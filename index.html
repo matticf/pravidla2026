@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Grafický přehled pravidel florbalu (edice 2026) pro diváky a laiky.">
+<title>Florbal srozumitelně</title>
+<style>
+/* Layout: dlouhý výklad po kapitolách, lepkavá navigace, modré nadpisy na bílém papíře, červená jen pro akcent a mřížku (vizuální styl Českého florbalu) */
+@font-face{font-family:"Geogrotesque";src:url("fonts/G01-Rg.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Geogrotesque";src:url("fonts/G01_Md.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Geogrotesque";src:url("fonts/G01-SmBd.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Geogrotesque";src:url("fonts/G01_Bd.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+
+:root{
+  --cf-cervena:#d51223; --cf-modra:#102d69; --bila:#ffffff;
+  --cerna-80:#333333; --cerna-60:#666666; --cerna-20:#cccccc; --cerna-05:#f2f2f2;
+  --podklad:var(--bila); --podklad-tlumeny:var(--cerna-05);
+  --text:var(--cf-modra); --text-tlumeny:var(--cerna-60); --text-akcent:var(--cf-cervena);
+  --plocha-akcent:var(--cf-cervena); --na-akcentu:var(--bila); --motiv:var(--cf-cervena); --linka:var(--cf-modra);
+  --plocha-hriste:var(--cerna-05); --znamka:var(--cf-cervena); --postava:var(--cf-modra);
+  --geo:"Geogrotesque", Arial, sans-serif;
+  --s1:4px; --s2:8px; --s3:16px; --s4:24px; --s5:40px; --s6:64px;
+  --radius-blok:8px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --podklad:var(--cf-modra); --podklad-tlumeny:var(--cerna-80);
+    --text:var(--bila); --text-tlumeny:var(--cerna-20); --text-akcent:var(--bila);
+    --linka:var(--cerna-20); --plocha-hriste:#0b2152; --znamka:var(--cf-cervena); --postava:var(--bila);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --podklad:var(--cf-modra); --podklad-tlumeny:var(--cerna-80);
+  --text:var(--bila); --text-tlumeny:var(--cerna-20); --text-akcent:var(--bila);
+  --linka:var(--cerna-20); --plocha-hriste:#0b2152; --znamka:var(--cf-cervena); --postava:var(--bila);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--podklad);color:var(--text);font-family:var(--geo);font-size:16px;line-height:24px;font-variant-ligatures:none;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--podklad)}
+h1,h2,h3,h4{margin:0;font-weight:700;text-wrap:balance;color:var(--text)}
+p{margin:0}
+a{color:var(--text-akcent)}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--cf-cervena);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.popisek{font-size:12px;line-height:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-akcent)}
+.perex{font-size:18px;line-height:27px;font-weight:500;max-width:62ch}
+.drobny{font-size:13px;line-height:18px;color:var(--text-tlumeny)}
+.muted{color:var(--text-tlumeny)}
+
+/* Hero */
+.hero{padding-block:var(--s6) 0;position:relative}
+.hero h1{font-size:clamp(44px,8vw,80px);line-height:.95;letter-spacing:-.01em;text-transform:uppercase;max-width:12ch}
+.hero .perex{margin-top:var(--s4)}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:var(--s5);border-top:1px solid var(--linka)}
+.fact{padding:var(--s3) var(--s3) var(--s4) 0;display:flex;flex-direction:column;gap:var(--s1)}
+.fact + .fact{padding-left:var(--s3);border-left:1px solid var(--linka)}
+.fact b{font-size:40px;line-height:44px;font-weight:700;font-variant-numeric:tabular-nums}
+.fact span{font-size:14px;line-height:20px}
+.mrizka{height:56px;margin-top:var(--s5);
+  background:
+    repeating-linear-gradient(90deg,var(--motiv) 0 6px,transparent 6px 38px),
+    repeating-linear-gradient(0deg,var(--motiv) 0 6px,transparent 6px 22px);
+  background-position:-14px 4px;
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 55%,transparent 100%);
+          mask-image:linear-gradient(90deg,#000 0%,#000 55%,transparent 100%)}
+
+/* Nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--podklad);border-bottom:1px solid var(--linka)}
+.nav .wrap{overflow-x:auto;scrollbar-width:none}
+.nav ul{display:flex;gap:var(--s4);list-style:none;margin:0;padding:12px 0;white-space:nowrap}
+.nav a{color:var(--text);text-decoration:none;font-weight:600;font-size:15px}
+.nav a:hover{color:var(--text-akcent)}
+
+/* Sections */
+section.kap{padding-block:var(--s6);border-bottom:1px solid var(--linka);scroll-margin-top:48px}
+.kap-hlava{display:grid;gap:var(--s2);margin-bottom:var(--s5);max-width:720px}
+.kap-hlava h2{font-size:clamp(30px,4.4vw,44px);line-height:1.08}
+.kap-hlava p{font-size:18px;line-height:27px;font-weight:500;margin-top:var(--s2)}
+h3{font-size:21px;line-height:28px;font-weight:600}
+
+.grid2{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:var(--s5);align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3)}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
+.karta{background:var(--podklad-tlumeny);border-radius:var(--radius-blok);padding:var(--s4);display:flex;flex-direction:column;gap:var(--s2);min-width:0}
+.karta h3{font-size:19px;line-height:25px}
+.karta p{font-size:15px;line-height:22px}
+
+/* Rink */
+.hriste svg{width:100%;height:auto;display:block}
+.hriste .ln{fill:none;stroke:var(--linka);stroke-width:1.2}
+.hriste .plocha{fill:var(--plocha-hriste);stroke:var(--linka);stroke-width:2.4}
+.hriste .zona{fill:var(--podklad);stroke:var(--linka);stroke-width:1;stroke-dasharray:3 2}
+.hriste .txt{font:600 7px var(--geo);fill:var(--text-tlumeny)}
+.hriste .prvek{transition:opacity .2s}
+.hriste.ma-vyber .prvek{opacity:.25}
+.hriste.ma-vyber .prvek.on{opacity:1}
+.hriste .prvek.on .ln,.hriste .prvek.on .zona{stroke:var(--cf-cervena);stroke-width:2.4}
+.hriste .zn circle{fill:var(--plocha-akcent)}
+.hriste .zn text{font:700 8px var(--geo);fill:var(--na-akcentu);text-anchor:middle;dominant-baseline:central}
+.hriste .zn{cursor:pointer}
+.legenda{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--linka)}
+.legenda li{border-bottom:1px solid var(--linka)}
+.legenda button{all:unset;box-sizing:border-box;display:grid;grid-template-columns:28px minmax(0,1fr);gap:var(--s3);padding:12px 4px;width:100%;cursor:pointer}
+.legenda button:focus-visible{outline:3px solid var(--cf-cervena)}
+.legenda .c{width:24px;height:24px;border-radius:50%;background:var(--plocha-akcent);color:var(--na-akcentu);font-weight:700;font-size:13px;display:grid;place-items:center;margin-top:1px}
+.legenda b{display:block;font-weight:600}
+.legenda span.t{font-size:15px;line-height:22px}
+.legenda li.on button{background:var(--podklad-tlumeny)}
+.rozmery{margin-top:var(--s3)}
+
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 8px;border-radius:999px;border:1.5px solid var(--linka);color:var(--text);white-space:nowrap;align-self:flex-start}
+.chip.trest{background:var(--plocha-akcent);border-color:var(--plocha-akcent);color:var(--na-akcentu)}
+.chip.ts{background:var(--text);border-color:var(--text);color:var(--podklad)}
+
+/* team */
+.sestava{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s5);align-items:start}
+.pocty{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--linka);margin-top:var(--s4)}
+.pocty div{padding:var(--s3) var(--s3) var(--s3) 0}
+.pocty div+div{border-left:1px solid var(--linka);padding-left:var(--s3)}
+.pocty b{font-size:34px;line-height:38px;display:block}
+.pocty span{font-size:14px;line-height:20px}
+.seznam{list-style:none;margin:var(--s3) 0 0;padding:0;display:grid;gap:10px}
+.seznam li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;font-size:16px;line-height:23px}
+.seznam li::before{content:"";width:10px;height:10px;background:var(--plocha-akcent);margin-top:7px}
+
+/* timeline */
+.casova{display:flex;width:100%;height:64px;margin-top:var(--s3);border-radius:var(--radius-blok);overflow:hidden}
+.casova div{display:flex;flex-direction:column;justify-content:center;padding:0 10px;min-width:0;font-size:13px;line-height:16px}
+.casova .hra{background:var(--text);color:var(--podklad);flex:20}
+.casova .hra b{font-size:18px;line-height:22px}
+.casova .pauza{background:var(--podklad-tlumeny);color:var(--text);flex:10}
+.casova-pozn{display:flex;justify-content:space-between;margin-top:6px}
+.dalsi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3);margin-top:var(--s5)}
+.cas-scroll{overflow-x:auto}
+.cas-inner{min-width:560px}
+
+/* height figure */
+.vyska{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:var(--s5);align-items:center;margin-bottom:var(--s5)}
+.vyska svg{width:100%;height:auto}
+.vyska .lvl{stroke-width:1.5;stroke-dasharray:5 4}
+.vyska-tab{width:100%;border-collapse:collapse}
+.vyska-tab td{padding:12px 8px 12px 0;border-bottom:1px solid var(--linka);vertical-align:top;font-size:15px;line-height:22px}
+.vyska-tab td:last-child{text-align:right;white-space:nowrap}
+.vyska-tab tr:first-child td{border-top:1px solid var(--linka)}
+
+.faul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3)}
+.smi{margin-top:var(--s5);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:var(--s5);align-items:start}
+.smi ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px var(--s4)}
+.smi li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px;font-size:15px;line-height:22px}
+.smi li svg{width:20px;height:20px;margin-top:1px}
+
+/* restarts */
+.mini{width:100%;height:auto;display:block;background:var(--plocha-hriste);border-radius:6px}
+.mini .ln{fill:none;stroke:var(--linka);stroke-width:1.2}
+.mini .d3{fill:none;stroke:var(--cf-cervena);stroke-width:1.2;stroke-dasharray:3 3}
+.mini .mic{fill:var(--cf-cervena)}
+.mini .h1{fill:var(--text)}
+.mini .h2{fill:var(--podklad);stroke:var(--text);stroke-width:1.5}
+.mini text{font:600 8px var(--geo);fill:var(--text-tlumeny)}
+
+/* penalties */
+.zebricek{display:grid;gap:0;border-top:1px solid var(--linka)}
+.stup{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr) minmax(0,260px);gap:var(--s4);padding:var(--s4) 0;border-bottom:1px solid var(--linka);align-items:center}
+.stup h3{font-size:19px;line-height:24px}
+.stup .kdy{font-size:15px;line-height:22px}
+.osa{position:relative;height:28px;display:flex;gap:3px}
+.osa i{font-style:normal;display:block;height:100%;background:var(--plocha-akcent);flex:0 0 auto}
+.osa i.os{background:repeating-linear-gradient(45deg,var(--text) 0 3px,transparent 3px 7px);border:1.5px solid var(--text)}
+.osa i.konec{background:var(--text);display:grid;place-items:center;color:var(--podklad);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:0 8px}
+.osa-sk{display:flex;justify-content:space-between;margin-top:4px;font-size:11px;color:var(--text-tlumeny);font-variant-numeric:tabular-nums}
+.leg-osa{display:flex;flex-wrap:wrap;gap:var(--s4);margin-top:var(--s3);font-size:14px}
+.leg-osa span{display:inline-flex;align-items:center;gap:8px}
+.leg-osa i{width:22px;height:12px;display:inline-block}
+
+/* goals */
+.gol{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s3)}
+.gol .karta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.gol .karta li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;font-size:15px;line-height:22px}
+.gol .karta li svg{width:18px;height:18px;margin-top:2px}
+.carahead{display:flex;align-items:center;gap:var(--s3)}
+.carahead svg{width:92px;height:auto;flex:none}
+
+/* signals */
+.signaly{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
+.sig{background:var(--podklad-tlumeny);border-radius:var(--radius-blok);padding:var(--s3) var(--s3) var(--s4);display:flex;flex-direction:column;gap:6px}
+.sig svg{width:100%;max-width:150px;height:auto;align-self:center}
+.sig .body{stroke:var(--postava);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.sig .hlava{fill:var(--postava)}
+.sig .ruka{stroke:var(--znamka);stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.sig .dlan{fill:var(--znamka)}
+.sig .karta-c{fill:var(--cf-cervena);stroke:var(--bila);stroke-width:1}
+.sig .num{font:700 13px var(--geo);fill:var(--text)}
+.sig h3{font-size:17px;line-height:22px}
+.sig p{font-size:14px;line-height:20px}
+.sig .kod{font-size:12px;font-weight:700;color:var(--text-tlumeny);font-variant-numeric:tabular-nums}
+
+/* glossary */
+.slovnik{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--s5);margin:0}
+.slovnik div{padding:var(--s3) 0;border-bottom:1px solid var(--linka)}
+.slovnik dt{font-weight:700}
+.slovnik dd{margin:2px 0 0;font-size:15px;line-height:22px}
+
+/* quiz */
+.kviz{display:grid;gap:var(--s4);max-width:780px}
+.otazka{border-top:1px solid var(--linka);padding-top:var(--s3);display:grid;gap:var(--s2)}
+.otazka h3{font-size:18px;line-height:25px}
+.moznosti{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.moznosti button{border:1.5px solid var(--linka);background:transparent;border-radius:var(--radius-blok);padding:9px 14px;font-size:15px;font-weight:500;cursor:pointer;text-align:left}
+.moznosti button:hover:not(:disabled){background:var(--podklad-tlumeny)}
+.moznosti button.spravne{background:var(--text);color:var(--podklad);border-color:var(--text)}
+.moznosti button.spatne{background:var(--plocha-akcent);color:var(--na-akcentu);border-color:var(--plocha-akcent)}
+.moznosti button:disabled{cursor:default}
+.vysvetleni{font-size:15px;line-height:22px}
+.skore{font-size:21px;line-height:28px;font-weight:600}
+.reset{border:1.5px solid var(--linka);background:transparent;border-radius:var(--radius-blok);padding:8px 14px;font-weight:600;cursor:pointer;justify-self:start}
+
+footer{padding-block:var(--s5) var(--s6)}
+footer .wrap{display:grid;gap:var(--s2)}
+
+@media (max-width:900px){
+  .grid2,.sestava,.vyska,.smi{grid-template-columns:minmax(0,1fr)}
+  .grid4,.signaly{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid3,.faul,.dalsi{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stup{grid-template-columns:minmax(0,1fr);gap:var(--s2)}
+  .vyska svg{max-width:280px}
+}
+@media (max-width:600px){
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fact:nth-child(3){padding-left:0;border-left:0}
+  .fact:nth-child(n+3){border-top:1px solid var(--linka)}
+  .grid3,.faul,.dalsi,.gol,.slovnik,.smi ul{grid-template-columns:minmax(0,1fr)}
+  .grid4{grid-template-columns:minmax(0,1fr)}
+  .fact b{font-size:32px;line-height:36px}
+  .pocty b{font-size:28px}
+  section.kap{padding-block:var(--s5)}
+}
+@media (max-width:420px){ .signaly{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s2)} .sig{padding:12px} }
+@media (prefers-reduced-motion: reduce){ *{transition:none!important;scroll-behavior:auto!important} }
+html{scroll-behavior:smooth}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="popisek">Pravidla florbalu · edice 2026</div>
+    <h1 style="margin-top:12px">Florbal srozumitelně</h1>
+    <p class="perex">Přišli jste se podívat na zápas a nevíte, proč rozhodčí zapískal? Tady jsou pravidla florbalu v kostce. Bez odborných řečí, s obrázky a pro každého, kdo nikdy nedržel florbalku.</p>
+    <div class="facts">
+      <div class="fact"><b>2</b><span>družstva proti sobě, vyhrává to s více góly</span></div>
+      <div class="fact"><b>5 + 1</b><span>na hřišti: pět hráčů s holí a brankář</span></div>
+      <div class="fact"><b>3 × 20</b><span>minut čistého času, mezi třetinami pauza</span></div>
+      <div class="fact"><b>40 × 20</b><span>metrů má hřiště ohraničené mantinelem</span></div>
+    </div>
+  </div>
+  <div class="mrizka" aria-hidden="true"></div>
+</header>
+
+<nav class="nav" aria-label="Kapitoly">
+  <div class="wrap">
+    <ul>
+      <li><a href="#hriste">Hřiště</a></li>
+      <li><a href="#hraci">Hráči</a></li>
+      <li><a href="#cas">Čas</a></li>
+      <li><a href="#zakazano">Co se nesmí</a></li>
+      <li><a href="#preruseni">Po zapískání</a></li>
+      <li><a href="#tresty">Tresty</a></li>
+      <li><a href="#goly">Góly</a></li>
+      <li><a href="#signaly">Signály</a></li>
+      <li><a href="#slovnik">Slovníček</a></li>
+      <li><a href="#kviz">Kvíz</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+<!-- HŘIŠTĚ -->
+<section class="kap" id="hriste">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">Kde se hraje</div>
+      <h2>Hřiště</h2>
+      <p>Florbal se hraje v hale na hřišti 40 × 20 metrů. Kolem je nízký plastový mantinel se zaoblenými rohy. Míček od něj může odskočit a hra pokračuje.</p>
+    </div>
+    <div class="grid2">
+      <div class="hriste" id="hriste-box">
+        <svg viewBox="-12 -40 424 280" role="img" aria-labelledby="hriste-t">
+          <title id="hriste-t">Nákres florbalového hřiště s vyznačenými částmi</title>
+          <!-- střídací prostory -->
+          <g class="prvek" data-k="7">
+            <rect class="zona" x="35" y="-30" width="115" height="22"/>
+            <rect class="zona" x="250" y="-30" width="115" height="22"/>
+            <text class="txt" x="92.5" y="-16" text-anchor="middle">střídání – domácí</text>
+            <text class="txt" x="307.5" y="-16" text-anchor="middle">střídání – hosté</text>
+          </g>
+          <!-- trestné lavice -->
+          <g class="prvek" data-k="8">
+            <rect class="zona" x="170" y="208" width="20" height="16"/>
+            <rect class="zona" x="210" y="208" width="20" height="16"/>
+            <rect class="zona" x="192" y="208" width="16" height="16"/>
+            <text class="txt" x="200" y="234" text-anchor="middle">trestné lavice a stolek zapisovatelů</text>
+          </g>
+          <g class="prvek" data-k="1"><rect class="plocha" x="0" y="0" width="400" height="200" rx="30"/></g>
+          <g class="prvek" data-k="2">
+            <line class="ln" x1="200" y1="0" x2="200" y2="200"/>
+            <circle cx="200" cy="100" r="3" fill="var(--linka)"/>
+          </g>
+          <g class="prvek" data-k="3">
+            <path class="ln" d="M31 15h8M35 11v8 M31 185h8M35 181v8 M365 11v8M361 15h8 M365 181v8M361 185h8 M196 15h8 M196 185h8"/>
+          </g>
+          <g class="prvek" data-k="4">
+            <rect class="ln" x="28.5" y="75" width="40" height="50"/>
+            <rect class="ln" x="331.5" y="75" width="40" height="50"/>
+          </g>
+          <g class="prvek" data-k="5">
+            <rect class="ln" x="35" y="87.5" width="10" height="25"/>
+            <rect class="ln" x="355" y="87.5" width="10" height="25"/>
+          </g>
+          <g class="prvek" data-k="6">
+            <path d="M35 92 h-6.5 v16 h6.5" fill="none" stroke="var(--cf-cervena)" stroke-width="2.4"/>
+            <path d="M365 92 h6.5 v16 h-6.5" fill="none" stroke="var(--cf-cervena)" stroke-width="2.4"/>
+          </g>
+          <!-- značky -->
+          <g class="zn" data-k="1"><circle cx="300" cy="200" r="7"/><text x="300" y="200">1</text></g>
+          <g class="zn" data-k="2"><circle cx="212" cy="88" r="7"/><text x="212" y="88">2</text></g>
+          <g class="zn" data-k="3"><circle cx="48" cy="15" r="7"/><text x="48" y="15">3</text></g>
+          <g class="zn" data-k="4"><circle cx="58" cy="67" r="7"/><text x="58" y="67">4</text></g>
+          <g class="zn" data-k="5"><circle cx="54" cy="100" r="7"/><text x="54" y="100">5</text></g>
+          <g class="zn" data-k="6"><circle cx="19" cy="100" r="7"/><text x="19" y="100">6</text></g>
+          <g class="zn" data-k="7"><circle cx="160" cy="-19" r="7"/><text x="160" y="-19">7</text></g>
+          <g class="zn" data-k="8"><circle cx="240" cy="216" r="7"/><text x="240" y="216">8</text></g>
+        </svg>
+        <p class="drobny rozmery">Nakresleno v měřítku. Klepněte na číslo nebo na položku v seznamu.</p>
+      </div>
+      <ul class="legenda" id="legenda">
+        <li data-k="1"><button type="button"><span class="c">1</span><span><b>Mantinel</b><span class="t">Ohraničuje hřiště 40 × 20 m. Když míček přeletí ven, hra pokračuje rozehráním.</span></span></button></li>
+        <li data-k="2"><button type="button"><span class="c">2</span><span><b>Středová čára a středový bod</b><span class="t">Dělí hřiště na poloviny. Ze středu se začíná každá třetina, hra po gólu i trestné střílení.</span></span></button></li>
+        <li data-k="3"><button type="button"><span class="c">3</span><span><b>Body pro vhazování</b><span class="t">Šest křížků u mantinelů. Na nejbližším z nich se hra obnovuje vhazováním.</span></span></button></li>
+        <li data-k="4"><button type="button"><span class="c">4</span><span><b>Velké brankoviště (4 × 5 m)</b><span class="t">Území brankáře. Jen tady smí chytat míček rukama. Hráči s holí sem chodit smějí.</span></span></button></li>
+        <li data-k="5"><button type="button"><span class="c">5</span><span><b>Malé brankoviště (1 × 2,5 m)</b><span class="t">Hned před brankou. Hráči s holí do něj nesmí vstoupit ani nohou. Holí do něj zasahovat smějí.</span></span></button></li>
+        <li data-k="6"><button type="button"><span class="c">6</span><span><b>Brána (šířka 160 cm)</b><span class="t">Gól platí, když míček celý přejde brankovou čáru zepředu.</span></span></button></li>
+        <li data-k="7"><button type="button"><span class="c">7</span><span><b>Prostor pro střídání</b><span class="t">Střídačky obou družstev. Střídat se smí kdykoli a kolikrát chcete, ale jen tady.</span></span></button></li>
+        <li data-k="8"><button type="button"><span class="c">8</span><span><b>Trestné lavice a zapisovatelé</b><span class="t">Naproti střídačkám. Sem jde vyloučený hráč a zde se měří čas a píše zápis.</span></span></button></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- HRÁČI -->
+<section class="kap" id="hraci">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">Kdo hraje</div>
+      <h2>Hráči, brankář a rozhodčí</h2>
+      <p>Na hřišti je za každé družstvo nejvýš šest hráčů: obvykle pět s florbalkou a jeden brankář. Ostatní čekají na střídačce a průběžně se střídají.</p>
+    </div>
+    <div class="sestava">
+      <div>
+        <h3>Družstvo</h3>
+        <div class="pocty">
+          <div><b>20</b><span>hráčů nejvýš na soupisce</span></div>
+          <div><b>6</b><span>nejvýš na hřišti naráz</span></div>
+          <div><b>4</b><span>nejméně na hřišti, i při trestech</span></div>
+        </div>
+        <ul class="seznam">
+          <li><span><b>Střídání bez omezení.</b> Kdykoli během hry, i za pohybu. Hráč, který odchází, musí nejdřív přelézt mantinel, teprve pak smí jít na hřiště nový.</span></li>
+          <li><span><b>Brankáře lze stáhnout.</b> Družstvo může kdykoli hrát se šesti hráči s holí a bez brankáře. Typicky v závěru, když prohrává.</span></li>
+          <li><span><b>Kapitán s páskou.</b> Jen on smí mluvit s rozhodčími.</span></li>
+          <li><span><b>Realizační tým.</b> Trenéři a další členové týmu, nejvýš pět. Pokyny dávají jen ze střídačky.</span></li>
+          <li><span><b>Výstroj.</b> Hráči s holí mají trika, trenýrky a štulpny; dlouhé kalhoty nosí jen brankář. Šperky jsou zakázané kvůli bezpečnosti.</span></li>
+        </ul>
+      </div>
+      <div style="display:grid;gap:var(--s3)">
+        <div class="karta">
+          <div class="popisek">Brankář</div>
+          <h3>Chytá rukama a nemá hůl</h3>
+          <p>Brankář klečí v bráně v masce a chytá míček rukama i tělem. Má k tomu pár pravidel navíc:</p>
+          <ul class="seznam" style="margin-top:4px">
+            <li><span>Musí zůstat ve velkém brankovišti. Když ho celý opustí, hraje jako hráč bez hole a míček rukou chytat nesmí.</span></li>
+            <li><span>Míček smí držet nejvýš <b>3 sekundy</b>.</span></li>
+            <li><span>Výhozem ani výkopem nesmí poslat míček vzduchem za půlku.</span></li>
+            <li><span>Nesmí vzít do ruky úmyslnou přihrávku od spoluhráče.</span></li>
+          </ul>
+        </div>
+        <div class="karta">
+          <div class="popisek">Rozhodčí</div>
+          <h3>Dva se stejnou autoritou</h3>
+          <p>Zápas řídí dva rozhodčí s píšťalkou. Pomáhá jim stolek zapisovatelů, který měří čas a tresty a vede zápis o utkání.</p>
+        </div>
+        <div class="karta">
+          <div class="popisek">Florbalka</div>
+          <h3>Lehká hůl s plastovou čepelí</h3>
+          <p>Musí mít schválení IFF. Čepel se smí zahnout nejvýš o 30 mm. Míček je plastový a děrovaný.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ČAS -->
+<section class="kap" id="cas">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">Jak dlouho se hraje</div>
+      <h2>Čas hry</h2>
+      <p>Zápas má tři třetiny po 20 minutách. Čas je čistý: při každém zapískání se zastaví a rozběhne se, až se zase hraje. Proto zápas trvá déle než hodinu.</p>
+    </div>
+    <div class="cas-scroll">
+      <div class="cas-inner">
+        <div class="casova" role="img" aria-label="Časová osa: 20 minut hry, 10 minut přestávka, 20 minut hry, 10 minut přestávka, 20 minut hry">
+          <div class="hra"><b>1. třetina</b>20 min</div>
+          <div class="pauza">pauza<br>10 min</div>
+          <div class="hra"><b>2. třetina</b>20 min</div>
+          <div class="pauza">pauza<br>10 min</div>
+          <div class="hra"><b>3. třetina</b>20 min</div>
+        </div>
+        <div class="casova-pozn drobny"><span>začátek: vhazování ve středu</span><span>po každé třetině si týmy mění strany</span><span>siréna = konec</span></div>
+      </div>
+    </div>
+    <div class="dalsi">
+      <div class="karta">
+        <div class="popisek">Time-out</div>
+        <h3>30 sekund na poradu</h3>
+        <p>Každé družstvo si smí za zápas vzít jeden oddechový čas. Požádat o něj může kapitán nebo trenér.</p>
+      </div>
+      <div class="karta">
+        <div class="popisek">Prodloužení</div>
+        <h3>10 minut, rozhoduje první gól</h3>
+        <p>Jen když musí být znám vítěz. Kdo první skóruje, vyhrává a hra okamžitě končí.</p>
+      </div>
+      <div class="karta">
+        <div class="popisek">Nájezdy</div>
+        <h3>Trestná střílení</h3>
+        <p>Když nerozhodne ani prodloužení, jde pět hráčů z každého týmu sám na brankáře. Při rovnosti se pokračuje po jednom, dokud jeden tým nevede.</p>
+      </div>
+    </div>
+    <p class="drobny" style="margin-top:var(--s3)">Mládežnické a nižší soutěže mohou hrát kratší dobu, nejméně 2 × 15 minut.</p>
+  </div>
+</section>
+
+<!-- CO SE NESMÍ -->
+<section class="kap" id="zakazano">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">Nejčastější fauly</div>
+      <h2>Co se nesmí</h2>
+      <p>Florbal je bezkontaktní hra. Nesmí se strkat, sekat do hole ani hrát vysoko. Lehčí prohřešek znamená volný úder pro soupeře, ten těžší vyloučení na trestnou lavici.</p>
+    </div>
+
+    <div class="vyska">
+      <svg viewBox="0 0 220 260" role="img" aria-label="Postava hráče s vyznačenou úrovní kolen a pasu">
+        <line class="lvl" x1="4" y1="128" x2="216" y2="128" stroke="var(--cf-cervena)"/>
+        <line class="lvl" x1="4" y1="180" x2="216" y2="180" stroke="var(--linka)"/>
+        <text x="216" y="122" text-anchor="end" style="font:700 12px var(--geo);fill:var(--text-akcent)">ÚROVEŇ PASU</text>
+        <text x="216" y="174" text-anchor="end" style="font:700 12px var(--geo);fill:var(--text)">ÚROVEŇ KOLEN</text>
+        <g stroke="var(--postava)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none">
+          <circle cx="70" cy="44" r="14" fill="var(--postava)" stroke="none"/>
+          <path d="M70 62 V126"/>
+          <path d="M70 126 L58 182 L52 238"/>
+          <path d="M70 126 L84 182 L92 238"/>
+          <path d="M70 74 L92 100 L112 118"/>
+          <path d="M70 74 L58 102 L96 112"/>
+        </g>
+        <path d="M100 110 L150 218 L176 222" stroke="var(--cf-cervena)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="166" cy="236" r="6" fill="var(--cf-cervena)"/>
+      </svg>
+      <div>
+        <h3 style="margin-bottom:var(--s3)">Hra vysoko</h3>
+        <table class="vyska-tab">
+          <tr><td>Čepel hole nad pasem při nápřahu nebo po střele, když je blízko soupeř</td><td><span class="chip">volný úder</span></td></tr>
+          <tr><td>Hrát míček holí nad koleny</td><td><span class="chip">volný úder</span></td></tr>
+          <tr><td>Hrát míček nohou nad koleny</td><td><span class="chip">volný úder</span></td></tr>
+          <tr><td>Zahrát míček holí nebo nohou nad pasem</td><td><span class="chip trest">2 minuty</span></td></tr>
+        </table>
+        <p class="drobny" style="margin-top:8px">Měří se podle výšky kolen a pasu hráče ve vzpřímeném postoji.</p>
+      </div>
+    </div>
+
+    <div class="faul">
+      <div class="karta"><span class="chip">volný úder</span><h3>Sekání do hole</h3><p>Bít, blokovat, nadzvedávat nebo kopat do soupeřovy hole. Když jde o velkou výhodu nebo hráč na míček vůbec nedosáhl, jsou to <b>2 minuty</b>.</p></div>
+      <div class="karta"><span class="chip">volný úder</span><h3>Strkání a vrážení</h3><p>Povolený je jen souboj ramenem na rameno. Strkání jinak nebo vrážení zády do soupeře je faul. Natlačit soupeře na mantinel stojí <b>2 minuty</b>.</p></div>
+      <div class="karta"><span class="chip">volný úder</span><h3>Držení</h3><p>Chytat, tahat nebo držet soupeře či jeho hůl. Chytit soupeřovu hůl do ruky jsou už <b>2 minuty</b>.</p></div>
+      <div class="karta"><span class="chip">volný úder</span><h3>Hůl nebo noha mezi nohy</h3><p>Vložit florbalku, nohu nebo chodidlo mezi nohy soupeře.</p></div>
+      <div class="karta"><span class="chip">volný úder</span><h3>Hra vleže a na kolenou</h3><p>Hrát míček, když hráč klečí na obou kolenou nebo se opírá o zem rukou bez hole.</p></div>
+      <div class="karta"><span class="chip">volný úder</span><h3>Výskok</h3><p>Vyskočit oběma nohama a zastavit míček. Přeskočit ho je v pořádku.</p></div>
+      <div class="karta"><span class="chip">volný úder</span><h3>Hlavička</h3><p>Hrát míček hlavou je zakázané.</p></div>
+      <div class="karta"><span class="chip trest">2 minuty</span><h3>Hra rukou</h3><p>Hráč s holí nesmí zastavit ani zahrát míček rukou, paží ani nataženým dresem.</p></div>
+      <div class="karta"><span class="chip">volný úder</span><h3>Malé brankoviště</h3><p>Hráč s holí do něj nesmí vstoupit ani ho přeběhnout. Brání-li tam obránce při střele z volného úderu, nařídí se <b>trestné střílení</b>.</p></div>
+      <div class="karta"><span class="chip trest">2 minuty</span><h3>Nedodržení 3 metrů</h3><p>Při volném úderu nebo rozehrání musí soupeři ustoupit aspoň 3 m od míčku, i s holí.</p></div>
+      <div class="karta"><span class="chip trest">2 minuty</span><h3>Protesty</h3><p>Hádání s rozhodčími. Nesportovní chování a simulování se trestá ještě přísněji.</p></div>
+      <div class="karta"><span class="chip trest">2 + 2 minuty</span><h3>Hákování a bezohlednost</h3><p>Zaháknout holí soupeřovo tělo, hodit holí po míčku nebo bezohledně srazit soupeře.</p></div>
+    </div>
+
+    <div class="smi">
+      <div>
+        <div class="popisek">A co je naopak dovoleno</div>
+        <h3 style="margin-top:8px">Tohle není faul</h3>
+      </div>
+      <ul>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Zastavit míček tělem, třeba stehnem nebo hrudníkem (ne hlavou a rukou).</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Přihrát nohou pod úrovní kolen. Kopnutý gól ale neplatí.</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Souboj ramenem na rameno o míček.</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Hrát holí do soupeřovy hole poté, co hráč čistě zahrál míček.</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Vysoký nápřah, když poblíž nikdo není.</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Běžet za mantinelem. Míček odtud ale hrát nesmíte.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PO ZAPÍSKÁNÍ -->
+<section class="kap" id="preruseni">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">Jak se pokračuje</div>
+      <h2>Po zapískání</h2>
+      <p>Když rozhodčí přeruší hru, pokračuje se jednou ze čtyř standardních situací. Která to bude, záleží na tom, proč se přestalo hrát.</p>
+    </div>
+    <div class="grid4">
+      <div class="karta">
+        <svg class="mini" viewBox="0 0 160 100" aria-hidden="true">
+          <line class="ln" x1="80" y1="0" x2="80" y2="100"/>
+          <circle class="d3" cx="80" cy="50" r="30"/>
+          <rect x="68" y="45" width="10" height="3" fill="var(--text)"/><rect x="82" y="52" width="10" height="3" fill="var(--text)"/>
+          <circle class="mic" cx="80" cy="50" r="3"/>
+          <circle class="h1" cx="60" cy="50" r="5"/><circle class="h2" cx="100" cy="50" r="5"/>
+          <circle class="h1" cx="40" cy="25" r="4"/><circle class="h2" cx="122" cy="72" r="4"/>
+          <text x="114" y="22">3 m</text>
+        </svg>
+        <h3>Vhazování</h3>
+        <p>Dva hráči se postaví proti sobě a o míček položený mezi čepelemi se utkají holemi. Ostatní stojí aspoň 3 m daleko. Začíná se jím každá třetina a hra po gólu.</p>
+      </div>
+      <div class="karta">
+        <svg class="mini" viewBox="0 0 160 100" aria-hidden="true">
+          <path class="ln" d="M0 10 H160" stroke-width="3"/>
+          <circle class="d3" cx="70" cy="25" r="30"/>
+          <circle class="mic" cx="70" cy="25" r="3"/>
+          <circle class="h1" cx="62" cy="21" r="5"/>
+          <circle class="h2" cx="108" cy="50" r="5"/><circle class="h2" cx="50" cy="66" r="5"/><circle class="h1" cx="128" cy="80" r="4"/>
+          <text x="6" y="24">1,5 m</text><text x="104" y="22">3 m</text>
+        </svg>
+        <h3>Rozehrání</h3>
+        <p>Míček přeletěl mantinel. Rozehrává družstvo, které se ho naposledy nedotklo, 1,5 m od mantinelu v místě, kde míček vylétl. Míček se musí odpálit, ne táhnout.</p>
+      </div>
+      <div class="karta">
+        <svg class="mini" viewBox="0 0 160 100" aria-hidden="true">
+          <rect class="ln" x="130" y="22" width="30" height="56"/><rect class="ln" x="148" y="38" width="8" height="24"/>
+          <circle class="d3" cx="70" cy="50" r="30"/>
+          <circle class="mic" cx="70" cy="50" r="3"/>
+          <circle class="h1" cx="62" cy="47" r="5"/>
+          <circle class="h2" cx="110" cy="40" r="5"/><circle class="h2" cx="110" cy="52" r="5"/><circle class="h2" cx="110" cy="64" r="5"/>
+          <text x="20" y="22">místo faulu</text>
+        </svg>
+        <h3>Volný úder</h3>
+        <p>Po faulu. Hraje se z místa přestupku, nejméně 3,5 m od malého brankoviště. Bránící tým smí postavit zeď. Z volného úderu lze rovnou dát gól.</p>
+      </div>
+      <div class="karta">
+        <svg class="mini" viewBox="0 0 160 100" aria-hidden="true">
+          <line class="ln" x1="10" y1="0" x2="10" y2="100"/>
+          <rect class="ln" x="120" y="22" width="40" height="56"/><rect class="ln" x="140" y="38" width="8" height="24"/>
+          <path d="M18 50 C60 30, 90 70, 128 52" fill="none" stroke="var(--cf-cervena)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <circle class="mic" cx="14" cy="50" r="3"/><circle class="h1" cx="22" cy="46" r="5"/>
+          <rect x="148" y="44" width="8" height="12" fill="var(--text)"/>
+          <text x="16" y="92">ze středu</text>
+        </svg>
+        <h3>Trestné střílení</h3>
+        <p>Obránce faulem zmařil jasnou šanci na gól. Hráč se rozjede od středu sám proti brankáři a musí se pořád pohybovat směrem k brance.</p>
+      </div>
+    </div>
+    <div class="karta" style="margin-top:var(--s3);flex-direction:row;flex-wrap:wrap;gap:var(--s3) var(--s5);align-items:baseline">
+      <div style="flex:1 1 260px;min-width:0"><div class="popisek">Výhoda</div><h3 style="margin-top:4px">Proč rozhodčí nepískl?</h3></div>
+      <p style="flex:2 1 380px;min-width:0">Když faulovaný tým má míček dál pod kontrolou a pokračovat je pro něj lepší, rozhodčí nechá hrát a jen natáhne ruku dlaní vzhůru. Tomu se říká výhoda.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRESTY -->
+<section class="kap" id="tresty">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">Od mírného k nejpřísnějšímu</div>
+      <h2>Tresty</h2>
+      <p>Za vážnější fauly jde hráč na trestnou lavici. Jeho tým mezitím hraje v oslabení, tedy o jednoho hráče méně. Soupeř hraje v přesilovce.</p>
+    </div>
+    <div class="zebricek" id="zebricek">
+      <div class="stup">
+        <div><span class="chip">bez vyloučení</span><h3 style="margin-top:8px">Volný úder</h3></div>
+        <div><div class="osa"><i class="konec" style="background:transparent;color:var(--text-tlumeny);padding:0">hraje se dál v plném počtu</i></div></div>
+        <p class="kdy">Lehčí faul: sekání do hole, strkání, hra nohou nad koleny.</p>
+      </div>
+      <div class="stup">
+        <div><span class="chip trest">menší trest</span><h3 style="margin-top:8px">2 minuty</h3></div>
+        <div><div class="osa" data-min="2"></div></div>
+        <p class="kdy">Neopatrná hra, hra rukou, špatné střídání, protesty. Když soupeř v přesilovce dá gól, trest končí.</p>
+      </div>
+      <div class="stup">
+        <div><span class="chip trest">větší trest</span><h3 style="margin-top:8px">2 + 2 minuty</h3></div>
+        <div><div class="osa" data-min="2,2"></div></div>
+        <p class="kdy">Bezohledná hra, hákování. Gól soupeře zruší jen jednu z dvouminutovek.</p>
+      </div>
+      <div class="stup">
+        <div><span class="chip trest">osobní trest</span><h3 style="margin-top:8px">2 + 10 minut</h3></div>
+        <div><div class="osa" data-min="2" data-os="10"></div></div>
+        <p class="kdy">Nesportovní chování a simulování. Tým je oslaben jen 2 minuty, provinilec ale sedí celých 12.</p>
+      </div>
+      <div class="stup">
+        <div><span class="chip ts">červená karta</span><h3 style="margin-top:8px">Do konce utkání</h3></div>
+        <div><div class="osa" data-min="2,2" data-konec="1"></div></div>
+        <p class="kdy">Hrubé nesportovní chování, násilí, rvačka, druhý větší trest. Hráč odchází do šatny a tým odslouží 2 + 2 min. Většinou ho čeká i stop na další zápas.</p>
+      </div>
+    </div>
+    <div class="leg-osa">
+      <span><i style="background:var(--plocha-akcent)"></i>tým hraje v oslabení</span>
+      <span><i style="background:repeating-linear-gradient(45deg,var(--text) 0 3px,transparent 3px 7px);border:1.5px solid var(--text)"></i>sedí jen hráč, na hřišti ho nahradí spoluhráč</span>
+      <span><i style="background:var(--text)"></i>hráč do konce utkání mimo hru</span>
+    </div>
+
+    <div class="grid3" style="margin-top:var(--s5)">
+      <div class="karta">
+        <div class="popisek">Odložené vyloučení</div>
+        <h3>Ruka nahoře, hraje se dál</h3>
+        <p>Faulovaný tým má míček, a tak rozhodčí zvedne ruku a nechá ho útočit. Trest udělí, až provinilci získají míček nebo se hra přeruší. Faulovaný tým může mezitím stáhnout brankáře.</p>
+      </div>
+      <div class="karta">
+        <div class="popisek">Nejvýš dva naráz</div>
+        <h3>Vždy aspoň čtyři na hřišti</h3>
+        <p>Družstvu se měří nejvýš dva tresty současně. I při více vyloučených hraje dál nejméně ve čtyřech, ostatní čekají na lavici, až na ně přijde řada.</p>
+      </div>
+      <div class="karta">
+        <div class="popisek">Oba týmy najednou</div>
+        <h3>Tresty se vyruší</h3>
+        <p>Dostanou-li dvě minuty hráči obou týmů ve stejném přerušení, hráči sedí, ale počet na hřišti se nemění a tresty neruší ani gól.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GÓLY -->
+<section class="kap" id="goly">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">Kdy se počítá</div>
+      <h2>Gól, nebo ne?</h2>
+      <p>Gól platí, když míček celým objemem přejde brankovou čáru zepředu po správném zahrání holí. Potvrdí se vhazováním ve středu hřiště.</p>
+    </div>
+    <div class="gol">
+      <div class="karta">
+        <div class="carahead">
+          <svg viewBox="0 0 92 60" aria-hidden="true"><line x1="40" y1="2" x2="40" y2="58" stroke="var(--linka)" stroke-width="2"/><path d="M40 10 h30 v40 h-30" fill="none" stroke="var(--linka)" stroke-width="1.5"/><circle cx="54" cy="30" r="8" fill="var(--cf-cervena)"/></svg>
+          <h3>Gól platí</h3>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Míček je celý za čárou, ne jen dotýká se jí.</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Střelec ho zahrál holí, nebo ho do branky hodil brankář.</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Míček se do branky odrazil od obránce, nebo si ho tam obránce srazil sám (vlastní gól).</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Útočník ho do branky neúmyslně tečoval tělem.</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tým bez brankáře zmaří soupeři šanci faulem. Místo trestného střílení se rovnou uzná gól.</span></li>
+        </ul>
+      </div>
+      <div class="karta">
+        <div class="carahead">
+          <svg viewBox="0 0 92 60" aria-hidden="true"><line x1="40" y1="2" x2="40" y2="58" stroke="var(--linka)" stroke-width="2"/><path d="M40 10 h30 v40 h-30" fill="none" stroke="var(--linka)" stroke-width="1.5"/><circle cx="40" cy="30" r="8" fill="var(--cf-cervena)"/></svg>
+          <h3>Gól neplatí</h3>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" fill="none" stroke="var(--cf-cervena)" stroke-width="2.6" stroke-linecap="round"/></svg><span>Útočník míček úmyslně kopl nebo usměrnil tělem.</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" fill="none" stroke="var(--cf-cervena)" stroke-width="2.6" stroke-linecap="round"/></svg><span>Útočící tým těsně předtím fauloval.</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" fill="none" stroke="var(--cf-cervena)" stroke-width="2.6" stroke-linecap="round"/></svg><span>Míček přešel čáru až po hvizdu nebo siréně.</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" fill="none" stroke="var(--cf-cervena)" stroke-width="2.6" stroke-linecap="round"/></svg><span>Míček se do branky dostal zezadu nebo ze strany.</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" fill="none" stroke="var(--cf-cervena)" stroke-width="2.6" stroke-linecap="round"/></svg><span>Skóroval tým, kterému se právě odkládá trest, nebo tým s příliš mnoha hráči na hřišti.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNÁLY -->
+<section class="kap" id="signaly">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">Co ukazuje rozhodčí</div>
+      <h2>Signály rozhodčích</h2>
+      <p>Po hvizdu rozhodčí nejdřív ukáže, jak se bude pokračovat, a pak případně za co. Tady jsou signály, které uvidíte nejčastěji.</p>
+    </div>
+    <div class="signaly" id="signaly-grid"></div>
+  </div>
+</section>
+
+<!-- SLOVNÍČEK -->
+<section class="kap" id="slovnik">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">Jak tomu rozumět</div>
+      <h2>Malý slovníček</h2>
+      <p>Slova, která uslyšíte od komentátorů a z hlediště.</p>
+    </div>
+    <dl class="slovnik">
+      <div><dt>Florbalka</dt><dd>Hůl s plastovou zahnutou čepelí, kterou se hraje míček.</dd></div>
+      <div><dt>Hráč v poli</dt><dd>Každý hráč kromě brankáře, tedy ten, kdo hraje s holí.</dd></div>
+      <div><dt>Mantinel</dt><dd>Nízká plastová zeď kolem hřiště se zaoblenými rohy.</dd></div>
+      <div><dt>Brankoviště</dt><dd>Dva obdélníky před brankou: velké je území brankáře, do malého nesmí hráči s holí.</dd></div>
+      <div><dt>Vhazování</dt><dd>Souboj dvou hráčů o míček položený mezi jejich čepelemi.</dd></div>
+      <div><dt>Rozehrání</dt><dd>Pokračování hry po tom, co míček opustil hřiště.</dd></div>
+      <div><dt>Volný úder</dt><dd>Pokračování hry po faulu z místa přestupku.</dd></div>
+      <div><dt>Trestné střílení</dt><dd>Samostatný nájezd jednoho hráče na brankáře.</dd></div>
+      <div><dt>Oslabení a přesilovka</dt><dd>Hraní s menším, nebo naopak větším počtem hráčů, když je někdo vyloučený.</dd></div>
+      <div><dt>Výhoda</dt><dd>Rozhodčí nechá hrát dál, protože přerušení by faulovanému týmu uškodilo.</dd></div>
+      <div><dt>Čistý čas</dt><dd>Hodiny běží, jen když se opravdu hraje.</dd></div>
+      <div><dt>Zápis o utkání</dt><dd>Oficiální dokument se soupiskami, góly a tresty.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- KVÍZ -->
+<section class="kap" id="kviz" style="border-bottom:0">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">Otestujte se</div>
+      <h2>Rozumíte už florbalu?</h2>
+      <p>Šest rychlých otázek. Klepněte na odpověď, hned uvidíte, jestli je správně.</p>
+    </div>
+    <div class="kviz" id="kviz-box"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="mrizka" aria-hidden="true" style="margin:0 0 var(--s4);height:32px"></div>
+    <p><b>Český florbal</b></p>
+    <p class="drobny">Zjednodušený přehled podle dokumentu Pravidla florbalu a jejich výklad, edice 2026, platná od 1. července 2026 (podle oficiálních pravidel IFF). Ve sporných případech rozhoduje plné znění pravidel. Dotazy k pravidlům: pravidla@ceskyflorbal.cz</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ---------- Hřiště: zvýraznění ---------- */
+  var box=document.getElementById('hriste-box'), leg=document.getElementById('legenda'), vybrano=null;
+  function vyber(k){
+    if(vybrano===k){k=null}
+    vybrano=k;
+    box.classList.toggle('ma-vyber',!!k);
+    box.querySelectorAll('.prvek').forEach(function(g){g.classList.toggle('on',g.dataset.k===k)});
+    leg.querySelectorAll('li').forEach(function(li){li.classList.toggle('on',li.dataset.k===k);li.querySelector('button').setAttribute('aria-pressed',li.dataset.k===k)});
+  }
+  leg.querySelectorAll('li').forEach(function(li){li.querySelector('button').addEventListener('click',function(){vyber(li.dataset.k)})});
+  box.querySelectorAll('.zn').forEach(function(z){z.addEventListener('click',function(){vyber(z.dataset.k)})});
+
+  /* ---------- Tresty: osy ---------- */
+  var MAX=12;
+  document.querySelectorAll('.osa[data-min]').forEach(function(o){
+    var parts=o.dataset.min.split(',').map(Number);
+    parts.forEach(function(m){var i=document.createElement('i');i.style.width='calc('+(m/MAX*100)+'% - 3px)';i.title=m+' min';o.appendChild(i)});
+    if(o.dataset.os){var i=document.createElement('i');i.className='os';i.style.width='calc('+(+o.dataset.os/MAX*100)+'% - 3px)';o.appendChild(i)}
+    if(o.dataset.konec){var k=document.createElement('i');k.className='konec';k.style.flex='1';k.textContent='do konce zápasu';o.appendChild(k)}
+  });
+
+  /* ---------- Signály: panáčci ---------- */
+  var B='<circle class="hlava" cx="50" cy="22" r="9"/><path class="body" d="M50 32V82M50 82L41 128M50 82L59 128M42 40H58"/>';
+  function ruka(p){return '<polyline class="ruka" points="'+p+'"/>'}
+  var L0='40,40 36,60 35,79', R0='60,40 64,60 65,79';
+  function dlan(x,y,r){return '<circle class="dlan" cx="'+x+'" cy="'+y+'" r="'+(r||4)+'"/>'}
+  var S=[
+    {k:'802',n:'Vhazování',t:'Obě předloktí vodorovně před tělem, dlaně dolů.',a:ruka('40,40 34,58 58,56')+ruka('60,40 66,60 42,62')},
+    {k:'803',n:'Rozehrání / volný úder',t:'Paže vodorovně ve směru hry, dlaň dolů. Ukazuje, který tým hraje.',a:ruka(L0)+ruka('60,40 78,40 96,40')+dlan(97,42,3.5)},
+    {k:'804',n:'Výhoda',t:'Paže ve směru hry, dlaň nahoru. Faul byl, ale hraje se dál.',a:ruka(L0)+ruka('60,40 78,36 95,33')+'<path class="ruka" d="M91 27 Q96 34 101 27"/>'},
+    {k:'805',n:'Trestné střílení',t:'Paže nad hlavou zkřížené v zápěstí, pěsti sevřené.',a:ruka('40,40 36,18 56,0')+ruka('60,40 64,18 44,0')+dlan(57,-1,4.5)+dlan(43,-1,4.5)},
+    {k:'806',n:'Odložené vyloučení',t:'Paže svisle nahoru, dlaň dopředu. Trest přijde, hra zatím běží.',a:ruka(L0)+ruka('60,40 62,18 62,-2')+'<rect class="dlan" x="58" y="-12" width="8" height="10" rx="3"/>'},
+    {k:'807',n:'Vyloučení na 2 minuty',t:'Paže svisle, dva prsty = menší trest. Pět prstů znamená 2 + 2, pěst osobní trest.',a:ruka(L0)+ruka('60,40 62,18 62,-2')+'<path class="ruka" d="M60 -4 L57 -14 M64 -4 L67 -14" stroke-width="3.5"/>'+'<text class="num" x="74" y="-4">2</text>'},
+    {k:'808',n:'Červená karta',t:'Paže svisle s červenou kartou. Hráč jde do konce utkání do šatny.',a:ruka(L0)+ruka('60,40 62,18 62,-2')+'<rect class="karta-c" x="57" y="-18" width="12" height="16" rx="1.5"/>'},
+    {k:'809',n:'Gól',t:'Rozhodčí ukáže paží na branku. Gól se pak potvrdí vhazováním.',a:ruka(L0)+ruka('60,40 77,52 94,64')+dlan(95,65,3.5)},
+    {k:'810',n:'Hraje se dál / gól neplatí',t:'Obě paže vodorovně do stran, dlaně dolů.',a:ruka('40,40 22,40 4,40')+ruka('60,40 78,40 96,40')},
+    {k:'801',n:'Time-out / stop čas',t:'Ruce do tvaru T: prsty jedné ruky se zespodu dotknou dlaně druhé.',a:ruka('40,40 28,48 68,46')+ruka('60,40 56,68 56,48')},
+    {k:'912',n:'Malé brankoviště',t:'Paže nad hlavou, konečky prstů se dotýkají a tvoří trojúhelník.',a:ruka('40,40 30,18 50,-4')+ruka('60,40 70,18 50,-4')},
+    {k:'923',n:'Nesportovní chování',t:'Ruce v bok.',a:ruka('40,40 26,58 44,74')+ruka('60,40 74,58 56,74')}
+  ];
+  var g=document.getElementById('signaly-grid');
+  g.innerHTML=S.map(function(s){
+    return '<div class="sig"><svg viewBox="0 -22 104 156" role="img" aria-label="Signál '+s.n+'">'+B+s.a+'</svg><span class="kod">Signál '+s.k+'</span><h3>'+s.n+'</h3><p>'+s.t+'</p></div>';
+  }).join('');
+
+  /* ---------- Kvíz ---------- */
+  var Q=[
+    {q:'Kolik hráčů smí mít družstvo na hřišti najednou?',o:['5','6','7'],s:1,v:'Nejvýš šest: obvykle pět hráčů s holí a brankář. Brankáře lze vyměnit za šestého hráče s holí.'},
+    {q:'Hráč zastavil míček stehnem. Co zapíská rozhodčí?',o:['Nic, je to v pořádku','Volný úder','2 minuty'],s:0,v:'Zastavit míček tělem je dovoleno. Zakázaná je jen hlava, ruka a zastavení ve výskoku.'},
+    {q:'Útočník kopl míček přímo do branky. Platí gól?',o:['Ano','Ne'],s:1,v:'Úmyslně kopnutý nebo tělem usměrněný gól neplatí. Hra pokračuje vhazováním.'},
+    {q:'Smí hráč s holí vstoupit do malého brankoviště?',o:['Ano, kdykoli','Jen holí, ne nohou','Nesmí ani holí'],s:1,v:'Hráč s holí nesmí malé brankoviště ani přeběhnout. Hůl tam ale strčit smí.'},
+    {q:'Tým hraje v oslabení kvůli 2minutovému trestu a soupeř dá gól. Co se stane?',o:['Trest končí a hráč se vrací','Trest běží dál','Soupeř dostane trestné střílení'],s:0,v:'Gól v přesilovce ukončí měřený menší trest a vyloučený hráč se smí vrátit.'},
+    {q:'Jak dlouho smí brankář držet míček?',o:['3 sekundy','5 sekund','Jak dlouho chce'],s:0,v:'Nejvýš tři sekundy. Pak musí míček rozehrát, jinak je volný úder pro soupeře.'}
+  ];
+  var kb=document.getElementById('kviz-box'), body=0, zodp=0;
+  function render(){
+    body=0;zodp=0;
+    kb.innerHTML=Q.map(function(x,i){
+      return '<div class="otazka" data-i="'+i+'"><span class="drobny">Otázka '+(i+1)+' z '+Q.length+'</span><h3>'+x.q+'</h3><div class="moznosti">'+x.o.map(function(o,j){return '<button type="button" id="q'+i+'o'+j+'" data-j="'+j+'">'+o+'</button>'}).join('')+'</div><p class="vysvetleni" hidden></p></div>';
+    }).join('')+'<p class="skore" id="skore" hidden></p><button type="button" class="reset" id="reset" hidden>Zkusit znovu</button>';
+    kb.querySelectorAll('.otazka').forEach(function(el){
+      var x=Q[+el.dataset.i];
+      el.querySelectorAll('.moznosti button').forEach(function(b){
+        b.addEventListener('click',function(){
+          var j=+b.dataset.j, ok=j===x.s;
+          el.querySelectorAll('.moznosti button').forEach(function(bb){bb.disabled=true;if(+bb.dataset.j===x.s)bb.classList.add('spravne')});
+          if(!ok)b.classList.add('spatne');
+          var v=el.querySelector('.vysvetleni');v.innerHTML='<b>'+(ok?'Správně.':'Tentokrát ne.')+'</b> '+x.v;v.hidden=false;
+          if(ok)body++;zodp++;
+          if(zodp===Q.length){var s=document.getElementById('skore');s.textContent='Výsledek: '+body+' z '+Q.length+(body===Q.length?'. Můžete jít fandit!':'. Projděte si kapitoly a zkuste to znovu.');s.hidden=false;document.getElementById('reset').hidden=false}
+        });
+      });
+    });
+    document.getElementById('reset').addEventListener('click',function(){render();kb.scrollIntoView({block:'start'})});
+    nbsp(kb);
+  }
+
+  /* ---------- Nezlomitelné mezery za jednopísmennými předložkami ---------- */
+  function nbsp(root){
+    var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode&&n.parentNode.nodeName;return (p==='SCRIPT'||p==='STYLE'||p==='text')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
+    var n;while((n=w.nextNode())){var t=n.nodeValue.replace(/(^|[\s(„])([vkszouaiVKSZOUAI])\s+/g,'$1$2 ');if(t!==n.nodeValue)n.nodeValue=t}
+  }
+  render();
+  nbsp(document.querySelector('main'));nbsp(document.querySelector('header'));
+})();
+</script>
+
+</body>
+</html>
