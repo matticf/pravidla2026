@@ -6,7 +6,8 @@
 <meta name="description" content="Grafický přehled pravidel florbalu (edice 2026) pro diváky a laiky.">
 <title>Florbal srozumitelně</title>
 <style>
-/* Layout: dlouhý výklad po kapitolách, lepkavá navigace, modré nadpisy na bílém papíře, červená jen pro akcent a mřížku (vizuální styl Českého florbalu) */
+/* Jediný světlý vzhled: bílé pozadí, modrý text, červené zvýraznění.
+   Layout: dlouhý výklad po kapitolách, lepkavá navigace, modré nadpisy na bílém papíře, červená jen pro akcent a mřížku (vizuální styl Českého florbalu) */
 @font-face{font-family:"Geogrotesque";src:url("fonts/G01-Rg.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Geogrotesque";src:url("fonts/G01_Md.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
 @font-face{font-family:"Geogrotesque";src:url("fonts/G01-SmBd.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
@@ -14,30 +15,15 @@
 
 :root{
   --cf-cervena:#d51223; --cf-modra:#102d69; --bila:#ffffff;
-  --cerna-80:#333333; --cerna-60:#666666; --cerna-20:#cccccc; --cerna-05:#f2f2f2;
-  --podklad:var(--bila); --podklad-tlumeny:var(--cerna-05);
-  --text:var(--cf-modra); --text-tlumeny:var(--cerna-60); --text-akcent:var(--cf-cervena);
+  --podklad:var(--bila); --podklad-tlumeny:var(--bila);
+  --text:var(--cf-modra); --text-tlumeny:var(--cf-modra); --text-akcent:var(--cf-cervena);
   --plocha-akcent:var(--cf-cervena); --na-akcentu:var(--bila); --motiv:var(--cf-cervena); --linka:var(--cf-modra);
-  --plocha-hriste:var(--cerna-05); --znamka:var(--cf-cervena); --postava:var(--cf-modra);
+  --plocha-hriste:var(--bila); --znamka:var(--cf-cervena); --postava:var(--cf-modra);
   --geo:"Geogrotesque", Arial, sans-serif;
   --s1:4px; --s2:8px; --s3:16px; --s4:24px; --s5:40px; --s6:64px;
   --radius-blok:8px;
+  color-scheme:light;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --podklad:var(--cf-modra); --podklad-tlumeny:var(--cerna-80);
-    --text:var(--bila); --text-tlumeny:var(--cerna-20); --text-akcent:var(--bila);
-    --linka:var(--cerna-20); --plocha-hriste:#0b2152; --znamka:var(--cf-cervena); --postava:var(--bila);
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --podklad:var(--cf-modra); --podklad-tlumeny:var(--cerna-80);
-  --text:var(--bila); --text-tlumeny:var(--cerna-20); --text-akcent:var(--bila);
-  --linka:var(--cerna-20); --plocha-hriste:#0b2152; --znamka:var(--cf-cervena); --postava:var(--bila);
-  color-scheme:dark;
-}
-
 *{box-sizing:border-box}
 body{background:var(--podklad);color:var(--text);font-family:var(--geo);font-size:16px;line-height:24px;font-variant-ligatures:none;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--podklad)}
@@ -86,7 +72,7 @@ h3{font-size:21px;line-height:28px;font-weight:600}
 .grid2{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:var(--s5);align-items:start}
 .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3)}
 .grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
-.karta{background:var(--podklad-tlumeny);border-radius:var(--radius-blok);padding:var(--s4);display:flex;flex-direction:column;gap:var(--s2);min-width:0}
+.karta{background:var(--podklad);border:1px solid var(--linka);border-radius:var(--radius-blok);padding:var(--s4);display:flex;flex-direction:column;gap:var(--s2);min-width:0}
 .karta h3{font-size:19px;line-height:25px}
 .karta p{font-size:15px;line-height:22px}
 
@@ -110,7 +96,7 @@ h3{font-size:21px;line-height:28px;font-weight:600}
 .legenda .c{width:24px;height:24px;border-radius:50%;background:var(--plocha-akcent);color:var(--na-akcentu);font-weight:700;font-size:13px;display:grid;place-items:center;margin-top:1px}
 .legenda b{display:block;font-weight:600}
 .legenda span.t{font-size:15px;line-height:22px}
-.legenda li.on button{background:var(--podklad-tlumeny)}
+.legenda li.on b{color:var(--text-akcent)}
 .rozmery{margin-top:var(--s3)}
 
 /* chips */
@@ -134,7 +120,7 @@ h3{font-size:21px;line-height:28px;font-weight:600}
 .casova div{display:flex;flex-direction:column;justify-content:center;padding:0 10px;min-width:0;font-size:13px;line-height:16px}
 .casova .hra{background:var(--text);color:var(--podklad);flex:20}
 .casova .hra b{font-size:18px;line-height:22px}
-.casova .pauza{background:var(--podklad-tlumeny);color:var(--text);flex:10}
+.casova .pauza{background:var(--podklad);color:var(--text);flex:10;border-top:1px solid var(--linka);border-bottom:1px solid var(--linka)}
 .casova-pozn{display:flex;justify-content:space-between;margin-top:6px}
 .dalsi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3);margin-top:var(--s5)}
 .cas-scroll{overflow-x:auto}
@@ -156,7 +142,7 @@ h3{font-size:21px;line-height:28px;font-weight:600}
 .smi li svg{width:20px;height:20px;margin-top:1px}
 
 /* restarts */
-.mini{width:100%;height:auto;display:block;background:var(--plocha-hriste);border-radius:6px}
+.mini{width:100%;height:auto;display:block;background:var(--plocha-hriste);border:1px solid var(--linka);border-radius:6px}
 .mini .ln{fill:none;stroke:var(--linka);stroke-width:1.2}
 .mini .d3{fill:none;stroke:var(--cf-cervena);stroke-width:1.2;stroke-dasharray:3 3}
 .mini .mic{fill:var(--cf-cervena)}
@@ -188,7 +174,7 @@ h3{font-size:21px;line-height:28px;font-weight:600}
 
 /* signals */
 .signaly{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
-.sig{background:var(--podklad-tlumeny);border-radius:var(--radius-blok);padding:var(--s3) var(--s3) var(--s4);display:flex;flex-direction:column;gap:6px}
+.sig{background:var(--podklad);border:1px solid var(--linka);border-radius:var(--radius-blok);padding:var(--s3) var(--s3) var(--s4);display:flex;flex-direction:column;gap:6px}
 .sig svg{width:100%;max-width:150px;height:auto;align-self:center}
 .sig .body{stroke:var(--postava);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;fill:none}
 .sig .hlava{fill:var(--postava)}
@@ -212,7 +198,7 @@ h3{font-size:21px;line-height:28px;font-weight:600}
 .otazka h3{font-size:18px;line-height:25px}
 .moznosti{display:flex;flex-wrap:wrap;gap:var(--s2)}
 .moznosti button{border:1.5px solid var(--linka);background:transparent;border-radius:var(--radius-blok);padding:9px 14px;font-size:15px;font-weight:500;cursor:pointer;text-align:left}
-.moznosti button:hover:not(:disabled){background:var(--podklad-tlumeny)}
+.moznosti button:hover:not(:disabled){border-color:var(--cf-cervena);color:var(--text-akcent)}
 .moznosti button.spravne{background:var(--text);color:var(--podklad);border-color:var(--text)}
 .moznosti button.spatne{background:var(--plocha-akcent);color:var(--na-akcentu);border-color:var(--plocha-akcent)}
 .moznosti button:disabled{cursor:default}
@@ -591,7 +577,7 @@ html{scroll-behavior:smooth}
     <div class="zebricek" id="zebricek">
       <div class="stup">
         <div><span class="chip">bez vyloučení</span><h3 style="margin-top:8px">Volný úder</h3></div>
-        <div><div class="osa"><i class="konec" style="background:transparent;color:var(--text-tlumeny);padding:0">hraje se dál v plném počtu</i></div></div>
+        <div><div class="osa"><i class="konec" style="background:transparent;color:var(--text);padding:0">hraje se dál v plném počtu</i></div></div>
         <p class="kdy">Lehčí faul: sekání do hole, strkání, hra nohou nad koleny.</p>
       </div>
       <div class="stup">
