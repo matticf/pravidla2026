@@ -6,7 +6,7 @@
 <meta name="description" content="Grafický přehled pravidel florbalu (edice 2026) pro diváky a laiky.">
 <title>Florbal srozumitelně</title>
 <style>
-/* Jediný světlý vzhled: bílé pozadí, modrý text, červené zvýraznění.
+/* Výchozí světlý vzhled: bílé pozadí, modrý text, červené zvýraznění. Tmavý (ČF modrá) jen přepínačem.
    Layout: dlouhý výklad po kapitolách, lepkavá navigace, modré nadpisy na bílém papíře, červená jen pro akcent a mřížku (vizuální styl Českého florbalu) */
 @font-face{font-family:"Geogrotesque";src:url("fonts/G01-Rg.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Geogrotesque";src:url("fonts/G01_Md.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
@@ -23,6 +23,12 @@
   --s1:4px; --s2:8px; --s3:16px; --s4:24px; --s5:40px; --s6:64px;
   --radius-blok:8px;
   color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --podklad:var(--cf-modra); --podklad-tlumeny:var(--cf-modra);
+  --text:var(--bila); --text-tlumeny:#cccccc; --text-akcent:var(--bila);
+  --linka:#cccccc; --plocha-hriste:var(--cf-modra); --postava:var(--bila);
+  color-scheme:dark;
 }
 *{box-sizing:border-box}
 body{background:var(--podklad);color:var(--text);font-family:var(--geo);font-size:16px;line-height:24px;font-variant-ligatures:none;-webkit-font-smoothing:antialiased}
@@ -57,7 +63,15 @@ button{font-family:inherit;color:inherit}
 
 /* Nav */
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--podklad);border-bottom:1px solid var(--linka)}
-.nav .wrap{overflow-x:auto;scrollbar-width:none}
+.nav .wrap{display:flex;align-items:center;gap:var(--s3)}
+.nav-scroll{flex:1 1 auto;min-width:0;overflow-x:auto;scrollbar-width:none}
+.vzhled{flex:none;display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--linka);background:var(--podklad);color:var(--text);border-radius:999px;padding:5px 12px 5px 8px;font-size:14px;font-weight:600;cursor:pointer}
+.vzhled:hover{border-color:var(--cf-cervena)}
+.vzhled svg{width:18px;height:18px}
+.vzhled .ik-mesic{display:none}
+:root[data-theme="dark"] .vzhled .ik-slunce{display:none}
+:root[data-theme="dark"] .vzhled .ik-mesic{display:block}
+@media (max-width:600px){.vzhled .lbl{display:none}.vzhled{padding:6px}}
 .nav ul{display:flex;gap:var(--s4);list-style:none;margin:0;padding:12px 0;white-space:nowrap}
 .nav a{color:var(--text);text-decoration:none;font-weight:600;font-size:15px}
 .nav a:hover{color:var(--text-akcent)}
@@ -96,7 +110,7 @@ h3{font-size:21px;line-height:28px;font-weight:600}
 .legenda .c{width:24px;height:24px;border-radius:50%;background:var(--plocha-akcent);color:var(--na-akcentu);font-weight:700;font-size:13px;display:grid;place-items:center;margin-top:1px}
 .legenda b{display:block;font-weight:600}
 .legenda span.t{font-size:15px;line-height:22px}
-.legenda li.on b{color:var(--text-akcent)}
+.legenda li.on b{color:var(--text-akcent);text-decoration:underline;text-decoration-color:var(--cf-cervena);text-decoration-thickness:2px;text-underline-offset:3px}
 .rozmery{margin-top:var(--s3)}
 
 /* chips */
@@ -240,7 +254,7 @@ html{scroll-behavior:smooth}
     <p class="perex">Přišli jste se podívat na zápas a nevíte, proč rozhodčí zapískal? Tady jsou pravidla florbalu v kostce. Bez odborných řečí, s obrázky a pro každého, kdo nikdy nedržel florbalku.</p>
     <div class="facts">
       <div class="fact"><b>2</b><span>družstva proti sobě, vyhrává to s více góly</span></div>
-      <div class="fact"><b>5 + 1</b><span>na hřišti: pět hráčů s holí a brankář</span></div>
+      <div class="fact"><b>5 + 1</b><span>na hřišti: pět hráčů s florbalkou a brankář</span></div>
       <div class="fact"><b>3 × 20</b><span>minut čistého času, mezi třetinami pauza</span></div>
       <div class="fact"><b>40 × 20</b><span>metrů má hřiště ohraničené mantinelem</span></div>
     </div>
@@ -250,6 +264,7 @@ html{scroll-behavior:smooth}
 
 <nav class="nav" aria-label="Kapitoly">
   <div class="wrap">
+    <div class="nav-scroll">
     <ul>
       <li><a href="#hriste">Hřiště</a></li>
       <li><a href="#hraci">Hráči</a></li>
@@ -262,6 +277,12 @@ html{scroll-behavior:smooth}
       <li><a href="#slovnik">Slovníček</a></li>
       <li><a href="#kviz">Kvíz</a></li>
     </ul>
+    </div>
+    <button type="button" class="vzhled" id="vzhled" aria-pressed="false" aria-label="Přepnout na tmavý vzhled">
+      <svg class="ik-slunce" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="var(--cf-cervena)"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="var(--cf-cervena)" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="ik-mesic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="var(--cf-cervena)"/></svg>
+      <span class="lbl">Tmavý vzhled</span>
+    </button>
   </div>
 </nav>
 
@@ -328,8 +349,8 @@ html{scroll-behavior:smooth}
         <li data-k="1"><button type="button"><span class="c">1</span><span><b>Mantinel</b><span class="t">Ohraničuje hřiště 40 × 20 m. Když míček přeletí ven, hra pokračuje rozehráním.</span></span></button></li>
         <li data-k="2"><button type="button"><span class="c">2</span><span><b>Středová čára a středový bod</b><span class="t">Dělí hřiště na poloviny. Ze středu se začíná každá třetina, hra po gólu i trestné střílení.</span></span></button></li>
         <li data-k="3"><button type="button"><span class="c">3</span><span><b>Body pro vhazování</b><span class="t">Šest křížků u mantinelů. Na nejbližším z nich se hra obnovuje vhazováním.</span></span></button></li>
-        <li data-k="4"><button type="button"><span class="c">4</span><span><b>Velké brankoviště (4 × 5 m)</b><span class="t">Území brankáře. Jen tady smí chytat míček rukama. Hráči s holí sem chodit smějí.</span></span></button></li>
-        <li data-k="5"><button type="button"><span class="c">5</span><span><b>Malé brankoviště (1 × 2,5 m)</b><span class="t">Hned před brankou. Hráči s holí do něj nesmí vstoupit ani nohou. Holí do něj zasahovat smějí.</span></span></button></li>
+        <li data-k="4"><button type="button"><span class="c">4</span><span><b>Velké brankoviště (4 × 5 m)</b><span class="t">Území brankáře. Jen tady smí chytat míček rukama. Hráči s florbalkou sem chodit smějí.</span></span></button></li>
+        <li data-k="5"><button type="button"><span class="c">5</span><span><b>Malé brankoviště (1 × 2,5 m)</b><span class="t">Hned před brankou. Hráči s florbalkou do něj nesmí vstoupit ani nohou. Florbalkou do něj zasahovat smějí.</span></span></button></li>
         <li data-k="6"><button type="button"><span class="c">6</span><span><b>Brána (šířka 160 cm)</b><span class="t">Gól platí, když míček celý přejde brankovou čáru zepředu.</span></span></button></li>
         <li data-k="7"><button type="button"><span class="c">7</span><span><b>Prostor pro střídání</b><span class="t">Střídačky obou družstev. Střídat se smí kdykoli a kolikrát chcete, ale jen tady.</span></span></button></li>
         <li data-k="8"><button type="button"><span class="c">8</span><span><b>Trestné lavice a zapisovatelé</b><span class="t">Naproti střídačkám. Sem jde vyloučený hráč a zde se měří čas a píše zápis.</span></span></button></li>
@@ -356,19 +377,19 @@ html{scroll-behavior:smooth}
         </div>
         <ul class="seznam">
           <li><span><b>Střídání bez omezení.</b> Kdykoli během hry, i za pohybu. Hráč, který odchází, musí nejdřív přelézt mantinel, teprve pak smí jít na hřiště nový.</span></li>
-          <li><span><b>Brankáře lze stáhnout.</b> Družstvo může kdykoli hrát se šesti hráči s holí a bez brankáře. Typicky v závěru, když prohrává.</span></li>
+          <li><span><b>Brankáře lze stáhnout.</b> Družstvo může kdykoli hrát se šesti hráči s florbalkou a bez brankáře. Typicky v závěru, když prohrává.</span></li>
           <li><span><b>Kapitán s páskou.</b> Jen on smí mluvit s rozhodčími.</span></li>
           <li><span><b>Realizační tým.</b> Trenéři a další členové týmu, nejvýš pět. Pokyny dávají jen ze střídačky.</span></li>
-          <li><span><b>Výstroj.</b> Hráči s holí mají trika, trenýrky a štulpny; dlouhé kalhoty nosí jen brankář. Šperky jsou zakázané kvůli bezpečnosti.</span></li>
+          <li><span><b>Výstroj.</b> Hráči s florbalkou mají trika, trenýrky a štulpny; dlouhé kalhoty nosí jen brankář. Šperky jsou zakázané kvůli bezpečnosti.</span></li>
         </ul>
       </div>
       <div style="display:grid;gap:var(--s3)">
         <div class="karta">
           <div class="popisek">Brankář</div>
-          <h3>Chytá rukama a nemá hůl</h3>
+          <h3>Chytá rukama a nemá florbalku</h3>
           <p>Brankář klečí v bráně v masce a chytá míček rukama i tělem. Má k tomu pár pravidel navíc:</p>
           <ul class="seznam" style="margin-top:4px">
-            <li><span>Musí zůstat ve velkém brankovišti. Když ho celý opustí, hraje jako hráč bez hole a míček rukou chytat nesmí.</span></li>
+            <li><span>Musí zůstat ve velkém brankovišti. Když ho celý opustí, hraje jako hráč bez florbalky a míček rukou chytat nesmí.</span></li>
             <li><span>Míček smí držet nejvýš <b>3 sekundy</b>.</span></li>
             <li><span>Výhozem ani výkopem nesmí poslat míček vzduchem za půlku.</span></li>
             <li><span>Nesmí vzít do ruky úmyslnou přihrávku od spoluhráče.</span></li>
@@ -381,7 +402,7 @@ html{scroll-behavior:smooth}
         </div>
         <div class="karta">
           <div class="popisek">Florbalka</div>
-          <h3>Lehká hůl s plastovou čepelí</h3>
+          <h3>Lehká, s plastovou čepelí</h3>
           <p>Musí mít schválení IFF. Čepel se smí zahnout nejvýš o 30 mm. Míček je plastový a děrovaný.</p>
         </div>
       </div>
@@ -436,7 +457,7 @@ html{scroll-behavior:smooth}
     <div class="kap-hlava">
       <div class="popisek">Nejčastější fauly</div>
       <h2>Co se nesmí</h2>
-      <p>Florbal je bezkontaktní hra. Nesmí se strkat, sekat do hole ani hrát vysoko. Lehčí prohřešek znamená volný úder pro soupeře, ten těžší vyloučení na trestnou lavici.</p>
+      <p>Florbal je bezkontaktní hra. Nesmí se strkat, sekat do florbalky ani hrát vysoko. Lehčí prohřešek znamená volný úder pro soupeře, ten těžší vyloučení na trestnou lavici.</p>
     </div>
 
     <div class="vyska">
@@ -459,28 +480,28 @@ html{scroll-behavior:smooth}
       <div>
         <h3 style="margin-bottom:var(--s3)">Hra vysoko</h3>
         <table class="vyska-tab">
-          <tr><td>Čepel hole nad pasem při nápřahu nebo po střele, když je blízko soupeř</td><td><span class="chip">volný úder</span></td></tr>
-          <tr><td>Hrát míček holí nad koleny</td><td><span class="chip">volný úder</span></td></tr>
+          <tr><td>Čepel florbalky nad pasem při nápřahu nebo po střele, když je blízko soupeř</td><td><span class="chip">volný úder</span></td></tr>
+          <tr><td>Hrát míček florbalkou nad koleny</td><td><span class="chip">volný úder</span></td></tr>
           <tr><td>Hrát míček nohou nad koleny</td><td><span class="chip">volný úder</span></td></tr>
-          <tr><td>Zahrát míček holí nebo nohou nad pasem</td><td><span class="chip trest">2 minuty</span></td></tr>
+          <tr><td>Zahrát míček florbalkou nebo nohou nad pasem</td><td><span class="chip trest">2 minuty</span></td></tr>
         </table>
         <p class="drobny" style="margin-top:8px">Měří se podle výšky kolen a pasu hráče ve vzpřímeném postoji.</p>
       </div>
     </div>
 
     <div class="faul">
-      <div class="karta"><span class="chip">volný úder</span><h3>Sekání do hole</h3><p>Bít, blokovat, nadzvedávat nebo kopat do soupeřovy hole. Když jde o velkou výhodu nebo hráč na míček vůbec nedosáhl, jsou to <b>2 minuty</b>.</p></div>
+      <div class="karta"><span class="chip">volný úder</span><h3>Sekání do florbalky</h3><p>Bít, blokovat, nadzvedávat nebo kopat do soupeřovy florbalky. Když jde o velkou výhodu nebo hráč na míček vůbec nedosáhl, jsou to <b>2 minuty</b>.</p></div>
       <div class="karta"><span class="chip">volný úder</span><h3>Strkání a vrážení</h3><p>Povolený je jen souboj ramenem na rameno. Strkání jinak nebo vrážení zády do soupeře je faul. Natlačit soupeře na mantinel stojí <b>2 minuty</b>.</p></div>
-      <div class="karta"><span class="chip">volný úder</span><h3>Držení</h3><p>Chytat, tahat nebo držet soupeře či jeho hůl. Chytit soupeřovu hůl do ruky jsou už <b>2 minuty</b>.</p></div>
-      <div class="karta"><span class="chip">volný úder</span><h3>Hůl nebo noha mezi nohy</h3><p>Vložit florbalku, nohu nebo chodidlo mezi nohy soupeře.</p></div>
-      <div class="karta"><span class="chip">volný úder</span><h3>Hra vleže a na kolenou</h3><p>Hrát míček, když hráč klečí na obou kolenou nebo se opírá o zem rukou bez hole.</p></div>
+      <div class="karta"><span class="chip">volný úder</span><h3>Držení</h3><p>Chytat, tahat nebo držet soupeře či jeho florbalku. Chytit soupeřovu florbalku do ruky jsou už <b>2 minuty</b>.</p></div>
+      <div class="karta"><span class="chip">volný úder</span><h3>Florbalka nebo noha mezi nohy</h3><p>Vložit florbalku, nohu nebo chodidlo mezi nohy soupeře.</p></div>
+      <div class="karta"><span class="chip">volný úder</span><h3>Hra vleže a na kolenou</h3><p>Hrát míček, když hráč klečí na obou kolenou nebo se opírá o zem rukou, ve které nedrží florbalku.</p></div>
       <div class="karta"><span class="chip">volný úder</span><h3>Výskok</h3><p>Vyskočit oběma nohama a zastavit míček. Přeskočit ho je v pořádku.</p></div>
       <div class="karta"><span class="chip">volný úder</span><h3>Hlavička</h3><p>Hrát míček hlavou je zakázané.</p></div>
-      <div class="karta"><span class="chip trest">2 minuty</span><h3>Hra rukou</h3><p>Hráč s holí nesmí zastavit ani zahrát míček rukou, paží ani nataženým dresem.</p></div>
-      <div class="karta"><span class="chip">volný úder</span><h3>Malé brankoviště</h3><p>Hráč s holí do něj nesmí vstoupit ani ho přeběhnout. Brání-li tam obránce při střele z volného úderu, nařídí se <b>trestné střílení</b>.</p></div>
-      <div class="karta"><span class="chip trest">2 minuty</span><h3>Nedodržení 3 metrů</h3><p>Při volném úderu nebo rozehrání musí soupeři ustoupit aspoň 3 m od míčku, i s holí.</p></div>
+      <div class="karta"><span class="chip trest">2 minuty</span><h3>Hra rukou</h3><p>Hráč s florbalkou nesmí zastavit ani zahrát míček rukou, paží ani nataženým dresem.</p></div>
+      <div class="karta"><span class="chip">volný úder</span><h3>Malé brankoviště</h3><p>Hráč s florbalkou do něj nesmí vstoupit ani ho přeběhnout. Brání-li tam obránce při střele z volného úderu, nařídí se <b>trestné střílení</b>.</p></div>
+      <div class="karta"><span class="chip trest">2 minuty</span><h3>Nedodržení 3 metrů</h3><p>Při volném úderu nebo rozehrání musí soupeři ustoupit aspoň 3 m od míčku, i s florbalkou.</p></div>
       <div class="karta"><span class="chip trest">2 minuty</span><h3>Protesty</h3><p>Hádání s rozhodčími. Nesportovní chování a simulování se trestá ještě přísněji.</p></div>
-      <div class="karta"><span class="chip trest">2 + 2 minuty</span><h3>Hákování a bezohlednost</h3><p>Zaháknout holí soupeřovo tělo, hodit holí po míčku nebo bezohledně srazit soupeře.</p></div>
+      <div class="karta"><span class="chip trest">2 + 2 minuty</span><h3>Hákování a bezohlednost</h3><p>Zaháknout florbalkou soupeřovo tělo, hodit florbalkou po míčku nebo bezohledně srazit soupeře.</p></div>
     </div>
 
     <div class="smi">
@@ -492,7 +513,7 @@ html{scroll-behavior:smooth}
         <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Zastavit míček tělem, třeba stehnem nebo hrudníkem (ne hlavou a rukou).</span></li>
         <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Přihrát nohou pod úrovní kolen. Kopnutý gól ale neplatí.</span></li>
         <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Souboj ramenem na rameno o míček.</span></li>
-        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Hrát holí do soupeřovy hole poté, co hráč čistě zahrál míček.</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Hrát florbalkou do soupeřovy florbalky poté, co hráč čistě zahrál míček.</span></li>
         <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Vysoký nápřah, když poblíž nikdo není.</span></li>
         <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Běžet za mantinelem. Míček odtud ale hrát nesmíte.</span></li>
       </ul>
@@ -520,7 +541,7 @@ html{scroll-behavior:smooth}
           <text x="114" y="22">3 m</text>
         </svg>
         <h3>Vhazování</h3>
-        <p>Dva hráči se postaví proti sobě a o míček položený mezi čepelemi se utkají holemi. Ostatní stojí aspoň 3 m daleko. Začíná se jím každá třetina a hra po gólu.</p>
+        <p>Dva hráči se postaví proti sobě a o míček položený mezi čepelemi se utkají florbalkami. Ostatní stojí aspoň 3 m daleko. Začíná se jím každá třetina a hra po gólu.</p>
       </div>
       <div class="karta">
         <svg class="mini" viewBox="0 0 160 100" aria-hidden="true">
@@ -578,7 +599,7 @@ html{scroll-behavior:smooth}
       <div class="stup">
         <div><span class="chip">bez vyloučení</span><h3 style="margin-top:8px">Volný úder</h3></div>
         <div><div class="osa"><i class="konec" style="background:transparent;color:var(--text);padding:0">hraje se dál v plném počtu</i></div></div>
-        <p class="kdy">Lehčí faul: sekání do hole, strkání, hra nohou nad koleny.</p>
+        <p class="kdy">Lehčí faul: sekání do florbalky, strkání, hra nohou nad koleny.</p>
       </div>
       <div class="stup">
         <div><span class="chip trest">menší trest</span><h3 style="margin-top:8px">2 minuty</h3></div>
@@ -633,7 +654,7 @@ html{scroll-behavior:smooth}
     <div class="kap-hlava">
       <div class="popisek">Kdy se počítá</div>
       <h2>Gól, nebo ne?</h2>
-      <p>Gól platí, když míček celým objemem přejde brankovou čáru zepředu po správném zahrání holí. Potvrdí se vhazováním ve středu hřiště.</p>
+      <p>Gól platí, když míček celým objemem přejde brankovou čáru zepředu po správném zahrání florbalkou. Potvrdí se vhazováním ve středu hřiště.</p>
     </div>
     <div class="gol">
       <div class="karta">
@@ -643,7 +664,7 @@ html{scroll-behavior:smooth}
         </div>
         <ul>
           <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Míček je celý za čárou, ne jen dotýká se jí.</span></li>
-          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Střelec ho zahrál holí, nebo ho do branky hodil brankář.</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Střelec ho zahrál florbalkou, nebo ho do branky hodil brankář.</span></li>
           <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Míček se do branky odrazil od obránce, nebo si ho tam obránce srazil sám (vlastní gól).</span></li>
           <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Útočník ho do branky neúmyslně tečoval tělem.</span></li>
           <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tým bez brankáře zmaří soupeři šanci faulem. Místo trestného střílení se rovnou uzná gól.</span></li>
@@ -687,10 +708,10 @@ html{scroll-behavior:smooth}
       <p>Slova, která uslyšíte od komentátorů a z hlediště.</p>
     </div>
     <dl class="slovnik">
-      <div><dt>Florbalka</dt><dd>Hůl s plastovou zahnutou čepelí, kterou se hraje míček.</dd></div>
-      <div><dt>Hráč v poli</dt><dd>Každý hráč kromě brankáře, tedy ten, kdo hraje s holí.</dd></div>
+      <div><dt>Florbalka</dt><dd>Náčiní s dlouhou násadou a plastovou zahnutou čepelí, kterým se hraje míček.</dd></div>
+      <div><dt>Hráč v poli</dt><dd>Každý hráč kromě brankáře, tedy ten, kdo hraje s florbalkou.</dd></div>
       <div><dt>Mantinel</dt><dd>Nízká plastová zeď kolem hřiště se zaoblenými rohy.</dd></div>
-      <div><dt>Brankoviště</dt><dd>Dva obdélníky před brankou: velké je území brankáře, do malého nesmí hráči s holí.</dd></div>
+      <div><dt>Brankoviště</dt><dd>Dva obdélníky před brankou: velké je území brankáře, do malého nesmí hráči s florbalkou.</dd></div>
       <div><dt>Vhazování</dt><dd>Souboj dvou hráčů o míček položený mezi jejich čepelemi.</dd></div>
       <div><dt>Rozehrání</dt><dd>Pokračování hry po tom, co míček opustil hřiště.</dd></div>
       <div><dt>Volný úder</dt><dd>Pokračování hry po faulu z místa přestupku.</dd></div>
@@ -725,6 +746,24 @@ html{scroll-behavior:smooth}
 </footer>
 
 <script>
+(function(){
+  /* ---------- Přepínač vzhledu ---------- */
+  var root=document.documentElement, btn=document.getElementById('vzhled'), ulozeny=null;
+  try{ulozeny=localStorage.getItem('cf-vzhled')}catch(e){}
+  function nastav(t){
+    root.setAttribute('data-theme',t);
+    var tmavy=t==='dark';
+    btn.setAttribute('aria-pressed',tmavy);
+    btn.setAttribute('aria-label',tmavy?'Přepnout na světlý vzhled':'Přepnout na tmavý vzhled');
+    btn.querySelector('.lbl').textContent=tmavy?'Světlý vzhled':'Tmavý vzhled';
+  }
+  nastav(ulozeny==='dark'?'dark':'light');
+  btn.addEventListener('click',function(){
+    var t=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    nastav(t);
+    try{localStorage.setItem('cf-vzhled',t)}catch(e){}
+  });
+})();
 (function(){
   /* ---------- Hřiště: zvýraznění ---------- */
   var box=document.getElementById('hriste-box'), leg=document.getElementById('legenda'), vybrano=null;
@@ -773,10 +812,10 @@ html{scroll-behavior:smooth}
 
   /* ---------- Kvíz ---------- */
   var Q=[
-    {q:'Kolik hráčů smí mít družstvo na hřišti najednou?',o:['5','6','7'],s:1,v:'Nejvýš šest: obvykle pět hráčů s holí a brankář. Brankáře lze vyměnit za šestého hráče s holí.'},
+    {q:'Kolik hráčů smí mít družstvo na hřišti najednou?',o:['5','6','7'],s:1,v:'Nejvýš šest: obvykle pět hráčů s florbalkou a brankář. Brankáře lze vyměnit za šestého hráče s florbalkou.'},
     {q:'Hráč zastavil míček stehnem. Co zapíská rozhodčí?',o:['Nic, je to v pořádku','Volný úder','2 minuty'],s:0,v:'Zastavit míček tělem je dovoleno. Zakázaná je jen hlava, ruka a zastavení ve výskoku.'},
     {q:'Útočník kopl míček přímo do branky. Platí gól?',o:['Ano','Ne'],s:1,v:'Úmyslně kopnutý nebo tělem usměrněný gól neplatí. Hra pokračuje vhazováním.'},
-    {q:'Smí hráč s holí vstoupit do malého brankoviště?',o:['Ano, kdykoli','Jen holí, ne nohou','Nesmí ani holí'],s:1,v:'Hráč s holí nesmí malé brankoviště ani přeběhnout. Hůl tam ale strčit smí.'},
+    {q:'Smí hráč s florbalkou vstoupit do malého brankoviště?',o:['Ano, kdykoli','Jen florbalkou, ne nohou','Nesmí ani florbalkou'],s:1,v:'Hráč s florbalkou nesmí malé brankoviště ani přeběhnout. Florbalkou tam ale zasahovat smí.'},
     {q:'Tým hraje v oslabení kvůli 2minutovému trestu a soupeř dá gól. Co se stane?',o:['Trest končí a hráč se vrací','Trest běží dál','Soupeř dostane trestné střílení'],s:0,v:'Gól v přesilovce ukončí měřený menší trest a vyloučený hráč se smí vrátit.'},
     {q:'Jak dlouho smí brankář držet míček?',o:['3 sekundy','5 sekund','Jak dlouho chce'],s:0,v:'Nejvýš tři sekundy. Pak musí míček rozehrát, jinak je volný úder pro soupeře.'}
   ];
