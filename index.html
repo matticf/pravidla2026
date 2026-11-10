@@ -461,7 +461,7 @@ section.kap{counter-increment:kap}
 .hledat input::placeholder{color:var(--text-tlumeny);opacity:.7}
 
 /* teď pískáte vy */
-.hra{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:var(--s5);align-items:start}
+.piskat{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:var(--s5);align-items:start}
 .hra-obr{position:relative;min-width:0}
 .hra-obr .panel{border-width:3px;border-radius:14px;border-color:var(--bila);--podklad:var(--bila);--text:var(--cf-modra);--text-tlumeny:var(--cf-modra);--linka:var(--cf-modra);--postava:var(--cf-modra);--tym-a:var(--cf-modra);--podlaha:color-mix(in srgb,var(--cf-modra) 6%,var(--bila))}
 .razitko{position:absolute;top:14px;left:14px;padding:7px 16px;border-radius:999px;font-size:15px;line-height:20px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--bila);color:var(--cf-modra);border:2px solid var(--cf-modra);transform:rotate(-4deg) scale(0);transition:transform .28s cubic-bezier(.3,1.7,.5,1)}
@@ -474,10 +474,10 @@ section.kap{counter-increment:kap}
 .hra-postup i.ko{background:var(--cf-cervena);border-color:var(--cf-cervena)}
 .hra-postup i.ted{box-shadow:0 0 0 4px color-mix(in srgb,var(--text) 30%,transparent)}
 .hra-postup span{margin-left:8px}
-.hra h3{font-size:24px;line-height:31px}
-.hra .moznosti{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.hra .moznosti button{padding:14px 12px;font-size:16px;line-height:22px;font-weight:700;text-align:center}
-.hra .moznosti.tri{grid-template-columns:minmax(0,1fr)}
+.piskat h3{font-size:24px;line-height:31px}
+.piskat .moznosti{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.piskat .moznosti button{padding:14px 12px;font-size:16px;line-height:22px;font-weight:700;text-align:center}
+.piskat .moznosti.tri{grid-template-columns:minmax(0,1fr)}
 .hra-vysl{display:grid;gap:var(--s3);justify-items:start;min-height:96px;font-size:16px;line-height:24px}
 .hra-konec{grid-column:1/-1;display:grid;gap:var(--s3);justify-items:start;max-width:640px}
 .hra-konec b{font-size:clamp(64px,12vw,112px);line-height:.95;font-variant-numeric:tabular-nums}
@@ -498,16 +498,21 @@ section.kap{counter-increment:kap}
   .cisty[data-stav="1"] .hodiny.tab i::before{animation:blik 1s steps(1) infinite}
 }
 @media (max-width:900px){
-  .hero-grid,.cisty,.sim,.gol-hra,.hra,.vyska{grid-template-columns:minmax(0,1fr)}
+  .hero-grid,.cisty,.sim,.gol-hra,.piskat,.vyska{grid-template-columns:minmax(0,1fr)}
   .hero-grid h1{font-size:clamp(44px,8vw,80px)}
   .hero-scena{max-width:560px}
   .vyska-hra{max-width:460px}
 }
 @media (max-width:600px){
+  .cas-inner{min-width:0}
+  .casova div{padding:0 6px;font-size:12px;line-height:15px}
+  .casova .hra b{font-size:14px;line-height:18px}
+  .casova .pauza{padding:0 3px;align-items:center;text-align:center}
+  .casova-pozn{flex-direction:column;gap:2px}
   .kap-hlava::before{font-size:44px;line-height:44px}
   .hrani{padding:var(--s3)}
-  .hra .moznosti{grid-template-columns:minmax(0,1fr)}
-  .hra h3{font-size:21px;line-height:27px}
+  .piskat .moznosti{grid-template-columns:minmax(0,1fr)}
+  .piskat h3{font-size:21px;line-height:27px}
   .btn{padding:10px 16px}
 }
 </style>
@@ -1166,7 +1171,7 @@ section.kap{counter-increment:kap}
       <h2>Teď pískáte vy</h2>
       <p>Šest situací ze hřiště. Podívejte se na obrázek a rozhodněte jako rozhodčí. Co odpískáte?</p>
     </div>
-    <div class="hra" id="hra"></div>
+    <div class="piskat" id="hra"></div>
   </div>
 </section>
 
@@ -1810,7 +1815,7 @@ section.kap{counter-increment:kap}
   (function(){
     if(KLID||!('IntersectionObserver' in window))return;
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px',threshold:.04});
-    $$('.kap-hlava,.karta,.komiks,.stup,.sig,.klic,.hrani,.hra,.fact,.slovnik>div').forEach(function(el){
+    $$('.kap-hlava,.karta,.komiks,.stup,.sig,.klic,.hrani,.piskat,.fact,.slovnik>div').forEach(function(el){
       var i=0,p=el;while((p=p.previousElementSibling))i++;
       el.classList.add('rv');el.style.transitionDelay=(i%4)*70+'ms';io.observe(el);
     });
