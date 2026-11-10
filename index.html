@@ -244,15 +244,84 @@ footer .wrap{display:grid;gap:var(--s2)}
 @media (max-width:420px){ .signaly{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s2)} .sig{padding:12px} }
 @media (prefers-reduced-motion: reduce){ *{transition:none!important;scroll-behavior:auto!important} }
 html{scroll-behavior:smooth}
+
+/* comics */
+:root{--tym-a:var(--cf-modra);--tym-b:var(--cf-cervena);--podlaha:color-mix(in srgb,var(--cf-modra) 6%,var(--bila))}
+:root[data-theme="dark"]{--tym-a:var(--bila);--podlaha:color-mix(in srgb,var(--bila) 9%,var(--cf-modra))}
+.komiks{margin:var(--s5) 0 0;padding-top:var(--s4);border-top:1px solid var(--linka)}
+.komiks figcaption{display:grid;gap:4px;margin-bottom:var(--s3)}
+.panely{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3);counter-reset:panel}
+.panely.p3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.panely li{display:flex;flex-direction:column;gap:10px;min-width:0;counter-increment:panel}
+.panel{display:block;width:100%;height:auto;aspect-ratio:240/170;border:2px solid var(--postava);border-radius:var(--radius-blok);background:var(--podklad)}
+.panely li p{font-size:15px;line-height:22px;display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px}
+.panely li p::before{content:counter(panel);width:22px;height:22px;border-radius:50%;background:var(--plocha-akcent);color:var(--na-akcentu);font-size:12px;line-height:22px;font-weight:700;text-align:center}
+.posun{display:none;margin-top:var(--s2)}
+.panel .k-podlaha{fill:var(--podlaha)}
+.panel .k-mant{fill:var(--podklad);stroke:var(--linka);stroke-width:1.5}
+.panel .k-ln{fill:none;stroke:var(--linka);stroke-width:1.2}
+.panel .k-telo{fill:none;stroke:var(--postava);stroke-linecap:round;stroke-linejoin:round}
+.panel .k-ruka{stroke-width:3.6}
+.panel .k-noha{stroke-width:4.2}
+.panel .k-kalhoty{stroke-width:7}
+.panel .k-bota{stroke-width:4.6}
+.panel .k-prst{stroke-width:2}
+.panel .k-dres{stroke:var(--postava);stroke-width:1.5;stroke-linejoin:round}
+.panel .k-hlava{fill:var(--podklad);stroke:var(--postava);stroke-width:2}
+.panel .k-vlasy,.panel .k-oko,.panel .k-dlan{fill:var(--postava)}
+.panel .k-pusa{fill:none;stroke:var(--postava);stroke-width:1.4;stroke-linecap:round}
+.panel .k-maska{fill:none;stroke:var(--postava);stroke-width:1.2}
+.panel .k-pistalka{fill:var(--cf-cervena)}
+.panel .k-hodinky{fill:var(--cf-cervena)}
+.panel .k-hul{stroke:var(--postava);stroke-width:2.6;stroke-linecap:round}
+.panel .k-cepel{fill:none;stroke:var(--postava);stroke-width:4.6;stroke-linecap:round}
+.panel .k-mic{fill:var(--cf-cervena);stroke:var(--podklad);stroke-width:1}
+.panel .k-dirka{fill:var(--podklad)}
+.panel .k-sit{fill:url(#km-sit);stroke:none}
+.panel .k-ram{fill:none;stroke:var(--cf-cervena);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.panel .k-bk{fill:none;stroke:var(--linka);stroke-width:1.4}
+.panel .k-bk.on{fill:color-mix(in srgb,var(--cf-cervena) 22%,transparent);stroke:var(--cf-cervena);stroke-width:2.2}
+.panel .k-tab{fill:var(--text)}
+.panel .k-tabt{fill:var(--podklad);font:700 16px var(--geo);font-variant-numeric:tabular-nums}
+.panel .k-svetlo{fill:var(--cf-cervena)}
+.panel .k-pauza{stroke:var(--podklad);stroke-width:3}
+.panel .k-bub{fill:var(--podklad);stroke:var(--postava);stroke-width:1.6;stroke-linejoin:round}
+.panel .k-bt{font-family:var(--geo);font-weight:700;fill:var(--text)}
+.panel .k-zvuk{font-family:var(--geo);font-weight:700;fill:var(--cf-cervena);stroke:var(--podklad);stroke-width:4;paint-order:stroke;stroke-linejoin:round}
+.panel .k-pohyb{fill:none;stroke:var(--cf-cervena);stroke-width:1.6;stroke-dasharray:4 3;stroke-linecap:round}
+.panel .k-rychlost{stroke:var(--linka);stroke-width:1.6;stroke-linecap:round}
+.panel .k-pas{stroke:var(--cf-cervena);stroke-width:1.2;stroke-dasharray:5 4}
+.panel .k-mira{fill:none;stroke:var(--linka);stroke-width:1.2}
+.panel .k-mtxt{font:700 9px var(--geo);letter-spacing:.04em;fill:var(--text-tlumeny)}
+.panel .k-divak{fill:var(--linka);opacity:.35}
+.panel .k-lav{fill:none;stroke:var(--linka);stroke-width:3;stroke-linecap:round}
+.panel .k-st{fill:var(--plocha-akcent)}
+.panel .k-st.ok{fill:var(--text)}
+.panel .k-sti{fill:none;stroke:var(--podklad);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.panel .k-st:not(.ok)+.k-sti{stroke:var(--na-akcentu)}
+.panel .k-stt{font:700 11px var(--geo);fill:var(--podklad)}
+.panel .k-st:not(.ok)~.k-stt{fill:var(--na-akcentu)}
+@media (max-width:900px){.panely,.panely.p3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){
+  .panely,.panely.p3{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:84%;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding-bottom:8px;scrollbar-width:thin}
+  .panely li{scroll-snap-align:start}
+  .posun{display:block}
+}
 </style>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="km-pruhy" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" style="fill:var(--podklad)"/><rect width="3" height="6" style="fill:var(--postava)"/></pattern>
+    <pattern id="km-sit" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V5M0 0H5" style="fill:none;stroke:var(--linka);stroke-width:.7"/></pattern>
+  </defs>
+</svg>
 <header class="hero">
   <div class="wrap">
     <div class="popisek">Pravidla florbalu · edice 2026</div>
     <h1 style="margin-top:12px">Florbal srozumitelně</h1>
-    <p class="perex">Přišli jste se podívat na zápas a nevíte, proč rozhodčí zapískal? Tady jsou pravidla florbalu v kostce. Bez odborných řečí, s obrázky a pro každého, kdo nikdy nedržel florbalku.</p>
+    <p class="perex">Přišli jste se podívat na zápas a nevíte, proč rozhodčí zapískal? Tady jsou pravidla florbalu v kostce. Bez odborných řečí, s obrázky a komiksy, pro každého, kdo nikdy nedržel florbalku.</p>
     <div class="facts">
       <div class="fact"><b>2</b><span>družstva proti sobě, vyhrává to s více góly</span></div>
       <div class="fact"><b>5 + 1</b><span>na hřišti: pět hráčů s florbalkou a brankář</span></div>
@@ -357,6 +426,16 @@ html{scroll-behavior:smooth}
         <li data-k="8"><button type="button"><span class="c">8</span><span><b>Trestné lavice a zapisovatelé</b><span class="t">Naproti střídačkám, každý tým na stejné straně jako jeho střídačka. Sem jde vyloučený hráč, u stolku se měří čas a píše zápis.</span></span></button></li>
       </ul>
     </div>
+    <figure class="komiks" aria-labelledby="km-bk">
+      <figcaption><span class="popisek">Komiks</span><h3 id="km-bk">Pozor na malé brankoviště</h3></figcaption>
+      <ol class="panely">
+        <li><svg class="panel" data-s="bk1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Útočník se řítí s míčkem na bránu.</p></li>
+        <li><svg class="panel" data-s="bk2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>V zápalu šlápne do malého brankoviště. Počítá se i noha na čáře.</p></li>
+        <li><svg class="panel" data-s="bk3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Hvizd. Ruce nad hlavou ve tvaru trojúhelníku znamenají přestupek v malém brankovišti.</p></li>
+        <li><svg class="panel" data-s="bk4" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Volný úder dostává bránící tým a soupeři musí ustoupit na 3 m. Florbalkou by útočník do brankoviště sahat směl.</p></li>
+      </ol>
+      <p class="posun drobny">Další políčka najdete posunutím do strany →</p>
+    </figure>
   </div>
 </section>
 
@@ -410,6 +489,25 @@ html{scroll-behavior:smooth}
         </div>
       </div>
     </div>
+    <figure class="komiks" aria-labelledby="km-st">
+      <figcaption><span class="popisek">Komiks</span><h3 id="km-st">Jak se správně střídá</h3></figcaption>
+      <ol class="panely">
+        <li><svg class="panel" data-s="st1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Hráč dojíždí ke střídačce a hlásí střídání.</p></li>
+        <li><svg class="panel" data-s="st2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Nejdřív musí mantinel přelézt ten, kdo odchází. Nový hráč zatím čeká.</p></li>
+        <li><svg class="panel" data-s="st3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Teprve pak smí na hřiště nový hráč. Střídat se dá kdykoli a kolikrát chcete.</p></li>
+        <li><svg class="panel" data-s="st4" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Kdo naskočí dřív a zasáhne do hry, jde na 2 minuty za špatné střídání.</p></li>
+      </ol>
+      <p class="posun drobny">Další políčka najdete posunutím do strany →</p>
+    </figure>
+    <figure class="komiks" aria-labelledby="km-br">
+      <figcaption><span class="popisek">Komiks</span><h3 id="km-br">Brankář a tři sekundy</h3></figcaption>
+      <ol class="panely p3">
+        <li><svg class="panel" data-s="br1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Brankář chytí míček do rukou. Začíná odpočet.</p></li>
+        <li><svg class="panel" data-s="br2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Míček smí držet nejvýš 3 sekundy. Hledá volného spoluhráče.</p></li>
+        <li><svg class="panel" data-s="br3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Výhoz ke spoluhráči. Vzduchem za půlku ale míček letět nesmí, to by byl volný úder pro soupeře.</p></li>
+      </ol>
+      <p class="posun drobny">Další políčka najdete posunutím do strany →</p>
+    </figure>
   </div>
 </section>
 
@@ -451,6 +549,16 @@ html{scroll-behavior:smooth}
       </div>
     </div>
     <p class="drobny" style="margin-top:var(--s3)">Mládežnické a nižší soutěže mohou hrát kratší dobu, nejméně 2 × 15 minut.</p>
+    <figure class="komiks" aria-labelledby="km-cc">
+      <figcaption><span class="popisek">Komiks</span><h3 id="km-cc">Proč zápas trvá déle než hodinu</h3></figcaption>
+      <ol class="panely">
+        <li><svg class="panel" data-s="cc1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Hraje se a hodiny na tabuli běží.</p></li>
+        <li><svg class="panel" data-s="cc2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Rozhodčí zapíská a hodiny se zastaví.</p></li>
+        <li><svg class="panel" data-s="cc3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Hodiny se rozběhnou, až se zase hraje. Tady po vhazování.</p></li>
+        <li><svg class="panel" data-s="cc4" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Hraje se čistý čas, proto zápas trvá déle, než ukazují hodiny.</p></li>
+      </ol>
+      <p class="posun drobny">Další políčka najdete posunutím do strany →</p>
+    </figure>
   </div>
 </section>
 
@@ -491,6 +599,15 @@ html{scroll-behavior:smooth}
         <p class="drobny" style="margin-top:8px">Měří se podle výšky kolen a pasu hráče ve vzpřímeném postoji.</p>
       </div>
     </div>
+    <figure class="komiks" aria-labelledby="km-vh">
+      <figcaption><span class="popisek">Komiks</span><h3 id="km-vh">Vysoko, nebo ještě v pořádku?</h3></figcaption>
+      <ol class="panely p3">
+        <li><svg class="panel" data-s="vh1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Velký nápřah nad pas je v pořádku, když poblíž nikdo není.</p></li>
+        <li><svg class="panel" data-s="vh2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Stejný nápřah, ale hned za hráčem stojí soupeř. Volný úder.</p></li>
+        <li><svg class="panel" data-s="vh3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Zahrát míček florbalkou nad úrovní pasu stojí 2 minuty.</p></li>
+      </ol>
+      <p class="posun drobny">Další políčka najdete posunutím do strany →</p>
+    </figure>
 
     <div class="faul">
       <div class="karta"><span class="chip">volný úder</span><h3>Sekání do florbalky</h3><p>Bít, blokovat, nadzvedávat nebo kopat do soupeřovy florbalky. Když jde o velkou výhodu nebo hráč na míček vůbec nedosáhl, jsou to <b>2 minuty</b>.</p></div>
@@ -509,6 +626,15 @@ html{scroll-behavior:smooth}
       <div class="karta"><span class="chip trest">2 minuty</span><h3>Vyprovokování potyčky</h3><p>Trest navíc pro toho, kdo potyčku vyvolal. Dostat ho může nejvýš jeden hráč, i když za samotnou potyčku nikdo potrestán není.</p></div>
       <div class="karta"><span class="chip trest">2 + 2 minuty</span><h3>Hákování a bezohlednost</h3><p>Zaháknout florbalkou soupeřovo tělo, hodit florbalkou po míčku nebo bezohledně srazit soupeře.</p></div>
     </div>
+    <figure class="komiks" aria-labelledby="km-so">
+      <figcaption><span class="popisek">Komiks</span><h3 id="km-so">Souboj o míček</h3></figcaption>
+      <ol class="panely p3">
+        <li><svg class="panel" data-s="so1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Ramenem na rameno o míček: dovolený souboj.</p></li>
+        <li><svg class="panel" data-s="so2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Strčit soupeře rukama do zad je faul a následuje volný úder.</p></li>
+        <li><svg class="panel" data-s="so3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Natlačit soupeře na mantinel stojí 2 minuty.</p></li>
+      </ol>
+      <p class="posun drobny">Další políčka najdete posunutím do strany →</p>
+    </figure>
 
     <div class="smi">
       <div>
@@ -591,6 +717,15 @@ html{scroll-behavior:smooth}
       <div style="flex:1 1 260px;min-width:0"><div class="popisek">Výhoda</div><h3 style="margin-top:4px">Proč rozhodčí nepískl?</h3></div>
       <p style="flex:2 1 380px;min-width:0">Když faulovaný tým má míček dál pod kontrolou a pokračovat je pro něj lepší, rozhodčí nechá hrát a jen natáhne ruku dlaní vzhůru. Tomu se říká výhoda.</p>
     </div>
+    <figure class="komiks" aria-labelledby="km-vy">
+      <figcaption><span class="popisek">Komiks</span><h3 id="km-vy">Výhoda: proč rozhodčí nepískl</h3></figcaption>
+      <ol class="panely p3">
+        <li><svg class="panel" data-s="vy1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Obránce sekne útočníkovi do florbalky. Míček ale útočníkovi zůstal.</p></li>
+        <li><svg class="panel" data-s="vy2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Rozhodčí nepíská. Natáhne ruku dlaní vzhůru a nechá hrát dál.</p></li>
+        <li><svg class="panel" data-s="vy3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Útok pokračuje a padne gól. Kdyby rozhodčí pískl, faulovaný tým by o šanci přišel.</p></li>
+      </ol>
+      <p class="posun drobny">Další políčka najdete posunutím do strany →</p>
+    </figure>
   </div>
 </section>
 
@@ -657,6 +792,25 @@ html{scroll-behavior:smooth}
         <p>Má-li tým na lavici víc vyloučených, gól soupeře ukončí ten trest, kterému zbývá nejméně času. Dřív se rušil ten, který byl udělen první.</p>
       </div>
     </div>
+    <figure class="komiks" aria-labelledby="km-od">
+      <figcaption><span class="popisek">Komiks</span><h3 id="km-od">Odložené vyloučení</h3></figcaption>
+      <ol class="panely">
+        <li><svg class="panel" data-s="od1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Hráč s míčkem je podražen. Rozhodčí zvedne ruku, ale hra běží dál.</p></li>
+        <li><svg class="panel" data-s="od2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Faulovaný tým útočí dál a může stáhnout brankáře. Místo něj naskočí šestý hráč do pole.</p></li>
+        <li><svg class="panel" data-s="od3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Jakmile míček získá tým, který fauloval, rozhodčí zapíská.</p></li>
+        <li><svg class="panel" data-s="od4" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Faulující hráč jde na 2 minuty na trestnou lavici. Kdyby mezitím padl gól, dvouminutový trest by se neudělil.</p></li>
+      </ol>
+      <p class="posun drobny">Další políčka najdete posunutím do strany →</p>
+    </figure>
+    <figure class="komiks" aria-labelledby="km-pr">
+      <figcaption><span class="popisek">Komiks</span><h3 id="km-pr">Gól v přesilovce</h3></figcaption>
+      <ol class="panely p3">
+        <li><svg class="panel" data-s="pr1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Červený hráč sedí 2 minuty na trestné lavici. Modří hrají v přesilovce.</p></li>
+        <li><svg class="panel" data-s="pr2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Modří v přesilovce skórují.</p></li>
+        <li><svg class="panel" data-s="pr3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Gól ukončí menší trest, i když z něj zbývá přes minutu. Vyloučený se hned vrací do hry.</p></li>
+      </ol>
+      <p class="posun drobny">Další políčka najdete posunutím do strany →</p>
+    </figure>
   </div>
 </section>
 
@@ -696,6 +850,16 @@ html{scroll-behavior:smooth}
         </ul>
       </div>
     </div>
+    <figure class="komiks" aria-labelledby="km-ko">
+      <figcaption><span class="popisek">Komiks</span><h3 id="km-ko">Kopnutý gól</h3></figcaption>
+      <ol class="panely">
+        <li><svg class="panel" data-s="ko1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Útočník kopne míček do branky.</p></li>
+        <li><svg class="panel" data-s="ko2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Míček je v síti a útočník slaví.</p></li>
+        <li><svg class="panel" data-s="ko3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Předčasně. Úmyslně kopnutý míček se nepočítá a rozhodčí ukáže obě paže do stran.</p></li>
+        <li><svg class="panel" data-s="ko4" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Nejde o faul, a tak se pokračuje vhazováním na nejbližším bodě.</p></li>
+      </ol>
+      <p class="posun drobny">Další políčka najdete posunutím do strany →</p>
+    </figure>
   </div>
 </section>
 
@@ -867,6 +1031,174 @@ html{scroll-behavior:smooth}
   }
   render();
   nbsp(document.querySelector('main'));nbsp(document.querySelector('header'));
+})();
+</script>
+<script>
+(function(){
+  /* ---------- Komiksy: jednoduchá kreslicí knihovna (inline SVG, barvy z CSS proměnných) ---------- */
+  function r(n){return Math.round(n*10)/10}
+  function pts(a){var s=[];for(var i=0;i<a.length;i+=2)s.push(r(a[i])+','+r(a[i+1]));return s.join(' ')}
+  function pl(a,c){return '<polyline class="'+c+'" points="'+pts(a)+'"/>'}
+  function ext(a,b){var o={},k;for(k in a)o[k]=a[k];for(k in b)o[k]=b[k];return o}
+  /* loket mezi ramenem a dlaní, b = vyboulení (kladné dolů/dopředu) */
+  function loket(s,h,b){var dx=h[0]-s[0],dy=h[1]-s[1],L=Math.sqrt(dx*dx+dy*dy)||1,nx=-dy/L,ny=dx/L;if(ny<0||(ny===0&&nx<0)){nx=-nx;ny=-ny}b=b==null?4:b;return [s[0],s[1],(s[0]+h[0])/2+nx*b,(s[1]+h[1])/2+ny*b,h[0],h[1]]}
+
+  /* nohy: [kyčel, koleno, chodidlo] zadní a přední, postava kouká doprava, chodidla na y=0 */
+  var NOHY={
+    stoj:[[-3,-24,-4,-12,-5,0],[3,-24,4,-12,5,0]],
+    beh:[[-2,-24,-10,-13,-20,-6],[2,-24,11,-14,9,0]],
+    krok:[[-2,-24,-7,-12,-12,0],[2,-24,9,-12,14,0]],
+    skok:[[-2,-24,-6,-12,-8,0],[2,-24,14,-32,27,-29]],
+    kop:[[-3,-24,-5,-12,-7,0],[3,-24,14,-17,25,-11]],
+    drep:[[-3,-24,-12,-12,-9,0],[3,-24,12,-13,13,0]],
+    sed:[[-2,-24,10,-24,11,0],[2,-24,13,-24,14,0]],
+    klek:[[-2,-24,7,-3,-9,-1],[2,-24,12,-3,-3,-1]]
+  };
+  var POSUN={drep:5,sed:8,klek:12};
+  /* florbalky: [konec násady, pata čepele, špička čepele] */
+  var HUL={
+    vede:[[-4,-54],[25,-1],[34,-.5]],
+    klid:[[2,-50],[17,-1],[26,0]],
+    naprah:[[12,-46],[-16,-100],[-23,-107]],
+    strela:[[-2,-50],[32,-12],[40,-16]],
+    vysoko:[[0,-48],[28,-78],[34,-84]],
+    drep:[[6,-42],[26,-1],[34,0]],
+    vzad:[[0,-50],[-24,-8],[-32,-6]]
+  };
+
+  function hrac(o){
+    var s=o.s||1,k=o.k||1,l=o.lean||0,nohy=o.nohy||'stoj',u=POSUN[nohy]||0,n=NOHY[nohy],g=!!o.gol;
+    var dres=o.tym==='b'?'var(--tym-b)':o.tym==='r'?'url(#km-pruhy)':'var(--tym-a)';
+    var tren=o.tym==='a'?'var(--podklad)':'var(--postava)';
+    var sh=[l,-55+u],hx=r(l*1.15),hy=-68+u;
+    var ruce=o.ruce?o.ruce.slice():null,H='';
+    if(o.hul){
+      var T=o.hul[0],E=o.hul[1],B=o.hul[2]||[E[0]+9,E[1]];
+      var at=function(t){return [T[0]+(E[0]-T[0])*t,T[1]+(E[1]-T[1])*t]};
+      if(!ruce)ruce=[at(.05),at(.36)];
+      H='<line class="k-hul" x1="'+r(T[0])+'" y1="'+r(T[1])+'" x2="'+r(E[0])+'" y2="'+r(E[1])+'"/>'+pl([E[0],E[1],B[0],B[1]],'k-cepel');
+    }
+    if(!ruce)ruce=[[-5,-33+u],[6,-33+u]];
+    function ruka(h,i){
+      var out=pl(loket(sh,h,h[2]),'k-telo k-ruka')+'<circle class="k-dlan" cx="'+r(h[0])+'" cy="'+r(h[1])+'" r="2.5"/>';
+      if(i===1&&o.prsty)out+='<path class="k-telo k-prst" d="M'+r(h[0]-1.5)+','+r(h[1]-1)+' l-2,-7 M'+r(h[0]+1.5)+','+r(h[1]-1)+' l2,-7"/>';
+      if(i===1&&o.dlan==='nahoru')out+='<path class="k-telo k-prst" d="M'+r(h[0]-4)+','+r(h[1]-3)+' Q'+r(h[0])+','+r(h[1]+2)+' '+r(h[0]+5)+','+r(h[1]-3)+'"/>';
+      if(i===1&&o.dlan==='dopredu')out+='<rect class="k-dlan" x="'+r(h[0]-3)+'" y="'+r(h[1]-9)+'" width="6" height="9" rx="2.5"/>';
+      if(i===1&&o.hodinky)out+='<rect class="k-hodinky" x="'+r(h[0]-3.5)+'" y="'+r(h[1]+3)+'" width="7" height="6" rx="1.5"/>';
+      return out;
+    }
+    function noha(a){
+      a=a.slice();a[1]+=u;
+      return pl(a,g?'k-telo k-kalhoty':'k-telo k-noha')+(g?'':'<line class="k-telo k-bota" x1="'+r(a[4])+'" y1="'+r(a[5])+'" x2="'+r(a[4]+4.5)+'" y2="'+r(a[5])+'"/>');
+    }
+    var torzo='<path class="k-dres" fill="'+dres+'" d="M'+r(l-9)+','+(-57+u)+' Q'+r(l)+','+(-60+u)+' '+r(l+9)+','+(-57+u)+' L8,'+(-29+u)+' L-8,'+(-29+u)+'Z"/>';
+    var kr=g?'':'<path class="k-dres" fill="'+tren+'" d="M-8.5,'+(-31+u)+' H8.5 L9,'+(-21+u)+' H1.2 L0,'+(-25+u)+' L-1.2,'+(-21+u)+' H-9Z"/>';
+    var hlava='<circle class="k-hlava" cx="'+hx+'" cy="'+hy+'" r="9"/>';
+    if(g){
+      hlava+='<path class="k-vlasy" d="M'+(hx-9)+','+hy+' A9,9 0 0 1 '+(hx+1)+','+(hy-8.9)+' L'+(hx+1)+','+(hy+8.9)+' A9,9 0 0 1 '+(hx-9)+','+hy+'Z"/>'+
+        '<path class="k-maska" d="M'+(hx+4.5)+','+(hy-7.7)+'V'+(hy+7.7)+'M'+(hx+7.8)+','+(hy-4.6)+'V'+(hy+4.6)+'M'+(hx+1)+','+(hy-3.5)+'H'+(hx+8.4)+'M'+(hx+1)+','+(hy+2.5)+'H'+(hx+8.6)+'"/>';
+    }else{
+      hlava+='<path class="k-vlasy" d="M'+(hx-9)+','+(hy+1)+' A9,9 0 0 1 '+(hx+7)+','+(hy-5.6)+' Q'+(hx-1)+','+(hy-4.5)+' '+(hx-5)+','+(hy+3)+'Z"/>'+
+        '<circle class="k-oko" cx="'+(hx+3)+'" cy="'+(hy-1)+'" r="1.25"/><circle class="k-oko" cx="'+(hx+6.6)+'" cy="'+(hy-1)+'" r="1.25"/>';
+      var t=o.tvar||'ok';
+      if(t==='ok')hlava+='<path class="k-pusa" d="M'+(hx+3)+','+(hy+3.6)+' Q'+(hx+5)+','+(hy+5.6)+' '+(hx+7.4)+','+(hy+3.2)+'"/>';
+      if(t==='krik')hlava+='<ellipse class="k-oko" cx="'+(hx+5.2)+'" cy="'+(hy+4.3)+'" rx="2" ry="2.5"/>';
+      if(t==='vylek')hlava+='<circle class="k-pusa" cx="'+(hx+5.2)+'" cy="'+(hy+4.4)+'" r="1.4"/><path class="k-pusa" d="M'+(hx+1.6)+','+(hy-4.6)+' l2.6,-.8 M'+(hx+5.4)+','+(hy-5.2)+' l2.6,.6"/>';
+      if(t==='smutny')hlava+='<path class="k-pusa" d="M'+(hx+3)+','+(hy+5.2)+' Q'+(hx+5)+','+(hy+3.4)+' '+(hx+7.4)+','+(hy+5.2)+'"/>';
+      if(t==='zly')hlava+='<path class="k-pusa" d="M'+(hx+3.4)+','+(hy+4.4)+' H'+(hx+7.2)+' M'+(hx+1.4)+','+(hy-4.8)+' L'+(hx+4.2)+','+(hy-3.2)+' M'+(hx+5.4)+','+(hy-3.2)+' L'+(hx+8.2)+','+(hy-4.8)+'"/>';
+      if(t==='pisk')hlava+='<rect class="k-pistalka" x="'+(hx+5)+'" y="'+(hy+2.2)+'" width="7" height="3.4" rx="1.2"/>';
+    }
+    var tr=(o.x||0)+' '+(o.y==null?150:o.y);
+    return '<g transform="translate('+tr+') scale('+(s*k)+' '+k+')">'+noha(n[0])+noha(n[1])+ruka(ruce[0],0)+torzo+kr+hlava+H+ruka(ruce[1],1)+(o.navic||'')+'</g>';
+  }
+  function brankar(o){return hrac(ext({gol:true,nohy:'klek'},o))}
+
+  /* ---------- kulisy ---------- */
+  function hala(h,l1,l2){h=h==null?106:h;return '<rect class="k-podlaha" x="0" y="'+h+'" width="240" height="'+(170-h)+'"/><rect class="k-mant" x="-4" y="'+(h-14)+'" width="248" height="14" rx="2"/>'+(l1?'<text class="k-mtxt" x="8" y="'+(h-4)+'">'+l1+'</text>':'')+(l2?'<text class="k-mtxt" x="232" y="'+(h-4)+'" text-anchor="end">'+l2+'</text>':'')}
+  function mic(x,y){return '<circle class="k-mic" cx="'+x+'" cy="'+y+'" r="3.8"/><circle class="k-dirka" cx="'+r(x-1.3)+'" cy="'+r(y-1)+'" r=".75"/><circle class="k-dirka" cx="'+r(x+1.3)+'" cy="'+r(y+.8)+'" r=".75"/>'}
+  function branka(x,y,s){s=s||1;var p=function(dx,dy){return r(x+dx*s)+','+r(y+dy)};
+    return '<path class="k-sit" d="M'+p(0,0)+' L'+p(0,-46)+' L'+p(22,-46)+' L'+p(34,0)+'Z"/><path class="k-ln" d="M'+p(22,-46)+' L'+p(34,0)+' L'+p(0,0)+'"/><path class="k-ram" d="M'+p(0,0)+' L'+p(0,-46)+' L'+p(22,-46)+'"/>'}
+  function brankoviste(x1,x2,y,on){return '<polygon class="k-bk'+(on?' on':'')+'" points="'+pts([x1+6,y-7,x2+6,y-7,x2-6,y+7,x1-6,y+7])+'"/>'}
+  function tabule(x,y,t,bezi){
+    return '<path class="k-ln" d="M'+(x-24)+',0 V'+y+' M'+(x+24)+',0 V'+y+'"/><rect class="k-tab" x="'+(x-38)+'" y="'+y+'" width="76" height="28" rx="4"/>'+
+      '<text class="k-tabt" x="'+(x-7)+'" y="'+(y+20)+'" text-anchor="middle">'+t+'</text>'+
+      (bezi?'<circle class="k-svetlo" cx="'+(x+25)+'" cy="'+(y+14)+'" r="4"/>':'<path class="k-pauza" d="M'+(x+22)+','+(y+9)+' v10 M'+(x+28)+','+(y+9)+' v10"/>');
+  }
+  function bublina(cx,cy,t,tx,ty,fs){
+    fs=fs||11;var rad=String(t).split('|'),max=0;rad.forEach(function(x){if(x.length>max)max=x.length});
+    var w=Math.round(max*fs*.56+18),h=Math.round(rad.length*fs*1.2+10),x=r(cx-w/2),y=r(cy-h/2),q=Math.min(9,h/2),dole=ty>cy;
+    var b=Math.max(x+q+2,Math.min(x+w-q-12,tx-5)),d;
+    if(dole)d='M'+(x+q)+','+y+' H'+(x+w-q)+' A'+q+','+q+' 0 0 1 '+(x+w)+','+(y+q)+' V'+(y+h-q)+' A'+q+','+q+' 0 0 1 '+(x+w-q)+','+(y+h)+' H'+(b+10)+' L'+tx+','+ty+' L'+b+','+(y+h)+' H'+(x+q)+' A'+q+','+q+' 0 0 1 '+x+','+(y+h-q)+' V'+(y+q)+' A'+q+','+q+' 0 0 1 '+(x+q)+','+y+'Z';
+    else d='M'+(x+q)+','+y+' H'+b+' L'+tx+','+ty+' L'+(b+10)+','+y+' H'+(x+w-q)+' A'+q+','+q+' 0 0 1 '+(x+w)+','+(y+q)+' V'+(y+h-q)+' A'+q+','+q+' 0 0 1 '+(x+w-q)+','+(y+h)+' H'+(x+q)+' A'+q+','+q+' 0 0 1 '+x+','+(y+h-q)+' V'+(y+q)+' A'+q+','+q+' 0 0 1 '+(x+q)+','+y+'Z';
+    var txt=rad.map(function(z,i){return '<tspan x="'+cx+'" dy="'+(i?r(fs*1.2):0)+'">'+z+'</tspan>'}).join('');
+    return '<path class="k-bub" d="'+d+'"/><text class="k-bt" font-size="'+fs+'" x="'+cx+'" y="'+r(cy-(rad.length-1)*fs*.6+fs*.36)+'" text-anchor="middle">'+txt+'</text>';
+  }
+  function zvuk(x,y,t,fs,rot){return '<text class="k-zvuk" font-size="'+(fs||20)+'" text-anchor="middle" transform="translate('+x+' '+y+') rotate('+(rot||0)+') skewX(-8)">'+t+'</text>'}
+  function cary(x,y,s){s=s||1;return '<path class="k-rychlost" d="M'+x+','+(y-54)+' h'+(-14*s)+' M'+(x+2*s)+','+(y-42)+' h'+(-20*s)+' M'+x+','+(y-28)+' h'+(-12*s)+'"/>'}
+  function drah(d){return '<path class="k-pohyb" d="'+d+'"/>'}
+  function stitek(ok,t){
+    var w=Math.round(t.length*5.9+36);
+    return '<g><rect class="k-st'+(ok?' ok':'')+'" x="8" y="8" width="'+w+'" height="22" rx="11"/>'+
+      (ok?'<path class="k-sti" d="M14.5,19.5 l3.5,3.5 l7,-8"/>':'<path class="k-sti" d="M15,14.5 l8,8 M23,14.5 l-8,8"/>')+
+      '<text class="k-stt" x="30" y="23.4">'+t+'</text></g>';
+  }
+  function pas(y){return '<line class="k-pas" x1="0" y1="'+y+'" x2="240" y2="'+y+'"/><text class="k-mtxt" x="4" y="'+(y-4)+'">úroveň pasu</text>'}
+  function mantinelBok(x,y){return '<rect class="k-mant" x="'+x+'" y="'+(y-24)+'" width="12" height="24" rx="2"/>'}
+  function lavice(x1,x2,y){return '<path class="k-lav" d="M'+x1+','+(y-15)+' H'+x2+' M'+(x1+5)+','+(y-15)+' V'+y+' M'+(x2-5)+','+(y-15)+' V'+y+'"/>'}
+  function trestna(x1,x2,y,txt){return '<rect class="k-mant" x="'+x1+'" y="'+(y-30)+'" width="'+(x2-x1)+'" height="30" rx="3"/><text class="k-mtxt" x="'+((x1+x2)/2)+'" y="'+(y-11)+'" text-anchor="middle">'+(txt==null?'TRESTNÁ LAVICE':txt)+'</text>'}
+  function vzdalenost(x1,x2,y,t){return '<path class="k-mira" d="M'+x1+','+y+' H'+x2+' M'+x1+','+(y-4)+' v8 M'+x2+','+(y-4)+' v8"/><text class="k-mtxt" x="'+((x1+x2)/2)+'" y="'+(y-5)+'" text-anchor="middle">'+t+'</text>'}
+  function krizek(x,y){return '<path class="k-ln" d="M'+(x-6)+','+y+' h12 M'+x+','+(y-3)+' v6" stroke-width="1.6"/>'}
+
+  var REF_NAHORU=[[-5,-33],[1,-96,3]];
+  var SC={
+    /* --- Malé brankoviště --- */
+    bk1:function(){return hala()+brankoviste(140,196,150)+branka(200,150)+brankar({x:186,y:152,s:-1,tym:'a',ruce:[[-13,-34],[14,-34]]})+cary(66,152)+hrac({x:84,y:152,tym:'b',nohy:'beh',lean:6,hul:HUL.vede,tvar:'zly'})+mic(121,148)},
+    bk2:function(){return hala()+brankoviste(140,196,150,true)+branka(200,150)+brankar({x:190,y:152,s:-1,tym:'a',ruce:[[-13,-34],[14,-34]],tvar:''})+hrac({x:134,y:152,tym:'b',nohy:'krok',lean:4,hul:[[-4,-54],[22,-3],[30,-3]],tvar:'vylek'})+mic(168,149)+zvuk(140,58,'!',30)},
+    bk3:function(){return hala()+brankoviste(150,206,150,true)+branka(210,150)+hrac({x:96,y:152,tym:'r',tvar:'pisk',ruce:[[1,-91,-8],[3,-91,8]]})+zvuk(150,64,'FÍÍÍ!',22,-8)},
+    bk4:function(){return hala()+brankoviste(150,206,150)+branka(210,150)+hrac({x:170,y:152,s:-1,tym:'a',nohy:'krok',hul:HUL.vede,tvar:'ok'})+mic(133,149)+hrac({x:50,y:152,tym:'b',hul:HUL.klid,tvar:'smutny'})+vzdalenost(82,128,163,'3 m')},
+    /* --- Střídání --- */
+    st1:function(){return hala(100)+'<text class="k-mtxt" x="8" y="164">HŘIŠTĚ</text><text class="k-mtxt" x="211" y="164" text-anchor="middle">STŘÍDAČKA</text>'+lavice(184,238,150)+mantinelBok(124,150)+hrac({x:214,y:150,s:-1,tym:'b',nohy:'sed',tvar:'ok',ruce:[[-2,-28],[8,-26]]})+hrac({x:162,y:152,s:-1,tym:'b',hul:HUL.klid,tvar:'ok'})+cary(44,152)+hrac({x:62,y:152,tym:'b',nohy:'beh',lean:6,hul:HUL.klid,tvar:'krik'})+bublina(70,34,'Střídám!',66,70)},
+    st2:function(){return hala(100)+'<text class="k-mtxt" x="8" y="164">HŘIŠTĚ</text><text class="k-mtxt" x="211" y="164" text-anchor="middle">STŘÍDAČKA</text>'+lavice(184,238,150)+hrac({x:214,y:150,s:-1,tym:'b',nohy:'sed',tvar:'ok',ruce:[[-2,-28],[8,-26]]})+hrac({x:166,y:152,s:-1,tym:'b',hul:HUL.klid,tvar:'ok'})+hrac({x:108,y:152,tym:'b',nohy:'skok',lean:5,ruce:[[-6,-38],[17,-25,-3]],hul:[[-5,-40],[-24,-3],[-32,-3]],tvar:'ok'})+mantinelBok(124,150)},
+    st3:function(){return hala(100)+'<text class="k-mtxt" x="8" y="164">HŘIŠTĚ</text><text class="k-mtxt" x="211" y="164" text-anchor="middle">STŘÍDAČKA</text>'+lavice(184,238,150)+hrac({x:202,y:150,s:-1,tym:'b',nohy:'sed',tvar:'ok',ruce:[[-2,-28],[8,-26]]})+hrac({x:226,y:150,s:-1,tym:'b',nohy:'sed',tvar:'ok',k:.95})+hrac({x:150,y:152,s:-1,tym:'b',nohy:'skok',lean:5,ruce:[[-6,-38],[17,-25,-3]],hul:[[-5,-40],[-24,-3],[-32,-3]],tvar:'krik'})+mantinelBok(124,150)+bublina(150,36,'Jdu!',146,70)+stitek(true,'správně')},
+    st4:function(){return hala(100)+'<text class="k-mtxt" x="8" y="164">HŘIŠTĚ</text><text class="k-mtxt" x="211" y="164" text-anchor="middle">STŘÍDAČKA</text>'+lavice(184,238,150)+mantinelBok(124,150)+hrac({x:214,y:150,s:-1,tym:'b',nohy:'sed',tvar:'vylek',ruce:[[-2,-28],[8,-26]]})+hrac({x:24,y:152,k:.88,tym:'r',tvar:'pisk',ruce:[[-5,-33],[2,-92,4]],prsty:2})+hrac({x:64,y:152,tym:'b',nohy:'krok',hul:HUL.vede,tvar:'ok'})+mic(101,149)+hrac({x:112,y:152,s:-1,tym:'b',nohy:'krok',hul:HUL.klid,tvar:'vylek'})+zvuk(70,58,'FÍÍ!',18,-8)+stitek(false,'2 minuty')},
+    /* --- Brankář a tři sekundy --- */
+    br1:function(){return hala()+brankoviste(150,200,150)+branka(204,150)+brankar({x:188,y:152,s:-1,tym:'a',ruce:[[9,-36],[12,-38]],navic:mic(14,-37)})+hrac({x:58,y:152,tym:'b',hul:HUL.klid,tvar:'smutny'})+bublina(150,40,'1…',172,80,14)},
+    br2:function(){return hala()+brankoviste(150,200,150)+branka(204,150)+brankar({x:186,y:152,s:-1,tym:'a',nohy:'stoj',ruce:[[-4,-38],[13,-66,-3]],navic:mic(14,-70)})+hrac({x:56,y:152,tym:'a',nohy:'krok',hul:HUL.klid,tvar:'krik'})+bublina(62,38,'Sem!',62,72)+bublina(150,36,'2…',168,66,14)},
+    br3:function(){return hala()+'<line class="k-pas" x1="18" y1="92" x2="18" y2="170"/><text class="k-mtxt" x="22" y="164">půlka</text>'+brankoviste(150,200,150)+branka(204,150)+brankar({x:186,y:152,s:-1,tym:'a',nohy:'krok',lean:6,ruce:[[-10,-40],[24,-66,-3]]})+drah('M160,84 Q118,52 88,140')+hrac({x:50,y:152,tym:'a',nohy:'krok',hul:HUL.vede,tvar:'ok'})+mic(88,144)+stitek(true,'do 3 sekund')},
+    /* --- Čistý čas --- */
+    cc1:function(){return hala(108)+tabule(120,10,'14:52',true)+hrac({x:90,y:152,tym:'a',nohy:'krok',lean:4,hul:HUL.vede,tvar:'zly'})+hrac({x:162,y:152,s:-1,tym:'b',nohy:'krok',lean:4,hul:HUL.vede,tvar:'zly'})+mic(126,149)},
+    cc2:function(){return hala(108)+tabule(120,10,'14:52',false)+hrac({x:46,y:152,tym:'a',hul:HUL.klid,tvar:'ok'})+hrac({x:198,y:152,s:-1,tym:'b',hul:HUL.klid,tvar:'ok'})+hrac({x:118,y:152,tym:'r',tvar:'pisk',ruce:[[-5,-33],[16,-46]]})+zvuk(166,74,'FÍÍÍ!',20,-8)},
+    cc3:function(){return hala(108)+tabule(120,10,'14:52',true)+hrac({x:121,y:128,k:.78,tym:'r',tvar:'ok'})+hrac({x:90,y:152,tym:'a',nohy:'drep',lean:8,hul:HUL.drep,tvar:'zly'})+hrac({x:152,y:152,s:-1,tym:'b',nohy:'drep',lean:8,hul:HUL.drep,tvar:'zly'})+mic(121,149)},
+    cc4:function(){var d='';for(var i=0;i<12;i++){d+='<circle class="k-divak" cx="'+(10+i*20)+'" cy="'+(i%2?84:80)+'" r="6"/><path class="k-divak" d="M'+(i*20)+','+(i%2?102:98)+' q10,-14 20,0Z"/>'}
+      return '<rect class="k-podlaha" x="0" y="0" width="240" height="170" opacity=".6"/>'+d+'<path class="k-ln" d="M0,100 H240"/>'+hrac({x:70,y:212,k:1.5,tym:'a',tvar:'vylek',ruce:[[-5,-33],[14,-64,-3]],hodinky:true})+hrac({x:176,y:212,k:1.5,s:-1,tym:'b',tvar:'krik'})+'<rect class="k-mant" x="-4" y="156" width="248" height="30"/>'+bublina(72,30,'Pořád 5 minut?',74,66)+bublina(170,44,'Čistý čas!',172,80)},
+    /* --- Vysoká hůl --- */
+    vh1:function(){return hala()+pas(121)+hrac({x:116,y:152,tym:'b',nohy:'krok',hul:HUL.naprah,tvar:'ok'})+mic(142,149)+stitek(true,'nikdo blízko')},
+    vh2:function(){return hala()+pas(121)+hrac({x:212,y:142,k:.8,s:-1,tym:'r',tvar:'pisk'})+hrac({x:86,y:152,tym:'a',hul:HUL.klid,tvar:'vylek'})+hrac({x:142,y:152,tym:'b',nohy:'krok',hul:HUL.naprah,tvar:'ok'})+mic(168,149)+zvuk(204,66,'FÍÍ!',17,-8)+stitek(false,'volný úder')},
+    vh3:function(){return hala()+pas(121)+hrac({x:204,y:152,s:-1,tym:'r',tvar:'pisk',ruce:[[-5,-33],[2,-92,4]],prsty:2})+hrac({x:92,y:152,tym:'b',nohy:'krok',hul:HUL.vysoko,tvar:'zly'})+mic(134,64)+stitek(false,'2 minuty')},
+    /* --- Souboje --- */
+    so1:function(){return hala()+cary(70,148)+hrac({x:113,y:146,k:.95,tym:'b',nohy:'beh',lean:4,hul:HUL.klid,tvar:'zly'})+hrac({x:94,y:154,tym:'a',nohy:'beh',lean:6,hul:HUL.klid,tvar:'zly'})+mic(160,152)+stitek(true,'rameno na rameno')},
+    so2:function(){return hala()+hrac({x:80,y:152,tym:'a',nohy:'krok',lean:8,ruce:[[24,-52,-2],[28,-46,-2]],tvar:'zly'})+cary(140,150)+hrac({x:126,y:152,tym:'b',nohy:'beh',lean:14,hul:HUL.klid,tvar:'krik'})+stitek(false,'volný úder')},
+    so3:function(){return hala()+mantinelBok(198,150)+hrac({x:180,y:152,tym:'b',lean:7,ruce:[[12,-40],[18,-27]],tvar:'krik'})+hrac({x:152,y:152,tym:'a',nohy:'krok',lean:10,ruce:[[18,-50,-2],[22,-44,-2]],tvar:'zly'})+stitek(false,'2 minuty')},
+    /* --- Výhoda --- */
+    vy1:function(){return hala()+hrac({x:84,y:152,tym:'a',nohy:'beh',lean:5,hul:HUL.vede,tvar:'zly'})+mic(122,149)+hrac({x:140,y:152,s:-1,tym:'b',nohy:'krok',lean:6,hul:[[2,-56],[34,-12],[41,-10]],tvar:'zly'})+zvuk(116,70,'ŤUK!',16,-6)},
+    vy2:function(){return hala()+hrac({x:46,y:152,tym:'r',ruce:[[-5,-33],[32,-50,-3]],dlan:'nahoru',tvar:'ok'})+hrac({x:116,y:152,tym:'b',nohy:'stoj',hul:HUL.klid,tvar:'zly'})+cary(150,152)+hrac({x:168,y:152,tym:'a',nohy:'beh',lean:6,hul:HUL.vede,tvar:'ok'})+mic(205,149)+bublina(66,34,'Výhoda, hraj!',56,72)},
+    vy3:function(){return hala()+branka(204,150)+brankar({x:190,y:152,s:-1,tym:'b',ruce:[[-12,-28],[10,-24]]})+drah('M158,138 Q190,96 214,118')+mic(216,121)+hrac({x:118,y:152,tym:'a',nohy:'krok',hul:HUL.strela,tvar:'krik'})+zvuk(92,62,'GÓÓÓL!',24,-8)},
+    /* --- Odložené vyloučení --- */
+    od1:function(){return hala()+hrac({x:212,y:144,k:.85,s:-1,tym:'r',ruce:REF_NAHORU,dlan:'dopredu',tvar:'ok'})+hrac({x:76,y:152,tym:'b',nohy:'krok',lean:6,hul:[[2,-52],[44,-3],[51,-5]],tvar:'zly'})+hrac({x:124,y:152,tym:'a',nohy:'beh',lean:16,hul:HUL.vede,tvar:'krik'})+mic(164,148)},
+    od2:function(){return hala()+hrac({x:40,y:144,k:.85,tym:'r',ruce:REF_NAHORU,dlan:'dopredu',tvar:'ok'})+cary(110,152)+hrac({x:128,y:152,tym:'a',nohy:'beh',lean:6,hul:HUL.klid,tvar:'krik'})+cary(196,152)+brankar({x:214,y:152,tym:'a',nohy:'beh',lean:8,ruce:[[-12,-32],[10,-34]]})+bublina(130,32,'Jdu za brankáře!',128,70)},
+    od3:function(){return hala()+hrac({x:34,y:144,k:.85,tym:'r',ruce:REF_NAHORU,dlan:'dopredu',tvar:'pisk'})+hrac({x:112,y:152,tym:'b',nohy:'krok',hul:HUL.vede,tvar:'ok'})+mic(149,149)+hrac({x:190,y:152,s:-1,tym:'a',nohy:'krok',hul:HUL.klid,tvar:'vylek'})+zvuk(80,52,'FÍÍÍ!',20,-8)},
+    od4:function(){return tabule(120,8,'2:00',false)+'<rect class="k-podlaha" x="0" y="96" width="240" height="74"/>'+hrac({x:116,y:152,k:1.3,tym:'b',nohy:'sed',tvar:'smutny',ruce:[[-2,-28],[8,-26]]})+trestna(16,224,164)},
+    /* --- Gól v přesilovce --- */
+    pr1:function(){return tabule(184,6,'1:12',true)+'<rect class="k-podlaha" x="0" y="96" width="240" height="74"/>'+hrac({x:184,y:118,k:.9,tym:'b',nohy:'sed',tvar:'smutny'})+trestna(132,236,120,'TREST')+cary(50,152)+hrac({x:70,y:152,tym:'a',nohy:'beh',lean:6,hul:HUL.vede,tvar:'krik'})+mic(108,149)},
+    pr2:function(){return hala()+branka(204,150)+brankar({x:190,y:152,s:-1,tym:'b',ruce:[[-12,-28],[10,-24]]})+drah('M152,138 Q186,100 214,124')+mic(216,127)+hrac({x:112,y:152,tym:'a',nohy:'krok',hul:HUL.strela,tvar:'krik'})+zvuk(80,62,'GÓÓL!',24,-8)},
+    pr3:function(){return tabule(184,6,'0:00',false)+'<rect class="k-podlaha" x="0" y="96" width="240" height="74"/>'+trestna(132,236,120,'TREST')+cary(122,152,-1)+hrac({x:104,y:152,s:-1,tym:'b',nohy:'beh',lean:6,hul:HUL.klid,tvar:'krik'})+bublina(70,58,'Jdu zpátky!',94,80)+stitek(true,'trest skončil')},
+    /* --- Kopnutý gól --- */
+    ko1:function(){return hala()+branka(204,150)+hrac({x:108,y:152,tym:'b',nohy:'kop',lean:-3,hul:HUL.vzad,tvar:'zly'})+drah('M142,138 Q176,120 212,134')+mic(140,139)+zvuk(150,112,'BUM!',16,-10)},
+    ko2:function(){return hala()+branka(204,150)+mic(220,140)+hrac({x:120,y:152,tym:'b',ruce:[[-12,-90,-3],[14,-92,3]],hul:[[-13,-88],[-6,-128],[2,-132]],tvar:'krik'})+bublina(54,40,'Góól!',100,74,13)},
+    ko3:function(){return hala()+branka(208,150)+mic(224,140)+hrac({x:206,y:146,k:.8,s:-1,tym:'b',tvar:'smutny',hul:HUL.klid})+hrac({x:110,y:152,tym:'r',tvar:'pisk',ruce:[[-38,-58,-2],[38,-58,-2]]})+zvuk(170,56,'FÍÍÍ!',20,-8)+stitek(false,'gól neplatí')},
+    ko4:function(){return hala(108)+hrac({x:124,y:128,k:.78,tym:'r',tvar:'ok'})+krizek(124,151)+hrac({x:93,y:152,tym:'b',nohy:'drep',lean:8,hul:HUL.drep,tvar:'zly'})+hrac({x:155,y:152,s:-1,tym:'a',nohy:'drep',lean:8,hul:HUL.drep,tvar:'zly'})+mic(124,149)}
+  };
+  document.querySelectorAll('svg[data-s]').forEach(function(svg){var f=SC[svg.getAttribute('data-s')];if(f)svg.innerHTML=f()});
 })();
 </script>
 
