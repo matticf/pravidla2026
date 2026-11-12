@@ -375,6 +375,19 @@ section.kap{counter-increment:kap}
 .posuvnik::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--cf-cervena);border:3px solid var(--podklad);box-shadow:0 0 0 2px var(--cf-cervena)}
 .posuvnik-pop{display:flex;justify-content:space-between;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-tlumeny)}
 
+/* mládež: menší hřiště */
+.mladez{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:var(--s3) var(--s5);align-items:center;margin-top:var(--s5);border:1px solid var(--linka);border-radius:var(--radius-blok);padding:var(--s4)}
+.mladez>div{display:grid;gap:var(--s2);min-width:0}
+.mladez p{font-size:16px;line-height:24px}
+.mladez svg{width:100%;height:auto;display:block}
+.ml-velke{fill:none;stroke:var(--linka);stroke-width:1.5;stroke-dasharray:6 5}
+.ml-male{fill:var(--podlaha);stroke:var(--postava);stroke-width:2.6}
+.ml-ln{fill:none;stroke:var(--postava);stroke-width:1.2}
+.ml-txt{font:700 13px var(--geo);letter-spacing:.03em;fill:var(--text)}
+.ml-txt.tl{fill:var(--text-tlumeny);font-weight:600}
+.ml-a{fill:var(--tym-a);stroke:var(--postava);stroke-width:1.5}
+.ml-b{fill:var(--tym-b);stroke:var(--postava);stroke-width:1.5}
+
 /* čistý čas */
 .cisty{margin-top:var(--s5);grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:var(--s3) var(--s5);align-items:center}
 .cisty-hodiny{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3)}
@@ -498,7 +511,7 @@ section.kap{counter-increment:kap}
   .cisty[data-stav="1"] .hodiny.tab i::before{animation:blik 1s steps(1) infinite}
 }
 @media (max-width:900px){
-  .hero-grid,.cisty,.sim,.gol-hra,.piskat,.vyska{grid-template-columns:minmax(0,1fr)}
+  .hero-grid,.cisty,.sim,.gol-hra,.piskat,.vyska,.mladez{grid-template-columns:minmax(0,1fr)}
   .hero-grid h1{font-size:clamp(44px,8vw,80px)}
   .hero-scena{max-width:560px}
   .vyska-hra{max-width:460px}
@@ -642,6 +655,25 @@ section.kap{counter-increment:kap}
         <li data-k="7"><button type="button"><span class="c">7</span><span><b>Prostor pro střídání</b><span class="t">Střídačky obou družstev. Střídat se smí kdykoli a kolikrát chcete, ale jen tady.</span></span></button></li>
         <li data-k="8"><button type="button"><span class="c">8</span><span><b>Trestné lavice a zapisovatelé</b><span class="t">Naproti střídačkám, každý tým na stejné straně jako jeho střídačka. Sem jde vyloučený hráč, u stolku se měří čas a píše zápis.</span></span></button></li>
       </ul>
+    </div>
+    <div class="mladez">
+      <div>
+        <div class="popisek">Mládež</div>
+        <h3>Menší hráči, menší hřiště</h3>
+        <p>Soutěže mládeže se často hrají na menším hřišti. Jeho rozměry určuje předpis dané soutěže.</p>
+        <p>Nejmladší kategorie hrají jen ve formátu <b>3 + 1</b>, tedy tři hráči s florbalkou a brankář, a třeba jen na hřišti <b>18 × 10 metrů</b>. To jsou zhruba poloviční rozměry.</p>
+      </div>
+      <svg viewBox="0 0 420 222" role="img" aria-label="Porovnání v měřítku: běžné hřiště 40 × 20 metrů a uvnitř něj hřiště 18 × 10 metrů pro nejmladší kategorie se třemi hráči a brankářem na každé straně">
+        <rect class="ml-velke" x="10" y="10" width="400" height="200" rx="30"/>
+        <line class="ml-velke" x1="210" y1="10" x2="210" y2="60"/><line class="ml-velke" x1="210" y1="194" x2="210" y2="210"/>
+        <text class="ml-txt tl" x="34" y="38">BĚŽNÉ HŘIŠTĚ 40 × 20 m</text>
+        <rect class="ml-male" x="120" y="60" width="180" height="100" rx="14"/>
+        <line class="ml-ln" x1="210" y1="60" x2="210" y2="160"/>
+        <path d="M132,101 h-5 v18 h5 M288,101 h5 v18 h-5" style="fill:none;stroke:var(--cf-cervena);stroke-width:2.4"/>
+        <circle class="ml-a" cx="141" cy="110" r="7"/><circle class="ml-a" cx="170" cy="84" r="6"/><circle class="ml-a" cx="170" cy="136" r="6"/><circle class="ml-a" cx="193" cy="110" r="6"/>
+        <circle class="ml-b" cx="279" cy="110" r="7"/><circle class="ml-b" cx="250" cy="84" r="6"/><circle class="ml-b" cx="250" cy="136" r="6"/><circle class="ml-b" cx="227" cy="110" r="6"/>
+        <text class="ml-txt" x="210" y="183" text-anchor="middle">NEJMLADŠÍ: 18 × 10 m, HRAJE SE 3 + 1</text>
+      </svg>
     </div>
     <figure class="komiks" aria-labelledby="km-bk">
       <figcaption><span class="popisek">Komiks</span><h3 id="km-bk">Pozor na malé brankoviště</h3><span class="pr">507.8</span></figcaption>
@@ -1815,7 +1847,7 @@ section.kap{counter-increment:kap}
   (function(){
     if(KLID||!('IntersectionObserver' in window))return;
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px',threshold:.04});
-    $$('.kap-hlava,.karta,.komiks,.stup,.sig,.klic,.hrani,.piskat,.fact,.slovnik>div').forEach(function(el){
+    $$('.kap-hlava,.karta,.komiks,.stup,.sig,.klic,.hrani,.piskat,.mladez,.fact,.slovnik>div').forEach(function(el){
       var i=0,p=el;while((p=p.previousElementSibling))i++;
       el.classList.add('rv');el.style.transitionDelay=(i%4)*70+'ms';io.observe(el);
     });
