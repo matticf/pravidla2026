@@ -1,0 +1,1178 @@
+[
+ {
+  "n": 1,
+  "q": "A bleeding player:",
+  "o": [
+   "Is not allowed to participate in the match until the bleeding is under control.",
+   "May participate in the match without restriction.",
+   "Is not allowed to participate in the match until the bleeding has stopped completely.",
+   "Must go to the dressing room and take no further part in the match."
+  ],
+  "v": "A bleeding player is not allowed to participate in the match until the bleeding is under control.",
+  "r": "302.1"
+ },
+ {
+  "n": 2,
+  "q": "If a player receives a pass played with the foot by a team-mate who is a field player:",
+  "o": [
+   "The referees let play continue.",
+   "The referees award a free-hit from where the player received the pass.",
+   "The referees award a free-hit from where the pass was played.",
+   "The referees let play continue, provided the pass was not intentional."
+  ],
+  "v": "Playing the ball with the foot below knee level is allowed, and the rules do not forbid passing to a team-mate with the foot. Play continues.",
+  "r": "507.4"
+ },
+ {
+  "n": 3,
+  "q": "During a goal situation in progress, a player is stopped by an offence leading to a major bench penalty. What follows?",
+  "o": [
+   "The referees award a penalty shot and impose a major bench penalty of 2+2 minutes.",
+   "The referees award a penalty shot.",
+   "The referees impose a major bench penalty of 2+2 minutes.",
+   "The referees award a penalty shot and, if it does not result in a goal, impose a major bench penalty of 2+2 minutes."
+  ],
+  "v": "An offence that interrupts a goal situation leads to a penalty shot. A major bench penalty is always imposed as well; only a minor bench penalty is dropped when a penalty shot is awarded.",
+  "r": "510.1, 603.8"
+ },
+ {
+  "n": 4,
+  "q": "Who decides whether the rink is fit for play?",
+  "o": [
+   "The match referees.",
+   "The referees and the match delegate.",
+   "The match delegate.",
+   "The referees, the match delegate and the chief organiser."
+  ],
+  "v": "The referees inspect the rink before the match and ensure that defects are corrected.",
+  "r": "106.1"
+ },
+ {
+  "n": 5,
+  "q": "The ball passes the goal line during the signal ending the period. The referees:",
+  "o": [
+   "Disallow the goal.",
+   "Allow the goal.",
+   "Disallow the goal and award a penalty shot.",
+   "Allow the goal after consulting the chief organiser."
+  ],
+  "v": "A goal is incorrectly scored when the ball passes the goal line during, or after, a signal.",
+  "r": "703.3"
+ },
+ {
+  "n": 6,
+  "q": "A field player intentionally kicks the ball into the opponents' goal. The referees:",
+  "o": [
+   "Disallow the goal and award a face-off.",
+   "Allow the goal.",
+   "Disallow the goal and award a free-hit from the goal crease.",
+   "Disallow the goal and give the player a 2-minute penalty."
+  ],
+  "v": "A ball intentionally kicked into the goal is an incorrectly scored goal. This is not an offence, so play is resumed with a face-off.",
+  "r": "703.2"
+ },
+ {
+  "n": 7,
+  "q": "A goal is scored just before the siren ending the match. What follows?",
+  "o": [
+   "The goal is allowed and the match is over.",
+   "The goal is disallowed and the match is over.",
+   "The goal is disallowed and a face-off is taken in the corner of the rink.",
+   "The goal is allowed and confirmed with a face-off at the centre spot."
+  ],
+  "v": "The goal was scored within game time, so it stands. After the end of a period or a match, a goal is not confirmed with a face-off.",
+  "r": "502.1, 701.1"
+ },
+ {
+  "n": 8,
+  "q": "Who is an own goal credited to?",
+  "o": [
+   "The player who scored it, and it is noted in the match record as 'OG'.",
+   "Nobody – it will not be allowed.",
+   "The last attacking player to touch the ball.",
+   "The last attacking player to touch the ball, and it is noted in the match record as 'OG'."
+  ],
+  "v": "An own goal is credited to the player who scored it and noted in the match record as OG.",
+  "r": "702.1"
+ },
+ {
+  "n": 9,
+  "q": "A player of the defending team has moved the goal cage out of position and the ball passes the goal line from the front, between the marks for the posts and below the imaginary position of the bar. The referees:",
+  "o": [
+   "Allow the goal.",
+   "Award a face-off in the corner of the rink.",
+   "Award a penalty shot.",
+   "Award a free-hit from the goal crease."
+  ],
+  "v": "When the goal cage is out of position and the ball passes the goal line from the front between the marks for the posts and below the imaginary position of the bar, the goal is allowed.",
+  "r": "702.1"
+ },
+ {
+  "n": 10,
+  "q": "The entire ball passes the goal line after a player of the attacking team has unintentionally directed it with their body. The referees:",
+  "o": [
+   "Allow the goal.",
+   "Award a free-hit from the goal crease.",
+   "Award a penalty shot.",
+   "Disallow the goal."
+  ],
+  "v": "The goal stands even when a player of the attacking team has unintentionally directed the ball with their body.",
+  "r": "702.2"
+ },
+ {
+  "n": 11,
+  "q": "A member of the team staff who incurs a personal penalty must:",
+  "o": [
+   "Immediately go to the dressing room and take no further part in the match in any way.",
+   "Leave the substitution zone at the next intermission.",
+   "Spend the whole rest of the match in the spectators' stand.",
+   "Serve a 2-minute minor bench penalty on the penalty bench and then go to the dressing room."
+  ],
+  "v": "A member of the team staff incurring a personal penalty must immediately go to the dressing room and takes no further part in the match.",
+  "r": "608.2"
+ },
+ {
+  "n": 12,
+  "q": "A technical match penalty:",
+  "o": [
+   "Leads to suspension for the rest of the match and has no further consequences.",
+   "Leads to suspension from the following match in the same competition.",
+   "Leads to suspension from the next match played, whatever the competition.",
+   "Leads to suspension from the following match in the same competition and to further punishment decided by the disciplinary committee."
+  ],
+  "v": "A technical match penalty means suspension for the rest of the match and has no further consequences for the offender.",
+  "r": "611.2"
+ },
+ {
+  "n": 13,
+  "q": "A match penalty:",
+  "o": [
+   "Leads to suspension from the following match in the same competition and to further punishment decided by the disciplinary committee.",
+   "Leads to suspension for the rest of the match and has no further consequences.",
+   "Allows the player to play in matches until the disciplinary committee has decided.",
+   "Leads to suspension from matches in the same competition until the end of the season."
+  ],
+  "v": "A match penalty means suspension for the rest of the match and from the following match in the same competition, and possible further punishment by the administrating authority.",
+  "r": "613.2"
+ },
+ {
+  "n": 14,
+  "q": "The ball is bouncing in the goal crease. The home team's goalkeeper kicks it straight into the path of a running team-mate, who controls it in their own half of the rink. What follows?",
+  "o": [
+   "Play continues.",
+   "A free-hit for the away team 3.5 m from the goalkeeper area.",
+   "A free-hit for the away team where the pass was received.",
+   "A face-off at the nearest face-off dot."
+  ],
+  "v": "The goalkeeper may play the ball with the foot. It would only be an offence to receive a pass from a team-mate with the hands, or to throw the ball through the air over the centre line.",
+  "r": "507.14, 507.17"
+ },
+ {
+  "n": 15,
+  "q": "If the goalkeeper entirely leaves the goal crease during a throw-in:",
+  "o": [
+   "A free-hit is awarded.",
+   "Play continues.",
+   "A minor bench penalty (2 minutes) is imposed for playing the ball lying down.",
+   "A minor bench penalty (2 minutes) is imposed for hands."
+  ],
+  "v": "If the goalkeeper entirely leaves the goal crease during a throw-in, a free-hit is awarded.",
+  "r": "507.13"
+ },
+ {
+  "n": 16,
+  "q": "A defending player, trying to win the ball, kicks the attacker's blade. The referees:",
+  "o": [
+   "Award a free-hit.",
+   "Warn the player verbally and let play continue.",
+   "Do nothing; the situation does not require it.",
+   "Give a triple signal and check whether the defending player is injured."
+  ],
+  "v": "Kicking an opponent's stick is an offence leading to a free-hit.",
+  "r": "507.1"
+ },
+ {
+  "n": 17,
+  "q": "The player taking a free-hit:",
+  "o": [
+   "Shall not touch the ball again before it has touched another player or another player's equipment.",
+   "May take it with the foot.",
+   "Must hold the stick with both hands when taking it",
+   "Must tell the opponents to keep 3 metres away from where the free-hit is taken."
+  ],
+  "v": "The player taking a free-hit shall not touch the ball again before it has touched another player or that player's equipment.",
+  "r": "506.5"
+ },
+ {
+  "n": 18,
+  "q": "A penalised player may leave the penalty bench:",
+  "o": [
+   "During an intermission in regular game time.",
+   "During a time out.",
+   "During the intermission between regular game time and overtime.",
+   "During an intermission in regular game time and also during the intermission between regular game time and overtime."
+  ],
+  "v": "During regular game time a penalised player may leave the penalty bench during an intermission, but not before overtime.",
+  "r": "601.2"
+ },
+ {
+  "n": 19,
+  "q": "If the match secretariat is responsible for a penalised player being admitted to the rink too soon:",
+  "o": [
+   "The player returns to the penalty bench and no additional penalties are imposed.",
+   "The player goes straight back into play.",
+   "The player is struck from the match record.",
+   "The player returns to play and the organising club is fined afterwards."
+  ],
+  "v": "The player returns to the penalty bench, no additional penalties are imposed, and the player re-enters the rink when the penalty expires.",
+  "r": "601.2"
+ },
+ {
+  "n": 20,
+  "q": "In what order do penalised players leave the penalty bench?",
+  "o": [
+   "In the order in which their penalties expired.",
+   "In the order decided by the referees.",
+   "In the order in which their penalties were imposed.",
+   "In the order decided by the match secretariat."
+  ],
+  "v": "Penalised players leave the penalty bench in the same order as their penalties expire.",
+  "r": "603.4"
+ },
+ {
+  "n": 21,
+  "q": "Does a team with more than two penalised players on the penalty bench still have the right to play with four players on the rink?",
+  "o": [
+   "Yes.",
+   "No.",
+   "Yes, provided none of the penalties was a match penalty.",
+   "No, unless the referees decide otherwise."
+  ],
+  "v": "A team with more than two penalised players still has the right to play with four players on the rink.",
+  "r": "603.4"
+ },
+ {
+  "n": 22,
+  "q": "What is the maximum number of penalties that can be imposed on one player?",
+  "o": [
+   "An unlimited number.",
+   "Two.",
+   "Three.",
+   "Three, if one of them is a personal penalty."
+  ],
+  "v": "An unlimited number of bench penalties can be imposed on the same player.",
+  "r": "603.5"
+ },
+ {
+  "n": 23,
+  "q": "If a player incurs a 10-minute personal penalty, when does this penalty start to be measured?",
+  "o": [
+   "After all the player's bench penalties have expired or terminated.",
+   "On the referee's instruction.",
+   "At any time.",
+   "Always immediately after the penalty is imposed."
+  ],
+  "v": "A personal penalty starts to be measured once all the player's bench penalties have expired or terminated.",
+  "r": "603.5, 608.1"
+ },
+ {
+  "n": 24,
+  "q": "If a goal is scored during a minor bench penalty (2 minutes):",
+  "o": [
+   "The penalty terminates if the goal was scored by the team that was not penalised.",
+   "The penalty terminates if the goal was scored by the team that was not penalised, or if the teams were playing with the same number of players on the rink.",
+   "The penalty continues even if the goal was scored by the team that was not penalised and the penalised team is still playing with fewer field players.",
+   "The player's penalty continues, but the penalised team plays with its full number of players."
+  ],
+  "v": "A goal terminates a minor bench penalty that is being measured if it was scored by the team with more players on the rink.",
+  "r": "603.6"
+ },
+ {
+  "n": 25,
+  "q": "During a delayed penalty the non-offending team scores:",
+  "o": [
+   "The delayed penalty is cancelled and all penalties already being served continue.",
+   "The delayed penalty is carried out and the penalty with the shortest remaining time terminates.",
+   "The penalty is not cancelled if exactly one penalty was being measured for the non-offending team at that moment.",
+   "The delayed penalty is carried out and the previously imposed minor bench penalty (2 minutes) terminates."
+  ],
+  "v": "When the non-offending team scores, the delayed minor bench penalty last imposed is not carried out. No other penalties are affected.",
+  "r": "602.2"
+ },
+ {
+  "n": 26,
+  "q": "A delayed penalty is in progress. Play is interrupted when an attacking player shoots the ball out of the rink. How is play resumed?",
+  "o": [
+   "With a hit-in for the attacking team.",
+   "According to the offence leading to the penalty.",
+   "With a hit-in for the defending team.",
+   "With a free-hit from the place where play was interrupted."
+  ],
+  "v": "When play during a delayed penalty is interrupted by an event leading to a hit-in, the hit-in is awarded to the non-offending team.",
+  "r": "602.2"
+ },
+ {
+  "n": 27,
+  "q": "At a face-off the away team's player is the first to place their blade on the floor. The home team's player does not like this and goes to swap with a team-mate. What do the referees do?",
+  "o": [
+   "Send the original player back and the face-off is taken.",
+   "Allow the face-off with the 'new line-up'.",
+   "Give the home team's player a match penalty for sabotage of play.",
+   "Give the home team's player a bench penalty for delaying play."
+  ],
+  "v": "Once a player has been chosen to take the face-off, the player must not be changed.",
+  "r": "502.5"
+ },
+ {
+  "n": 28,
+  "q": "All the fixed situations in floorball are:",
+  "o": [
+   "Face-off, free-hit, hit-in and penalty shot.",
+   "Face-off, free-hit and hit-in.",
+   "Free-hit and face-off.",
+   "Free-hit and hit-in."
+  ],
+  "v": "The fixed situations are face-off, hit-in, free-hit and penalty shot.",
+  "r": "501.1"
+ },
+ {
+  "n": 29,
+  "q": "Unreasonable delay of a fixed situation:",
+  "o": [
+   "Is for the referees to decide.",
+   "Is defined exhaustively in the Rules of the Game.",
+   "Is not mentioned in the Rules of the Game at all.",
+   "Is when a team does not resume play within three seconds."
+  ],
+  "v": "The referees decide what is considered unreasonable delay of a fixed situation.",
+  "r": "501.3"
+ },
+ {
+  "n": 30,
+  "q": "A face-off is taken:",
+  "o": [
+   "At the nearest face-off dot, according to where the ball was at the interruption.",
+   "At the farthest face-off dot, according to where the ball was at the interruption.",
+   "In a team's attacking half if the other team has been given a bench penalty.",
+   "Always at the centre spot."
+  ],
+  "v": "A face-off is taken at the nearest face-off dot, according to where the ball was at the interruption.",
+  "r": "502.3"
+ },
+ {
+  "n": 31,
+  "q": "When play is interrupted, it is resumed with a face-off:",
+  "o": [
+   "If neither team can be awarded a hit-in, a free-hit or a penalty shot.",
+   "In all cases.",
+   "Only if a correct goal has been scored.",
+   "Only if a penalty unrelated to play has been imposed."
+  ],
+  "v": "A face-off is used when neither team can be awarded a hit-in, a free-hit or a penalty shot.",
+  "r": "502.2"
+ },
+ {
+  "n": 32,
+  "q": "At a face-off the other players (except those taking the face-off) must be:",
+  "o": [
+   "At least 3 m from the ball, sticks included.",
+   "At least 3 m from the ball; the stick may be closer.",
+   "At most 5 m from the ball, sticks included.",
+   "At least 2 m from the ball, sticks included."
+  ],
+  "v": "All players except the two taking the face-off must be at least 3 m from the ball, sticks included.",
+  "r": "502.4"
+ },
+ {
+  "n": 33,
+  "q": "The referees always interrupt play immediately if:",
+  "o": [
+   "A serious injury to a player is suspected.",
+   "A player has been injured in the attacking half.",
+   "The injured player does not affect play.",
+   "The goal cage has been moved."
+  ],
+  "v": "As soon as a serious injury is suspected, play must be interrupted immediately.",
+  "r": "503.5"
+ },
+ {
+  "n": 34,
+  "q": "During a penalty shot the following may be on the rink:",
+  "o": [
+   "The goalkeeper of one team and the player of the other team taking the penalty shot.",
+   "The goalkeepers of both teams and the player taking the penalty shot.",
+   "As many players as the Rules of the Game allow at the start of play.",
+   "The goalkeeper of one team, the player taking the penalty shot and the player who will take the next penalty shot."
+  ],
+  "v": "During a penalty shot only the defending goalkeeper and the player taking it are on the rink. All the others are in their substitution zones.",
+  "r": "508.3"
+ },
+ {
+  "n": 35,
+  "q": "When a penalty shot starts, the goalkeeper must be:",
+  "o": [
+   "In the goalkeeper area.",
+   "1.5 m in front of the goal line.",
+   "0.5 m in front of the goal line.",
+   "On the goal line."
+  ],
+  "v": "The goalkeeper must be in the goalkeeper area when the penalty shot starts.",
+  "r": "508.3"
+ },
+ {
+  "n": 36,
+  "q": "During a penalty shot the ball hits the frame of the goal cage, then hits the goalkeeper and passes the goal line from the front. The goal:",
+  "o": [
+   "Is allowed.",
+   "Is disallowed, because the ball had already touched the goalkeeper and the penalty shot was therefore over.",
+   "Is allowed only if the player then touches the ball again.",
+   "Is disallowed, because the ball must not stop or move backwards during a penalty shot."
+  ],
+  "v": "If the ball hits the front face of the goal cage, then the goalkeeper, and passes the goal line from the front, the goal stands.",
+  "r": "508.4"
+ },
+ {
+  "n": 37,
+  "q": "A delayed penalty shot is awarded:",
+  "o": [
+   "Immediately after the goal situation is over.",
+   "If the offending team does not have the ball under control.",
+   "If one of the teams has scored a correct goal.",
+   "At once, because a penalty shot can never be delayed."
+  ],
+  "v": "A delayed penalty shot lets the non-offending team continue the attack until the goal situation is over. The penalty shot is then taken.",
+  "r": "509.2"
+ },
+ {
+  "n": 38,
+  "q": "Offences in the goal crease:",
+  "o": [
+   "Do not automatically lead to a penalty shot.",
+   "Automatically lead to a penalty shot.",
+   "Automatically lead to a penalty shot if the goalkeeper is not in the goal.",
+   "Lead to a penalty shot if the offence is hitting with the stick."
+  ],
+  "v": "Offences in the goal crease do not automatically lead to a penalty shot.",
+  "r": "510.1"
+ },
+ {
+  "n": 39,
+  "q": "At a face-off at the centre spot, who places their stick first?",
+  "o": [
+   "The away team's player.",
+   "The home team's player.",
+   "The referees choose the player.",
+   "The player of the team that conceded the goal."
+  ],
+  "v": "At a face-off on the centre line, the away team's player places the stick first.",
+  "r": "502.5"
+ },
+ {
+  "n": 40,
+  "q": "At a face-off at a face-off dot in the corner of the rink, who places their stick first?",
+  "o": [
+   "The defending player.",
+   "The attacking player.",
+   "The player of the team that is losing.",
+   "The player of the team that is short-handed."
+  ],
+  "v": "Away from the centre line, the defending team's player places the stick first.",
+  "r": "502.5"
+ },
+ {
+  "n": 41,
+  "q": "Can a goal be scored directly from a face-off?",
+  "o": [
+   "Yes.",
+   "No.",
+   "It depends on the referee's judgement.",
+   "Yes, but only in the attacking half."
+  ],
+  "v": "A face-off may go directly into the goal.",
+  "r": "502.6"
+ },
+ {
+  "n": 42,
+  "q": "The ball hits a referee and this has a significant effect on play. What follows?",
+  "o": [
+   "A face-off at the nearest face-off dot.",
+   "A free-hit for the team that last had the ball.",
+   "Play continues.",
+   "A free-hit against the team that last had the ball."
+  ],
+  "v": "When a referee is hit by the ball and this has a significant effect on play, it is an unnatural situation and play is resumed with a face-off.",
+  "r": "503.6"
+ },
+ {
+  "n": 43,
+  "q": "The ball leaves the rink after a defending player hits the net of the goal cage with their stick without touching the ball. What follows?",
+  "o": [
+   "A hit-in for the attacking team.",
+   "A hit-in for the defending team.",
+   "A face-off at the nearest face-off dot.",
+   "A face-off at the centre spot."
+  ],
+  "v": "If a player hits the net of the goal cage and the ball leaves the rink, that player is considered the last to have touched the ball. The opponents take the hit-in.",
+  "r": "504.1"
+ },
+ {
+  "n": 44,
+  "q": "At a hit-in the players of the defending team shall take a position from the ball of at least:",
+  "o": [
+   "3 m.",
+   "2.5 m.",
+   "2 m.",
+   "3.5 m."
+  ],
+  "v": "At a hit-in the defending players must take a position at least 3 m from the ball, sticks included.",
+  "r": "504.3"
+ },
+ {
+  "n": 45,
+  "q": "The referees impose a minor bench penalty (2 minutes) for a high stick if a field player plays the ball with any part of the stick above waist level:",
+  "o": [
+   "As measured with the player standing upright.",
+   "As measured in any stance.",
+   "As measured with the nearest opponent standing upright.",
+   "As measured with the player standing upright in the attacking half, and in any stance in the defending half."
+  ],
+  "v": "Waist level is considered the level of the player's waist when standing upright.",
+  "r": "605.3"
+ },
+ {
+  "n": 46,
+  "q": "With the away team playing six field players and no goalkeeper, a home-team player runs alone towards the empty goal cage. While shooting, the player is hit on the stick and misses. What follows?",
+  "o": [
+   "A goal is awarded.",
+   "A penalty shot.",
+   "A 2-minute bench penalty for the away team's player.",
+   "A free-hit for the home team."
+  ],
+  "v": "The away team are playing without a goalkeeper. If one of their players stops a chance with an offence that would lead to a penalty shot, a goal is awarded straight away.",
+  "r": "701.3"
+ },
+ {
+  "n": 47,
+  "q": "A player puts their stick in the way of an opponent's shot; the stick breaks and flies out of the player's hand. After that:",
+  "o": [
+   "The player whose stick broke may leave the broken stick on the rink and go to substitute.",
+   "The player whose stick broke must pick the stick up from the rink and take it to their own substitution zone.",
+   "The player whose stick broke must pick the stick up and put it anywhere behind the board.",
+   "The nearest player of the team whose player owned the stick, and next to whom the stick landed, is obliged to remove it from the rink."
+  ],
+  "v": "The player does not have to pick up the broken stick until the next interruption. A player must not play without a stick, so the player goes to substitute.",
+  "r": "605.8, 605.24"
+ },
+ {
+  "n": 48,
+  "q": "A home-team player is standing in the substitution zone with a foot resting on the board. During play the ball hits the player in the chest. What follows?",
+  "o": [
+   "A 2-minute bench penalty.",
+   "A hit-in for the away team.",
+   "A face-off at the nearest face-off dot.",
+   "A free-hit for the away team."
+  ],
+  "v": "A player in the substitution zone with a foot on the board counts as too many players on the rink, regardless of whether play is affected.",
+  "r": "605.16"
+ },
+ {
+  "n": 49,
+  "q": "A minor bench penalty (2 minutes) is imposed if a player plays or stops the ball:",
+  "o": [
+   "Lying down, gaining a considerable advantage.",
+   "With the thigh.",
+   "While jumping.",
+   "With the stick above knee level."
+  ],
+  "v": "Playing the ball lying down is penalised with two minutes when the player gains a considerable advantage by it.",
+  "r": "605.13"
+ },
+ {
+  "n": 50,
+  "q": "If a player of the offending team strikes the ball away when play is interrupted:",
+  "o": [
+   "The player is given a minor bench penalty (2 minutes).",
+   "The player is warned.",
+   "The player is given a 2 + 10 minute personal penalty.",
+   "The player is penalised; the referees decide how severely, depending on whether the non-offending team could have resumed play quickly."
+  ],
+  "v": "When the offending team strikes or takes the ball away while play is interrupted, this is intentional delaying of play.",
+  "r": "605.19"
+ },
+ {
+  "n": 51,
+  "q": "The following does not lead to a minor bench penalty (2 minutes):",
+  "o": [
+   "A field player intentionally moving the opposing team's goal cage.",
+   "A field player participating in play without a stick.",
+   "A goalkeeper omitting, despite summons from the referees, to put the goal cage back into position.",
+   "Fetching a stick from a place other than the team's own substitution zone."
+  ],
+  "v": "A field player intentionally moving the opposing team's goal cage is penalised with a free-hit only.",
+  "r": "507.9"
+ },
+ {
+  "n": 52,
+  "q": "If a player trips an opponent in the middle of the rink:",
+  "o": [
+   "The player is given a minor bench penalty (2 minutes).",
+   "The situation is judged as an offence leading to a free-hit.",
+   "Nothing happens; the rules do not cover this situation.",
+   "It is roughing, and the player is always given a major bench penalty (2+2 minutes)."
+  ],
+  "v": "Tripping an opponent is careless physical play and is penalised with a minor bench penalty.",
+  "r": "605.6"
+ },
+ {
+  "n": 53,
+  "q": "What must field players wear (according to the rules)?",
+  "o": [
+   "Uniforms consisting of jerseys, shorts and socks.",
+   "Exactly the same uniforms consisting of jerseys and shorts.",
+   "Uniforms in any colour combination except grey and black.",
+   "A wristband, a headband and the latest fashion."
+  ],
+  "v": "Field players must wear a uniform consisting of a jersey, shorts and socks.",
+  "r": "401.1"
+ },
+ {
+  "n": 54,
+  "q": "What must the referees wear at a match (according to the rules)?",
+  "o": [
+   "Jerseys, black shorts and black knee socks.",
+   "Long-sleeved jerseys, shorts and knee socks.",
+   "Jerseys, shorts and knee socks in a colour combination different from the teams'.",
+   "Jerseys and shorts in the same colour combination."
+  ],
+  "v": "The referees must wear jerseys, black shorts and black knee socks.",
+  "r": "402.1"
+ },
+ {
+  "n": 55,
+  "q": "If a player loses one or both shoes during play:",
+  "o": [
+   "The player may continue playing until the next interruption.",
+   "The player must substitute immediately.",
+   "The player may carry on as they like, but must pick the shoe up and throw it behind the board.",
+   "The player must be given a 10-minute personal penalty."
+  ],
+  "v": "A player who loses a shoe may continue playing until the next interruption.",
+  "r": "401.4"
+ },
+ {
+  "n": 56,
+  "q": "When may the goalkeeper use a stick?",
+  "o": [
+   "Never.",
+   "During a power play.",
+   "When attacking an opponent.",
+   "During a penalty shot."
+  ],
+  "v": "The goalkeeper is not allowed to use a stick.",
+  "r": "403.1"
+ },
+ {
+  "n": 57,
+  "q": "What must the goalkeeper wear?",
+  "o": [
+   "A face mask in accordance with the rules, long trousers, a jersey and sports shoes.",
+   "A face mask in accordance with the rules, long trousers and a long-sleeved jersey.",
+   "A face mask, shorts, a jersey and socks.",
+   "Knee pads, sports shoes, a jersey and trousers."
+  ],
+  "v": "The goalkeeper must wear a face mask in accordance with the IFF Material Regulations, long trousers, a jersey and shoes.",
+  "r": "401.2, 401.4, 403.2"
+ },
+ {
+  "n": 58,
+  "q": "What protective equipment may the goalkeeper use?",
+  "o": [
+   "Any that is not intended to cover the goal; in addition, all zippers, pockets and straps on the trousers must be closed and tightened.",
+   "A helmet, a groin guard, an ice hockey chest protector with shoulder pads, and gloves.",
+   "A helmet, leg pads, a catching glove and a blocker.",
+   "Knee pads and shoulder pads."
+  ],
+  "v": "The goalkeeper may use any protective equipment that is not intended to cover the goal. Zippers, pockets and straps must be closed.",
+  "r": "403.3"
+ },
+ {
+  "n": 59,
+  "q": "What must a player not wear?",
+  "o": [
+   "Personal equipment which may cause injury, including jewellery, rings, necklaces or watches.",
+   "A headband without knots.",
+   "Orthopaedic aids of all kinds and sizes.",
+   "Shorts that are too short."
+  ],
+  "v": "A player must not wear equipment which may cause injury. Jewellery must be removed; covering it with tape is not enough.",
+  "r": "405.1"
+ },
+ {
+  "n": 60,
+  "q": "What is the maximum hook of the blade at its highest point?",
+  "o": [
+   "30 mm.",
+   "25 mm.",
+   "35 mm.",
+   "It may be any size."
+  ],
+  "v": "The hook of the blade shall not exceed 30 mm.",
+  "r": "406.2"
+ },
+ {
+  "n": 61,
+  "q": "What must a referee be equipped with?",
+  "o": [
+   "A plastic whistle, measuring equipment and a red card.",
+   "A whistle, a red card and the Rules of the Game.",
+   "A plastic whistle, a stopwatch and a red card.",
+   "A whistle, measuring equipment, timekeeping equipment and a red card."
+  ],
+  "v": "The referees must have a plastic whistle, measuring equipment and a red card.",
+  "r": "407.1"
+ },
+ {
+  "n": 62,
+  "q": "Who carries out the control and measuring of all equipment?",
+  "o": [
+   "The referees.",
+   "The captains of both teams.",
+   "The coach or the captain of the team that pointed out the incorrect equipment.",
+   "The referees together with the chief organiser and the team captains."
+  ],
+  "v": "The referees decide about controlling all equipment.",
+  "r": "409.1"
+ },
+ {
+  "n": 63,
+  "q": "Who may request the measuring of a blade or control of the shaft/blade combination?",
+  "o": [
+   "The team captain.",
+   "The coach.",
+   "The team manager.",
+   "The chief organiser."
+  ],
+  "v": "The team captain may request control of the hook of a blade or of the shaft/blade combination.",
+  "r": "409.2"
+ },
+ {
+  "n": 64,
+  "q": "What is the maximum number of players from one team who may take part in one match?",
+  "o": [
+   "20.",
+   "15.",
+   "20 (as standard); 25 (if a simplified match record is used).",
+   "The number is not limited."
+  ],
+  "v": "Each team may use a maximum of 20 players in a match, noted in the match record.",
+  "r": "301.1"
+ },
+ {
+  "n": 65,
+  "q": "The goalkeeper catches the ball in the goal crease while jumping. The referees:",
+  "o": [
+   "Let play continue.",
+   "Award a free-hit for jumping.",
+   "Award a penalty shot, because a goal situation was interrupted.",
+   "Give the goalkeeper a minor bench penalty (2 minutes) for hands outside the goalkeeper area."
+  ],
+  "v": "The goalkeeper is allowed to jump within their own goal crease.",
+  "r": "303.2"
+ },
+ {
+  "n": 66,
+  "q": "The substitution zone must be marked:",
+  "o": [
+   "Starting 5 metres from the centre line and ending at the imaginary goal line.",
+   "Starting 1 metre from the centre line and ending at the corner of the board.",
+   "Starting 5 metres from the centre line, with a length of 10 metres.",
+   "From the centre line to the imaginary goal line."
+  ],
+  "v": "The substitution zone starts 5 m from the centre line and ends at the imaginary extended goal line.",
+  "r": "104.1"
+ },
+ {
+  "n": 67,
+  "q": "A penalty shot is started:",
+  "o": [
+   "From an imaginary spot 5 m from the centre line, centred between the long sides of the rink.",
+   "From the centre spot.",
+   "From the goal crease.",
+   "From the board at the substitution zone."
+  ],
+  "v": "From 2026 the penalty shot starts 5 m closer to the goal, from an imaginary spot 5 m from the centre line.",
+  "r": "508.2"
+ },
+ {
+  "n": 68,
+  "q": "A defender misplaces a pass and the ball heads towards their own goalkeeper, who knocks it into the corner of the rink with the forearm. The referees award a free-hit for delaying play. Where is it taken from?",
+  "o": [
+   "On the line from the centre of the goal through the place where the goalkeeper played the ball, at least 3.5 metres from the goalkeeper area.",
+   "From where the defender played the pass.",
+   "From where the goalkeeper played the ball.",
+   "From the nearest face-off dot."
+  ],
+  "v": "A free-hit closer to the goalkeeper area than 3.5 m is moved out to this distance along the line from the centre of the goal line through the place of the offence.",
+  "r": "506.2"
+ },
+ {
+  "n": 69,
+  "q": "Responsibility for correcting defects found during the inspection of the rink, and for keeping it in a proper condition during the match, lies with:",
+  "o": [
+   "The organiser.",
+   "The referees.",
+   "The home team's players.",
+   "The venue staff."
+  ],
+  "v": "The organiser is responsible for correcting defects and for the condition of the rink during the match.",
+  "r": "106.1"
+ },
+ {
+  "n": 70,
+  "q": "Before the start of the match, ends (who starts where) are chosen by:",
+  "o": [
+   "The home team.",
+   "The away team.",
+   "The referees.",
+   "The chief organiser."
+  ],
+  "v": "The home team chooses ends before the start of the match.",
+  "r": "201.1"
+ },
+ {
+  "n": 71,
+  "q": "A time out may be requested:",
+  "o": [
+   "Only by the team captain or a member of the team staff.",
+   "Only by the team captain or the head coach.",
+   "Only by a member of the team staff.",
+   "Only by the team captain."
+  ],
+  "v": "A time out may be requested only by the team captain or a member of the team staff.",
+  "r": "202.1"
+ },
+ {
+  "n": 72,
+  "q": "A requested time out must always be carried out:",
+  "o": [
+   "If a goal is scored or a penalty shot is awarded, the team may withdraw its request for a time out.",
+   "Without exception.",
+   "If a bench penalty is imposed, the team may withdraw its request for a time out.",
+   "If a match penalty is imposed, the team may withdraw its request for a time out."
+  ],
+  "v": "A requested time out must always be carried out. The request may be withdrawn only when a goal is scored or a penalty shot is awarded.",
+  "r": "202.1"
+ },
+ {
+  "n": 73,
+  "q": "After the ball has gone out of the rink, a player takes the hit-in quickly. While taking it, the player has one foot over the board, outside the rink. What follows?",
+  "o": [
+   "A free-hit for the opponents.",
+   "The player receives a 2-minute penalty.",
+   "Play continues.",
+   "A face-off in the corner of the rink."
+  ],
+  "v": "Playing the ball from outside the rink is an offence leading to a free-hit.",
+  "r": "507.12"
+ },
+ {
+  "n": 74,
+  "q": "How many time outs is a team entitled to?",
+  "o": [
+   "One during the whole match (including overtime).",
+   "As many as needed.",
+   "One time out in each period and in overtime.",
+   "A team is not entitled to a time out."
+  ],
+  "v": "Each team is entitled to one time out per match.",
+  "r": "202.1"
+ },
+ {
+  "n": 76,
+  "q": "During a penalty shot:",
+  "o": [
+   "Game time is stopped.",
+   "Game time runs.",
+   "Game time is stopped, but ten seconds are added.",
+   "Game time runs; it is stopped only for a penalty shot in overtime."
+  ],
+  "v": "Game time is stopped during the entire penalty shot.",
+  "r": "508.4"
+ },
+ {
+  "n": 77,
+  "q": "If the board comes apart:",
+  "o": [
+   "Play may continue until the ball comes near the place in question.",
+   "Play is interrupted immediately and, once the board has been fixed, resumed with a face-off.",
+   "No notice is taken of it at all and play continues.",
+   "Play is interrupted immediately and, once the board has been fixed, resumed with a hit-in for the team that had the ball."
+  ],
+  "v": "When the board comes apart, play continues until the ball comes near the place in question.",
+  "r": "201.2, 503.3"
+ },
+ {
+  "n": 78,
+  "q": "If a field player participates in play without a stick, the referees:",
+  "o": [
+   "Give the player a minor bench penalty (2 minutes).",
+   "Let the player fetch a stick and continue playing.",
+   "Give the player a match penalty for sabotage of play.",
+   "Award a free-hit to the non-offending team."
+  ],
+  "v": "A field player without a stick is given a minor bench penalty.",
+  "r": "605.8"
+ },
+ {
+  "n": 79,
+  "q": "A player leaving the rink did not pass over the board before the new player entered. This happened while play was taking place by the substitution zone. What follows?",
+  "o": [
+   "A minor bench penalty (2 minutes) for incorrect substitution.",
+   "A match penalty for sabotage of play.",
+   "The referees let play continue 5 against 5.",
+   "A free-hit for the non-offending team."
+  ],
+  "v": "The player leaving the rink must be passing over the board before the new player enters. If play is affected, it is an incorrect substitution and a 2-minute penalty.",
+  "r": "605.15"
+ },
+ {
+  "n": 80,
+  "q": "A player who has already been given two minor bench penalties (2 minutes) for pushing in the match commits the same offence a third time. What follows?",
+  "o": [
+   "A minor bench penalty (2 minutes).",
+   "A major bench penalty (2+2 minutes).",
+   "A match penalty.",
+   "A 10-minute personal penalty."
+  ],
+  "v": "Repeated minor bench penalties are not made more severe. A match penalty follows only a second major bench penalty.",
+  "r": "605.6, 614.1"
+ },
+ {
+  "n": 81,
+  "q": "A player of team A is given a major bench penalty (2+2 minutes) and team B scores after 30 seconds. What follows?",
+  "o": [
+   "The player stays on the penalty bench, but the first bench penalty terminates with the goal and the second 2-minute bench penalty starts to be measured.",
+   "The whole penalty terminates and the player returns to play.",
+   "The goal has no effect on the major bench penalty and the player sits out the whole rest of the penalty on the penalty bench.",
+   "Team A may replace the penalised player on the rink, but the penalised player must stay on the penalty bench."
+  ],
+  "v": "A goal terminates a major bench penalty only one part at a time. The first two minutes terminate and the second two minutes start.",
+  "r": "603.7"
+ },
+ {
+  "n": 82,
+  "q": "A player is penalised with 2+10 minutes for unsporting behaviour. Who serves the 2-minute bench penalty?",
+  "o": [
+   "A player chosen by the team captain.",
+   "The penalised player alone serves the whole penalty.",
+   "The team captain.",
+   "The referees choose at their own discretion."
+  ],
+  "v": "The 2-minute bench penalty that goes with a personal penalty is served by a field player chosen by the team captain.",
+  "r": "608.1"
+ },
+ {
+  "n": 83,
+  "q": "A penalty shot is awarded to the attacking team. The player taking the penalty shot fails to score. How is play resumed?",
+  "o": [
+   "With a face-off in the corner of the rink.",
+   "With a free-hit for the defending team in the corner of the rink.",
+   "With a free-hit for the attacking team in the corner of the rink.",
+   "With a face-off at the centre spot."
+  ],
+  "v": "A penalty shot that does not result in a goal leads to a face-off at the nearest face-off dot, i.e. in the corner.",
+  "r": "503.8, 502.3"
+ },
+ {
+  "n": 84,
+  "q": "An attacking player taking a free-hit touches the ball a second time before any team-mate has touched it. The referees:",
+  "o": [
+   "Award a free-hit to the defending team from the same place.",
+   "Let play continue, because no rule has been broken.",
+   "Interrupt play and let the attacking team take the free-hit again.",
+   "Award a face-off at the nearest face-off dot."
+  ],
+  "v": "If the player taking the free-hit touches the ball a second time, the free-hit is incorrectly performed and the ball goes to the opponents.",
+  "r": "506.5, 507.15"
+ },
+ {
+  "n": 85,
+  "q": "A defending player knocks the ball out of the rink. An attacking player shoots directly from the hit-in, without passing to a team-mate, and scores. The referees:",
+  "o": [
+   "Allow the goal.",
+   "Disallow the goal and award a face-off in the corner of the rink.",
+   "Disallow the goal and award a free-hit to the defending team in the corner of the rink.",
+   "Disallow the goal and have the free-hit retaken from the same place."
+  ],
+  "v": "A hit-in may go directly into the goal.",
+  "r": "504.6"
+ },
+ {
+  "n": 86,
+  "q": "The ball bounces off a defending player's stick high into the air and touches the ceiling of the hall. The referees:",
+  "o": [
+   "Award a hit-in to the attacking team 1.5 m from the board, at the same distance from the centre line as where the ball touched the ceiling.",
+   "Let play continue, because no rule has been broken.",
+   "Award a free-hit to the attacking team from the place on the rink directly below where the ball touched the ceiling.",
+   "Award a face-off at the nearest face-off dot."
+  ],
+  "v": "After the ball touches the ceiling, the hit-in is taken 1.5 m from the board at the same distance from the centre line.",
+  "r": "504.2"
+ },
+ {
+  "n": 87,
+  "q": "An attacking player shoots just over the goal cage and the ball leaves the rink over the short side directly, without touching any other player. The referees:",
+  "o": [
+   "Award a hit-in to the defending team in the corner of the rink.",
+   "Award a hit-in to the defending team from where the ball left the rink, moved out to 1.5 m from the board.",
+   "Award a face-off in the corner of the rink.",
+   "Award a hit-in to the attacking team in the corner of the rink."
+  ],
+  "v": "If the ball leaves the rink behind the goal line, the hit-in is taken from the nearest face-off dot.",
+  "r": "504.2"
+ },
+ {
+  "n": 88,
+  "q": "The referee judged a defending player's challenge in the goal crease to be an offence and awarded a free-hit. Where is the free-hit taken from?",
+  "o": [
+   "3.5 m from the goalkeeper area, on the imaginary extended line from the centre of the goal line through the place where the offence was committed.",
+   "Always exactly where the offence was committed.",
+   "From the corner of the rink.",
+   "From the edge of the goalkeeper area."
+  ],
+  "v": "The free-hit is moved out to 3.5 m from the goalkeeper area along the line from the centre of the goal line through the place of the offence.",
+  "r": "506.2"
+ },
+ {
+  "n": 89,
+  "q": "A player with the ball in the middle of the rink takes a wide stance to shield the ball with their body. A defending player cleverly takes the ball away with a foot between the player's legs. The referees:",
+  "o": [
+   "Award a free-hit to the attacking team for playing between an opponent's legs.",
+   "Let play continue, because playing between an opponent's legs is forbidden only with the stick.",
+   "Give the defending player a minor bench penalty (2 minutes) for playing between an opponent's legs.",
+   "Let play continue, because the Rules of the Game do not forbid playing between an opponent's legs."
+  ],
+  "v": "Placing a foot between an opponent's legs is an offence leading to a free-hit.",
+  "r": "507.5"
+ },
+ {
+  "n": 90,
+  "q": "A defending player kicks a dropping ball away with the instep, making contact at thigh level. The referees:",
+  "o": [
+   "Award a free-hit to the attacking team for a high kick.",
+   "Let play continue, because kicking the ball with the instep is forbidden only above waist level.",
+   "Give the defending player a minor bench penalty (2 minutes) for a high kick.",
+   "Let play continue, because the Rules of the Game do not forbid a high kick."
+  ],
+  "v": "Playing the ball with the foot above knee level leads to a free-hit.",
+  "r": "507.4"
+ },
+ {
+  "n": 91,
+  "q": "An attacking player scores from a rebound while standing with one foot on the line marking the goalkeeper area. The referees:",
+  "o": [
+   "Disallow the goal and award a free-hit to the defending team because the player was in the goalkeeper area.",
+   "Allow the goal, because only a defending player is forbidden to play in the goalkeeper area.",
+   "Allow the goal, because the player was only standing on the line, which is not part of the goalkeeper area.",
+   "Disallow the goal and award a face-off at the centre spot."
+  ],
+  "v": "A field player is in the goalkeeper area even when standing on the line. The goal is therefore disallowed.",
+  "r": "507.8, 703.1"
+ },
+ {
+  "n": 92,
+  "q": "A defending player stands in the corner of the rink watching the ball drop towards them, and decides to head it away before the attacker arrives. The referees:",
+  "o": [
+   "Award a free-hit to the attacking team for a header.",
+   "Let play continue, because playing the ball with the head is allowed.",
+   "Give the defending player a minor bench penalty (2 minutes) for a header.",
+   "Interrupt play, check whether the player who headed the ball is injured, and award a face-off."
+  ],
+  "v": "A field player must not play the ball with the head. A free-hit follows.",
+  "r": "507.21"
+ },
+ {
+  "n": 93,
+  "q": "A defending player is marking a screening attacker in front of the goal cage and is fully focused on that player. At that moment a shot from the middle of the rink is blocked and hits the defending player on the side of the head. The referees:",
+  "o": [
+   "Let play continue, because the defending player did not play the ball with the head intentionally.",
+   "Award a free-hit to the attacking team for a header.",
+   "Give the defending player a minor bench penalty (2 minutes) for a header.",
+   "Award a penalty shot, because the offence interrupted a goal situation."
+  ],
+  "v": "The offence is playing the ball with the head. Being hit on the head unintentionally is not playing the ball.",
+  "r": "507.21"
+ },
+ {
+  "n": 94,
+  "q": "A player taking a penalty shot keeps their body moving forward throughout, but just in front of the goalkeeper drags the ball slightly back with the tip of the blade and scores. The referees:",
+  "o": [
+   "Allow the goal, because the ball may move backwards during a penalty shot as long as the player's body is moving forward.",
+   "Disallow the goal but have the penalty shot retaken, because the ball moved back only slightly.",
+   "Disallow the goal, because during a penalty shot the ball must not move backwards under any circumstances, not even slightly.",
+   "Disallow the goal, because during a penalty shot the ball may move backwards only in the player's own half of the rink."
+  ],
+  "v": "The player and the ball must not stop or move backwards at the same time. The ball may move backwards while the player's body is moving forward.",
+  "r": "508.4"
+ },
+ {
+  "n": 95,
+  "q": "A player taking a penalty shot is surprised by the goalkeeper rushing out and makes a move to the side, at the same time moving slightly backwards with both body and ball. The referees:",
+  "o": [
+   "Disallow the goal, because during a penalty shot the player and the ball must not stop or move backwards at the same time.",
+   "Disallow the goal but have the penalty shot retaken, because the player and the ball moved back only slightly.",
+   "Allow the goal, because the movement of the player and the ball is not restricted in any way during a penalty shot.",
+   "Allow the goal, because the goalkeeper must not rush out at the player taking the penalty shot."
+  ],
+  "v": "The player and the ball moved backwards at the same time, which is not allowed during a penalty shot.",
+  "r": "508.4"
+ },
+ {
+  "n": 97,
+  "q": "A delayed penalty does not end at the moment when:",
+  "o": [
+   "A player of the offending team is hit by an opponent's shot.",
+   "A player of the offending team gains full control of the ball and passes to a team-mate.",
+   "A player of the offending team plays, with the stick, a ball bouncing in front of the goal cage.",
+   "A player of the offending team intentionally plays the ball with the foot."
+  ],
+  "v": "A delayed penalty ends only when the offending team takes control of the ball or plays it in a controlled way. Being hit by a shot is neither.",
+  "r": "602.2"
+ },
+ {
+  "n": 98,
+  "q": "Part of a broken stick is left lying on the rink and play continues. Who may not remove the broken part from the rink over the board during play?",
+  "o": [
+   "A spectator.",
+   "A referee.",
+   "The player who broke the stick.",
+   "An opponent of the player who broke the stick."
+  ],
+  "v": "Anyone taking part in the game may remove a broken stick in a safe manner. A spectator is not one of them.",
+  "r": "605.24"
+ },
+ {
+  "n": 99,
+  "q": "A player's stick breaks while shooting. One part stays in the player's hand and the other flies off towards the centre spot. Which of the following statements is true?",
+  "o": [
+   "The player may leave the broken part lying on the rink and go to substitute with the other broken part in hand.",
+   "The player may carry on playing with the broken part of the stick in hand and join in defending.",
+   "The player may throw the broken part of the stick over the board and join in defending without a stick.",
+   "The player may drop the broken part of the stick and go to substitute."
+  ],
+  "v": "A player must not play with a broken stick, and intentionally dropping part of a stick is penalised. The player may go to substitute and pick up the rest at an interruption.",
+  "r": "605.8, 605.24, 614.11"
+ },
+ {
+  "n": 100,
+  "q": "What is considered playing the ball lying down, for which a minor bench penalty (2 minutes) is imposed?",
+  "o": [
+   "A defending player kneels on both knees and pokes away an opponent's pass with the stick.",
+   "A defending player kneels on one knee and pokes away an opponent's pass with the stick.",
+   "A player with the ball slips and puts a hand on the floor while the ball is on their blade.",
+   "A player slips, is lying on the floor and is about to get up. At that moment an opponent hits the player with the ball."
+  ],
+  "v": "Playing with both knees on the floor, when the player gains a considerable advantage by it, is penalised with two minutes.",
+  "r": "605.13"
+ }
+]

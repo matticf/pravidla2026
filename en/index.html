@@ -1,0 +1,1860 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A visual overview of the rules of floorball (2026 edition) for spectators and newcomers.">
+<title>Floorball Made Simple</title>
+<link rel="alternate" hreflang="cs" href="../index.html">
+<style>
+/* Výchozí světlý vzhled: bílé pozadí, modrý text, červené zvýraznění. Tmavý (ČF modrá) jen přepínačem.
+   Layout: dlouhý výklad po kapitolách, lepkavá navigace, modré nadpisy na bílém papíře, červená jen pro akcent a mřížku (vizuální styl Českého florbalu) */
+@font-face{font-family:"Geogrotesque";src:url("../fonts/G01-Rg.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Geogrotesque";src:url("../fonts/G01_Md.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Geogrotesque";src:url("../fonts/G01-SmBd.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Geogrotesque";src:url("../fonts/G01_Bd.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+
+:root{
+  --cf-cervena:#d51223; --cf-modra:#102d69; --bila:#ffffff;
+  --podklad:var(--bila); --podklad-tlumeny:var(--bila);
+  --text:var(--cf-modra); --text-tlumeny:var(--cf-modra); --text-akcent:var(--cf-cervena);
+  --plocha-akcent:var(--cf-cervena); --na-akcentu:var(--bila); --motiv:var(--cf-cervena); --linka:var(--cf-modra);
+  --plocha-hriste:var(--bila); --znamka:var(--cf-cervena); --postava:var(--cf-modra);
+  --geo:"Geogrotesque", Arial, sans-serif;
+  --s1:4px; --s2:8px; --s3:16px; --s4:24px; --s5:40px; --s6:64px;
+  --radius-blok:8px;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --podklad:var(--cf-modra); --podklad-tlumeny:var(--cf-modra);
+  --text:var(--bila); --text-tlumeny:#cccccc; --text-akcent:var(--bila);
+  --linka:#cccccc; --plocha-hriste:var(--cf-modra); --postava:var(--bila);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--podklad);color:var(--text);font-family:var(--geo);font-size:16px;line-height:24px;font-variant-ligatures:none;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--podklad)}
+h1,h2,h3,h4{margin:0;font-weight:700;text-wrap:balance;color:var(--text)}
+p{margin:0}
+a{color:var(--text-akcent)}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--cf-cervena);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.popisek{font-size:12px;line-height:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-akcent)}
+.perex{font-size:18px;line-height:27px;font-weight:500;max-width:62ch}
+.drobny{font-size:13px;line-height:18px;color:var(--text-tlumeny)}
+.muted{color:var(--text-tlumeny)}
+
+/* Hero */
+.hero{padding-block:var(--s6) 0;position:relative}
+.hero h1{font-size:clamp(44px,8vw,80px);line-height:.95;letter-spacing:-.01em;text-transform:uppercase;max-width:12ch}
+.hero .perex{margin-top:var(--s4)}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:var(--s5);border-top:1px solid var(--linka)}
+.fact{padding:var(--s3) var(--s3) var(--s4) 0;display:flex;flex-direction:column;gap:var(--s1)}
+.fact + .fact{padding-left:var(--s3);border-left:1px solid var(--linka)}
+.fact b{font-size:40px;line-height:44px;font-weight:700;font-variant-numeric:tabular-nums}
+.fact span{font-size:14px;line-height:20px}
+.mrizka{height:56px;margin-top:var(--s5);
+  background:
+    repeating-linear-gradient(90deg,var(--motiv) 0 6px,transparent 6px 38px),
+    repeating-linear-gradient(0deg,var(--motiv) 0 6px,transparent 6px 22px);
+  background-position:-14px 4px;
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 55%,transparent 100%);
+          mask-image:linear-gradient(90deg,#000 0%,#000 55%,transparent 100%)}
+
+/* Nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--podklad);border-bottom:1px solid var(--linka)}
+.nav .wrap{display:flex;align-items:center;gap:var(--s3)}
+.nav-scroll{flex:1 1 auto;min-width:0;overflow-x:auto;scrollbar-width:none}
+.vzhled{flex:none;display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--linka);background:var(--podklad);color:var(--text);border-radius:999px;padding:5px 12px 5px 8px;font-size:14px;font-weight:600;cursor:pointer}
+.vzhled:hover{border-color:var(--cf-cervena)}
+.nav a.jazyk{flex:none;display:inline-flex;align-items:center;border:1.5px solid var(--linka);border-radius:999px;padding:5px 12px;font-size:14px;line-height:19px;font-weight:700;letter-spacing:.04em;color:var(--text);text-decoration:none}
+.nav a.jazyk:hover{border-color:var(--cf-cervena);color:var(--text-akcent)}
+.vzhled svg{width:18px;height:18px}
+.vzhled .ik-mesic{display:none}
+:root[data-theme="dark"] .vzhled .ik-slunce{display:none}
+:root[data-theme="dark"] .vzhled .ik-mesic{display:block}
+@media (max-width:600px){.vzhled .lbl{display:none}.vzhled{padding:6px}}
+.nav ul{display:flex;gap:var(--s4);list-style:none;margin:0;padding:12px 0;white-space:nowrap}
+.nav a{color:var(--text);text-decoration:none;font-weight:600;font-size:15px}
+.nav a:hover{color:var(--text-akcent)}
+
+/* Sections */
+section.kap{padding-block:var(--s6);border-bottom:1px solid var(--linka);scroll-margin-top:48px}
+.kap-hlava{display:grid;gap:var(--s2);margin-bottom:var(--s5);max-width:720px}
+.kap-hlava h2{font-size:clamp(30px,4.4vw,44px);line-height:1.08}
+.kap-hlava p{font-size:18px;line-height:27px;font-weight:500;margin-top:var(--s2)}
+h3{font-size:21px;line-height:28px;font-weight:600}
+
+.grid2{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:var(--s5);align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3)}
+.grid2x2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3)}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
+.karta{background:var(--podklad);border:1px solid var(--linka);border-radius:var(--radius-blok);padding:var(--s4);display:flex;flex-direction:column;gap:var(--s2);min-width:0}
+.karta h3{font-size:19px;line-height:25px}
+.karta p{font-size:15px;line-height:22px}
+
+/* Rink */
+.hriste svg{width:100%;height:auto;display:block}
+.hriste .ln{fill:none;stroke:var(--linka);stroke-width:1.2}
+.hriste .plocha{fill:var(--plocha-hriste);stroke:var(--linka);stroke-width:2.4}
+.hriste .zona{fill:var(--podklad);stroke:var(--linka);stroke-width:1;stroke-dasharray:3 2}
+.hriste .txt{font:600 7px var(--geo);fill:var(--text-tlumeny)}
+.hriste .prvek{transition:opacity .2s}
+.hriste.ma-vyber .prvek{opacity:.25}
+.hriste.ma-vyber .prvek.on{opacity:1}
+.hriste .prvek.on .ln,.hriste .prvek.on .zona{stroke:var(--cf-cervena);stroke-width:2.4}
+.hriste .zn circle{fill:var(--plocha-akcent)}
+.hriste .zn text{font:700 8px var(--geo);fill:var(--na-akcentu);text-anchor:middle;dominant-baseline:central}
+.hriste .zn{cursor:pointer}
+.legenda{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--linka)}
+.legenda li{border-bottom:1px solid var(--linka)}
+.legenda button{all:unset;box-sizing:border-box;display:grid;grid-template-columns:28px minmax(0,1fr);gap:var(--s3);padding:12px 4px;width:100%;cursor:pointer}
+.legenda button:focus-visible{outline:3px solid var(--cf-cervena)}
+.legenda .c{width:24px;height:24px;border-radius:50%;background:var(--plocha-akcent);color:var(--na-akcentu);font-weight:700;font-size:13px;display:grid;place-items:center;margin-top:1px}
+.legenda b{display:block;font-weight:600}
+.legenda span.t{font-size:15px;line-height:22px}
+.legenda li.on b{color:var(--text-akcent);text-decoration:underline;text-decoration-color:var(--cf-cervena);text-decoration-thickness:2px;text-underline-offset:3px}
+.rozmery{margin-top:var(--s3)}
+
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 8px;border-radius:999px;border:1.5px solid var(--linka);color:var(--text);white-space:nowrap;align-self:flex-start}
+.chip.trest{background:var(--bila);border-color:var(--cf-cervena);color:var(--cf-cervena)}
+.chip.os{background:repeating-linear-gradient(45deg,var(--bila) 0 4px,color-mix(in srgb,var(--cf-cervena) 18%,var(--bila)) 4px 7px);border-color:var(--cf-cervena);color:var(--cf-cervena)}
+.chip.vt{background:repeating-linear-gradient(45deg,transparent 0 4px,color-mix(in srgb,var(--cf-cervena) 15%,transparent) 4px 5.5px),repeating-linear-gradient(-45deg,var(--bila) 0 4px,color-mix(in srgb,var(--cf-cervena) 15%,var(--bila)) 4px 5.5px);border-color:var(--cf-cervena);color:var(--cf-cervena)}
+:root[data-theme="dark"] .chip.ss{border-color:var(--bila)}
+.chip.ts{background:var(--cf-cervena);border-color:var(--cf-cervena);color:var(--bila)}
+.chip.ss{background:var(--bila);border-color:var(--cf-modra);color:var(--cf-cervena)}
+/* barevný klíč */
+.klic{display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:var(--s3) var(--s4);align-items:start;padding:var(--s3) 0;border-top:1px solid var(--linka);border-bottom:1px solid var(--linka);margin-bottom:var(--s5)}
+.klic h3{font-size:17px;line-height:22px;margin-top:4px}
+.klic ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3) var(--s4)}
+.klic li{display:grid;gap:6px;font-size:14px;line-height:20px}
+/* princip kapitoly */
+.princip{display:grid;gap:4px;margin-top:var(--s3);padding:var(--s3) var(--s4);border-left:6px solid var(--cf-cervena);background:var(--podlaha)}
+.princip p{font-size:20px!important;line-height:28px!important;font-weight:600!important;margin:0!important}
+/* čísla pravidel */
+.pr{display:inline-block;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.02em;color:var(--text-tlumeny);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pr::before{content:"§ ";color:var(--text-akcent)}
+.karta .pr{margin-top:auto;padding-top:4px}
+.komiks figcaption .pr{margin-top:2px}
+
+/* team */
+.sestava{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s5);align-items:start}
+.pocty{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--linka);margin-top:var(--s4)}
+.pocty div{padding:var(--s3) var(--s3) var(--s3) 0}
+.pocty div+div{border-left:1px solid var(--linka);padding-left:var(--s3)}
+.pocty b{font-size:34px;line-height:38px;display:block}
+.pocty span{font-size:14px;line-height:20px}
+.seznam{list-style:none;margin:var(--s3) 0 0;padding:0;display:grid;gap:10px}
+.seznam li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;font-size:16px;line-height:23px}
+.seznam li::before{content:"";width:10px;height:10px;background:var(--plocha-akcent);margin-top:7px}
+
+/* timeline */
+.casova{display:flex;width:100%;height:64px;margin-top:var(--s3);border-radius:var(--radius-blok);overflow:hidden}
+.casova div{display:flex;flex-direction:column;justify-content:center;padding:0 10px;min-width:0;font-size:13px;line-height:16px}
+.casova .hra{background:var(--text);color:var(--podklad);flex:20}
+.casova .hra b{font-size:18px;line-height:22px}
+.casova .pauza{background:var(--podklad);color:var(--text);flex:10;border-top:1px solid var(--linka);border-bottom:1px solid var(--linka)}
+.casova-pozn{display:flex;justify-content:space-between;margin-top:6px}
+.dalsi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3);margin-top:var(--s5)}
+.cas-scroll{overflow-x:auto}
+.cas-inner{min-width:560px}
+
+/* height figure */
+.vyska{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:var(--s5);align-items:center;margin-bottom:var(--s5)}
+.vyska svg{width:100%;height:auto}
+.vyska .lvl{stroke-width:1.5;stroke-dasharray:5 4}
+.vyska-tab{width:100%;border-collapse:collapse}
+.vyska-tab td{padding:12px 8px 12px 0;border-bottom:1px solid var(--linka);vertical-align:top;font-size:15px;line-height:22px}
+.vyska-tab td:last-child{text-align:right;white-space:nowrap}
+.vyska-tab tr:first-child td{border-top:1px solid var(--linka)}
+
+.faul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3)}
+.smi{margin-top:var(--s5);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:var(--s5);align-items:start}
+.smi ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px var(--s4)}
+.smi li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px;font-size:15px;line-height:22px}
+.smi li svg{width:20px;height:20px;margin-top:1px}
+
+/* restarts */
+.mini{width:100%;height:auto;display:block;background:var(--plocha-hriste);border:1px solid var(--linka);border-radius:6px}
+.mini .ln{fill:none;stroke:var(--linka);stroke-width:1.2}
+.mini .d3{fill:none;stroke:var(--cf-cervena);stroke-width:1.2;stroke-dasharray:3 3}
+.mini .mic{fill:var(--cf-cervena)}
+.mini .h1{fill:var(--text)}
+.mini .h2{fill:var(--podklad);stroke:var(--text);stroke-width:1.5}
+.mini text{font:600 8px var(--geo);fill:var(--text-tlumeny)}
+
+/* penalties */
+.zebricek{display:grid;gap:0;border-top:1px solid var(--linka)}
+.stup{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr) minmax(0,260px);gap:var(--s4);padding:var(--s4) 0;border-bottom:1px solid var(--linka);align-items:center}
+.stup h3{font-size:19px;line-height:24px}
+.stup .kdy{font-size:15px;line-height:22px}
+.osa{position:relative;height:28px;display:flex;gap:3px}
+.osa i{font-style:normal;display:block;height:100%;background:var(--plocha-akcent);flex:0 0 auto}
+.osa i.os{background:repeating-linear-gradient(45deg,var(--text) 0 3px,transparent 3px 7px);border:1.5px solid var(--text)}
+.osa i.konec{background:var(--cf-cervena);border-radius:999px;display:grid;place-items:center;color:var(--bila);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:0 8px}
+.osa-sk{display:flex;justify-content:space-between;margin-top:4px;font-size:11px;color:var(--text-tlumeny);font-variant-numeric:tabular-nums}
+.leg-osa{display:flex;flex-wrap:wrap;gap:var(--s4);margin-top:var(--s3);font-size:14px}
+.leg-osa span{display:inline-flex;align-items:center;gap:8px}
+.leg-osa i{width:22px;height:12px;display:inline-block}
+
+/* goals */
+.gol{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s3)}
+.gol .karta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.gol .karta li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;font-size:15px;line-height:22px}
+.gol .karta li svg{width:18px;height:18px;margin-top:2px}
+.carahead{display:flex;align-items:center;gap:var(--s3)}
+.carahead svg{width:92px;height:auto;flex:none}
+
+/* signals */
+.signaly{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
+.sig{background:var(--podklad);border:1px solid var(--linka);border-radius:var(--radius-blok);padding:var(--s3) var(--s3) var(--s4);display:flex;flex-direction:column;gap:6px}
+.sig svg{width:100%;max-width:150px;height:auto;align-self:center}
+.sig .body{stroke:var(--postava);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.sig .hlava{fill:var(--postava)}
+.sig .ruka{stroke:var(--znamka);stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.sig .dlan{fill:var(--znamka)}
+.sig .karta-c{fill:var(--cf-cervena);stroke:var(--bila);stroke-width:1}
+.sig .num{font:700 13px var(--geo);fill:var(--text)}
+.sig h3{font-size:17px;line-height:22px}
+.sig p{font-size:14px;line-height:20px}
+.sig .kod{font-size:12px;font-weight:700;color:var(--text-tlumeny);font-variant-numeric:tabular-nums}
+
+/* glossary */
+.slovnik{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--s5);margin:0}
+.slovnik div{padding:var(--s3) 0;border-bottom:1px solid var(--linka)}
+.slovnik dt{font-weight:700}
+.slovnik dd{margin:2px 0 0;font-size:15px;line-height:22px}
+
+/* quiz */
+.kviz{display:grid;gap:var(--s4);max-width:780px}
+.otazka{border-top:1px solid var(--linka);padding-top:var(--s3);display:grid;gap:var(--s2)}
+.otazka h3{font-size:18px;line-height:25px}
+.moznosti{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.moznosti button{border:1.5px solid var(--linka);background:transparent;border-radius:var(--radius-blok);padding:9px 14px;font-size:15px;font-weight:500;cursor:pointer;text-align:left}
+.moznosti button:hover:not(:disabled){border-color:var(--cf-cervena);color:var(--text-akcent)}
+.moznosti button.spravne{background:var(--text);color:var(--podklad);border-color:var(--text)}
+.moznosti button.spatne{background:var(--plocha-akcent);color:var(--na-akcentu);border-color:var(--plocha-akcent)}
+.moznosti button:disabled{cursor:default}
+.vysvetleni{font-size:15px;line-height:22px}
+.skore{font-size:21px;line-height:28px;font-weight:600}
+.reset{border:1.5px solid var(--linka);background:transparent;border-radius:var(--radius-blok);padding:8px 14px;font-weight:600;cursor:pointer;justify-self:start}
+
+footer{padding-block:var(--s5) var(--s6)}
+footer .wrap{display:grid;gap:var(--s2)}
+
+@media (max-width:900px){
+  .klic ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid2,.sestava,.vyska,.smi{grid-template-columns:minmax(0,1fr)}
+  .grid4,.signaly{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid3,.faul,.dalsi{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stup{grid-template-columns:minmax(0,1fr);gap:var(--s2)}
+  .vyska svg{max-width:280px}
+}
+@media (max-width:600px){
+  .klic,.klic ul{grid-template-columns:minmax(0,1fr)}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fact:nth-child(3){padding-left:0;border-left:0}
+  .fact:nth-child(n+3){border-top:1px solid var(--linka)}
+  .grid3,.faul,.dalsi,.gol,.slovnik,.smi ul,.grid2x2{grid-template-columns:minmax(0,1fr)}
+  .grid4{grid-template-columns:minmax(0,1fr)}
+  .fact b{font-size:32px;line-height:36px}
+  .pocty b{font-size:28px}
+  section.kap{padding-block:var(--s5)}
+}
+@media (max-width:420px){ .signaly{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s2)} .sig{padding:12px} }
+@media (prefers-reduced-motion: reduce){ *{transition:none!important;scroll-behavior:auto!important} }
+html{scroll-behavior:smooth}
+
+/* comics */
+:root{--tym-a:var(--cf-modra);--tym-b:var(--cf-cervena);--podlaha:color-mix(in srgb,var(--cf-modra) 6%,var(--bila))}
+:root[data-theme="dark"]{--tym-a:var(--bila);--podlaha:color-mix(in srgb,var(--bila) 9%,var(--cf-modra))}
+.komiks{margin:var(--s5) 0 0;padding-top:var(--s4);border-top:1px solid var(--linka)}
+.komiks figcaption{display:grid;gap:4px;margin-bottom:var(--s3)}
+.panely{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3);counter-reset:panel}
+.panely.p3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.panely li{display:flex;flex-direction:column;gap:10px;min-width:0;counter-increment:panel}
+.panel{display:block;width:100%;height:auto;aspect-ratio:240/170;border:2px solid var(--postava);border-radius:var(--radius-blok);background:var(--podklad)}
+.panely li p{font-size:15px;line-height:22px;display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px}
+.panely li p::before{content:counter(panel);width:22px;height:22px;border-radius:50%;background:var(--plocha-akcent);color:var(--na-akcentu);font-size:12px;line-height:22px;font-weight:700;text-align:center}
+.posun{display:none;margin-top:var(--s2)}
+.k-podlaha{fill:var(--podlaha)}
+.k-mant{fill:var(--podklad);stroke:var(--linka);stroke-width:1.5}
+.k-ln{fill:none;stroke:var(--linka);stroke-width:1.2}
+.k-telo{fill:none;stroke:var(--postava);stroke-linecap:round;stroke-linejoin:round}
+.k-ruka{stroke-width:3.6}
+.k-noha{stroke-width:4.2}
+.k-kalhoty{stroke-width:7}
+.k-bota{stroke-width:4.6}
+.k-prst{stroke-width:2}
+.k-dres{stroke:var(--postava);stroke-width:1.5;stroke-linejoin:round}
+.k-hlava{fill:var(--podklad);stroke:var(--postava);stroke-width:2}
+.k-vlasy,.k-oko,.k-dlan{fill:var(--postava)}
+.k-pusa{fill:none;stroke:var(--postava);stroke-width:1.4;stroke-linecap:round}
+.k-maska{fill:none;stroke:var(--postava);stroke-width:1.2}
+.k-pistalka{fill:var(--cf-cervena)}
+.k-hodinky{fill:var(--cf-cervena)}
+.k-hul{stroke:var(--postava);stroke-width:2.6;stroke-linecap:round}
+.k-cepel{fill:none;stroke:var(--postava);stroke-width:4.6;stroke-linecap:round}
+.k-mic{fill:var(--cf-cervena);stroke:var(--podklad);stroke-width:1}
+.k-dirka{fill:var(--podklad)}
+.k-sit{fill:url(#km-sit);stroke:none}
+.k-ram{fill:none;stroke:var(--cf-cervena);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.k-bk{fill:none;stroke:var(--linka);stroke-width:1.4}
+.k-bk.on{fill:color-mix(in srgb,var(--cf-cervena) 22%,transparent);stroke:var(--cf-cervena);stroke-width:2.2}
+.k-tab{fill:var(--text)}
+.k-tabt{fill:var(--podklad);font:700 16px var(--geo);font-variant-numeric:tabular-nums}
+.k-svetlo{fill:var(--cf-cervena)}
+.k-pauza{stroke:var(--podklad);stroke-width:3}
+.k-bub{fill:var(--podklad);stroke:var(--postava);stroke-width:1.6;stroke-linejoin:round}
+.k-bt{font-family:var(--geo);font-weight:700;fill:var(--text)}
+.k-zvuk{font-family:var(--geo);font-weight:700;fill:var(--cf-cervena);stroke:var(--podklad);stroke-width:4;paint-order:stroke;stroke-linejoin:round}
+.k-pohyb{fill:none;stroke:var(--cf-cervena);stroke-width:1.6;stroke-dasharray:4 3;stroke-linecap:round}
+.k-rychlost{stroke:var(--linka);stroke-width:1.6;stroke-linecap:round}
+.k-pas{stroke:var(--cf-cervena);stroke-width:1.2;stroke-dasharray:5 4}
+.k-mira{fill:none;stroke:var(--linka);stroke-width:1.2}
+.k-mtxt{font:700 9px var(--geo);letter-spacing:.04em;fill:var(--text-tlumeny)}
+.k-divak{fill:var(--linka);opacity:.35}
+.k-lav{fill:none;stroke:var(--linka);stroke-width:3;stroke-linecap:round}
+.k-st{fill:var(--text)}
+.k-st.tr{fill:var(--bila);stroke:var(--cf-cervena);stroke-width:1.6}
+.k-st.vu{fill:var(--podklad);stroke:var(--text);stroke-width:1.6}
+.k-sti{fill:none;stroke:var(--podklad);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.k-stt{font:700 11px var(--geo);fill:var(--podklad)}
+.k-st.tr~.k-sti{stroke:var(--cf-cervena)}
+.k-st.tr~.k-stt{fill:var(--cf-cervena)}
+.k-st.vu~.k-sti{stroke:var(--text)}
+.k-st.vu~.k-stt{fill:var(--text)}
+@media (max-width:900px){.panely,.panely.p3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){
+  .panely,.panely.p3{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:84%;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding-bottom:8px;scrollbar-width:thin}
+  .panely li{scroll-snap-align:start}
+  .posun{display:block}
+}
+
+/* ===== Dynamika a interaktivní prvky ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:2px solid var(--text);background:transparent;color:var(--text);border-radius:999px;padding:10px 20px;font-size:16px;line-height:22px;font-weight:700;cursor:pointer;text-decoration:none;transition:border-color .15s,color .15s,transform .12s,filter .15s}
+.btn:hover{border-color:var(--cf-cervena);color:var(--text-akcent)}
+.btn:active{transform:scale(.97)}
+.btn.hlavni{background:var(--cf-cervena);border-color:var(--cf-cervena);color:var(--bila)}
+.btn.hlavni:hover{filter:brightness(.88);color:var(--bila)}
+.btn:disabled{opacity:.35;cursor:default;transform:none;filter:none}
+.chip.ok{background:var(--text);border-color:var(--text);color:var(--podklad)}
+
+/* hero */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:var(--s5);align-items:center}
+.hero-grid h1{font-size:clamp(40px,5.6vw,68px)}
+.hero-akce{display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--s4)}
+.hero-scena{border-width:3px;border-radius:16px}
+
+/* čísla kapitol */
+main{counter-reset:kap}
+section.kap{counter-increment:kap}
+.kap-hlava::before{content:counter(kap,decimal-leading-zero);font-size:56px;line-height:56px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--text-akcent)}
+
+/* navigace: postup a aktivní kapitola */
+.nav .postup{position:absolute;left:0;right:0;bottom:-2px;height:3px;background:var(--cf-cervena);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+.nav a[aria-current="true"]{color:var(--text-akcent);text-decoration:underline;text-decoration-color:var(--cf-cervena);text-decoration-thickness:3px;text-underline-offset:7px}
+
+/* modrý pruh (vždy tmavý vzhled) */
+.pruh{--podklad:var(--cf-modra);--podklad-tlumeny:var(--cf-modra);--text:var(--bila);--text-tlumeny:#cccccc;--text-akcent:var(--bila);--linka:#cccccc;--plocha-hriste:var(--cf-modra);--postava:var(--bila);--tym-a:var(--bila);--podlaha:color-mix(in srgb,var(--bila) 9%,var(--cf-modra));background:var(--podklad);color:var(--text)}
+:root[data-theme="dark"] .pruh{border-top:1px solid var(--linka)}
+
+/* společný rámeček interaktivních prvků */
+.hrani{border:2px solid var(--postava);border-radius:12px;padding:var(--s4);display:grid;gap:var(--s3);background:var(--podklad);min-width:0}
+.hrani h3{font-size:21px;line-height:27px}
+.hrani p{font-size:15px;line-height:22px}
+.hrani-hl{display:grid;gap:6px;justify-items:start;align-content:start}
+.hrani-akce{display:flex;flex-wrap:wrap;gap:8px}
+.zkus{display:inline-flex;align-items:center;gap:6px;background:var(--cf-cervena);color:var(--bila);font-size:12px;line-height:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;justify-self:start}
+.zkus::before{content:"";width:0;height:0;border-left:7px solid var(--bila);border-top:5px solid transparent;border-bottom:5px solid transparent}
+.verdikt .chip{align-self:center}
+.verdikt{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;min-height:48px;font-size:15px;line-height:22px;font-weight:500}
+.posuvnik{-webkit-appearance:none;appearance:none;display:block;width:100%;height:32px;background:transparent;margin:0;cursor:pointer}
+.posuvnik::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:var(--linka)}
+.posuvnik::-moz-range-track{height:6px;border-radius:3px;background:var(--linka)}
+.posuvnik::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--cf-cervena);border:3px solid var(--podklad);box-shadow:0 0 0 2px var(--cf-cervena);margin-top:-11px}
+.posuvnik::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--cf-cervena);border:3px solid var(--podklad);box-shadow:0 0 0 2px var(--cf-cervena)}
+.posuvnik-pop{display:flex;justify-content:space-between;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-tlumeny)}
+
+/* mládež: menší hřiště */
+.mladez{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:var(--s3) var(--s5);align-items:center;margin-top:var(--s5);border:1px solid var(--linka);border-radius:var(--radius-blok);padding:var(--s4)}
+.mladez>div{display:grid;gap:var(--s2);min-width:0}
+.mladez p{font-size:16px;line-height:24px}
+.mladez svg{width:100%;height:auto;display:block}
+.ml-velke{fill:none;stroke:var(--linka);stroke-width:1.5;stroke-dasharray:6 5}
+.ml-male{fill:var(--podlaha);stroke:var(--postava);stroke-width:2.6}
+.ml-ln{fill:none;stroke:var(--postava);stroke-width:1.2}
+.ml-txt{font:700 13px var(--geo);letter-spacing:.03em;fill:var(--text)}
+.ml-txt.tl{fill:var(--text-tlumeny);font-weight:600}
+.ml-a{fill:var(--tym-a);stroke:var(--postava);stroke-width:1.5}
+.ml-b{fill:var(--tym-b);stroke:var(--postava);stroke-width:1.5}
+
+/* čistý čas */
+.cisty{margin-top:var(--s5);grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:var(--s3) var(--s5);align-items:center}
+.cisty-hodiny{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3)}
+.hodiny{border:1.5px solid var(--linka);border-radius:var(--radius-blok);padding:12px 16px 14px;display:grid;gap:2px;min-width:0}
+.hodiny span{font-size:12px;line-height:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.hodiny b{font-size:clamp(32px,5.4vw,52px);line-height:1.1;font-variant-numeric:tabular-nums}
+.hodiny i{font-style:normal;font-size:13px;line-height:18px;min-height:18px}
+.hodiny.tab{background:var(--text);color:var(--podklad);border-color:var(--text)}
+.hodiny.tab i::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--cf-cervena);margin-right:6px;opacity:.3}
+.cisty[data-stav="1"] .hodiny.tab i::before{opacity:1}
+.cisty[data-stav="2"] .hodiny.tab{box-shadow:0 0 0 3px var(--podklad),0 0 0 6px var(--cf-cervena)}
+
+/* hra vysoko */
+.vyska{grid-template-columns:minmax(0,380px) minmax(0,1fr);align-items:start}
+.vyska-hra svg{max-width:none!important;border:1px solid var(--linka);border-radius:var(--radius-blok);background:var(--plocha-hriste)}
+.vy-z{fill:transparent;transition:fill .15s}
+.vy-z.z1.on{fill:color-mix(in srgb,var(--text) 12%,transparent)}
+.vy-z.z2.on{fill:color-mix(in srgb,var(--cf-cervena) 20%,transparent)}
+.vy-t{font:700 9px var(--geo);letter-spacing:.05em;fill:var(--text-tlumeny);text-transform:uppercase;opacity:.55}
+.vy-t.on{opacity:1;fill:var(--text)}
+.vy-kol{stroke:var(--linka);stroke-width:1.2;stroke-dasharray:5 4}
+
+/* filtr faulů */
+.filtr{display:flex;flex-wrap:wrap;gap:8px;margin:var(--s5) 0 var(--s3)}
+.fbtn{border:1.5px solid var(--linka);background:transparent;color:var(--text);border-radius:999px;padding:7px 14px;font-size:13px;line-height:16px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.fbtn i{font-style:normal;font-variant-numeric:tabular-nums;opacity:.65}
+.fbtn:hover{border-color:var(--cf-cervena)}
+.fbtn[aria-pressed="true"]{background:var(--text);color:var(--podklad);border-color:var(--text)}
+
+/* simulátor trestů */
+.sim{margin-top:var(--s5);grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:var(--s3) var(--s5);align-items:start}
+.sim-hl{grid-column:1/-1}
+.sim-obr{position:relative;min-width:0}
+.sim svg{width:100%;height:auto;display:block}
+.sim-rink{fill:var(--plocha-hriste);stroke:var(--linka);stroke-width:2}
+.sim-ln{fill:none;stroke:var(--linka);stroke-width:1.2}
+.sim-box{fill:var(--podlaha);stroke:var(--linka);stroke-width:1.2}
+.sim-txt{font:700 7.5px var(--geo);letter-spacing:.06em;fill:var(--text-tlumeny)}
+.sim-h{transition:transform .7s cubic-bezier(.3,.8,.3,1)}
+.sim-h circle{stroke:var(--postava);stroke-width:1.5}
+.sim-h.a circle{fill:var(--tym-a)}
+.sim-h.b circle{fill:var(--tym-b)}
+.sim-h text{font:700 8px var(--geo)}
+.sim-h.a text{fill:var(--podklad)}
+.sim-h.b text{fill:var(--bila)}
+.sim-gol{position:absolute;right:7%;top:24%;font-size:clamp(22px,4vw,34px);line-height:1;font-weight:700;font-style:italic;color:var(--cf-cervena);-webkit-text-stroke:5px var(--podklad);paint-order:stroke fill;opacity:0;pointer-events:none;transform:rotate(-8deg)}
+.sim-gol.on{animation:bum 1.1s ease-out}
+.sim-panel{display:grid;gap:var(--s3);min-width:0}
+.sim-stav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3)}
+.sim-stav div{border-top:1px solid var(--linka);padding-top:8px;display:grid;gap:2px}
+.sim-stav span{font-size:12px;line-height:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.sim-stav b{font-size:36px;line-height:40px;font-variant-numeric:tabular-nums}
+.sim-osy{display:flex;gap:3px;height:22px}
+.sim-osy i{display:block;position:relative;border:1.5px solid var(--cf-cervena);overflow:hidden;min-width:0}
+.sim-osy i u{position:absolute;inset:0;background:var(--cf-cervena);transform-origin:100% 50%}
+.sim-osy i.os{border-color:var(--text)}
+.sim-osy i.os u{background:repeating-linear-gradient(45deg,var(--text) 0 3px,transparent 3px 7px)}
+.sim-osy:empty{border:1.5px dashed var(--linka)}
+.sim-hlaska{min-height:88px}
+@keyframes bum{0%{opacity:0;transform:rotate(-8deg) scale(.2)}25%{opacity:1;transform:rotate(-8deg) scale(1.25)}60%{opacity:1;transform:rotate(-8deg) scale(1)}100%{opacity:0;transform:rotate(-8deg) scale(1)}}
+
+/* gól na čáře */
+.gol-hra{margin-bottom:var(--s3);grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:var(--s3) var(--s5);align-items:center}
+.gol-hra svg{width:100%;height:auto;display:block;border:1px solid var(--linka);border-radius:var(--radius-blok);background:var(--plocha-hriste)}
+.gl-cara{stroke:var(--linka);stroke-width:4}
+.gol-hra[data-z="1"] .gl-cara{stroke:var(--cf-cervena)}
+.gl-mic{fill:var(--cf-cervena);stroke:var(--podklad);stroke-width:2}
+.gl-gol{opacity:0;transition:opacity .15s}
+.gol-hra[data-z="2"] .gl-gol{opacity:1}
+.gol-pole{display:grid;gap:6px;min-width:0}
+
+/* signály: hádání */
+.sig-nastroje{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin-bottom:var(--s3)}
+.signaly.hadej .sig{cursor:pointer;position:relative}
+.signaly.hadej .sig:hover{border-color:var(--cf-cervena)}
+.signaly.hadej .sig:not(.odkryto)>.kod,.signaly.hadej .sig:not(.odkryto)>h3,.signaly.hadej .sig:not(.odkryto)>p{visibility:hidden}
+.signaly.hadej .sig:not(.odkryto)::after{content:"What does it mean?";position:absolute;left:var(--s3);right:var(--s3);bottom:var(--s4);text-align:center;font-size:17px;line-height:22px;font-weight:700;color:var(--text-akcent)}
+
+/* slovníček: hledání */
+.hledat{display:flex;align-items:center;gap:10px;max-width:420px;border:1.5px solid var(--linka);border-radius:999px;padding:9px 16px;margin-bottom:var(--s3)}
+.hledat:focus-within{outline:3px solid var(--cf-cervena);outline-offset:2px}
+.hledat svg{width:18px;height:18px;flex:none}
+.hledat input{all:unset;flex:1 1 auto;min-width:0;font-size:16px;line-height:22px}
+.hledat input::placeholder{color:var(--text-tlumeny);opacity:.7}
+
+/* teď pískáte vy */
+.piskat{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:var(--s5);align-items:start}
+.hra-obr{position:relative;min-width:0}
+.hra-obr .panel{border-width:3px;border-radius:14px;border-color:var(--bila);--podklad:var(--bila);--text:var(--cf-modra);--text-tlumeny:var(--cf-modra);--linka:var(--cf-modra);--postava:var(--cf-modra);--tym-a:var(--cf-modra);--podlaha:color-mix(in srgb,var(--cf-modra) 6%,var(--bila))}
+.razitko{position:absolute;top:14px;left:14px;padding:7px 16px;border-radius:999px;font-size:15px;line-height:20px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--bila);color:var(--cf-modra);border:2px solid var(--cf-modra);transform:rotate(-4deg) scale(0);transition:transform .28s cubic-bezier(.3,1.7,.5,1)}
+.razitko.on{transform:rotate(-4deg) scale(1)}
+.razitko.spatne{background:var(--cf-cervena);color:var(--bila);border-color:var(--bila)}
+.hra-panel{display:grid;gap:var(--s3);align-content:start;min-width:0}
+.hra-postup{display:flex;align-items:center;gap:8px;font-size:13px;line-height:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.hra-postup i{width:13px;height:13px;border-radius:50%;border:2px solid var(--text);display:block;flex:none}
+.hra-postup i.ok{background:var(--text)}
+.hra-postup i.ko{background:var(--cf-cervena);border-color:var(--cf-cervena)}
+.hra-postup i.ted{box-shadow:0 0 0 4px color-mix(in srgb,var(--text) 30%,transparent)}
+.hra-postup span{margin-left:8px}
+.piskat h3{font-size:24px;line-height:31px}
+.piskat .moznosti{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.piskat .moznosti button{padding:14px 12px;font-size:16px;line-height:22px;font-weight:700;text-align:center}
+.piskat .moznosti.tri{grid-template-columns:minmax(0,1fr)}
+.hra-vysl{display:grid;gap:var(--s3);justify-items:start;min-height:96px;font-size:16px;line-height:24px}
+.hra-konec{grid-column:1/-1;display:grid;gap:var(--s3);justify-items:start;max-width:640px}
+.hra-konec b{font-size:clamp(64px,12vw,112px);line-height:.95;font-variant-numeric:tabular-nums}
+.hra-konec p{font-size:18px;line-height:27px;font-weight:500}
+
+/* pohyb */
+@keyframes pochod{to{stroke-dashoffset:-14}}
+@keyframes pochod3{to{stroke-dashoffset:-12}}
+@keyframes puls{50%{transform:scale(1.22)}}
+@keyframes blik{50%{opacity:.25}}
+@media (prefers-reduced-motion:no-preference){
+  html.js .rv{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  html.js .rv.in{opacity:1;transform:none}
+  .k-pohyb{animation:pochod 1.1s linear infinite}
+  .mini .d3{animation:pochod3 3s linear infinite}
+  .hriste:not(.ma-vyber) .zn circle{animation:puls 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+  .hriste:not(.ma-vyber) .zn:nth-of-type(even) circle{animation-delay:-1.3s}
+  .cisty[data-stav="1"] .hodiny.tab i::before{animation:blik 1s steps(1) infinite}
+}
+@media (max-width:900px){
+  .hero-grid,.cisty,.sim,.gol-hra,.piskat,.vyska,.mladez{grid-template-columns:minmax(0,1fr)}
+  .hero-grid h1{font-size:clamp(44px,8vw,80px)}
+  .hero-scena{max-width:560px}
+  .vyska-hra{max-width:460px}
+}
+@media (max-width:600px){
+  .cas-inner{min-width:0}
+  .casova div{padding:0 6px;font-size:12px;line-height:15px}
+  .casova .hra b{font-size:14px;line-height:18px}
+  .casova .pauza{padding:0 3px;align-items:center;text-align:center}
+  .casova-pozn{flex-direction:column;gap:2px}
+  .kap-hlava::before{font-size:44px;line-height:44px}
+  .hrani{padding:var(--s3)}
+  .piskat .moznosti{grid-template-columns:minmax(0,1fr)}
+  .piskat h3{font-size:21px;line-height:27px}
+  .btn{padding:10px 16px}
+}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<script>document.documentElement.className+=' js'</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="km-pruhy" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" style="fill:var(--podklad)"/><rect width="3" height="6" style="fill:var(--postava)"/></pattern>
+    <pattern id="km-sit" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V5M0 0H5" style="fill:none;stroke:var(--linka);stroke-width:.7"/></pattern>
+  </defs>
+</svg>
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="popisek">Floorball rules · 2026 edition</div>
+        <h1 style="margin-top:12px">Floorball Made Simple</h1>
+        <p class="perex">Came to watch a match and not sure why the referee blew the whistle? Here are the rules of floorball in a nutshell. No jargon, with comics and things you can try yourself. For anyone who has never held a floorball stick.</p>
+        <div class="hero-akce"><a class="btn hlavni" href="#hriste">Start with the rink</a><a class="btn" href="#rozhodci">Try refereeing</a></div>
+      </div>
+      <svg id="hero-scena" class="panel hero-scena" viewBox="0 0 240 170" aria-hidden="true"></svg>
+    </div>
+    <div class="facts">
+      <div class="fact"><b>2</b><span>teams face each other, the one with more goals wins</span></div>
+      <div class="fact"><b>5 + 1</b><span>on the rink: five field players and a goalkeeper</span></div>
+      <div class="fact"><b>3 × 20</b><span>minutes of effective time, with breaks between periods</span></div>
+      <div class="fact"><b>40 × 20</b><span>metres is the size of the rink, enclosed by a board</span></div>
+    </div>
+  </div>
+  <div class="mrizka" aria-hidden="true"></div>
+</header>
+
+<nav class="nav" aria-label="Chapters">
+  <div class="wrap">
+    <div class="nav-scroll">
+    <ul>
+      <li><a href="#hriste">Rink</a></li>
+      <li><a href="#hraci">Players</a></li>
+      <li><a href="#cas">Time</a></li>
+      <li><a href="#zakazano">What’s not allowed</a></li>
+      <li><a href="#preruseni">After the whistle</a></li>
+      <li><a href="#tresty">Penalties</a></li>
+      <li><a href="#goly">Goals</a></li>
+      <li><a href="#signaly">Signs</a></li>
+      <li><a href="#rozhodci">You referee</a></li>
+      <li><a href="#slovnik">Glossary</a></li>
+      <li><a href="#kviz">Quiz</a></li>
+    </ul>
+    </div>
+    <a class="jazyk" href="../index.html" hreflang="cs" lang="cs" aria-label="Česká verze">CZ</a>
+    <button type="button" class="vzhled" id="vzhled" aria-pressed="false" aria-label="Switch to dark mode">
+      <svg class="ik-slunce" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="var(--cf-cervena)"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="var(--cf-cervena)" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="ik-mesic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="var(--cf-cervena)"/></svg>
+      <span class="lbl">Dark mode</span>
+    </button>
+  </div>
+</nav>
+
+<main>
+<!-- HŘIŠTĚ -->
+<section class="kap" id="hriste">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">Where it is played</div>
+      <h2>Rink</h2>
+      <p>Floorball is played indoors on a rink of 40 × 20 metres. It is enclosed by a low plastic board with rounded corners. The ball can bounce off it and play goes on.</p>
+      <div class="princip"><span class="popisek">Principle</span><p>The game is played inside the board. The markings on the floor show who may go where and where play restarts.</p></div>
+    </div>
+    <div class="grid2">
+      <div class="hriste" id="hriste-box">
+        <svg viewBox="-12 -40 424 280" role="img" aria-labelledby="hriste-t">
+          <title id="hriste-t">Diagram of a floorball rink with its parts marked</title>
+          <!-- střídací prostory -->
+          <g class="prvek" data-k="7">
+            <rect class="zona" x="35" y="-30" width="115" height="22"/>
+            <rect class="zona" x="250" y="-30" width="115" height="22"/>
+            <text class="txt" x="92.5" y="-16" text-anchor="middle">substitution – home</text>
+            <text class="txt" x="307.5" y="-16" text-anchor="middle">substitution – away</text>
+          </g>
+          <!-- trestné lavice -->
+          <g class="prvek" data-k="8">
+            <rect class="zona" x="170" y="208" width="20" height="16"/>
+            <rect class="zona" x="210" y="208" width="20" height="16"/>
+            <rect class="zona" x="192" y="208" width="16" height="16"/>
+            <text class="txt" x="200" y="234" text-anchor="middle">penalty benches and match secretariat</text>
+          </g>
+          <g class="prvek" data-k="1"><rect class="plocha" x="0" y="0" width="400" height="200" rx="30"/></g>
+          <g class="prvek" data-k="2">
+            <line class="ln" x1="200" y1="0" x2="200" y2="200"/>
+            <circle cx="200" cy="100" r="3" fill="var(--linka)"/>
+          </g>
+          <g class="prvek" data-k="3">
+            <path class="ln" d="M31 15h8M35 11v8 M31 185h8M35 181v8 M365 11v8M361 15h8 M365 181v8M361 185h8 M196 15h8 M196 185h8"/>
+          </g>
+          <g class="prvek" data-k="4">
+            <rect class="ln" x="28.5" y="75" width="40" height="50"/>
+            <rect class="ln" x="331.5" y="75" width="40" height="50"/>
+          </g>
+          <g class="prvek" data-k="5">
+            <rect class="ln" x="35" y="87.5" width="10" height="25"/>
+            <rect class="ln" x="355" y="87.5" width="10" height="25"/>
+          </g>
+          <g class="prvek" data-k="6">
+            <path d="M35 92 h-6.5 v16 h6.5" fill="none" stroke="var(--cf-cervena)" stroke-width="2.4"/>
+            <path d="M365 92 h6.5 v16 h-6.5" fill="none" stroke="var(--cf-cervena)" stroke-width="2.4"/>
+          </g>
+          <!-- značky -->
+          <g class="zn" data-k="1"><circle cx="300" cy="200" r="7"/><text x="300" y="200">1</text></g>
+          <g class="zn" data-k="2"><circle cx="212" cy="88" r="7"/><text x="212" y="88">2</text></g>
+          <g class="zn" data-k="3"><circle cx="48" cy="15" r="7"/><text x="48" y="15">3</text></g>
+          <g class="zn" data-k="4"><circle cx="58" cy="67" r="7"/><text x="58" y="67">4</text></g>
+          <g class="zn" data-k="5"><circle cx="54" cy="100" r="7"/><text x="54" y="100">5</text></g>
+          <g class="zn" data-k="6"><circle cx="19" cy="100" r="7"/><text x="19" y="100">6</text></g>
+          <g class="zn" data-k="7"><circle cx="160" cy="-19" r="7"/><text x="160" y="-19">7</text></g>
+          <g class="zn" data-k="8"><circle cx="240" cy="216" r="7"/><text x="240" y="216">8</text></g>
+        </svg>
+        <p class="drobny rozmery">Drawn to scale. Tap a number or an item in the list.</p>
+      </div>
+      <ul class="legenda" id="legenda">
+        <li data-k="1"><button type="button"><span class="c">1</span><span><b>Board</b><span class="t">Encloses the 40 × 20 m rink. When the ball flies over it, play resumes with a hit-in.</span></span></button></li>
+        <li data-k="2"><button type="button"><span class="c">2</span><span><b>Centre line and centre spot</b><span class="t">Divides the rink into two halves. Every period, and play after a goal, starts from the centre spot. A penalty shot starts 5 m closer to the goal.</span></span></button></li>
+        <li data-k="3"><button type="button"><span class="c">3</span><span><b>Face-off dots</b><span class="t">Six crosses near the board. Play restarts with a face-off on the nearest one.</span></span></button></li>
+        <li data-k="4"><button type="button"><span class="c">4</span><span><b>Goal crease (4 × 5 m)</b><span class="t">The goalkeeper’s territory. Only here may the goalkeeper catch the ball with the hands. Field players may enter it.</span></span></button></li>
+        <li data-k="5"><button type="button"><span class="c">5</span><span><b>Goalkeeper area (1 × 2.5 m)</b><span class="t">Right in front of the goal. Field players must not step into it, not even with one foot. They may reach in with the stick.</span></span></button></li>
+        <li data-k="6"><button type="button"><span class="c">6</span><span><b>Goal cage (160 cm wide)</b><span class="t">A goal counts when the whole ball crosses the goal line from the front.</span></span></button></li>
+        <li data-k="7"><button type="button"><span class="c">7</span><span><b>Substitution zones</b><span class="t">The benches of both teams. You may substitute at any time and as often as you like, but only here.</span></span></button></li>
+        <li data-k="8"><button type="button"><span class="c">8</span><span><b>Penalty benches and secretariat</b><span class="t">Opposite the substitution zones, each team on the same side as its own bench. A penalised player goes here; the secretariat keeps the time and writes the match record.</span></span></button></li>
+      </ul>
+    </div>
+    <div class="mladez">
+      <div>
+        <div class="popisek">Youth</div>
+        <h3>Smaller players, smaller rink</h3>
+        <p>Youth competitions in Czechia are often played on a smaller rink. Its dimensions are set by the regulations of each competition.</p>
+        <p>The youngest age groups play only <b>3 + 1</b>, meaning three field players and a goalkeeper, sometimes on a rink of just <b>18 × 10 metres</b>, roughly half the dimensions. Two of them then fit side by side across a regular rink.</p>
+      </div>
+      <svg viewBox="0 0 420 262" role="img" aria-label="Diagram to scale: two 18 × 10 metre rinks placed side by side across a regular 40 × 20 metre rink, each with three field players and a goalkeeper against three field players and a goalkeeper">
+        <rect class="ml-velke" x="10" y="10" width="400" height="200" rx="30"/>
+        <line class="ml-velke" x1="210" y1="10" x2="210" y2="210"/>
+        <rect class="ml-male" x="60" y="20" width="100" height="180" rx="14"/><line class="ml-ln" x1="60" y1="110" x2="160" y2="110"/><path d="M101,32 v-5 h18 v5 M101,188 v5 h18 v-5" style="fill:none;stroke:var(--cf-cervena);stroke-width:2.4"/><circle class="ml-a" cx="110" cy="41" r="7"/><circle class="ml-a" cx="86" cy="68" r="6"/><circle class="ml-a" cx="134" cy="68" r="6"/><circle class="ml-a" cx="110" cy="92" r="6"/><circle class="ml-b" cx="110" cy="179" r="7"/><circle class="ml-b" cx="86" cy="152" r="6"/><circle class="ml-b" cx="134" cy="152" r="6"/><circle class="ml-b" cx="110" cy="128" r="6"/>
+        <rect class="ml-male" x="260" y="20" width="100" height="180" rx="14"/><line class="ml-ln" x1="260" y1="110" x2="360" y2="110"/><path d="M301,32 v-5 h18 v5 M301,188 v5 h18 v-5" style="fill:none;stroke:var(--cf-cervena);stroke-width:2.4"/><circle class="ml-a" cx="310" cy="41" r="7"/><circle class="ml-a" cx="286" cy="68" r="6"/><circle class="ml-a" cx="334" cy="68" r="6"/><circle class="ml-a" cx="310" cy="92" r="6"/><circle class="ml-b" cx="310" cy="179" r="7"/><circle class="ml-b" cx="286" cy="152" r="6"/><circle class="ml-b" cx="334" cy="152" r="6"/><circle class="ml-b" cx="310" cy="128" r="6"/>
+        <line class="ml-velke" x1="62" y1="230" x2="96" y2="230"/><text class="ml-txt tl" x="106" y="234.5">REGULAR RINK 40 × 20 m</text>
+        <rect class="ml-male" x="64" y="243" width="30" height="13" rx="4" style="stroke-width:2"/><text class="ml-txt" x="106" y="254.5">TWO RINKS 18 × 10 m, PLAYED 3 + 1</text>
+      </svg>
+    </div>
+    <figure class="komiks" aria-labelledby="km-bk">
+      <figcaption><span class="popisek">Comic</span><h3 id="km-bk">Mind the goalkeeper area</h3><span class="pr">507.8</span></figcaption>
+      <ol class="panely">
+        <li><svg class="panel" data-s="bk1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>An attacker charges at the goal with the ball.</p></li>
+        <li><svg class="panel" data-s="bk2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>In the heat of the moment a foot lands in the goalkeeper area. A foot on the line counts too.</p></li>
+        <li><svg class="panel" data-s="bk3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Whistle. Arms above the head forming a triangle signal an offence in the goalkeeper area.</p></li>
+        <li><svg class="panel" data-s="bk4" viewBox="0 0 240 170" aria-hidden="true"></svg><p>The defending team gets a free-hit and the opponents must move 3 m away. Reaching into the area with the stick would have been fine.</p></li>
+      </ol>
+      <p class="posun drobny">Swipe sideways for more panels →</p>
+    </figure>
+  </div>
+</section>
+
+<!-- HRÁČI -->
+<section class="kap" id="hraci">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">Who plays</div>
+      <h2>Players, goalkeeper and referees</h2>
+      <p>Each team has at most six players on the rink: usually five field players and one goalkeeper. The others wait in the substitution zone and rotate all the time.</p>
+      <div class="princip"><span class="popisek">Principle</span><p>A team plays with at most six players at once. Only the goalkeeper may catch the ball with the hands.</p></div>
+    </div>
+    <div class="sestava">
+      <div>
+        <h3>The team</h3>
+        <div class="pocty">
+          <div><b>20</b><span>players at most in the match record</span></div>
+          <div><b>6</b><span>at most on the rink at once</span></div>
+          <div><b>4</b><span>at least on the rink, even with penalties</span></div>
+        </div>
+        <ul class="seznam">
+          <li><span><b>Unlimited substitutions.</b> At any time during play, even on the fly. The player leaving must cross the board first; only then may the new one enter the rink.</span></li>
+          <li><span><b>The goalkeeper can be pulled.</b> A team may play with six field players and no goalkeeper at any time. Typically late in the game when it is losing.</span></li>
+          <li><span><b>Captain with an armband.</b> Only the captain may talk to the referees.</span></li>
+          <li><span><b>Team staff.</b> Coaches and other team members, five at most. They stand behind the players’ bench; only one of them may step in front of it, to give instructions to the players on the rink.</span></li>
+          <li><span><b>Calm on the bench.</b> Players sit on the bench and nobody may put a foot on the board. The referees warn first; a repeat costs 2 minutes. The aim is not to punish but to make the atmosphere in the hall more pleasant.</span></li>
+          <li><span><b>Equipment.</b> Field players wear shirts, shorts and knee socks of the same colour; only the goalkeeper wears long trousers. Jewellery is forbidden and taping it over is not enough. A bleeding player, or one with blood on the equipment, must stay out of play until it is sorted out.</span></li>
+        </ul>
+      </div>
+      <div style="display:grid;gap:var(--s3)">
+        <div class="karta">
+          <div class="popisek">Goalkeeper</div>
+          <h3>Catches with the hands and has no stick</h3>
+          <p>The goalkeeper kneels in the goal wearing a face mask and stops the ball with hands and body. A few extra rules apply:</p>
+          <ul class="seznam" style="margin-top:4px">
+            <li><span>Must stay in the goal crease. Having left it completely, the goalkeeper counts as a field player without a stick and may not catch the ball with the hands.</span></li>
+            <li><span>May hold the ball for at most <b>3 seconds</b>.</span></li>
+            <li><span>May not throw or kick the ball through the air over the centre line.</span></li>
+            <li><span>May not pick up an intentional pass from a teammate.</span></li>
+            <li><span>May score directly with a throw; nobody else needs to touch the ball.</span></li>
+          </ul>
+        </div>
+        <div class="karta">
+          <div class="popisek">Referees</div>
+          <h3>Two with equal authority</h3>
+          <p>A match is led by two referees with whistles. They are assisted by the match secretariat, which keeps the time and penalties and writes the match record.</p>
+        </div>
+        <div class="karta">
+          <div class="popisek">Stick</div>
+          <h3>Light, with a plastic blade</h3>
+          <p>It must be IFF-approved. The blade may be hooked by 30 mm at most. The ball is plastic with holes.</p>
+        </div>
+      </div>
+    </div>
+    <figure class="komiks" aria-labelledby="km-st">
+      <figcaption><span class="popisek">Comic</span><h3 id="km-st">How to substitute correctly</h3><span class="pr">605.15</span></figcaption>
+      <ol class="panely">
+        <li><svg class="panel" data-s="st1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>A player arrives at the substitution zone and calls for a change.</p></li>
+        <li><svg class="panel" data-s="st2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>The player leaving must cross the board first. The new player waits.</p></li>
+        <li><svg class="panel" data-s="st3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Only then may the new player enter the rink. You can substitute at any time, as often as you like.</p></li>
+        <li><svg class="panel" data-s="st4" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Jump in too early and affect play, and it is 2 minutes for incorrect substitution.</p></li>
+      </ol>
+      <p class="posun drobny">Swipe sideways for more panels →</p>
+    </figure>
+    <figure class="komiks" aria-labelledby="km-br">
+      <figcaption><span class="popisek">Comic</span><h3 id="km-br">The goalkeeper and three seconds</h3></figcaption>
+      <ol class="panely p3">
+        <li><svg class="panel" data-s="br1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>The goalkeeper catches the ball. The count begins.</p></li>
+        <li><svg class="panel" data-s="br2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>The ball may be held for 3 seconds at most. The goalkeeper looks for a free teammate.</p></li>
+        <li><svg class="panel" data-s="br3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>A throw to a teammate. The ball must not fly over the centre line through the air, though. That would be a free-hit for the opponents.</p></li>
+      </ol>
+      <p class="posun drobny">Swipe sideways for more panels →</p>
+    </figure>
+  </div>
+</section>
+
+<!-- ČAS -->
+<section class="kap" id="cas">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">How long it is played</div>
+      <h2>Game time</h2>
+      <p>A match has three periods of 20 minutes. Time is effective: it stops at every whistle and starts again when play resumes. That is why a match lasts longer than an hour.</p>
+      <div class="princip"><span class="popisek">Principle</span><p>Only the time when the game is actually being played counts.</p></div>
+    </div>
+    <div class="cas-scroll">
+      <div class="cas-inner">
+        <div class="casova" role="img" aria-label="Timeline: 20 minutes of play, 10-minute break, 20 minutes of play, 10-minute break, 20 minutes of play">
+          <div class="hra"><b>1st period</b>20 min</div>
+          <div class="pauza">break<br>10 min</div>
+          <div class="hra"><b>2nd period</b>20 min</div>
+          <div class="pauza">break<br>10 min</div>
+          <div class="hra"><b>3rd period</b>20 min</div>
+        </div>
+        <div class="casova-pozn drobny"><span>start: face-off at the centre spot</span><span>teams change ends after each period</span><span>siren = end</span></div>
+      </div>
+    </div>
+    <div class="hrani cisty" id="cisty" data-stav="0">
+      <div class="hrani-hl">
+        <span class="zkus">Try it</span>
+        <h3>Blow the whistle and watch the clocks</h3>
+        <p>The scoreboard clock runs only while the game is being played. Real time never stops. Here both run ten times faster.</p>
+        <div class="hrani-akce" style="margin-top:8px"><button type="button" class="btn hlavni" id="ct-btn">Start the match</button><button type="button" class="btn" id="ct-reset" hidden>Start over</button></div>
+      </div>
+      <div class="cisty-hodiny" aria-live="off">
+        <div class="hodiny tab"><span>Scoreboard time</span><b id="ct-hra">00:00</b><i id="ct-stav">ready</i></div>
+        <div class="hodiny"><span>Real time</span><b id="ct-real">00:00</b><i id="ct-rozdil">the same so far</i></div>
+      </div>
+    </div>
+    <div class="dalsi">
+      <div class="karta">
+        <div class="popisek">Time out</div>
+        <h3>30 seconds to regroup</h3>
+        <p>Each team may take one time out per match. The captain or the coach can request it.</p>
+      </div>
+      <div class="karta">
+        <div class="popisek">Overtime</div>
+        <h3>10 minutes, first goal decides</h3>
+        <p>Only when a winner is needed. The first team to score wins and the game ends at once.</p>
+      </div>
+      <div class="karta">
+        <div class="popisek">Shoot-out</div>
+        <h3>Penalty shots after overtime</h3>
+        <p>If overtime does not decide it either, five players from each team go one-on-one against the goalkeeper. If it is still level, they continue one shot each until one team leads.</p>
+      </div>
+    </div>
+    <p class="drobny" style="margin-top:var(--s3)">Youth and lower-level competitions may play shorter periods, at least 2 × 15 minutes.</p>
+    <figure class="komiks" aria-labelledby="km-cc">
+      <figcaption><span class="popisek">Comic</span><h3 id="km-cc">Why a match lasts longer than an hour</h3></figcaption>
+      <ol class="panely">
+        <li><svg class="panel" data-s="cc1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>The game is on and the scoreboard clock is running.</p></li>
+        <li><svg class="panel" data-s="cc2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>The referee blows the whistle and the clock stops.</p></li>
+        <li><svg class="panel" data-s="cc3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>The clock starts again when play resumes. Here after a face-off.</p></li>
+        <li><svg class="panel" data-s="cc4" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Time is effective, so the match takes longer than the clock shows.</p></li>
+      </ol>
+      <p class="posun drobny">Swipe sideways for more panels →</p>
+    </figure>
+  </div>
+</section>
+
+<!-- CO SE NESMÍ -->
+<section class="kap" id="zakazano">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">The most common offences</div>
+      <h2>What’s not allowed</h2>
+      <p>Floorball is a non-contact game. No pushing, no hitting the opponent’s stick and no high play. A lighter offence means a free-hit for the opponents, a more serious one a bench penalty.</p>
+      <div class="princip"><span class="popisek">Principle</span><p>You fight for the ball with the stick, not the body. The stick stays low, and neither the opponent nor the opponent’s stick may be pushed, hit or held.</p></div>
+    </div>
+
+    <div class="klic">
+      <h3>Colour key</h3>
+      <ul>
+        <li><span class="chip">free-hit</span><span>A lighter offence. The opponents get the ball and both teams stay at full strength.</span></li>
+        <li><span class="chip trest">2 minutes</span><span>Minor bench penalty. The player goes to the penalty bench and the team plays short-handed.</span></li>
+        <li><span class="chip vt">2 + 2 minutes</span><span>Major bench penalty. Two 2-minute penalties in a row; an opponents’ goal cancels only one.</span></li>
+        <li><span class="chip os">2 + 10 minutes</span><span>Personal penalty. The team is short-handed for 2 minutes only; the offender sits longer.</span></li>
+        <li><span class="chip ts">red card</span><span>The player is out for the rest of the match.</span></li>
+        <li><span class="chip ss">penalty shot</span><span>An offence spoiled a clear scoring chance; one player goes alone against the goalkeeper.</span></li>
+      </ul>
+    </div>
+
+    <div class="vyska">
+      <div class="hrani vyska-hra">
+        <div class="hrani-hl"><span class="zkus">Try it</span><p>Move the ball up and down and see when the referee would blow the whistle.</p></div>
+        <svg id="vy-svg" viewBox="0 0 240 194" role="img" aria-label="A player raises the stick with the ball to different heights"></svg>
+        <div>
+          <input type="range" class="posuvnik" id="vy-range" min="0" max="100" value="4" aria-label="Height of the ball when played">
+          <div class="posuvnik-pop" aria-hidden="true"><span>on the floor</span><span>above the head</span></div>
+        </div>
+        <p class="verdikt" id="vy-verdikt" aria-live="polite"></p>
+      </div>
+      <div>
+        <h3 style="margin-bottom:var(--s3)">High play</h3>
+        <table class="vyska-tab">
+          <tr><td>Stick blade above waist level in the back swing or after a shot, with an opponent nearby</td><td><span class="chip">free-hit</span></td></tr>
+          <tr><td>Playing the ball with the stick above knee level</td><td><span class="chip">free-hit</span></td></tr>
+          <tr><td>Playing the ball with the foot above knee level <span class="pr">507.4</span></td><td><span class="chip">free-hit</span></td></tr>
+          <tr><td>Playing the ball with the stick or foot above waist level <span class="pr">605.3</span></td><td><span class="chip trest">2 minutes</span></td></tr>
+        </table>
+        <p class="drobny" style="margin-top:8px">Measured by the player’s knee and waist level when standing upright.</p>
+      </div>
+    </div>
+    <figure class="komiks" aria-labelledby="km-vh">
+      <figcaption><span class="popisek">Comic</span><h3 id="km-vh">Too high, or still fine?</h3><span class="pr">605.3</span></figcaption>
+      <ol class="panely p3">
+        <li><svg class="panel" data-s="vh1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>A big back swing above the waist is fine when nobody is nearby.</p></li>
+        <li><svg class="panel" data-s="vh2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>The same swing, but an opponent is right behind the player. Free-hit.</p></li>
+        <li><svg class="panel" data-s="vh3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Playing the ball with the stick above waist level costs 2 minutes.</p></li>
+      </ol>
+      <p class="posun drobny">Swipe sideways for more panels →</p>
+    </figure>
+
+    <div class="filtr" id="faul-filtr" role="group" aria-label="Show offences by penalty"></div>
+    <div class="faul">
+      <div class="karta"><span class="chip">free-hit</span><h3>Hitting the stick</h3><p>Hitting, blocking, lifting or kicking an opponent’s stick. If it gains a considerable advantage or the player had no chance of reaching the ball, it is <b>2 minutes</b>.</p><span class="pr">507.1</span></div>
+      <div class="karta"><span class="chip">free-hit</span><h3>Pushing and obstruction</h3><p>Only a shoulder-to-shoulder challenge is allowed. Pushing in any other way or backing into an opponent is an offence. Pushing an opponent against the board costs <b>2 minutes</b>.</p></div>
+      <div class="karta"><span class="chip">free-hit</span><h3>Holding</h3><p>Grabbing, pulling or holding an opponent or the opponent’s stick. Taking hold of the opponent’s stick with a hand already means <b>2 minutes</b>.</p></div>
+      <div class="karta"><span class="chip">free-hit</span><h3>Stick or foot between the legs</h3><p>Placing the stick, foot or leg between an opponent’s legs.</p><span class="pr">507.5</span></div>
+      <div class="karta"><span class="chip">free-hit</span><h3>Lying play and kneeling</h3><p>Playing the ball while kneeling on both knees or leaning on the floor with the hand that is not holding the stick.</p></div>
+      <div class="karta"><span class="chip">free-hit</span><h3>Jumping</h3><p>Jumping up with both feet and stopping the ball. Jumping over it is fine.</p></div>
+      <div class="karta"><span class="chip">free-hit</span><h3>Header</h3><p>Playing the ball with the head is forbidden.</p><span class="pr">507.21</span></div>
+      <div class="karta"><span class="chip trest">2 minutes</span><h3>Hand ball</h3><p>A field player must not stop or play the ball with a hand, an arm or a stretched-out shirt.</p></div>
+      <div class="karta"><span class="chip">free-hit</span><h3>Goalkeeper area</h3><p>A field player must not step into it or run through it. A defender standing there when a free-hit is shot straight at the goal means a <b>penalty shot</b>.</p><span class="chip ss">penalty shot</span><span class="pr">507.8</span></div>
+      <div class="karta"><span class="chip trest">2 minutes</span><h3>Not keeping 3 metres</h3><p>At a free-hit or hit-in the opponents must move at least 3 m from the ball, sticks included.</p></div>
+      <div class="karta"><span class="chip trest">2 minutes</span><h3>Protests</h3><p>Arguing with the referees or disturbing coaching from the bench. Misconduct, provocative celebrations and diving are punished even more severely.</p></div>
+      <div class="karta"><span class="chip trest">2 minutes</span><h3>Colliding with the goalkeeper</h3><p>Inside the goal crease an attacker must try to avoid the goalkeeper. Contact the attacker made no effort to prevent is careless play.</p></div>
+      <div class="karta"><span class="chip">free-hit</span><h3>Blocking the goalkeeper’s view</h3><p>Ordinary screening is fine. It is an offence when an attacker actively and repeatedly follows the goalkeeper’s movements only to obscure the view.</p></div>
+      <div class="karta"><span class="chip trest">2 minutes</span><h3>Provoking a scuffle</h3><p>An extra penalty for whoever started the scuffle. At most one player can get it, even when nobody is penalised for the scuffle itself.</p></div>
+      <div class="karta"><span class="chip vt">2 + 2 minutes</span><h3>Hooking and reckless play</h3><p>Hooking an opponent’s body with the stick, throwing the stick at the ball or recklessly knocking an opponent over.</p></div>
+    </div>
+    <figure class="komiks" aria-labelledby="km-so">
+      <figcaption><span class="popisek">Comic</span><h3 id="km-so">Fighting for the ball</h3></figcaption>
+      <ol class="panely p3">
+        <li><svg class="panel" data-s="so1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Shoulder to shoulder for the ball: a fair challenge.</p></li>
+        <li><svg class="panel" data-s="so2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Pushing an opponent in the back with the hands is an offence, followed by a free-hit.</p></li>
+        <li><svg class="panel" data-s="so3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Pushing an opponent against the board costs 2 minutes.</p></li>
+      </ol>
+      <p class="posun drobny">Swipe sideways for more panels →</p>
+    </figure>
+
+    <div class="smi">
+      <div>
+        <div class="popisek">And what is allowed</div>
+        <h3 style="margin-top:8px">This is not an offence</h3>
+      </div>
+      <ul>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Stopping the ball with the body, for example the thigh or chest (not the head or a hand).</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Passing with the foot below knee level. A kicked goal does not count, though.</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A shoulder-to-shoulder challenge for the ball.</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Hitting the opponent’s stick after playing the ball cleanly first.</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A high back swing when nobody is nearby.</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Running outside the board. You must not play the ball from there, though.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PO ZAPÍSKÁNÍ -->
+<section class="kap" id="preruseni">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">How play resumes</div>
+      <h2>After the whistle</h2>
+      <p>When the referees stop play, it resumes with one of four fixed situations. Which one depends on why play was stopped.</p>
+      <div class="princip"><span class="popisek">Principle</span><p>Whoever commits the offence loses the ball. The referees do not blow the whistle when stopping play would hurt the team that was fouled.</p></div>
+    </div>
+    <div class="grid4">
+      <div class="karta">
+        <svg class="mini" viewBox="0 0 160 100" aria-hidden="true">
+          <line class="ln" x1="80" y1="0" x2="80" y2="100"/>
+          <circle class="d3" cx="80" cy="50" r="30"/>
+          <rect x="68" y="45" width="10" height="3" fill="var(--text)"/><rect x="82" y="52" width="10" height="3" fill="var(--text)"/>
+          <circle class="mic" cx="80" cy="50" r="3"/>
+          <circle class="h1" cx="60" cy="50" r="5"/><circle class="h2" cx="100" cy="50" r="5"/>
+          <circle class="h1" cx="40" cy="25" r="4"/><circle class="h2" cx="122" cy="72" r="4"/>
+          <text x="114" y="22">3 m</text>
+        </svg>
+        <h3>Face-off</h3>
+        <p>Two players face each other and contest the ball placed between their blades. Everyone else stands at least 3 m away. It starts every period and restarts play after a goal.</p>
+      </div>
+      <div class="karta">
+        <svg class="mini" viewBox="0 0 160 100" aria-hidden="true">
+          <path class="ln" d="M0 10 H160" stroke-width="3"/>
+          <circle class="d3" cx="70" cy="25" r="30"/>
+          <circle class="mic" cx="70" cy="25" r="3"/>
+          <circle class="h1" cx="62" cy="21" r="5"/>
+          <circle class="h2" cx="108" cy="50" r="5"/><circle class="h2" cx="50" cy="66" r="5"/><circle class="h1" cx="128" cy="80" r="4"/>
+          <text x="6" y="24">1.5 m</text><text x="104" y="22">3 m</text>
+        </svg>
+        <h3>Hit-in</h3>
+        <p>The ball went over the board. The team that did not touch it last takes the hit-in, 1.5 m from the board where the ball went out. The ball must be hit, not dragged.</p>
+      </div>
+      <div class="karta">
+        <svg class="mini" viewBox="0 0 160 100" aria-hidden="true">
+          <rect class="ln" x="130" y="22" width="30" height="56"/><rect class="ln" x="148" y="38" width="8" height="24"/>
+          <circle class="d3" cx="70" cy="50" r="30"/>
+          <circle class="mic" cx="70" cy="50" r="3"/>
+          <circle class="h1" cx="62" cy="47" r="5"/>
+          <circle class="h2" cx="110" cy="40" r="5"/><circle class="h2" cx="110" cy="52" r="5"/><circle class="h2" cx="110" cy="64" r="5"/>
+          <text x="20" y="22">place of the offence</text>
+        </svg>
+        <h3>Free-hit</h3>
+        <p>After an offence. Taken where it happened, at least 3.5 m from the goalkeeper area. The defending team may form a wall. A free-hit may go straight into the goal.</p>
+      </div>
+      <div class="karta">
+        <svg class="mini" viewBox="0 0 160 100" aria-hidden="true">
+          <line class="ln" x1="10" y1="0" x2="10" y2="100"/>
+          <rect class="ln" x="120" y="22" width="40" height="56"/><rect class="ln" x="140" y="38" width="8" height="24"/>
+          <path d="M44 50 C70 34, 96 66, 128 52" fill="none" stroke="var(--cf-cervena)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <path d="M10 82 H40 M10 78 v8 M40 78 v8" fill="none" stroke="var(--linka)" stroke-width="1"/>
+          <circle class="mic" cx="40" cy="50" r="3"/><circle class="h1" cx="48" cy="46" r="5"/>
+          <rect x="148" y="44" width="8" height="12" fill="var(--text)"/>
+          <text x="14" y="96">5 m</text>
+        </svg>
+        <h3>Penalty shot</h3>
+        <p>A defender’s offence spoiled a clear scoring chance. A player goes alone against the goalkeeper from an imaginary spot 5 m from the centre line and must keep moving towards the goal. Starting with the foot or a “zorro” move is not allowed.</p>
+      </div>
+    </div>
+    <div class="karta" style="margin-top:var(--s3);flex-direction:row;flex-wrap:wrap;gap:var(--s3) var(--s5);align-items:baseline">
+      <div style="flex:1 1 260px;min-width:0"><div class="popisek">Advantage</div><h3 style="margin-top:4px">Why didn’t the referee blow the whistle?</h3></div>
+      <p style="flex:2 1 380px;min-width:0">When the fouled team still controls the ball and playing on suits it better, the referee lets play continue and just holds out an arm with the palm up. That is called advantage.</p>
+    </div>
+    <figure class="komiks" aria-labelledby="km-vy">
+      <figcaption><span class="popisek">Comic</span><h3 id="km-vy">Advantage: why the referee did not whistle</h3></figcaption>
+      <ol class="panely p3">
+        <li><svg class="panel" data-s="vy1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>A defender hits the attacker’s stick. But the attacker keeps the ball.</p></li>
+        <li><svg class="panel" data-s="vy2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>No whistle. The referee holds out an arm, palm up, and lets play continue.</p></li>
+        <li><svg class="panel" data-s="vy3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>The attack goes on and a goal is scored. Had the referee blown the whistle, the fouled team would have lost its chance.</p></li>
+      </ol>
+      <p class="posun drobny">Swipe sideways for more panels →</p>
+    </figure>
+  </div>
+</section>
+
+<!-- TRESTY -->
+<section class="kap" id="tresty">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">From mild to most severe</div>
+      <h2>Penalties</h2>
+      <p>For more serious offences a player goes to the penalty bench. Meanwhile the team plays short-handed, one player fewer. The opponents are on a power play.</p>
+      <div class="princip"><span class="popisek">Principle</span><p>The more serious the offence, the longer the team plays without the offender.</p></div>
+    </div>
+    <div class="zebricek" id="zebricek">
+      <div class="stup">
+        <div><span class="chip">no bench penalty</span><h3 style="margin-top:8px">Free-hit</h3></div>
+        <div><div class="osa"><i class="konec" style="background:transparent;color:var(--text);padding:0">play continues at full strength</i></div></div>
+        <p class="kdy">A lighter offence: hitting the stick, pushing, playing the ball with the foot above knee level.</p>
+      </div>
+      <div class="stup">
+        <div><span class="chip trest">minor bench penalty</span><h3 style="margin-top:8px">2 minutes</h3></div>
+        <div><div class="osa" data-min="2"></div></div>
+        <p class="kdy">Careless play, hand ball, incorrect substitution, protests. When the opponents score on the power play, the penalty ends. <span class="pr">603.6</span></p>
+      </div>
+      <div class="stup">
+        <div><span class="chip vt">major bench penalty</span><h3 style="margin-top:8px">2 + 2 minutes</h3></div>
+        <div><div class="osa" data-min="2,2"></div></div>
+        <p class="kdy">Reckless play, hooking. An opponents’ goal cancels only one of the two 2-minute penalties. <span class="pr">603.7</span></p>
+      </div>
+      <div class="stup">
+        <div><span class="chip os">personal penalty</span><h3 style="margin-top:8px">2 + 10 minutes</h3></div>
+        <div><div class="osa" data-min="2" data-os="10"></div></div>
+        <p class="kdy">Misconduct, provocative celebrations, diving. The team is short-handed for 2 minutes only; the offender sits the full 12 and returns only at the next interruption. <span class="pr">608.1</span></p>
+      </div>
+      <div class="stup">
+        <div><span class="chip ts">red card</span><h3 style="margin-top:8px">Rest of the match</h3></div>
+        <div><div class="osa" data-min="2,2" data-konec="1"></div></div>
+        <p class="kdy">Gross misconduct, violence, fighting, a second major bench penalty. The player leaves for the dressing room and the team serves 2 + 2 min. A suspension for the next match usually follows. A red card can be given even after the final siren while players are still on the rink.</p>
+      </div>
+    </div>
+    <div class="leg-osa">
+      <span><i style="background:var(--plocha-akcent)"></i>team plays short-handed</span>
+      <span><i style="background:repeating-linear-gradient(45deg,var(--text) 0 3px,transparent 3px 7px);border:1.5px solid var(--text)"></i>only the player sits; a teammate takes the place on the rink</span>
+      <span><i style="background:var(--cf-cervena);border-radius:999px"></i>player out for the rest of the match</span>
+    </div>
+
+    <div class="hrani sim" id="sim">
+      <div class="hrani-hl sim-hl">
+        <span class="zkus">Try it</span>
+        <h3>The penalty bench, live</h3>
+        <p>Give the red team a penalty and watch how many players stay on the rink. Then try scoring for the blue team.</p>
+      </div>
+      <div class="sim-obr"><svg viewBox="0 0 320 204" role="img" aria-label="Diagram of a rink with two teams, substitution zones and a penalty bench"></svg><span class="sim-gol" aria-hidden="true">GOAL!</span></div>
+      <div class="sim-panel">
+        <div class="hrani-akce" role="group" aria-label="Award a penalty">
+          <button type="button" class="btn" data-trest="2">2 minutes</button>
+          <button type="button" class="btn" data-trest="22">2 + 2</button>
+          <button type="button" class="btn" data-trest="210">2 + 10</button>
+        </div>
+        <div class="sim-stav">
+          <div><span>On the rink · blue : red</span><b id="sim-pocet">5 : 5</b></div>
+          <div><span id="sim-co">Penalty</span><b id="sim-cas">–</b></div>
+        </div>
+        <div class="sim-osy" id="sim-osy" aria-hidden="true"></div>
+        <p class="sim-hlaska" id="sim-hlaska" aria-live="polite"></p>
+        <div class="hrani-akce">
+          <button type="button" class="btn hlavni" id="sim-gol" disabled>Blue goal!</button>
+          <button type="button" class="btn" id="sim-reset" disabled>Again</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid2x2" style="margin-top:var(--s5)">
+      <div class="karta">
+        <div class="popisek">Delayed penalty</div>
+        <h3>Arm up, play goes on</h3>
+        <p>The fouled team has the ball, so the referee raises an arm and lets it attack. The penalty is given once the offenders gain the ball or play stops. Meanwhile the fouled team may pull its goalkeeper.</p>
+      </div>
+      <div class="karta">
+        <div class="popisek">Two at a time at most</div>
+        <h3>Always at least four on the rink</h3>
+        <p>No more than two penalties per team are timed at once. Even with more players penalised, the team keeps at least four on the rink; the others wait on the bench for their turn.</p>
+      </div>
+      <div class="karta">
+        <div class="popisek">Both teams at once</div>
+        <h3>Penalties cancel out</h3>
+        <p>If players of both teams are penalised during the same interruption, the 2-minute penalties on each side are added up. Whatever balances out does not change the number of players on the rink and is not cancelled by a goal. For example, 2 + 2 against 2 minutes means a power play for 2 minutes only.</p>
+      </div>
+      <div class="karta">
+        <div class="popisek">New in 2026</div>
+        <h3>A goal cancels the shortest penalty</h3>
+        <p>When a team has several players on the penalty bench, an opponents’ goal ends the penalty with the least time left. It used to be the one awarded first.</p>
+      </div>
+    </div>
+    <figure class="komiks" aria-labelledby="km-od">
+      <figcaption><span class="popisek">Comic</span><h3 id="km-od">Delayed penalty</h3><span class="pr">602.2</span></figcaption>
+      <ol class="panely">
+        <li><svg class="panel" data-s="od1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>The player with the ball is tripped. The referee raises an arm, but play goes on.</p></li>
+        <li><svg class="panel" data-s="od2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>The fouled team keeps attacking and may pull its goalkeeper. A sixth field player jumps in instead.</p></li>
+        <li><svg class="panel" data-s="od3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>As soon as the offending team gains the ball, the referee blows the whistle.</p></li>
+        <li><svg class="panel" data-s="od4" viewBox="0 0 240 170" aria-hidden="true"></svg><p>The offender goes to the penalty bench for 2 minutes. Had a goal been scored in the meantime, the 2-minute penalty would not have been given.</p></li>
+      </ol>
+      <p class="posun drobny">Swipe sideways for more panels →</p>
+    </figure>
+    <figure class="komiks" aria-labelledby="km-pr">
+      <figcaption><span class="popisek">Comic</span><h3 id="km-pr">A power-play goal</h3><span class="pr">603.6</span></figcaption>
+      <ol class="panely p3">
+        <li><svg class="panel" data-s="pr1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>A red player sits on the penalty bench for 2 minutes. Blue are on a power play.</p></li>
+        <li><svg class="panel" data-s="pr2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Blue score on the power play.</p></li>
+        <li><svg class="panel" data-s="pr3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>The goal ends the minor penalty even with more than a minute left. The penalised player returns straight away.</p></li>
+      </ol>
+      <p class="posun drobny">Swipe sideways for more panels →</p>
+    </figure>
+  </div>
+</section>
+
+<!-- GÓLY -->
+<section class="kap" id="goly">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">When it counts</div>
+      <h2>Goal or no goal?</h2>
+      <p>A goal counts when the whole ball crosses the goal line from the front after being played correctly with the stick. It is confirmed with a face-off at the centre spot.</p>
+      <div class="princip"><span class="popisek">Principle</span><p>Goals are scored with the stick. An attacker cannot score intentionally with a foot or the body.</p></div>
+    </div>
+    <div class="hrani gol-hra" id="gl-box" data-z="0">
+      <div class="hrani-hl">
+        <span class="zkus">Try it</span>
+        <h3>Slide the ball across the line</h3>
+        <p>When exactly is it a goal? A view of the goal line from above.</p>
+        <p class="verdikt" id="gl-verdikt" aria-live="polite"></p>
+      </div>
+      <div class="gol-pole">
+        <svg viewBox="0 0 320 130" aria-hidden="true">
+          <rect class="k-sit" x="172" y="22" width="78" height="86"/>
+          <path class="k-ram" d="M170 22 H250 V108 H170"/>
+          <line class="gl-cara" x1="170" y1="4" x2="170" y2="126"/>
+          <text class="k-mtxt" x="162" y="14" text-anchor="end">RINK</text><text class="k-mtxt" x="178" y="14">GOAL</text>
+          <text class="k-zvuk gl-gol" font-size="32" text-anchor="middle" transform="translate(84 76) rotate(-8) skewX(-8)">GOAL!</text>
+          <g id="gl-mic" transform="translate(100 65)"><circle class="gl-mic" r="13"/><circle class="k-dirka" cx="-4.5" cy="-3.5" r="2.4"/><circle class="k-dirka" cx="4.5" cy="-3" r="2.4"/><circle class="k-dirka" cx="0" cy="4.5" r="2.4"/></g>
+        </svg>
+        <input type="range" class="posuvnik" id="gl-range" min="0" max="100" value="12" aria-label="Position of the ball relative to the goal line">
+        <div class="posuvnik-pop" aria-hidden="true"><span>in front of the line</span><span>in the goal</span></div>
+      </div>
+    </div>
+    <div class="gol">
+      <div class="karta">
+        <div class="carahead">
+          <svg viewBox="0 0 92 60" aria-hidden="true"><line x1="40" y1="2" x2="40" y2="58" stroke="var(--linka)" stroke-width="2"/><path d="M40 10 h30 v40 h-30" fill="none" stroke="var(--linka)" stroke-width="1.5"/><circle cx="54" cy="30" r="8" fill="var(--cf-cervena)"/></svg>
+          <h3>Goal counts</h3>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>The whole ball is over the line, not just touching it.</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>The scorer played it with the stick. The goalkeeper can score too, with a throw, even if nobody else touches the ball.</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>The ball bounced into the goal off a defender, or a defender knocked it in (own goal). <span class="pr">702.1</span></span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>An attacker unintentionally deflected it into the goal with the body. <span class="pr">702.2</span></span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A team playing without a goalkeeper spoils the opponents’ chance with an offence. Instead of a penalty shot, a goal is awarded straight away. <span class="pr">701.3</span></span></li>
+        </ul>
+      </div>
+      <div class="karta">
+        <div class="carahead">
+          <svg viewBox="0 0 92 60" aria-hidden="true"><line x1="40" y1="2" x2="40" y2="58" stroke="var(--linka)" stroke-width="2"/><path d="M40 10 h30 v40 h-30" fill="none" stroke="var(--linka)" stroke-width="1.5"/><circle cx="40" cy="30" r="8" fill="var(--cf-cervena)"/></svg>
+          <h3>No goal</h3>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" fill="none" stroke="var(--cf-cervena)" stroke-width="2.6" stroke-linecap="round"/></svg><span>An attacker intentionally kicked the ball or directed it with the body. <span class="pr">703.2</span></span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" fill="none" stroke="var(--cf-cervena)" stroke-width="2.6" stroke-linecap="round"/></svg><span>The attacking team committed an offence just before.</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" fill="none" stroke="var(--cf-cervena)" stroke-width="2.6" stroke-linecap="round"/></svg><span>The ball crossed the line after the whistle or the siren. <span class="pr">703.3</span></span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" fill="none" stroke="var(--cf-cervena)" stroke-width="2.6" stroke-linecap="round"/></svg><span>The ball entered the goal from behind or from the side.</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" fill="none" stroke="var(--cf-cervena)" stroke-width="2.6" stroke-linecap="round"/></svg><span>The team that scored had a penalty being delayed against it, or had too many players on the rink.</span></li>
+        </ul>
+      </div>
+    </div>
+    <figure class="komiks" aria-labelledby="km-ko">
+      <figcaption><span class="popisek">Comic</span><h3 id="km-ko">A kicked goal</h3><span class="pr">703.2 and 502.3</span></figcaption>
+      <ol class="panely">
+        <li><svg class="panel" data-s="ko1" viewBox="0 0 240 170" aria-hidden="true"></svg><p>An attacker kicks the ball into the goal.</p></li>
+        <li><svg class="panel" data-s="ko2" viewBox="0 0 240 170" aria-hidden="true"></svg><p>The ball is in the net and the attacker celebrates.</p></li>
+        <li><svg class="panel" data-s="ko3" viewBox="0 0 240 170" aria-hidden="true"></svg><p>Too soon. An intentionally kicked ball does not count, and the referee holds both arms out to the sides.</p></li>
+        <li><svg class="panel" data-s="ko4" viewBox="0 0 240 170" aria-hidden="true"></svg><p>It is not an offence, so play resumes with a face-off at the nearest dot.</p></li>
+      </ol>
+      <p class="posun drobny">Swipe sideways for more panels →</p>
+    </figure>
+  </div>
+</section>
+
+<!-- SIGNÁLY -->
+<section class="kap" id="signaly">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">What the referee shows</div>
+      <h2>Referees’ signs</h2>
+      <p>After the whistle the referee first shows how play will resume and then, where needed, what for. These are the signs you will see most often.</p>
+    </div>
+    <div class="sig-nastroje"><button type="button" class="btn" id="sig-hadej" aria-pressed="false">Try guessing the signs</button><span class="drobny" id="sig-pozn" hidden>Tap a card to reveal what the sign means.</span></div>
+    <div class="signaly" id="signaly-grid"></div>
+  </div>
+</section>
+
+<!-- TEĎ PÍSKÁTE VY -->
+<section class="kap pruh" id="rozhodci">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">Have a go</div>
+      <h2>Now you referee</h2>
+      <p>Six situations from the rink. Look at the picture and decide like a referee. What is your call?</p>
+    </div>
+    <div class="piskat" id="hra"></div>
+  </div>
+</section>
+
+<!-- SLOVNÍČEK -->
+<section class="kap" id="slovnik">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">Making sense of it</div>
+      <h2>A short glossary</h2>
+      <p>Words you will hear from commentators and from the stands.</p>
+    </div>
+    <label class="hledat"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="var(--text)" stroke-width="2"/><path d="M13 13l5 5" stroke="var(--text)" stroke-width="2.4" stroke-linecap="round"/></svg><input type="search" id="slov-hledat" placeholder="Search the glossary" aria-label="Search the glossary" autocomplete="off"></label>
+    <p id="slov-nic" hidden>That word is not in the glossary.</p>
+    <dl class="slovnik">
+      <div><dt>Stick</dt><dd>The implement with a long shaft and a hooked plastic blade used to play the ball.</dd></div>
+      <div><dt>Field player</dt><dd>Any player other than the goalkeeper, that is, one who plays with a stick.</dd></div>
+      <div><dt>Board</dt><dd>A low plastic wall with rounded corners around the rink.</dd></div>
+      <div><dt>Goal crease and goalkeeper area</dt><dd>Two rectangles in front of the goal: the larger goal crease is the goalkeeper’s territory, and field players must stay out of the smaller goalkeeper area.</dd></div>
+      <div><dt>Face-off</dt><dd>A contest between two players for the ball placed between their blades.</dd></div>
+      <div><dt>Hit-in</dt><dd>The restart after the ball has left the rink.</dd></div>
+      <div><dt>Free-hit</dt><dd>The restart after an offence, taken where it happened.</dd></div>
+      <div><dt>Penalty shot</dt><dd>One player going alone against the goalkeeper.</dd></div>
+      <div><dt>Short-handed and power play</dt><dd>Playing with fewer or, on the other side, more players while someone is serving a penalty.</dd></div>
+      <div><dt>Advantage</dt><dd>The referee lets play continue because stopping it would hurt the fouled team.</dd></div>
+      <div><dt>Effective time</dt><dd>The clock runs only while the game is actually being played.</dd></div>
+      <div><dt>Match record</dt><dd>The official document with the team lists, goals and penalties.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- KVÍZ -->
+<section class="kap" id="kviz" style="border-bottom:0">
+  <div class="wrap">
+    <div class="kap-hlava">
+      <div class="popisek">Test yourself</div>
+      <h2>Do you understand floorball now?</h2>
+      <p>Five random questions from the question bank Czech Floorball uses to test novice referees. After each answer you will see an explanation and the rule number. The New questions button gives you another five.</p>
+    </div>
+    <div class="kviz" id="kviz-box"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="mrizka" aria-hidden="true" style="margin:0 0 var(--s4);height:32px"></div>
+    <p><b>Czech Floorball</b></p>
+    <p class="drobny">A simplified overview based on the IFF Rules of the Game, 2026 edition, valid from 1 July 2026, on their Czech edition (Pravidla florbalu a jejich výklad) and on the Czech referee seminar on the 2026 rule changes (5 September 2026). The quiz draws on Czech Floorball’s question bank for testing novice referees 2026. In case of doubt, the full text of the rules applies. Questions about the rules: pravidla@ceskyflorbal.cz</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ---------- Přepínač vzhledu ---------- */
+  var root=document.documentElement, btn=document.getElementById('vzhled'), ulozeny=null;
+  try{ulozeny=localStorage.getItem('cf-vzhled')}catch(e){}
+  function nastav(t){
+    root.setAttribute('data-theme',t);
+    var tmavy=t==='dark';
+    btn.setAttribute('aria-pressed',tmavy);
+    btn.setAttribute('aria-label',tmavy?'Switch to light mode':'Switch to dark mode');
+    btn.querySelector('.lbl').textContent=tmavy?'Light mode':'Dark mode';
+  }
+  nastav(ulozeny==='dark'?'dark':'light');
+  btn.addEventListener('click',function(){
+    var t=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    nastav(t);
+    try{localStorage.setItem('cf-vzhled',t)}catch(e){}
+  });
+})();
+(function(){
+  /* ---------- Hřiště: zvýraznění ---------- */
+  var box=document.getElementById('hriste-box'), leg=document.getElementById('legenda'), vybrano=null;
+  function vyber(k){
+    if(vybrano===k){k=null}
+    vybrano=k;
+    box.classList.toggle('ma-vyber',!!k);
+    box.querySelectorAll('.prvek').forEach(function(g){g.classList.toggle('on',g.dataset.k===k)});
+    leg.querySelectorAll('li').forEach(function(li){li.classList.toggle('on',li.dataset.k===k);li.querySelector('button').setAttribute('aria-pressed',li.dataset.k===k)});
+  }
+  leg.querySelectorAll('li').forEach(function(li){li.querySelector('button').addEventListener('click',function(){vyber(li.dataset.k)})});
+  box.querySelectorAll('.zn').forEach(function(z){z.addEventListener('click',function(){vyber(z.dataset.k)})});
+
+  /* ---------- Tresty: osy ---------- */
+  var MAX=12;
+  document.querySelectorAll('.osa[data-min]').forEach(function(o){
+    var parts=o.dataset.min.split(',').map(Number);
+    parts.forEach(function(m){var i=document.createElement('i');i.style.width='calc('+(m/MAX*100)+'% - 3px)';i.title=m+' min';o.appendChild(i)});
+    if(o.dataset.os){var i=document.createElement('i');i.className='os';i.style.width='calc('+(+o.dataset.os/MAX*100)+'% - 3px)';o.appendChild(i)}
+    if(o.dataset.konec){var k=document.createElement('i');k.className='konec';k.style.flex='1';k.textContent='rest of the match';o.appendChild(k)}
+  });
+
+  /* ---------- Signály: panáčci ---------- */
+  var B='<circle class="hlava" cx="50" cy="22" r="9"/><path class="body" d="M50 32V82M50 82L41 128M50 82L59 128M42 40H58"/>';
+  function ruka(p){return '<polyline class="ruka" points="'+p+'"/>'}
+  var L0='40,40 36,60 35,79', R0='60,40 64,60 65,79';
+  function dlan(x,y,r){return '<circle class="dlan" cx="'+x+'" cy="'+y+'" r="'+(r||4)+'"/>'}
+  var S=[
+    {k:'802',n:'Face-off',t:'Both forearms held horizontally in front of the body, palms down.',a:ruka('40,40 34,58 58,56')+ruka('60,40 66,60 42,62')},
+    {k:'803',n:'Hit-in / Free-hit',t:'Arm held horizontally in the direction of play, palm down. It shows which team plays the ball.',a:ruka(L0)+ruka('60,40 78,40 96,40')+dlan(97,42,3.5)},
+    {k:'804',n:'Advantage',t:'Arm in the direction of play, palm up. There was an offence, but play goes on.',a:ruka(L0)+ruka('60,40 78,36 95,33')+'<path class="ruka" d="M91 27 Q96 34 101 27"/>'},
+    {k:'805',n:'Penalty shot',t:'Arms above the head, crossed at the wrists, fists clenched.',a:ruka('40,40 36,18 56,0')+ruka('60,40 64,18 44,0')+dlan(57,-1,4.5)+dlan(43,-1,4.5)},
+    {k:'806',n:'Delayed penalty',t:'Arm held vertically, palm forward. A penalty is coming, but play continues for now.',a:ruka(L0)+ruka('60,40 62,18 62,-2')+'<rect class="dlan" x="58" y="-12" width="8" height="10" rx="3"/>'},
+    {k:'807',n:'Bench penalty',t:'Arm held vertically, two fingers = minor penalty. Five fingers mean 2 + 2, a fist a personal penalty.',a:ruka(L0)+ruka('60,40 62,18 62,-2')+'<path class="ruka" d="M60 -4 L57 -14 M64 -4 L67 -14" stroke-width="3.5"/>'+'<text class="num" x="74" y="-4">2</text>'},
+    {k:'808',n:'Red card',t:'Arm held vertically with the red card. The player goes to the dressing room for the rest of the match.',a:ruka(L0)+ruka('60,40 62,18 62,-2')+'<rect class="karta-c" x="57" y="-18" width="12" height="16" rx="1.5"/>'},
+    {k:'809',n:'Goal',t:'The referee points an arm towards the goal. The goal is then confirmed with a face-off.',a:ruka(L0)+ruka('60,40 77,52 94,64')+dlan(95,65,3.5)},
+    {k:'810',n:'Continue play / No goal',t:'Both arms held horizontally out to the sides, palms down.',a:ruka('40,40 22,40 4,40')+ruka('60,40 78,40 96,40')},
+    {k:'901',n:'Offences with the stick',t:'One arm held horizontally in the direction of play, the other strikes it once. Since 2026, hitting, blocking and lifting the stick share one sign.',a:ruka('40,40 22,40 4,40')+ruka('60,40 52,58 26,42')+dlan(25,41,4)},
+    {k:'912',n:'Entering the goalkeeper area',t:'Arms above the head, fingertips touching to form a triangle.',a:ruka('40,40 30,18 50,-4')+ruka('60,40 70,18 50,-4')},
+    {k:'923',n:'Misconduct',t:'Hands on hips.',a:ruka('40,40 26,58 44,74')+ruka('60,40 74,58 56,74')}
+  ];
+  var g=document.getElementById('signaly-grid');
+  g.innerHTML=S.map(function(s){
+    return '<div class="sig"><svg viewBox="0 -22 104 156" role="img" aria-label="Sign: '+s.n+'">'+B+s.a+'</svg><span class="kod">Sign '+s.k+'</span><h3>'+s.n+'</h3><p>'+s.t+'</p></div>';
+  }).join('');
+
+  /* ---------- Kvíz: 5 náhodných otázek ze zásobníku pro rozhodčí nováčky 2026 ---------- */
+  var ZASOBNIK=[{"n":1,"q":"A bleeding player:","o":["Is not allowed to participate in the match until the bleeding is under control.","May participate in the match without restriction.","Is not allowed to participate in the match until the bleeding has stopped completely.","Must go to the dressing room and take no further part in the match."],"v":"A bleeding player is not allowed to participate in the match until the bleeding is under control.","r":"302.1"},{"n":2,"q":"If a player receives a pass played with the foot by a team-mate who is a field player:","o":["The referees let play continue.","The referees award a free-hit from where the player received the pass.","The referees award a free-hit from where the pass was played.","The referees let play continue, provided the pass was not intentional."],"v":"Playing the ball with the foot below knee level is allowed, and the rules do not forbid passing to a team-mate with the foot. Play continues.","r":"507.4"},{"n":3,"q":"During a goal situation in progress, a player is stopped by an offence leading to a major bench penalty. What follows?","o":["The referees award a penalty shot and impose a major bench penalty of 2+2 minutes.","The referees award a penalty shot.","The referees impose a major bench penalty of 2+2 minutes.","The referees award a penalty shot and, if it does not result in a goal, impose a major bench penalty of 2+2 minutes."],"v":"An offence that interrupts a goal situation leads to a penalty shot. A major bench penalty is always imposed as well; only a minor bench penalty is dropped when a penalty shot is awarded.","r":"510.1, 603.8"},{"n":4,"q":"Who decides whether the rink is fit for play?","o":["The match referees.","The referees and the match delegate.","The match delegate.","The referees, the match delegate and the chief organiser."],"v":"The referees inspect the rink before the match and ensure that defects are corrected.","r":"106.1"},{"n":5,"q":"The ball passes the goal line during the signal ending the period. The referees:","o":["Disallow the goal.","Allow the goal.","Disallow the goal and award a penalty shot.","Allow the goal after consulting the chief organiser."],"v":"A goal is incorrectly scored when the ball passes the goal line during, or after, a signal.","r":"703.3"},{"n":6,"q":"A field player intentionally kicks the ball into the opponents' goal. The referees:","o":["Disallow the goal and award a face-off.","Allow the goal.","Disallow the goal and award a free-hit from the goal crease.","Disallow the goal and give the player a 2-minute penalty."],"v":"A ball intentionally kicked into the goal is an incorrectly scored goal. This is not an offence, so play is resumed with a face-off.","r":"703.2"},{"n":7,"q":"A goal is scored just before the siren ending the match. What follows?","o":["The goal is allowed and the match is over.","The goal is disallowed and the match is over.","The goal is disallowed and a face-off is taken in the corner of the rink.","The goal is allowed and confirmed with a face-off at the centre spot."],"v":"The goal was scored within game time, so it stands. After the end of a period or a match, a goal is not confirmed with a face-off.","r":"502.1, 701.1"},{"n":8,"q":"Who is an own goal credited to?","o":["The player who scored it, and it is noted in the match record as 'OG'.","Nobody – it will not be allowed.","The last attacking player to touch the ball.","The last attacking player to touch the ball, and it is noted in the match record as 'OG'."],"v":"An own goal is credited to the player who scored it and noted in the match record as OG.","r":"702.1"},{"n":9,"q":"A player of the defending team has moved the goal cage out of position and the ball passes the goal line from the front, between the marks for the posts and below the imaginary position of the bar. The referees:","o":["Allow the goal.","Award a face-off in the corner of the rink.","Award a penalty shot.","Award a free-hit from the goal crease."],"v":"When the goal cage is out of position and the ball passes the goal line from the front between the marks for the posts and below the imaginary position of the bar, the goal is allowed.","r":"702.1"},{"n":10,"q":"The entire ball passes the goal line after a player of the attacking team has unintentionally directed it with their body. The referees:","o":["Allow the goal.","Award a free-hit from the goal crease.","Award a penalty shot.","Disallow the goal."],"v":"The goal stands even when a player of the attacking team has unintentionally directed the ball with their body.","r":"702.2"},{"n":11,"q":"A member of the team staff who incurs a personal penalty must:","o":["Immediately go to the dressing room and take no further part in the match in any way.","Leave the substitution zone at the next intermission.","Spend the whole rest of the match in the spectators' stand.","Serve a 2-minute minor bench penalty on the penalty bench and then go to the dressing room."],"v":"A member of the team staff incurring a personal penalty must immediately go to the dressing room and takes no further part in the match.","r":"608.2"},{"n":12,"q":"A technical match penalty:","o":["Leads to suspension for the rest of the match and has no further consequences.","Leads to suspension from the following match in the same competition.","Leads to suspension from the next match played, whatever the competition.","Leads to suspension from the following match in the same competition and to further punishment decided by the disciplinary committee."],"v":"A technical match penalty means suspension for the rest of the match and has no further consequences for the offender.","r":"611.2"},{"n":13,"q":"A match penalty:","o":["Leads to suspension from the following match in the same competition and to further punishment decided by the disciplinary committee.","Leads to suspension for the rest of the match and has no further consequences.","Allows the player to play in matches until the disciplinary committee has decided.","Leads to suspension from matches in the same competition until the end of the season."],"v":"A match penalty means suspension for the rest of the match and from the following match in the same competition, and possible further punishment by the administrating authority.","r":"613.2"},{"n":14,"q":"The ball is bouncing in the goal crease. The home team's goalkeeper kicks it straight into the path of a running team-mate, who controls it in their own half of the rink. What follows?","o":["Play continues.","A free-hit for the away team 3.5 m from the goalkeeper area.","A free-hit for the away team where the pass was received.","A face-off at the nearest face-off dot."],"v":"The goalkeeper may play the ball with the foot. It would only be an offence to receive a pass from a team-mate with the hands, or to throw the ball through the air over the centre line.","r":"507.14, 507.17"},{"n":15,"q":"If the goalkeeper entirely leaves the goal crease during a throw-in:","o":["A free-hit is awarded.","Play continues.","A minor bench penalty (2 minutes) is imposed for playing the ball lying down.","A minor bench penalty (2 minutes) is imposed for hands."],"v":"If the goalkeeper entirely leaves the goal crease during a throw-in, a free-hit is awarded.","r":"507.13"},{"n":16,"q":"A defending player, trying to win the ball, kicks the attacker's blade. The referees:","o":["Award a free-hit.","Warn the player verbally and let play continue.","Do nothing; the situation does not require it.","Give a triple signal and check whether the defending player is injured."],"v":"Kicking an opponent's stick is an offence leading to a free-hit.","r":"507.1"},{"n":17,"q":"The player taking a free-hit:","o":["Shall not touch the ball again before it has touched another player or another player's equipment.","May take it with the foot.","Must hold the stick with both hands when taking it","Must tell the opponents to keep 3 metres away from where the free-hit is taken."],"v":"The player taking a free-hit shall not touch the ball again before it has touched another player or that player's equipment.","r":"506.5"},{"n":18,"q":"A penalised player may leave the penalty bench:","o":["During an intermission in regular game time.","During a time out.","During the intermission between regular game time and overtime.","During an intermission in regular game time and also during the intermission between regular game time and overtime."],"v":"During regular game time a penalised player may leave the penalty bench during an intermission, but not before overtime.","r":"601.2"},{"n":19,"q":"If the match secretariat is responsible for a penalised player being admitted to the rink too soon:","o":["The player returns to the penalty bench and no additional penalties are imposed.","The player goes straight back into play.","The player is struck from the match record.","The player returns to play and the organising club is fined afterwards."],"v":"The player returns to the penalty bench, no additional penalties are imposed, and the player re-enters the rink when the penalty expires.","r":"601.2"},{"n":20,"q":"In what order do penalised players leave the penalty bench?","o":["In the order in which their penalties expired.","In the order decided by the referees.","In the order in which their penalties were imposed.","In the order decided by the match secretariat."],"v":"Penalised players leave the penalty bench in the same order as their penalties expire.","r":"603.4"},{"n":21,"q":"Does a team with more than two penalised players on the penalty bench still have the right to play with four players on the rink?","o":["Yes.","No.","Yes, provided none of the penalties was a match penalty.","No, unless the referees decide otherwise."],"v":"A team with more than two penalised players still has the right to play with four players on the rink.","r":"603.4"},{"n":22,"q":"What is the maximum number of penalties that can be imposed on one player?","o":["An unlimited number.","Two.","Three.","Three, if one of them is a personal penalty."],"v":"An unlimited number of bench penalties can be imposed on the same player.","r":"603.5"},{"n":23,"q":"If a player incurs a 10-minute personal penalty, when does this penalty start to be measured?","o":["After all the player's bench penalties have expired or terminated.","On the referee's instruction.","At any time.","Always immediately after the penalty is imposed."],"v":"A personal penalty starts to be measured once all the player's bench penalties have expired or terminated.","r":"603.5, 608.1"},{"n":24,"q":"If a goal is scored during a minor bench penalty (2 minutes):","o":["The penalty terminates if the goal was scored by the team that was not penalised.","The penalty terminates if the goal was scored by the team that was not penalised, or if the teams were playing with the same number of players on the rink.","The penalty continues even if the goal was scored by the team that was not penalised and the penalised team is still playing with fewer field players.","The player's penalty continues, but the penalised team plays with its full number of players."],"v":"A goal terminates a minor bench penalty that is being measured if it was scored by the team with more players on the rink.","r":"603.6"},{"n":25,"q":"During a delayed penalty the non-offending team scores:","o":["The delayed penalty is cancelled and all penalties already being served continue.","The delayed penalty is carried out and the penalty with the shortest remaining time terminates.","The penalty is not cancelled if exactly one penalty was being measured for the non-offending team at that moment.","The delayed penalty is carried out and the previously imposed minor bench penalty (2 minutes) terminates."],"v":"When the non-offending team scores, the delayed minor bench penalty last imposed is not carried out. No other penalties are affected.","r":"602.2"},{"n":26,"q":"A delayed penalty is in progress. Play is interrupted when an attacking player shoots the ball out of the rink. How is play resumed?","o":["With a hit-in for the attacking team.","According to the offence leading to the penalty.","With a hit-in for the defending team.","With a free-hit from the place where play was interrupted."],"v":"When play during a delayed penalty is interrupted by an event leading to a hit-in, the hit-in is awarded to the non-offending team.","r":"602.2"},{"n":27,"q":"At a face-off the away team's player is the first to place their blade on the floor. The home team's player does not like this and goes to swap with a team-mate. What do the referees do?","o":["Send the original player back and the face-off is taken.","Allow the face-off with the 'new line-up'.","Give the home team's player a match penalty for sabotage of play.","Give the home team's player a bench penalty for delaying play."],"v":"Once a player has been chosen to take the face-off, the player must not be changed.","r":"502.5"},{"n":28,"q":"All the fixed situations in floorball are:","o":["Face-off, free-hit, hit-in and penalty shot.","Face-off, free-hit and hit-in.","Free-hit and face-off.","Free-hit and hit-in."],"v":"The fixed situations are face-off, hit-in, free-hit and penalty shot.","r":"501.1"},{"n":29,"q":"Unreasonable delay of a fixed situation:","o":["Is for the referees to decide.","Is defined exhaustively in the Rules of the Game.","Is not mentioned in the Rules of the Game at all.","Is when a team does not resume play within three seconds."],"v":"The referees decide what is considered unreasonable delay of a fixed situation.","r":"501.3"},{"n":30,"q":"A face-off is taken:","o":["At the nearest face-off dot, according to where the ball was at the interruption.","At the farthest face-off dot, according to where the ball was at the interruption.","In a team's attacking half if the other team has been given a bench penalty.","Always at the centre spot."],"v":"A face-off is taken at the nearest face-off dot, according to where the ball was at the interruption.","r":"502.3"},{"n":31,"q":"When play is interrupted, it is resumed with a face-off:","o":["If neither team can be awarded a hit-in, a free-hit or a penalty shot.","In all cases.","Only if a correct goal has been scored.","Only if a penalty unrelated to play has been imposed."],"v":"A face-off is used when neither team can be awarded a hit-in, a free-hit or a penalty shot.","r":"502.2"},{"n":32,"q":"At a face-off the other players (except those taking the face-off) must be:","o":["At least 3 m from the ball, sticks included.","At least 3 m from the ball; the stick may be closer.","At most 5 m from the ball, sticks included.","At least 2 m from the ball, sticks included."],"v":"All players except the two taking the face-off must be at least 3 m from the ball, sticks included.","r":"502.4"},{"n":33,"q":"The referees always interrupt play immediately if:","o":["A serious injury to a player is suspected.","A player has been injured in the attacking half.","The injured player does not affect play.","The goal cage has been moved."],"v":"As soon as a serious injury is suspected, play must be interrupted immediately.","r":"503.5"},{"n":34,"q":"During a penalty shot the following may be on the rink:","o":["The goalkeeper of one team and the player of the other team taking the penalty shot.","The goalkeepers of both teams and the player taking the penalty shot.","As many players as the Rules of the Game allow at the start of play.","The goalkeeper of one team, the player taking the penalty shot and the player who will take the next penalty shot."],"v":"During a penalty shot only the defending goalkeeper and the player taking it are on the rink. All the others are in their substitution zones.","r":"508.3"},{"n":35,"q":"When a penalty shot starts, the goalkeeper must be:","o":["In the goalkeeper area.","1.5 m in front of the goal line.","0.5 m in front of the goal line.","On the goal line."],"v":"The goalkeeper must be in the goalkeeper area when the penalty shot starts.","r":"508.3"},{"n":36,"q":"During a penalty shot the ball hits the frame of the goal cage, then hits the goalkeeper and passes the goal line from the front. The goal:","o":["Is allowed.","Is disallowed, because the ball had already touched the goalkeeper and the penalty shot was therefore over.","Is allowed only if the player then touches the ball again.","Is disallowed, because the ball must not stop or move backwards during a penalty shot."],"v":"If the ball hits the front face of the goal cage, then the goalkeeper, and passes the goal line from the front, the goal stands.","r":"508.4"},{"n":37,"q":"A delayed penalty shot is awarded:","o":["Immediately after the goal situation is over.","If the offending team does not have the ball under control.","If one of the teams has scored a correct goal.","At once, because a penalty shot can never be delayed."],"v":"A delayed penalty shot lets the non-offending team continue the attack until the goal situation is over. The penalty shot is then taken.","r":"509.2"},{"n":38,"q":"Offences in the goal crease:","o":["Do not automatically lead to a penalty shot.","Automatically lead to a penalty shot.","Automatically lead to a penalty shot if the goalkeeper is not in the goal.","Lead to a penalty shot if the offence is hitting with the stick."],"v":"Offences in the goal crease do not automatically lead to a penalty shot.","r":"510.1"},{"n":39,"q":"At a face-off at the centre spot, who places their stick first?","o":["The away team's player.","The home team's player.","The referees choose the player.","The player of the team that conceded the goal."],"v":"At a face-off on the centre line, the away team's player places the stick first.","r":"502.5"},{"n":40,"q":"At a face-off at a face-off dot in the corner of the rink, who places their stick first?","o":["The defending player.","The attacking player.","The player of the team that is losing.","The player of the team that is short-handed."],"v":"Away from the centre line, the defending team's player places the stick first.","r":"502.5"},{"n":41,"q":"Can a goal be scored directly from a face-off?","o":["Yes.","No.","It depends on the referee's judgement.","Yes, but only in the attacking half."],"v":"A face-off may go directly into the goal.","r":"502.6"},{"n":42,"q":"The ball hits a referee and this has a significant effect on play. What follows?","o":["A face-off at the nearest face-off dot.","A free-hit for the team that last had the ball.","Play continues.","A free-hit against the team that last had the ball."],"v":"When a referee is hit by the ball and this has a significant effect on play, it is an unnatural situation and play is resumed with a face-off.","r":"503.6"},{"n":43,"q":"The ball leaves the rink after a defending player hits the net of the goal cage with their stick without touching the ball. What follows?","o":["A hit-in for the attacking team.","A hit-in for the defending team.","A face-off at the nearest face-off dot.","A face-off at the centre spot."],"v":"If a player hits the net of the goal cage and the ball leaves the rink, that player is considered the last to have touched the ball. The opponents take the hit-in.","r":"504.1"},{"n":44,"q":"At a hit-in the players of the defending team shall take a position from the ball of at least:","o":["3 m.","2.5 m.","2 m.","3.5 m."],"v":"At a hit-in the defending players must take a position at least 3 m from the ball, sticks included.","r":"504.3"},{"n":45,"q":"The referees impose a minor bench penalty (2 minutes) for a high stick if a field player plays the ball with any part of the stick above waist level:","o":["As measured with the player standing upright.","As measured in any stance.","As measured with the nearest opponent standing upright.","As measured with the player standing upright in the attacking half, and in any stance in the defending half."],"v":"Waist level is considered the level of the player's waist when standing upright.","r":"605.3"},{"n":46,"q":"With the away team playing six field players and no goalkeeper, a home-team player runs alone towards the empty goal cage. While shooting, the player is hit on the stick and misses. What follows?","o":["A goal is awarded.","A penalty shot.","A 2-minute bench penalty for the away team's player.","A free-hit for the home team."],"v":"The away team are playing without a goalkeeper. If one of their players stops a chance with an offence that would lead to a penalty shot, a goal is awarded straight away.","r":"701.3"},{"n":47,"q":"A player puts their stick in the way of an opponent's shot; the stick breaks and flies out of the player's hand. After that:","o":["The player whose stick broke may leave the broken stick on the rink and go to substitute.","The player whose stick broke must pick the stick up from the rink and take it to their own substitution zone.","The player whose stick broke must pick the stick up and put it anywhere behind the board.","The nearest player of the team whose player owned the stick, and next to whom the stick landed, is obliged to remove it from the rink."],"v":"The player does not have to pick up the broken stick until the next interruption. A player must not play without a stick, so the player goes to substitute.","r":"605.8, 605.24"},{"n":48,"q":"A home-team player is standing in the substitution zone with a foot resting on the board. During play the ball hits the player in the chest. What follows?","o":["A 2-minute bench penalty.","A hit-in for the away team.","A face-off at the nearest face-off dot.","A free-hit for the away team."],"v":"A player in the substitution zone with a foot on the board counts as too many players on the rink, regardless of whether play is affected.","r":"605.16"},{"n":49,"q":"A minor bench penalty (2 minutes) is imposed if a player plays or stops the ball:","o":["Lying down, gaining a considerable advantage.","With the thigh.","While jumping.","With the stick above knee level."],"v":"Playing the ball lying down is penalised with two minutes when the player gains a considerable advantage by it.","r":"605.13"},{"n":50,"q":"If a player of the offending team strikes the ball away when play is interrupted:","o":["The player is given a minor bench penalty (2 minutes).","The player is warned.","The player is given a 2 + 10 minute personal penalty.","The player is penalised; the referees decide how severely, depending on whether the non-offending team could have resumed play quickly."],"v":"When the offending team strikes or takes the ball away while play is interrupted, this is intentional delaying of play.","r":"605.19"},{"n":51,"q":"The following does not lead to a minor bench penalty (2 minutes):","o":["A field player intentionally moving the opposing team's goal cage.","A field player participating in play without a stick.","A goalkeeper omitting, despite summons from the referees, to put the goal cage back into position.","Fetching a stick from a place other than the team's own substitution zone."],"v":"A field player intentionally moving the opposing team's goal cage is penalised with a free-hit only.","r":"507.9"},{"n":52,"q":"If a player trips an opponent in the middle of the rink:","o":["The player is given a minor bench penalty (2 minutes).","The situation is judged as an offence leading to a free-hit.","Nothing happens; the rules do not cover this situation.","It is roughing, and the player is always given a major bench penalty (2+2 minutes)."],"v":"Tripping an opponent is careless physical play and is penalised with a minor bench penalty.","r":"605.6"},{"n":53,"q":"What must field players wear (according to the rules)?","o":["Uniforms consisting of jerseys, shorts and socks.","Exactly the same uniforms consisting of jerseys and shorts.","Uniforms in any colour combination except grey and black.","A wristband, a headband and the latest fashion."],"v":"Field players must wear a uniform consisting of a jersey, shorts and socks.","r":"401.1"},{"n":54,"q":"What must the referees wear at a match (according to the rules)?","o":["Jerseys, black shorts and black knee socks.","Long-sleeved jerseys, shorts and knee socks.","Jerseys, shorts and knee socks in a colour combination different from the teams'.","Jerseys and shorts in the same colour combination."],"v":"The referees must wear jerseys, black shorts and black knee socks.","r":"402.1"},{"n":55,"q":"If a player loses one or both shoes during play:","o":["The player may continue playing until the next interruption.","The player must substitute immediately.","The player may carry on as they like, but must pick the shoe up and throw it behind the board.","The player must be given a 10-minute personal penalty."],"v":"A player who loses a shoe may continue playing until the next interruption.","r":"401.4"},{"n":56,"q":"When may the goalkeeper use a stick?","o":["Never.","During a power play.","When attacking an opponent.","During a penalty shot."],"v":"The goalkeeper is not allowed to use a stick.","r":"403.1"},{"n":57,"q":"What must the goalkeeper wear?","o":["A face mask in accordance with the rules, long trousers, a jersey and sports shoes.","A face mask in accordance with the rules, long trousers and a long-sleeved jersey.","A face mask, shorts, a jersey and socks.","Knee pads, sports shoes, a jersey and trousers."],"v":"The goalkeeper must wear a face mask in accordance with the IFF Material Regulations, long trousers, a jersey and shoes.","r":"401.2, 401.4, 403.2"},{"n":58,"q":"What protective equipment may the goalkeeper use?","o":["Any that is not intended to cover the goal; in addition, all zippers, pockets and straps on the trousers must be closed and tightened.","A helmet, a groin guard, an ice hockey chest protector with shoulder pads, and gloves.","A helmet, leg pads, a catching glove and a blocker.","Knee pads and shoulder pads."],"v":"The goalkeeper may use any protective equipment that is not intended to cover the goal. Zippers, pockets and straps must be closed.","r":"403.3"},{"n":59,"q":"What must a player not wear?","o":["Personal equipment which may cause injury, including jewellery, rings, necklaces or watches.","A headband without knots.","Orthopaedic aids of all kinds and sizes.","Shorts that are too short."],"v":"A player must not wear equipment which may cause injury. Jewellery must be removed; covering it with tape is not enough.","r":"405.1"},{"n":60,"q":"What is the maximum hook of the blade at its highest point?","o":["30 mm.","25 mm.","35 mm.","It may be any size."],"v":"The hook of the blade shall not exceed 30 mm.","r":"406.2"},{"n":61,"q":"What must a referee be equipped with?","o":["A plastic whistle, measuring equipment and a red card.","A whistle, a red card and the Rules of the Game.","A plastic whistle, a stopwatch and a red card.","A whistle, measuring equipment, timekeeping equipment and a red card."],"v":"The referees must have a plastic whistle, measuring equipment and a red card.","r":"407.1"},{"n":62,"q":"Who carries out the control and measuring of all equipment?","o":["The referees.","The captains of both teams.","The coach or the captain of the team that pointed out the incorrect equipment.","The referees together with the chief organiser and the team captains."],"v":"The referees decide about controlling all equipment.","r":"409.1"},{"n":63,"q":"Who may request the measuring of a blade or control of the shaft/blade combination?","o":["The team captain.","The coach.","The team manager.","The chief organiser."],"v":"The team captain may request control of the hook of a blade or of the shaft/blade combination.","r":"409.2"},{"n":64,"q":"What is the maximum number of players from one team who may take part in one match?","o":["20.","15.","20 (as standard); 25 (if a simplified match record is used).","The number is not limited."],"v":"Each team may use a maximum of 20 players in a match, noted in the match record.","r":"301.1"},{"n":65,"q":"The goalkeeper catches the ball in the goal crease while jumping. The referees:","o":["Let play continue.","Award a free-hit for jumping.","Award a penalty shot, because a goal situation was interrupted.","Give the goalkeeper a minor bench penalty (2 minutes) for hands outside the goalkeeper area."],"v":"The goalkeeper is allowed to jump within their own goal crease.","r":"303.2"},{"n":66,"q":"The substitution zone must be marked:","o":["Starting 5 metres from the centre line and ending at the imaginary goal line.","Starting 1 metre from the centre line and ending at the corner of the board.","Starting 5 metres from the centre line, with a length of 10 metres.","From the centre line to the imaginary goal line."],"v":"The substitution zone starts 5 m from the centre line and ends at the imaginary extended goal line.","r":"104.1"},{"n":67,"q":"A penalty shot is started:","o":["From an imaginary spot 5 m from the centre line, centred between the long sides of the rink.","From the centre spot.","From the goal crease.","From the board at the substitution zone."],"v":"From 2026 the penalty shot starts 5 m closer to the goal, from an imaginary spot 5 m from the centre line.","r":"508.2"},{"n":68,"q":"A defender misplaces a pass and the ball heads towards their own goalkeeper, who knocks it into the corner of the rink with the forearm. The referees award a free-hit for delaying play. Where is it taken from?","o":["On the line from the centre of the goal through the place where the goalkeeper played the ball, at least 3.5 metres from the goalkeeper area.","From where the defender played the pass.","From where the goalkeeper played the ball.","From the nearest face-off dot."],"v":"A free-hit closer to the goalkeeper area than 3.5 m is moved out to this distance along the line from the centre of the goal line through the place of the offence.","r":"506.2"},{"n":69,"q":"Responsibility for correcting defects found during the inspection of the rink, and for keeping it in a proper condition during the match, lies with:","o":["The organiser.","The referees.","The home team's players.","The venue staff."],"v":"The organiser is responsible for correcting defects and for the condition of the rink during the match.","r":"106.1"},{"n":70,"q":"Before the start of the match, ends (who starts where) are chosen by:","o":["The home team.","The away team.","The referees.","The chief organiser."],"v":"The home team chooses ends before the start of the match.","r":"201.1"},{"n":71,"q":"A time out may be requested:","o":["Only by the team captain or a member of the team staff.","Only by the team captain or the head coach.","Only by a member of the team staff.","Only by the team captain."],"v":"A time out may be requested only by the team captain or a member of the team staff.","r":"202.1"},{"n":72,"q":"A requested time out must always be carried out:","o":["If a goal is scored or a penalty shot is awarded, the team may withdraw its request for a time out.","Without exception.","If a bench penalty is imposed, the team may withdraw its request for a time out.","If a match penalty is imposed, the team may withdraw its request for a time out."],"v":"A requested time out must always be carried out. The request may be withdrawn only when a goal is scored or a penalty shot is awarded.","r":"202.1"},{"n":73,"q":"After the ball has gone out of the rink, a player takes the hit-in quickly. While taking it, the player has one foot over the board, outside the rink. What follows?","o":["A free-hit for the opponents.","The player receives a 2-minute penalty.","Play continues.","A face-off in the corner of the rink."],"v":"Playing the ball from outside the rink is an offence leading to a free-hit.","r":"507.12"},{"n":74,"q":"How many time outs is a team entitled to?","o":["One during the whole match (including overtime).","As many as needed.","One time out in each period and in overtime.","A team is not entitled to a time out."],"v":"Each team is entitled to one time out per match.","r":"202.1"},{"n":76,"q":"During a penalty shot:","o":["Game time is stopped.","Game time runs.","Game time is stopped, but ten seconds are added.","Game time runs; it is stopped only for a penalty shot in overtime."],"v":"Game time is stopped during the entire penalty shot.","r":"508.4"},{"n":77,"q":"If the board comes apart:","o":["Play may continue until the ball comes near the place in question.","Play is interrupted immediately and, once the board has been fixed, resumed with a face-off.","No notice is taken of it at all and play continues.","Play is interrupted immediately and, once the board has been fixed, resumed with a hit-in for the team that had the ball."],"v":"When the board comes apart, play continues until the ball comes near the place in question.","r":"201.2, 503.3"},{"n":78,"q":"If a field player participates in play without a stick, the referees:","o":["Give the player a minor bench penalty (2 minutes).","Let the player fetch a stick and continue playing.","Give the player a match penalty for sabotage of play.","Award a free-hit to the non-offending team."],"v":"A field player without a stick is given a minor bench penalty.","r":"605.8"},{"n":79,"q":"A player leaving the rink did not pass over the board before the new player entered. This happened while play was taking place by the substitution zone. What follows?","o":["A minor bench penalty (2 minutes) for incorrect substitution.","A match penalty for sabotage of play.","The referees let play continue 5 against 5.","A free-hit for the non-offending team."],"v":"The player leaving the rink must be passing over the board before the new player enters. If play is affected, it is an incorrect substitution and a 2-minute penalty.","r":"605.15"},{"n":80,"q":"A player who has already been given two minor bench penalties (2 minutes) for pushing in the match commits the same offence a third time. What follows?","o":["A minor bench penalty (2 minutes).","A major bench penalty (2+2 minutes).","A match penalty.","A 10-minute personal penalty."],"v":"Repeated minor bench penalties are not made more severe. A match penalty follows only a second major bench penalty.","r":"605.6, 614.1"},{"n":81,"q":"A player of team A is given a major bench penalty (2+2 minutes) and team B scores after 30 seconds. What follows?","o":["The player stays on the penalty bench, but the first bench penalty terminates with the goal and the second 2-minute bench penalty starts to be measured.","The whole penalty terminates and the player returns to play.","The goal has no effect on the major bench penalty and the player sits out the whole rest of the penalty on the penalty bench.","Team A may replace the penalised player on the rink, but the penalised player must stay on the penalty bench."],"v":"A goal terminates a major bench penalty only one part at a time. The first two minutes terminate and the second two minutes start.","r":"603.7"},{"n":82,"q":"A player is penalised with 2+10 minutes for unsporting behaviour. Who serves the 2-minute bench penalty?","o":["A player chosen by the team captain.","The penalised player alone serves the whole penalty.","The team captain.","The referees choose at their own discretion."],"v":"The 2-minute bench penalty that goes with a personal penalty is served by a field player chosen by the team captain.","r":"608.1"},{"n":83,"q":"A penalty shot is awarded to the attacking team. The player taking the penalty shot fails to score. How is play resumed?","o":["With a face-off in the corner of the rink.","With a free-hit for the defending team in the corner of the rink.","With a free-hit for the attacking team in the corner of the rink.","With a face-off at the centre spot."],"v":"A penalty shot that does not result in a goal leads to a face-off at the nearest face-off dot, i.e. in the corner.","r":"503.8, 502.3"},{"n":84,"q":"An attacking player taking a free-hit touches the ball a second time before any team-mate has touched it. The referees:","o":["Award a free-hit to the defending team from the same place.","Let play continue, because no rule has been broken.","Interrupt play and let the attacking team take the free-hit again.","Award a face-off at the nearest face-off dot."],"v":"If the player taking the free-hit touches the ball a second time, the free-hit is incorrectly performed and the ball goes to the opponents.","r":"506.5, 507.15"},{"n":85,"q":"A defending player knocks the ball out of the rink. An attacking player shoots directly from the hit-in, without passing to a team-mate, and scores. The referees:","o":["Allow the goal.","Disallow the goal and award a face-off in the corner of the rink.","Disallow the goal and award a free-hit to the defending team in the corner of the rink.","Disallow the goal and have the free-hit retaken from the same place."],"v":"A hit-in may go directly into the goal.","r":"504.6"},{"n":86,"q":"The ball bounces off a defending player's stick high into the air and touches the ceiling of the hall. The referees:","o":["Award a hit-in to the attacking team 1.5 m from the board, at the same distance from the centre line as where the ball touched the ceiling.","Let play continue, because no rule has been broken.","Award a free-hit to the attacking team from the place on the rink directly below where the ball touched the ceiling.","Award a face-off at the nearest face-off dot."],"v":"After the ball touches the ceiling, the hit-in is taken 1.5 m from the board at the same distance from the centre line.","r":"504.2"},{"n":87,"q":"An attacking player shoots just over the goal cage and the ball leaves the rink over the short side directly, without touching any other player. The referees:","o":["Award a hit-in to the defending team in the corner of the rink.","Award a hit-in to the defending team from where the ball left the rink, moved out to 1.5 m from the board.","Award a face-off in the corner of the rink.","Award a hit-in to the attacking team in the corner of the rink."],"v":"If the ball leaves the rink behind the goal line, the hit-in is taken from the nearest face-off dot.","r":"504.2"},{"n":88,"q":"The referee judged a defending player's challenge in the goal crease to be an offence and awarded a free-hit. Where is the free-hit taken from?","o":["3.5 m from the goalkeeper area, on the imaginary extended line from the centre of the goal line through the place where the offence was committed.","Always exactly where the offence was committed.","From the corner of the rink.","From the edge of the goalkeeper area."],"v":"The free-hit is moved out to 3.5 m from the goalkeeper area along the line from the centre of the goal line through the place of the offence.","r":"506.2"},{"n":89,"q":"A player with the ball in the middle of the rink takes a wide stance to shield the ball with their body. A defending player cleverly takes the ball away with a foot between the player's legs. The referees:","o":["Award a free-hit to the attacking team for playing between an opponent's legs.","Let play continue, because playing between an opponent's legs is forbidden only with the stick.","Give the defending player a minor bench penalty (2 minutes) for playing between an opponent's legs.","Let play continue, because the Rules of the Game do not forbid playing between an opponent's legs."],"v":"Placing a foot between an opponent's legs is an offence leading to a free-hit.","r":"507.5"},{"n":90,"q":"A defending player kicks a dropping ball away with the instep, making contact at thigh level. The referees:","o":["Award a free-hit to the attacking team for a high kick.","Let play continue, because kicking the ball with the instep is forbidden only above waist level.","Give the defending player a minor bench penalty (2 minutes) for a high kick.","Let play continue, because the Rules of the Game do not forbid a high kick."],"v":"Playing the ball with the foot above knee level leads to a free-hit.","r":"507.4"},{"n":91,"q":"An attacking player scores from a rebound while standing with one foot on the line marking the goalkeeper area. The referees:","o":["Disallow the goal and award a free-hit to the defending team because the player was in the goalkeeper area.","Allow the goal, because only a defending player is forbidden to play in the goalkeeper area.","Allow the goal, because the player was only standing on the line, which is not part of the goalkeeper area.","Disallow the goal and award a face-off at the centre spot."],"v":"A field player is in the goalkeeper area even when standing on the line. The goal is therefore disallowed.","r":"507.8, 703.1"},{"n":92,"q":"A defending player stands in the corner of the rink watching the ball drop towards them, and decides to head it away before the attacker arrives. The referees:","o":["Award a free-hit to the attacking team for a header.","Let play continue, because playing the ball with the head is allowed.","Give the defending player a minor bench penalty (2 minutes) for a header.","Interrupt play, check whether the player who headed the ball is injured, and award a face-off."],"v":"A field player must not play the ball with the head. A free-hit follows.","r":"507.21"},{"n":93,"q":"A defending player is marking a screening attacker in front of the goal cage and is fully focused on that player. At that moment a shot from the middle of the rink is blocked and hits the defending player on the side of the head. The referees:","o":["Let play continue, because the defending player did not play the ball with the head intentionally.","Award a free-hit to the attacking team for a header.","Give the defending player a minor bench penalty (2 minutes) for a header.","Award a penalty shot, because the offence interrupted a goal situation."],"v":"The offence is playing the ball with the head. Being hit on the head unintentionally is not playing the ball.","r":"507.21"},{"n":94,"q":"A player taking a penalty shot keeps their body moving forward throughout, but just in front of the goalkeeper drags the ball slightly back with the tip of the blade and scores. The referees:","o":["Allow the goal, because the ball may move backwards during a penalty shot as long as the player's body is moving forward.","Disallow the goal but have the penalty shot retaken, because the ball moved back only slightly.","Disallow the goal, because during a penalty shot the ball must not move backwards under any circumstances, not even slightly.","Disallow the goal, because during a penalty shot the ball may move backwards only in the player's own half of the rink."],"v":"The player and the ball must not stop or move backwards at the same time. The ball may move backwards while the player's body is moving forward.","r":"508.4"},{"n":95,"q":"A player taking a penalty shot is surprised by the goalkeeper rushing out and makes a move to the side, at the same time moving slightly backwards with both body and ball. The referees:","o":["Disallow the goal, because during a penalty shot the player and the ball must not stop or move backwards at the same time.","Disallow the goal but have the penalty shot retaken, because the player and the ball moved back only slightly.","Allow the goal, because the movement of the player and the ball is not restricted in any way during a penalty shot.","Allow the goal, because the goalkeeper must not rush out at the player taking the penalty shot."],"v":"The player and the ball moved backwards at the same time, which is not allowed during a penalty shot.","r":"508.4"},{"n":97,"q":"A delayed penalty does not end at the moment when:","o":["A player of the offending team is hit by an opponent's shot.","A player of the offending team gains full control of the ball and passes to a team-mate.","A player of the offending team plays, with the stick, a ball bouncing in front of the goal cage.","A player of the offending team intentionally plays the ball with the foot."],"v":"A delayed penalty ends only when the offending team takes control of the ball or plays it in a controlled way. Being hit by a shot is neither.","r":"602.2"},{"n":98,"q":"Part of a broken stick is left lying on the rink and play continues. Who may not remove the broken part from the rink over the board during play?","o":["A spectator.","A referee.","The player who broke the stick.","An opponent of the player who broke the stick."],"v":"Anyone taking part in the game may remove a broken stick in a safe manner. A spectator is not one of them.","r":"605.24"},{"n":99,"q":"A player's stick breaks while shooting. One part stays in the player's hand and the other flies off towards the centre spot. Which of the following statements is true?","o":["The player may leave the broken part lying on the rink and go to substitute with the other broken part in hand.","The player may carry on playing with the broken part of the stick in hand and join in defending.","The player may throw the broken part of the stick over the board and join in defending without a stick.","The player may drop the broken part of the stick and go to substitute."],"v":"A player must not play with a broken stick, and intentionally dropping part of a stick is penalised. The player may go to substitute and pick up the rest at an interruption.","r":"605.8, 605.24, 614.11"},{"n":100,"q":"What is considered playing the ball lying down, for which a minor bench penalty (2 minutes) is imposed?","o":["A defending player kneels on both knees and pokes away an opponent's pass with the stick.","A defending player kneels on one knee and pokes away an opponent's pass with the stick.","A player with the ball slips and puts a hand on the floor while the ball is on their blade.","A player slips, is lying on the floor and is about to get up. At that moment an opponent hits the player with the ball."],"v":"Playing with both knees on the floor, when the player gains a considerable advantage by it, is penalised with two minutes.","r":"605.13"}];
+  var POCET=5, kb=document.getElementById('kviz-box'), minule=[], body=0, zodp=0;
+  function zamichat(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+  function vyber(){
+    var volne=ZASOBNIK.filter(function(x){return minule.indexOf(x.n)<0});
+    var sada=zamichat(volne).slice(0,POCET);
+    minule=sada.map(function(x){return x.n});
+    return sada.map(function(x){
+      /* v zásobníku je správná vždy první odpověď, proto se pořadí míchá */
+      var poradi=zamichat(x.o.map(function(_,i){return i}));
+      return {n:x.n,q:x.q,o:poradi.map(function(i){return x.o[i]}),s:poradi.indexOf(0),v:x.v,r:x.r};
+    });
+  }
+  function render(){
+    body=0;zodp=0;
+    var Q=vyber();
+    kb.innerHTML=Q.map(function(x,i){
+      return '<div class="otazka"><span class="drobny">Question '+(i+1)+' of '+Q.length+'</span><h3>'+esc(x.q)+'</h3><div class="moznosti">'+x.o.map(function(o,j){return '<button type="button" data-j="'+j+'">'+esc(o)+'</button>'}).join('')+'</div><p class="vysvetleni" hidden></p></div>';
+    }).join('')+'<p class="skore" id="skore" hidden></p><button type="button" class="reset" id="reset">New questions</button>';
+    kb.querySelectorAll('.otazka').forEach(function(el,i){
+      var x=Q[i];
+      el.querySelectorAll('.moznosti button').forEach(function(b){
+        b.addEventListener('click',function(){
+          var j=+b.dataset.j, ok=j===x.s;
+          el.querySelectorAll('.moznosti button').forEach(function(bb){bb.disabled=true;if(+bb.dataset.j===x.s)bb.classList.add('spravne')});
+          if(!ok)b.classList.add('spatne');
+          var v=el.querySelector('.vysvetleni');v.innerHTML='<b>'+(ok?'Correct.':'Not this time.')+'</b> '+esc(x.v)+' <span class="drobny">Rule '+esc(x.r)+'</span>';v.hidden=false;nbsp(v);
+          if(ok)body++;zodp++;
+          if(zodp===Q.length){var s=document.getElementById('skore');s.textContent='Score: '+body+' of '+Q.length+(body===Q.length?'. Well done, you know the rules!':'. Try another set of questions.');s.hidden=false}
+        });
+      });
+    });
+    document.getElementById('reset').addEventListener('click',function(){render();document.getElementById('kviz').scrollIntoView({block:'start'})});
+    nbsp(kb);
+  }
+
+  /* ---------- Nezlomitelné mezery za jednopísmennými předložkami ---------- */
+  function nbsp(root){
+    var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode&&n.parentNode.nodeName;return (p==='SCRIPT'||p==='STYLE'||p==='text')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
+    var n;while((n=w.nextNode())){var t=n.nodeValue.replace(/(^|[\s(„])([vkszouaiVKSZOUAI])\s+/g,'$1$2 ');if(t!==n.nodeValue)n.nodeValue=t}
+  }
+  render();
+  nbsp(document.querySelector('main'));nbsp(document.querySelector('header'));
+})();
+</script>
+<script>
+(function(){
+  /* ---------- Komiksy: jednoduchá kreslicí knihovna (inline SVG, barvy z CSS proměnných) ---------- */
+  function r(n){return Math.round(n*10)/10}
+  function pts(a){var s=[];for(var i=0;i<a.length;i+=2)s.push(r(a[i])+','+r(a[i+1]));return s.join(' ')}
+  function pl(a,c){return '<polyline class="'+c+'" points="'+pts(a)+'"/>'}
+  function ext(a,b){var o={},k;for(k in a)o[k]=a[k];for(k in b)o[k]=b[k];return o}
+  /* loket mezi ramenem a dlaní, b = vyboulení (kladné dolů/dopředu) */
+  function loket(s,h,b){var dx=h[0]-s[0],dy=h[1]-s[1],L=Math.sqrt(dx*dx+dy*dy)||1,nx=-dy/L,ny=dx/L;if(ny<0||(ny===0&&nx<0)){nx=-nx;ny=-ny}b=b==null?4:b;return [s[0],s[1],(s[0]+h[0])/2+nx*b,(s[1]+h[1])/2+ny*b,h[0],h[1]]}
+
+  /* nohy: [kyčel, koleno, chodidlo] zadní a přední, postava kouká doprava, chodidla na y=0 */
+  var NOHY={
+    stoj:[[-3,-24,-4,-12,-5,0],[3,-24,4,-12,5,0]],
+    beh:[[-2,-24,-10,-13,-20,-6],[2,-24,11,-14,9,0]],
+    krok:[[-2,-24,-7,-12,-12,0],[2,-24,9,-12,14,0]],
+    skok:[[-2,-24,-6,-12,-8,0],[2,-24,14,-32,27,-29]],
+    kop:[[-3,-24,-5,-12,-7,0],[3,-24,14,-17,25,-11]],
+    drep:[[-3,-24,-12,-12,-9,0],[3,-24,12,-13,13,0]],
+    sed:[[-2,-24,10,-24,11,0],[2,-24,13,-24,14,0]],
+    klek:[[-2,-24,7,-3,-9,-1],[2,-24,12,-3,-3,-1]]
+  };
+  var POSUN={drep:5,sed:8,klek:12};
+  /* florbalky: [konec násady, pata čepele, špička čepele] */
+  var HUL={
+    vede:[[-4,-54],[25,-1],[34,-.5]],
+    klid:[[2,-50],[17,-1],[26,0]],
+    naprah:[[12,-46],[-16,-100],[-23,-107]],
+    strela:[[-2,-50],[32,-12],[40,-16]],
+    vysoko:[[0,-48],[28,-78],[34,-84]],
+    drep:[[6,-42],[26,-1],[34,0]],
+    vzad:[[0,-50],[-24,-8],[-32,-6]]
+  };
+
+  function hrac(o){
+    var s=o.s||1,k=o.k||1,l=o.lean||0,nohy=o.nohy||'stoj',u=POSUN[nohy]||0,n=NOHY[nohy],g=!!o.gol;
+    var dres=o.tym==='b'?'var(--tym-b)':o.tym==='r'?'url(#km-pruhy)':'var(--tym-a)';
+    var tren=o.tym==='a'?'var(--podklad)':'var(--postava)';
+    var sh=[l,-55+u],hx=r(l*1.15),hy=-68+u;
+    var ruce=o.ruce?o.ruce.slice():null,H='';
+    if(o.hul){
+      var T=o.hul[0],E=o.hul[1],B=o.hul[2]||[E[0]+9,E[1]];
+      var at=function(t){return [T[0]+(E[0]-T[0])*t,T[1]+(E[1]-T[1])*t]};
+      if(!ruce)ruce=[at(.05),at(.36)];
+      H='<line class="k-hul" x1="'+r(T[0])+'" y1="'+r(T[1])+'" x2="'+r(E[0])+'" y2="'+r(E[1])+'"/>'+pl([E[0],E[1],B[0],B[1]],'k-cepel');
+    }
+    if(!ruce)ruce=[[-5,-33+u],[6,-33+u]];
+    function ruka(h,i){
+      var out=pl(loket(sh,h,h[2]),'k-telo k-ruka')+'<circle class="k-dlan" cx="'+r(h[0])+'" cy="'+r(h[1])+'" r="2.5"/>';
+      if(i===1&&o.prsty)out+='<path class="k-telo k-prst" d="M'+r(h[0]-1.5)+','+r(h[1]-1)+' l-2,-7 M'+r(h[0]+1.5)+','+r(h[1]-1)+' l2,-7"/>';
+      if(i===1&&o.dlan==='nahoru')out+='<path class="k-telo k-prst" d="M'+r(h[0]-4)+','+r(h[1]-3)+' Q'+r(h[0])+','+r(h[1]+2)+' '+r(h[0]+5)+','+r(h[1]-3)+'"/>';
+      if(i===1&&o.dlan==='dopredu')out+='<rect class="k-dlan" x="'+r(h[0]-3)+'" y="'+r(h[1]-9)+'" width="6" height="9" rx="2.5"/>';
+      if(i===1&&o.hodinky)out+='<rect class="k-hodinky" x="'+r(h[0]-3.5)+'" y="'+r(h[1]+3)+'" width="7" height="6" rx="1.5"/>';
+      return out;
+    }
+    function noha(a){
+      a=a.slice();a[1]+=u;
+      return pl(a,g?'k-telo k-kalhoty':'k-telo k-noha')+(g?'':'<line class="k-telo k-bota" x1="'+r(a[4])+'" y1="'+r(a[5])+'" x2="'+r(a[4]+4.5)+'" y2="'+r(a[5])+'"/>');
+    }
+    var torzo='<path class="k-dres" fill="'+dres+'" d="M'+r(l-9)+','+(-57+u)+' Q'+r(l)+','+(-60+u)+' '+r(l+9)+','+(-57+u)+' L8,'+(-29+u)+' L-8,'+(-29+u)+'Z"/>';
+    var kr=g?'':'<path class="k-dres" fill="'+tren+'" d="M-8.5,'+(-31+u)+' H8.5 L9,'+(-21+u)+' H1.2 L0,'+(-25+u)+' L-1.2,'+(-21+u)+' H-9Z"/>';
+    var hlava='<circle class="k-hlava" cx="'+hx+'" cy="'+hy+'" r="9"/>';
+    if(g){
+      hlava+='<path class="k-vlasy" d="M'+(hx-9)+','+hy+' A9,9 0 0 1 '+(hx+1)+','+(hy-8.9)+' L'+(hx+1)+','+(hy+8.9)+' A9,9 0 0 1 '+(hx-9)+','+hy+'Z"/>'+
+        '<path class="k-maska" d="M'+(hx+4.5)+','+(hy-7.7)+'V'+(hy+7.7)+'M'+(hx+7.8)+','+(hy-4.6)+'V'+(hy+4.6)+'M'+(hx+1)+','+(hy-3.5)+'H'+(hx+8.4)+'M'+(hx+1)+','+(hy+2.5)+'H'+(hx+8.6)+'"/>';
+    }else{
+      hlava+='<path class="k-vlasy" d="M'+(hx-9)+','+(hy+1)+' A9,9 0 0 1 '+(hx+7)+','+(hy-5.6)+' Q'+(hx-1)+','+(hy-4.5)+' '+(hx-5)+','+(hy+3)+'Z"/>'+
+        '<circle class="k-oko" cx="'+(hx+3)+'" cy="'+(hy-1)+'" r="1.25"/><circle class="k-oko" cx="'+(hx+6.6)+'" cy="'+(hy-1)+'" r="1.25"/>';
+      var t=o.tvar||'ok';
+      if(t==='ok')hlava+='<path class="k-pusa" d="M'+(hx+3)+','+(hy+3.6)+' Q'+(hx+5)+','+(hy+5.6)+' '+(hx+7.4)+','+(hy+3.2)+'"/>';
+      if(t==='krik')hlava+='<ellipse class="k-oko" cx="'+(hx+5.2)+'" cy="'+(hy+4.3)+'" rx="2" ry="2.5"/>';
+      if(t==='vylek')hlava+='<circle class="k-pusa" cx="'+(hx+5.2)+'" cy="'+(hy+4.4)+'" r="1.4"/><path class="k-pusa" d="M'+(hx+1.6)+','+(hy-4.6)+' l2.6,-.8 M'+(hx+5.4)+','+(hy-5.2)+' l2.6,.6"/>';
+      if(t==='smutny')hlava+='<path class="k-pusa" d="M'+(hx+3)+','+(hy+5.2)+' Q'+(hx+5)+','+(hy+3.4)+' '+(hx+7.4)+','+(hy+5.2)+'"/>';
+      if(t==='zly')hlava+='<path class="k-pusa" d="M'+(hx+3.4)+','+(hy+4.4)+' H'+(hx+7.2)+' M'+(hx+1.4)+','+(hy-4.8)+' L'+(hx+4.2)+','+(hy-3.2)+' M'+(hx+5.4)+','+(hy-3.2)+' L'+(hx+8.2)+','+(hy-4.8)+'"/>';
+      if(t==='pisk')hlava+='<rect class="k-pistalka" x="'+(hx+5)+'" y="'+(hy+2.2)+'" width="7" height="3.4" rx="1.2"/>';
+    }
+    var tr=(o.x||0)+' '+(o.y==null?150:o.y);
+    return '<g transform="translate('+tr+') scale('+(s*k)+' '+k+')">'+noha(n[0])+noha(n[1])+ruka(ruce[0],0)+torzo+kr+hlava+H+ruka(ruce[1],1)+(o.navic||'')+'</g>';
+  }
+  function brankar(o){return hrac(ext({gol:true,nohy:'klek'},o))}
+
+  /* ---------- kulisy ---------- */
+  function hala(h,l1,l2){h=h==null?106:h;return '<rect class="k-podlaha" x="0" y="'+h+'" width="240" height="'+(170-h)+'"/><rect class="k-mant" x="-4" y="'+(h-14)+'" width="248" height="14" rx="2"/>'+(l1?'<text class="k-mtxt" x="8" y="'+(h-4)+'">'+l1+'</text>':'')+(l2?'<text class="k-mtxt" x="232" y="'+(h-4)+'" text-anchor="end">'+l2+'</text>':'')}
+  function mic(x,y){return '<circle class="k-mic" cx="'+x+'" cy="'+y+'" r="3.8"/><circle class="k-dirka" cx="'+r(x-1.3)+'" cy="'+r(y-1)+'" r=".75"/><circle class="k-dirka" cx="'+r(x+1.3)+'" cy="'+r(y+.8)+'" r=".75"/>'}
+  function branka(x,y,s){s=s||1;var p=function(dx,dy){return r(x+dx*s)+','+r(y+dy)};
+    return '<path class="k-sit" d="M'+p(0,0)+' L'+p(0,-46)+' L'+p(22,-46)+' L'+p(34,0)+'Z"/><path class="k-ln" d="M'+p(22,-46)+' L'+p(34,0)+' L'+p(0,0)+'"/><path class="k-ram" d="M'+p(0,0)+' L'+p(0,-46)+' L'+p(22,-46)+'"/>'}
+  function brankoviste(x1,x2,y,on){return '<polygon class="k-bk'+(on?' on':'')+'" points="'+pts([x1+6,y-7,x2+6,y-7,x2-6,y+7,x1-6,y+7])+'"/>'}
+  function tabule(x,y,t,bezi){
+    return '<path class="k-ln" d="M'+(x-24)+',0 V'+y+' M'+(x+24)+',0 V'+y+'"/><rect class="k-tab" x="'+(x-38)+'" y="'+y+'" width="76" height="28" rx="4"/>'+
+      '<text class="k-tabt" x="'+(x-7)+'" y="'+(y+20)+'" text-anchor="middle">'+t+'</text>'+
+      (bezi?'<circle class="k-svetlo" cx="'+(x+25)+'" cy="'+(y+14)+'" r="4"/>':'<path class="k-pauza" d="M'+(x+22)+','+(y+9)+' v10 M'+(x+28)+','+(y+9)+' v10"/>');
+  }
+  function bublina(cx,cy,t,tx,ty,fs){
+    fs=fs||11;var rad=String(t).split('|'),max=0;rad.forEach(function(x){if(x.length>max)max=x.length});
+    var w=Math.round(max*fs*.56+18),h=Math.round(rad.length*fs*1.2+10),x=r(cx-w/2),y=r(cy-h/2),q=Math.min(9,h/2),dole=ty>cy;
+    var b=Math.max(x+q+2,Math.min(x+w-q-12,tx-5)),d;
+    if(dole)d='M'+(x+q)+','+y+' H'+(x+w-q)+' A'+q+','+q+' 0 0 1 '+(x+w)+','+(y+q)+' V'+(y+h-q)+' A'+q+','+q+' 0 0 1 '+(x+w-q)+','+(y+h)+' H'+(b+10)+' L'+tx+','+ty+' L'+b+','+(y+h)+' H'+(x+q)+' A'+q+','+q+' 0 0 1 '+x+','+(y+h-q)+' V'+(y+q)+' A'+q+','+q+' 0 0 1 '+(x+q)+','+y+'Z';
+    else d='M'+(x+q)+','+y+' H'+b+' L'+tx+','+ty+' L'+(b+10)+','+y+' H'+(x+w-q)+' A'+q+','+q+' 0 0 1 '+(x+w)+','+(y+q)+' V'+(y+h-q)+' A'+q+','+q+' 0 0 1 '+(x+w-q)+','+(y+h)+' H'+(x+q)+' A'+q+','+q+' 0 0 1 '+x+','+(y+h-q)+' V'+(y+q)+' A'+q+','+q+' 0 0 1 '+(x+q)+','+y+'Z';
+    var txt=rad.map(function(z,i){return '<tspan x="'+cx+'" dy="'+(i?r(fs*1.2):0)+'">'+z+'</tspan>'}).join('');
+    return '<path class="k-bub" d="'+d+'"/><text class="k-bt" font-size="'+fs+'" x="'+cx+'" y="'+r(cy-(rad.length-1)*fs*.6+fs*.36)+'" text-anchor="middle">'+txt+'</text>';
+  }
+  function zvuk(x,y,t,fs,rot){return '<text class="k-zvuk" font-size="'+(fs||20)+'" text-anchor="middle" transform="translate('+x+' '+y+') rotate('+(rot||0)+') skewX(-8)">'+t+'</text>'}
+  function cary(x,y,s){s=s||1;return '<path class="k-rychlost" d="M'+x+','+(y-54)+' h'+(-14*s)+' M'+(x+2*s)+','+(y-42)+' h'+(-20*s)+' M'+x+','+(y-28)+' h'+(-12*s)+'"/>'}
+  function drah(d){return '<path class="k-pohyb" d="'+d+'"/>'}
+  /* druh: true = v pořádku, 'vu' = volný úder, 'tr' = trest, 'ne' = neplatí (stejné barvy jako štítky na stránce) */
+  function stitek(ok,t){
+    var w=Math.round(t.length*5.9+36),c=ok===true?'ok':ok;
+    return '<g><rect class="k-st '+c+'" x="8.8" y="8.8" width="'+w+'" height="20.4" rx="10.2"/>'+
+      (ok===true?'<path class="k-sti" d="M14.5,19.5 l3.5,3.5 l7,-8"/>':'<path class="k-sti" d="M15,14.5 l8,8 M23,14.5 l-8,8"/>')+
+      '<text class="k-stt" x="30" y="23.4">'+t+'</text></g>';
+  }
+  function pas(y){return '<line class="k-pas" x1="0" y1="'+y+'" x2="240" y2="'+y+'"/><text class="k-mtxt" x="4" y="'+(y-4)+'">waist level</text>'}
+  function mantinelBok(x,y){return '<rect class="k-mant" x="'+x+'" y="'+(y-24)+'" width="12" height="24" rx="2"/>'}
+  function lavice(x1,x2,y){return '<path class="k-lav" d="M'+x1+','+(y-15)+' H'+x2+' M'+(x1+5)+','+(y-15)+' V'+y+' M'+(x2-5)+','+(y-15)+' V'+y+'"/>'}
+  function trestna(x1,x2,y,txt){return '<rect class="k-mant" x="'+x1+'" y="'+(y-30)+'" width="'+(x2-x1)+'" height="30" rx="3"/><text class="k-mtxt" x="'+((x1+x2)/2)+'" y="'+(y-11)+'" text-anchor="middle">'+(txt==null?'PENALTY BENCH':txt)+'</text>'}
+  function vzdalenost(x1,x2,y,t){return '<path class="k-mira" d="M'+x1+','+y+' H'+x2+' M'+x1+','+(y-4)+' v8 M'+x2+','+(y-4)+' v8"/><text class="k-mtxt" x="'+((x1+x2)/2)+'" y="'+(y-5)+'" text-anchor="middle">'+t+'</text>'}
+  function krizek(x,y){return '<path class="k-ln" d="M'+(x-6)+','+y+' h12 M'+x+','+(y-3)+' v6" stroke-width="1.6"/>'}
+
+  var REF_NAHORU=[[-5,-33],[1,-96,3]];
+  var SC={
+    /* --- Malé brankoviště --- */
+    bk1:function(){return hala()+brankoviste(140,196,150)+branka(200,150)+brankar({x:186,y:152,s:-1,tym:'a',ruce:[[-13,-34],[14,-34]]})+cary(66,152)+hrac({x:84,y:152,tym:'b',nohy:'beh',lean:6,hul:HUL.vede,tvar:'zly'})+mic(121,148)},
+    bk2:function(){return hala()+brankoviste(140,196,150,true)+branka(200,150)+brankar({x:190,y:152,s:-1,tym:'a',ruce:[[-13,-34],[14,-34]],tvar:''})+hrac({x:134,y:152,tym:'b',nohy:'krok',lean:4,hul:[[-4,-54],[22,-3],[30,-3]],tvar:'vylek'})+mic(168,149)+zvuk(140,58,'!',30)},
+    bk3:function(){return hala()+brankoviste(150,206,150,true)+branka(210,150)+hrac({x:96,y:152,tym:'r',tvar:'pisk',ruce:[[1,-91,-8],[3,-91,8]]})+zvuk(150,64,'TWEEET!',22,-8)},
+    bk4:function(){return hala()+brankoviste(150,206,150)+branka(210,150)+hrac({x:170,y:152,s:-1,tym:'a',nohy:'krok',hul:HUL.vede,tvar:'ok'})+mic(133,149)+hrac({x:50,y:152,tym:'b',hul:HUL.klid,tvar:'smutny'})+vzdalenost(82,128,163,'3 m')},
+    /* --- Střídání --- */
+    st1:function(){return hala(100)+'<text class="k-mtxt" x="8" y="164">RINK</text><text class="k-mtxt" x="211" y="164" text-anchor="middle">BENCH</text>'+lavice(184,238,150)+mantinelBok(124,150)+hrac({x:214,y:150,s:-1,tym:'b',nohy:'sed',tvar:'ok',ruce:[[-2,-28],[8,-26]]})+hrac({x:162,y:152,s:-1,tym:'b',hul:HUL.klid,tvar:'ok'})+cary(44,152)+hrac({x:62,y:152,tym:'b',nohy:'beh',lean:6,hul:HUL.klid,tvar:'krik'})+bublina(70,34,'Change!',66,70)},
+    st2:function(){return hala(100)+'<text class="k-mtxt" x="8" y="164">RINK</text><text class="k-mtxt" x="211" y="164" text-anchor="middle">BENCH</text>'+lavice(184,238,150)+hrac({x:214,y:150,s:-1,tym:'b',nohy:'sed',tvar:'ok',ruce:[[-2,-28],[8,-26]]})+hrac({x:166,y:152,s:-1,tym:'b',hul:HUL.klid,tvar:'ok'})+hrac({x:108,y:152,tym:'b',nohy:'skok',lean:5,ruce:[[-6,-38],[17,-25,-3]],hul:[[-5,-40],[-24,-3],[-32,-3]],tvar:'ok'})+mantinelBok(124,150)},
+    st3:function(){return hala(100)+'<text class="k-mtxt" x="8" y="164">RINK</text><text class="k-mtxt" x="211" y="164" text-anchor="middle">BENCH</text>'+lavice(184,238,150)+hrac({x:202,y:150,s:-1,tym:'b',nohy:'sed',tvar:'ok',ruce:[[-2,-28],[8,-26]]})+hrac({x:226,y:150,s:-1,tym:'b',nohy:'sed',tvar:'ok',k:.95})+hrac({x:150,y:152,s:-1,tym:'b',nohy:'skok',lean:5,ruce:[[-6,-38],[17,-25,-3]],hul:[[-5,-40],[-24,-3],[-32,-3]],tvar:'krik'})+mantinelBok(124,150)+bublina(150,36,'Going in!',146,70)+stitek(true,'correct')},
+    st4:function(){return hala(100)+'<text class="k-mtxt" x="8" y="164">RINK</text><text class="k-mtxt" x="211" y="164" text-anchor="middle">BENCH</text>'+lavice(184,238,150)+mantinelBok(124,150)+hrac({x:214,y:150,s:-1,tym:'b',nohy:'sed',tvar:'vylek',ruce:[[-2,-28],[8,-26]]})+hrac({x:24,y:152,k:.88,tym:'r',tvar:'pisk',ruce:[[-5,-33],[2,-92,4]],prsty:2})+hrac({x:64,y:152,tym:'b',nohy:'krok',hul:HUL.vede,tvar:'ok'})+mic(101,149)+hrac({x:112,y:152,s:-1,tym:'b',nohy:'krok',hul:HUL.klid,tvar:'vylek'})+zvuk(70,58,'TWEET!',18,-8)+stitek('tr','2 minutes')},
+    /* --- Brankář a tři sekundy --- */
+    br1:function(){return hala()+brankoviste(150,200,150)+branka(204,150)+brankar({x:188,y:152,s:-1,tym:'a',ruce:[[9,-36],[12,-38]],navic:mic(14,-37)})+hrac({x:58,y:152,tym:'b',hul:HUL.klid,tvar:'smutny'})+bublina(150,40,'1…',172,80,14)},
+    br2:function(){return hala()+brankoviste(150,200,150)+branka(204,150)+brankar({x:186,y:152,s:-1,tym:'a',nohy:'stoj',ruce:[[-4,-38],[13,-66,-3]],navic:mic(14,-70)})+hrac({x:56,y:152,tym:'a',nohy:'krok',hul:HUL.klid,tvar:'krik'})+bublina(62,38,'Here!',62,72)+bublina(150,36,'2…',168,66,14)},
+    br3:function(){return hala()+'<line class="k-pas" x1="18" y1="92" x2="18" y2="170"/><text class="k-mtxt" x="22" y="164">centre line</text>'+brankoviste(150,200,150)+branka(204,150)+brankar({x:186,y:152,s:-1,tym:'a',nohy:'krok',lean:6,ruce:[[-10,-40],[24,-66,-3]]})+drah('M160,84 Q118,52 88,140')+hrac({x:50,y:152,tym:'a',nohy:'krok',hul:HUL.vede,tvar:'ok'})+mic(88,144)+stitek(true,'within 3 seconds')},
+    /* --- Čistý čas --- */
+    cc1:function(){return hala(108)+tabule(120,10,'14:52',true)+hrac({x:90,y:152,tym:'a',nohy:'krok',lean:4,hul:HUL.vede,tvar:'zly'})+hrac({x:162,y:152,s:-1,tym:'b',nohy:'krok',lean:4,hul:HUL.vede,tvar:'zly'})+mic(126,149)},
+    cc2:function(){return hala(108)+tabule(120,10,'14:52',false)+hrac({x:46,y:152,tym:'a',hul:HUL.klid,tvar:'ok'})+hrac({x:198,y:152,s:-1,tym:'b',hul:HUL.klid,tvar:'ok'})+hrac({x:118,y:152,tym:'r',tvar:'pisk',ruce:[[-5,-33],[16,-46]]})+zvuk(166,74,'TWEEET!',20,-8)},
+    cc3:function(){return hala(108)+tabule(120,10,'14:52',true)+hrac({x:121,y:128,k:.78,tym:'r',tvar:'ok'})+hrac({x:90,y:152,tym:'a',nohy:'drep',lean:8,hul:HUL.drep,tvar:'zly'})+hrac({x:152,y:152,s:-1,tym:'b',nohy:'drep',lean:8,hul:HUL.drep,tvar:'zly'})+mic(121,149)},
+    cc4:function(){var d='';for(var i=0;i<12;i++){d+='<circle class="k-divak" cx="'+(10+i*20)+'" cy="'+(i%2?84:80)+'" r="6"/><path class="k-divak" d="M'+(i*20)+','+(i%2?102:98)+' q10,-14 20,0Z"/>'}
+      return '<rect class="k-podlaha" x="0" y="0" width="240" height="170" opacity=".6"/>'+d+'<path class="k-ln" d="M0,100 H240"/>'+hrac({x:70,y:212,k:1.5,tym:'a',tvar:'vylek',ruce:[[-5,-33],[14,-64,-3]],hodinky:true})+hrac({x:176,y:212,k:1.5,s:-1,tym:'b',tvar:'krik'})+'<rect class="k-mant" x="-4" y="156" width="248" height="30"/>'+bublina(72,30,'Still 5 min?',74,66)+bublina(170,44,'Clock stops!',172,80)},
+    /* --- Vysoká hůl --- */
+    vh1:function(){return hala()+pas(121)+hrac({x:116,y:152,tym:'b',nohy:'krok',hul:HUL.naprah,tvar:'ok'})+mic(142,149)+stitek(true,'nobody near')},
+    vh2:function(){return hala()+pas(121)+hrac({x:212,y:142,k:.8,s:-1,tym:'r',tvar:'pisk'})+hrac({x:86,y:152,tym:'a',hul:HUL.klid,tvar:'vylek'})+hrac({x:142,y:152,tym:'b',nohy:'krok',hul:HUL.naprah,tvar:'ok'})+mic(168,149)+zvuk(204,66,'TWEET!',17,-8)+stitek('vu','free-hit')},
+    vh3:function(){return hala()+pas(121)+hrac({x:204,y:152,s:-1,tym:'r',tvar:'pisk',ruce:[[-5,-33],[2,-92,4]],prsty:2})+hrac({x:92,y:152,tym:'b',nohy:'krok',hul:HUL.vysoko,tvar:'zly'})+mic(134,64)+stitek('tr','2 minutes')},
+    /* --- Souboje --- */
+    so1:function(){return hala()+cary(70,148)+hrac({x:113,y:146,k:.95,tym:'b',nohy:'beh',lean:4,hul:HUL.klid,tvar:'zly'})+hrac({x:94,y:154,tym:'a',nohy:'beh',lean:6,hul:HUL.klid,tvar:'zly'})+mic(160,152)+stitek(true,'shoulder to shoulder')},
+    so2:function(){return hala()+hrac({x:80,y:152,tym:'a',nohy:'krok',lean:8,ruce:[[24,-52,-2],[28,-46,-2]],tvar:'zly'})+cary(140,150)+hrac({x:126,y:152,tym:'b',nohy:'beh',lean:14,hul:HUL.klid,tvar:'krik'})+stitek('vu','free-hit')},
+    so3:function(){return hala()+mantinelBok(198,150)+hrac({x:180,y:152,tym:'b',lean:7,ruce:[[12,-40],[18,-27]],tvar:'krik'})+hrac({x:152,y:152,tym:'a',nohy:'krok',lean:10,ruce:[[18,-50,-2],[22,-44,-2]],tvar:'zly'})+stitek('tr','2 minutes')},
+    /* --- Výhoda --- */
+    vy1:function(){return hala()+hrac({x:84,y:152,tym:'a',nohy:'beh',lean:5,hul:HUL.vede,tvar:'zly'})+mic(122,149)+hrac({x:140,y:152,s:-1,tym:'b',nohy:'krok',lean:6,hul:[[2,-56],[34,-12],[41,-10]],tvar:'zly'})+zvuk(116,70,'CLACK!',16,-6)},
+    vy2:function(){return hala()+hrac({x:46,y:152,tym:'r',ruce:[[-5,-33],[32,-50,-3]],dlan:'nahoru',tvar:'ok'})+hrac({x:116,y:152,tym:'b',nohy:'stoj',hul:HUL.klid,tvar:'zly'})+cary(150,152)+hrac({x:168,y:152,tym:'a',nohy:'beh',lean:6,hul:HUL.vede,tvar:'ok'})+mic(205,149)+bublina(66,34,'Advantage!',56,72)},
+    vy3:function(){return hala()+branka(204,150)+brankar({x:190,y:152,s:-1,tym:'b',ruce:[[-12,-28],[10,-24]]})+drah('M158,138 Q190,96 214,118')+mic(216,121)+hrac({x:118,y:152,tym:'a',nohy:'krok',hul:HUL.strela,tvar:'krik'})+zvuk(92,62,'GOOOAL!',24,-8)},
+    /* --- Odložené vyloučení --- */
+    od1:function(){return hala()+hrac({x:212,y:144,k:.85,s:-1,tym:'r',ruce:REF_NAHORU,dlan:'dopredu',tvar:'ok'})+hrac({x:76,y:152,tym:'b',nohy:'krok',lean:6,hul:[[2,-52],[44,-3],[51,-5]],tvar:'zly'})+hrac({x:124,y:152,tym:'a',nohy:'beh',lean:16,hul:HUL.vede,tvar:'krik'})+mic(164,148)},
+    od2:function(){return hala()+hrac({x:40,y:144,k:.85,tym:'r',ruce:REF_NAHORU,dlan:'dopredu',tvar:'ok'})+cary(110,152)+hrac({x:128,y:152,tym:'a',nohy:'beh',lean:6,hul:HUL.klid,tvar:'krik'})+cary(196,152)+brankar({x:214,y:152,tym:'a',nohy:'beh',lean:8,ruce:[[-12,-32],[10,-34]]})+bublina(130,32,'On for the goalie!',128,70)},
+    od3:function(){return hala()+hrac({x:34,y:144,k:.85,tym:'r',ruce:REF_NAHORU,dlan:'dopredu',tvar:'pisk'})+hrac({x:112,y:152,tym:'b',nohy:'krok',hul:HUL.vede,tvar:'ok'})+mic(149,149)+hrac({x:190,y:152,s:-1,tym:'a',nohy:'krok',hul:HUL.klid,tvar:'vylek'})+zvuk(80,52,'TWEEET!',20,-8)},
+    od4:function(){return tabule(120,8,'2:00',false)+'<rect class="k-podlaha" x="0" y="96" width="240" height="74"/>'+hrac({x:116,y:152,k:1.3,tym:'b',nohy:'sed',tvar:'smutny',ruce:[[-2,-28],[8,-26]]})+trestna(16,224,164)},
+    /* --- Gól v přesilovce --- */
+    pr1:function(){return tabule(184,6,'1:12',true)+'<rect class="k-podlaha" x="0" y="96" width="240" height="74"/>'+hrac({x:184,y:118,k:.9,tym:'b',nohy:'sed',tvar:'smutny'})+trestna(132,236,120,'PENALTY')+cary(50,152)+hrac({x:70,y:152,tym:'a',nohy:'beh',lean:6,hul:HUL.vede,tvar:'krik'})+mic(108,149)},
+    pr2:function(){return hala()+branka(204,150)+brankar({x:190,y:152,s:-1,tym:'b',ruce:[[-12,-28],[10,-24]]})+drah('M152,138 Q186,100 214,124')+mic(216,127)+hrac({x:112,y:152,tym:'a',nohy:'krok',hul:HUL.strela,tvar:'krik'})+zvuk(80,62,'GOOAL!',24,-8)},
+    pr3:function(){return tabule(184,6,'0:00',false)+'<rect class="k-podlaha" x="0" y="96" width="240" height="74"/>'+trestna(132,236,120,'PENALTY')+cary(122,152,-1)+hrac({x:104,y:152,s:-1,tym:'b',nohy:'beh',lean:6,hul:HUL.klid,tvar:'krik'})+bublina(70,58,'I’m back!',94,80)+stitek(true,'penalty over')},
+    /* --- Kopnutý gól --- */
+    ko1:function(){return hala()+branka(204,150)+hrac({x:108,y:152,tym:'b',nohy:'kop',lean:-3,hul:HUL.vzad,tvar:'zly'})+drah('M142,138 Q176,120 212,134')+mic(140,139)+zvuk(150,112,'THUD!',16,-10)},
+    ko2:function(){return hala()+branka(204,150)+mic(220,140)+hrac({x:120,y:152,tym:'b',ruce:[[-12,-90,-3],[14,-92,3]],hul:[[-13,-88],[-6,-128],[2,-132]],tvar:'krik'})+bublina(54,40,'Goal!',100,74,13)},
+    ko3:function(){return hala()+branka(208,150)+mic(224,140)+hrac({x:206,y:146,k:.8,s:-1,tym:'b',tvar:'smutny',hul:HUL.klid})+hrac({x:110,y:152,tym:'r',tvar:'pisk',ruce:[[-38,-58,-2],[38,-58,-2]]})+zvuk(170,56,'TWEEET!',20,-8)+stitek('ne','no goal')},
+    ko4:function(){return hala(108)+hrac({x:124,y:128,k:.78,tym:'r',tvar:'ok'})+krizek(124,151)+hrac({x:93,y:152,tym:'b',nohy:'drep',lean:8,hul:HUL.drep,tvar:'zly'})+hrac({x:155,y:152,s:-1,tym:'a',nohy:'drep',lean:8,hul:HUL.drep,tvar:'zly'})+mic(124,149)}
+  };
+  window.CFK={hrac:hrac,brankar:brankar,hala:hala,mic:mic,branka:branka,brankoviste:brankoviste,bublina:bublina,zvuk:zvuk,cary:cary,drah:drah,pas:pas,mantinelBok:mantinelBok,lavice:lavice,HUL:HUL};
+  document.querySelectorAll('svg[data-s]').forEach(function(svg){var f=SC[svg.getAttribute('data-s')];if(f)svg.innerHTML=f()});
+})();
+</script>
+<script>
+(function(){
+  /* ---------- Dynamika a interaktivní prvky ---------- */
+  var K=window.CFK;
+  var KLID=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+  function $(s,c){return (c||document).querySelector(s)}
+  function $$(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))}
+  function dvoj(n){return (n<10?'0':'')+n}
+  function mmss(s){s=Math.max(0,Math.floor(s));return dvoj(Math.floor(s/60))+':'+dvoj(s%60)}
+  function mss(s){s=Math.max(0,Math.ceil(s));return Math.floor(s/60)+':'+dvoj(s%60)}
+  function michat(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+
+  /* ---------- Úvodní scéna ---------- */
+  (function(){
+    var svg=$('#hero-scena');if(!svg||!K)return;
+    var d='',i,cx,cy,draha='M112,137 Q170,52 232,126';
+    for(i=0;i<13;i++){cx=i*20;cy=i%2?80:75;d+='<circle class="k-divak" cx="'+cx+'" cy="'+cy+'" r="6"/><path class="k-divak" d="M'+(cx-10)+','+(cy+18)+' q10,-14 20,0Z"/>'}
+    svg.innerHTML=d+K.hala(112)+K.brankoviste(168,226,151)+K.branka(222,150)+
+      K.brankar({x:204,y:152,s:-1,tym:'b',ruce:[[-12,-30],[13,-46,-2]]})+
+      K.drah(draha)+K.cary(40,154)+
+      K.hrac({x:66,y:154,k:1.12,tym:'a',nohy:'krok',lean:3,hul:K.HUL.strela,tvar:'krik'})+
+      (KLID?'<g transform="translate(232 126)">'+K.mic(0,0)+'</g>'
+           :'<g>'+K.mic(0,0)+'<animateMotion dur="3.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.14;0.5;1" keyPoints="0;0;1;1" keySplines="0 0 1 1;.25 0 .5 1;0 0 1 1" path="'+draha+'"/></g>')+
+      '<g'+(KLID?'':' opacity="0"')+'>'+K.zvuk(122,44,'GOOOAL!',26,-7)+
+      (KLID?'':'<animate attributeName="opacity" dur="3.6s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.5;0.56;0.92;1"/>')+'</g>';
+  })();
+
+  /* ---------- Čísla v úvodu ---------- */
+  (function(){
+    if(KLID)return;
+    $$('.fact b').forEach(function(b,k){
+      var cil=b.textContent,t0=null,D=900+k*150;
+      function krok(t){if(t0===null)t0=t;var p=Math.min(1,(t-t0)/D),e=1-Math.pow(1-p,3);
+        b.textContent=cil.replace(/\d+/g,function(n){return Math.round(n*e)});
+        if(p<1)requestAnimationFrame(krok);else b.textContent=cil}
+      requestAnimationFrame(krok);
+    });
+  })();
+
+  /* ---------- Navigace: postup stránkou a aktivní kapitola ---------- */
+  (function(){
+    var nav=$('.nav'),sc=$('.nav-scroll'),odk=$$('.nav-scroll a');if(!nav||!odk.length)return;
+    var bar=document.createElement('i');bar.className='postup';bar.setAttribute('aria-hidden','true');nav.appendChild(bar);
+    var sek=odk.map(function(a){return document.getElementById(a.getAttribute('href').slice(1))}),ceka=false,akt=-1;
+    function spy(){
+      ceka=false;
+      var h=document.documentElement.scrollHeight-window.innerHeight,y=window.pageYOffset||0,lim=window.innerHeight*.35,n=-1,i;
+      bar.style.transform='scaleX('+(h>0?Math.min(1,y/h):0)+')';
+      for(i=0;i<sek.length;i++){if(sek[i]&&sek[i].getBoundingClientRect().top<=lim)n=i}
+      if(n===akt)return;akt=n;
+      odk.forEach(function(a,j){if(j===n)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+      if(n>=0&&sc.scrollWidth>sc.clientWidth){
+        var a=odk[n],x=sc.scrollLeft+a.getBoundingClientRect().left-sc.getBoundingClientRect().left-(sc.clientWidth-a.offsetWidth)/2;
+        if(sc.scrollTo)sc.scrollTo({left:x,behavior:KLID?'auto':'smooth'});else sc.scrollLeft=x;
+      }
+    }
+    function plan(){if(!ceka){ceka=true;requestAnimationFrame(spy)}}
+    window.addEventListener('scroll',plan,{passive:true});window.addEventListener('resize',plan);spy();
+  })();
+
+  /* ---------- Čistý čas ---------- */
+  (function(){
+    var box=$('#cisty');if(!box)return;
+    var eh=$('#ct-hra'),er=$('#ct-real'),es=$('#ct-stav'),ed=$('#ct-rozdil'),btn=$('#ct-btn'),rst=$('#ct-reset');
+    var hra=0,real=0,stav=0,posl=0,raf=0,R=10; /* stav: 0 připraveno, 1 hraje se, 2 přerušeno, 3 konec třetiny */
+    function kresli(){
+      eh.textContent=mmss(hra);er.textContent=mmss(real);box.setAttribute('data-stav',stav);
+      es.textContent=['ready','in play','stopped, the clock is paused','end of period'][stav];
+      var r=Math.floor(real)-Math.floor(hra);
+      ed.textContent=r>0?mss(r)+' more than the scoreboard':'the same so far';
+      btn.textContent=['Start the match','Blow the whistle','Resume play','Play again'][stav];
+      rst.hidden=stav===0||stav===3;
+    }
+    function tik(t){
+      var dt=Math.min(.25,(t-posl)/1000);posl=t;
+      if(stav===1||stav===2){real+=dt*R;if(stav===1){hra+=dt*R;if(hra>=1200){hra=1200;stav=3}}if(real>=5940)stav=3}
+      kresli();
+      if(stav===1||stav===2)raf=requestAnimationFrame(tik);
+    }
+    function start(){posl=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(tik)}
+    btn.addEventListener('click',function(){
+      if(stav===0||stav===3){hra=0;real=0;stav=1;start()}
+      else if(stav===1){stav=2}
+      else if(stav===2){stav=1}
+      kresli();
+    });
+    rst.addEventListener('click',function(){cancelAnimationFrame(raf);hra=0;real=0;stav=0;kresli()});
+    kresli();
+  })();
+
+  /* ---------- Hra vysoko: posuvník ---------- */
+  (function(){
+    var svg=$('#vy-svg'),rg=$('#vy-range'),out=$('#vy-verdikt');if(!svg||!rg||!K)return;
+    var X=88,Y=178,S=1.5,YK=Y-12*S,YP=Y-30*S;
+    var Z=[{c:'ok',n:'fine',t:'Below knee level the ball may be played with the stick or the foot.',f:'ok'},
+           {c:'',n:'free-hit',t:'Playing the ball with the stick or foot above knee level.',f:'vylek'},
+           {c:'trest',n:'2 minutes',t:'Playing the ball with the stick or foot above waist level.',f:'zly',p:'605.3'}];
+    function kresli(){
+      var hb=3+rg.value*.86,z=hb<12?0:hb<30?1:2;
+      var hy=-hb+3,sn=(hy+46)/56,cs=Math.sqrt(Math.max(0,1-sn*sn)),hx=56*cs,a=Math.atan2(sn,cs)-.9;
+      var hul=[[-7*cs,-46-7*sn],[hx,hy],[hx+9*Math.cos(a),hy+9*Math.sin(a)]];
+      function t(y,txt,on){return '<text class="vy-t'+(on?' on':'')+'" x="234" y="'+y+'" text-anchor="end">'+txt+'</text>'}
+      svg.innerHTML='<rect class="k-podlaha" x="0" y="'+Y+'" width="240" height="'+(194-Y)+'"/>'+
+        '<rect class="vy-z z2'+(z===2?' on':'')+'" x="0" y="0" width="240" height="'+YP+'"/>'+
+        '<rect class="vy-z z1'+(z===1?' on':'')+'" x="0" y="'+YP+'" width="240" height="'+(YK-YP)+'"/>'+
+        '<line class="k-pas" x1="0" y1="'+YP+'" x2="240" y2="'+YP+'"/><line class="vy-kol" x1="0" y1="'+YK+'" x2="240" y2="'+YK+'"/>'+
+        '<text class="k-mtxt" x="5" y="'+(YP-4)+'">waist</text><text class="k-mtxt" x="5" y="'+(YK-4)+'">knees</text>'+
+        t(16,'2 minutes',z===2)+t(YP+13,'free-hit',z===1)+t(YK+12,'fine',z===0)+
+        K.hrac({x:X,y:Y,k:S,tym:'b',nohy:'krok',hul:hul,tvar:Z[z].f})+K.mic(Math.round((X+S*(hx+5))*10)/10,Math.round((Y-S*hb)*10)/10);
+      out.innerHTML='<span class="chip '+Z[z].c+'">'+Z[z].n+'</span><span>'+Z[z].t+(Z[z].p?' <span class="pr">'+Z[z].p+'</span>':'')+'</span>';
+      rg.setAttribute('aria-valuetext',Z[z].n);
+    }
+    rg.addEventListener('input',kresli);kresli();
+  })();
+
+  /* ---------- Filtr faulů ---------- */
+  (function(){
+    var g=$('#zakazano .faul'),f=$('#faul-filtr');if(!g||!f)return;
+    var karty=$$('.karta',g),pocty={},poradi=['free-hit','2 minutes','2 + 2 minutes'];
+    karty.forEach(function(k){var c=$('.chip',k).textContent.trim();k.setAttribute('data-trest',c);pocty[c]=(pocty[c]||0)+1});
+    f.innerHTML='<button type="button" class="fbtn" aria-pressed="true" data-f="">All <i>'+karty.length+'</i></button>'+
+      poradi.filter(function(p){return pocty[p]}).map(function(p){return '<button type="button" class="fbtn" aria-pressed="false" data-f="'+p+'">'+p+' <i>'+pocty[p]+'</i></button>'}).join('');
+    f.addEventListener('click',function(e){
+      var b=e.target.closest('button');if(!b)return;
+      $$('button',f).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      var v=b.getAttribute('data-f');
+      karty.forEach(function(k){k.hidden=!!v&&k.getAttribute('data-trest')!==v;if(!k.hidden)k.classList.add('in')});
+    });
+  })();
+
+  /* ---------- Simulátor trestů ---------- */
+  (function(){
+    var box=$('#sim');if(!box)return;
+    var svg=$('svg',box),ePocet=$('#sim-pocet'),eCas=$('#sim-cas'),eCo=$('#sim-co'),eOsy=$('#sim-osy'),eH=$('#sim-hlaska'),
+        bGol=$('#sim-gol'),bRst=$('#sim-reset'),bT=$$('[data-trest]',box),eGol=$('.sim-gol',box);
+    var A=[[26,88,1],[76,58],[76,118],[112,88],[142,64],[142,112]],B=[[294,88,1],[244,58],[244,118],[208,88],[178,64],[178,112]];
+    var LAVA=[[62,12],[84,12],[106,12]],LAVB=[[214,12],[236,12],[258,12]],TL=[[146,187],[174,187]];
+    function h(c,p,id){return '<g class="sim-h '+c+'"'+(id?' id="'+id+'"':'')+' style="transform:translate('+p[0]+'px,'+p[1]+'px)"><circle r="'+(p[2]?9:7.5)+'"/>'+(p[2]?'<text y="3" text-anchor="middle">G</text>':'')+'</g>'}
+    svg.innerHTML='<rect class="sim-box" x="40" y="1" width="88" height="22" rx="4"/><rect class="sim-box" x="192" y="1" width="88" height="22" rx="4"/>'+
+      '<rect class="sim-rink" x="2" y="28" width="316" height="120" rx="24"/><line class="sim-ln" x1="160" y1="28" x2="160" y2="148"/><circle cx="160" cy="88" r="2.5" style="fill:var(--linka)"/>'+
+      '<rect class="sim-ln" x="18" y="70" width="26" height="36"/><rect class="sim-ln" x="276" y="70" width="26" height="36"/>'+
+      '<path d="M22,80 h-5 v16 h5 M298,80 h5 v16 h-5" style="fill:none;stroke:var(--cf-cervena);stroke-width:2.2"/>'+
+      '<rect class="sim-box" x="118" y="172" width="84" height="30" rx="4"/><text class="sim-txt" x="160" y="167" text-anchor="middle">PENALTY BENCH</text>'+
+      A.map(function(p){return h('a',p)}).join('')+LAVA.map(function(p){return h('a',p)}).join('')+
+      B.map(function(p,i){return h('b',p,i===5?'sim-p':i===4?'sim-s':'')}).join('')+LAVB.map(function(p,i){return h('b',p,i===0?'sim-n':'')}).join('');
+    var P=$('#sim-p'),SP=$('#sim-s'),N=$('#sim-n');
+    function jdi(el,p){el.style.transform='translate('+p[0]+'px,'+p[1]+'px)'}
+    var typ=null,segs=[],i=0,zb=0,bezi=false,raf=0,posl=0;
+    var NAZ={'2':['Minor penalty'],'22':['First 2 minutes','Second 2 minutes'],'210':['2 minutes by a teammate','Personal penalty']};
+    function kresli(){
+      var osl=bezi&&segs[i].k==='tym';
+      ePocet.textContent='5 : '+(osl?4:5);
+      eCas.textContent=bezi?mss(zb):'–';
+      eCo.textContent=bezi?NAZ[typ][i]:'Penalty';
+      $$('u',eOsy).forEach(function(u,j){u.style.transform='scaleX('+(j<i?0:j===i?Math.max(0,zb/segs[j].d):1)+')'});
+      bGol.disabled=!osl;bRst.disabled=!typ;
+      bT.forEach(function(b){b.disabled=bezi});
+    }
+    function konec(){bezi=false;cancelAnimationFrame(raf)}
+    function dalsi(gol){
+      if(gol&&!KLID){eGol.classList.remove('on');void eGol.offsetWidth;eGol.classList.add('on')}
+      if(typ==='2'){
+        jdi(P,B[5]);konec();
+        eH.innerHTML=gol?'<b>Goal!</b> That ends the minor penalty and the player returns to the rink straight away. <span class="pr">603.6</span>':'The two minutes are up. The player returns and it is 5 on 5 again.';
+      }else if(typ==='22'){
+        if(i===0){i=1;zb=segs[1].d;
+          eH.innerHTML=gol?'<b>Goal!</b> But it cancels only the first 2 minutes. The second 2 minutes are just starting and red keep playing with four. <span class="pr">603.7</span>':'The first 2 minutes are up and the second start at once.';
+        }else{jdi(P,B[5]);konec();
+          eH.innerHTML=gol?'<b>Goal!</b> That ends the second 2 minutes too and the player returns.':'The major penalty is over. The player returns and it is 5 on 5 again.';}
+      }else{
+        if(i===0){i=1;zb=segs[1].d;jdi(SP,B[4]);
+          eH.innerHTML=(gol?'<b>Goal!</b> The 2-minute penalty ends,':'The two minutes are up,')+' the teammate returns and it is 5 on 5. The offender’s 10-minute personal penalty starts running now. <span class="pr">608.1</span>';
+        }else{jdi(P,LAVB[0]);konec();
+          eH.innerHTML='The personal penalty is over. The player may return only at the next interruption of play.';}
+      }
+      kresli();
+    }
+    function tik(t){
+      var dt=Math.min(.25,(t-posl)/1000);posl=t;
+      if(!bezi)return;
+      zb-=dt*(segs[i].k==='os'?75:12);
+      if(zb<=0)dalsi(false);else kresli();
+      if(bezi)raf=requestAnimationFrame(tik);
+    }
+    function vychozi(){
+      konec();typ=null;segs=[];i=0;zb=0;jdi(P,B[5]);jdi(SP,B[4]);jdi(N,LAVB[0]);eOsy.innerHTML='';
+      eH.textContent='Choose a penalty for the red team. Time is sped up: two minutes pass in ten seconds.';kresli();
+    }
+    bT.forEach(function(b){b.addEventListener('click',function(){
+      vychozi();typ=b.getAttribute('data-trest');
+      segs=typ==='2'?[{d:120,k:'tym'}]:typ==='22'?[{d:120,k:'tym'},{d:120,k:'tym'}]:[{d:120,k:'tym'},{d:600,k:'os'}];
+      eOsy.innerHTML=segs.map(function(s){return '<i class="'+(s.k==='os'?'os':'')+'" style="flex:'+(s.k==='os'?5:2)+'"><u></u></i>'}).join('');
+      i=0;zb=segs[0].d;bezi=true;jdi(P,TL[0]);
+      if(typ==='210'){jdi(SP,TL[1]);jdi(N,B[5])}
+      eH.innerHTML=typ==='2'?'A red player goes to the penalty bench for 2 minutes. Blue are on a 5 on 4 power play. Try scoring for them.':
+        typ==='22'?'A major penalty: two 2-minute penalties in a row. Red play with four for up to 4 minutes. What will a blue goal do?':
+        'The offender has a personal penalty. A teammate chosen by the captain serves the 2 minutes, and a substitute enters the rink. The team plays with four for 2 minutes only.';
+      kresli();posl=performance.now();raf=requestAnimationFrame(tik);
+    })});
+    bGol.addEventListener('click',function(){if(bezi&&segs[i].k==='tym')dalsi(true)});
+    bRst.addEventListener('click',vychozi);
+    vychozi();
+  })();
+
+  /* ---------- Gól na čáře: posuvník ---------- */
+  (function(){
+    var box=$('#gl-box'),rg=$('#gl-range'),mic=$('#gl-mic'),out=$('#gl-verdikt');if(!box||!rg)return;
+    var T=[['','not yet','The ball is in front of the line. Play on.'],['','not yet','The ball is only touching the line. It is not a goal until the whole ball has crossed it.'],['ok','goal','The whole ball is over the goal line.']];
+    function kresli(){
+      var x=100+rg.value*1.2,z=x+13<168?0:x-13>172?2:1;
+      mic.setAttribute('transform','translate('+x+' 65)');box.setAttribute('data-z',z);
+      out.innerHTML='<span class="chip '+T[z][0]+'">'+T[z][1]+'</span><span>'+T[z][2]+'</span>';
+      rg.setAttribute('aria-valuetext',T[z][2]);
+    }
+    rg.addEventListener('input',kresli);kresli();
+  })();
+
+  /* ---------- Signály: hádání ---------- */
+  (function(){
+    var g=$('#signaly-grid'),b=$('#sig-hadej'),p=$('#sig-pozn');if(!g||!b)return;
+    var karty=$$('.sig',g);
+    function odkryj(k){k.classList.add('odkryto');k.removeAttribute('tabindex');k.removeAttribute('role')}
+    b.addEventListener('click',function(){
+      var on=b.getAttribute('aria-pressed')!=='true';
+      b.setAttribute('aria-pressed',on?'true':'false');b.textContent=on?'Show all descriptions':'Try guessing the signs';
+      g.classList.toggle('hadej',on);p.hidden=!on;
+      karty.forEach(function(k){k.classList.remove('odkryto');if(on){k.setAttribute('tabindex','0');k.setAttribute('role','button')}else{k.removeAttribute('tabindex');k.removeAttribute('role')}});
+    });
+    g.addEventListener('click',function(e){var k=e.target.closest('.sig');if(k&&g.classList.contains('hadej'))odkryj(k)});
+    g.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&g.classList.contains('hadej')){var k=e.target.closest('.sig');if(k&&!k.classList.contains('odkryto')){e.preventDefault();odkryj(k)}}});
+  })();
+
+  /* ---------- Slovníček: hledání ---------- */
+  (function(){
+    var inp=$('#slov-hledat'),nic=$('#slov-nic'),pol=$$('.slovnik>div');if(!inp)return;
+    function norm(t){t=t.toLowerCase();return t.normalize?t.normalize('NFD').replace(/[̀-ͯ]/g,''):t}
+    inp.addEventListener('input',function(){
+      var q=norm(inp.value.trim()),n=0;
+      pol.forEach(function(d){var ok=!q||norm(d.textContent).indexOf(q)>-1;d.hidden=!ok;if(ok){n++;d.classList.add('in')}});
+      nic.hidden=n>0;
+    });
+  })();
+
+  /* ---------- Teď pískáte vy ---------- */
+  (function(){
+    var el=$('#hra');if(!el||!K)return;
+    var H=K.HUL,F=['Play on','Free-hit','2 minutes','Penalty shot'],CH={'Play on':'ok','2 minutes':'trest','Penalty shot':'ss'};
+    var SIT=[
+      {q:'Two players chase the ball, pushing shoulder to shoulder.',o:F,a:0,v:'A shoulder-to-shoulder challenge for the ball is allowed.',
+       s:function(){return K.hala()+K.cary(70,148)+K.hrac({x:113,y:146,k:.95,tym:'b',nohy:'beh',lean:4,hul:H.klid,tvar:'zly'})+K.hrac({x:94,y:154,tym:'a',nohy:'beh',lean:6,hul:H.klid,tvar:'zly'})+K.mic(160,152)}},
+      {q:'The blue player pushes an opponent in the back with both hands.',o:F,a:1,v:'Only a shoulder-to-shoulder challenge is allowed. Pushing in any other way is an offence and the opponents get the ball.',
+       s:function(){return K.hala()+K.hrac({x:80,y:152,tym:'a',nohy:'krok',lean:8,ruce:[[24,-52,-2],[28,-46,-2]],tvar:'zly'})+K.cary(140,150)+K.hrac({x:126,y:152,tym:'b',nohy:'beh',lean:14,hul:H.klid,tvar:'krik'})}},
+      {q:'The blue player pushes an opponent against the board.',o:F,a:2,v:'Pushing an opponent against the board costs 2 minutes on the penalty bench.',
+       s:function(){return K.hala()+K.mantinelBok(198,150)+K.hrac({x:180,y:152,tym:'b',lean:7,ruce:[[12,-40],[18,-27]],tvar:'krik'})+K.hrac({x:152,y:152,tym:'a',nohy:'krok',lean:10,ruce:[[18,-50,-2],[22,-44,-2]],tvar:'zly'})}},
+      {q:'In the heat of the moment an attacker steps into the goalkeeper area.',o:F,a:1,v:'A field player must not step into the goalkeeper area, not even with one foot. The defending team gets the ball.',p:'507.8',
+       s:function(){return K.hala()+K.brankoviste(140,196,150,true)+K.branka(200,150)+K.brankar({x:190,y:152,s:-1,tym:'a',ruce:[[-13,-34],[14,-34]]})+K.hrac({x:134,y:152,tym:'b',nohy:'krok',lean:4,hul:[[-4,-54],[22,-3],[30,-3]],tvar:'vylek'})+K.mic(168,149)}},
+      {q:'A player plays the ball with the stick high above waist level.',o:F,a:2,v:'Playing the ball with the stick above waist level costs 2 minutes.',p:'605.3',
+       s:function(){return K.hala()+K.pas(121)+K.hrac({x:104,y:152,tym:'b',nohy:'krok',hul:H.vysoko,tvar:'zly'})+K.mic(146,64)}},
+      {q:'Before shooting, a player swings the stick high above the head. Nobody is standing nearby.',o:F,a:0,v:'A high back swing is fine when nobody is nearby. With an opponent right behind, it would be a free-hit.',
+       s:function(){return K.hala()+K.pas(121)+K.hrac({x:116,y:152,tym:'b',nohy:'krok',hul:H.naprah,tvar:'ok'})+K.mic(142,149)}},
+      {q:'An attacker intentionally kicks the ball into the goal.',o:['Goal counts','No goal, face-off','No goal and 2 minutes'],a:1,v:'An intentionally kicked ball does not count as a goal. It is not an offence, though, so play resumes with a face-off.',p:'703.2',
+       s:function(){return K.hala()+K.branka(204,150)+K.hrac({x:108,y:152,tym:'b',nohy:'kop',lean:-3,hul:H.vzad,tvar:'zly'})+K.drah('M142,138 Q176,120 212,134')+K.mic(140,139)}},
+      {q:'A field player knocks down a flying ball with a hand.',o:F,a:2,v:'A field player must not stop or play the ball with a hand. That is 2 minutes.',
+       s:function(){return K.hala()+K.drah('M214,58 Q176,50 140,74')+K.hrac({x:108,y:152,tym:'b',nohy:'krok',ruce:[[5,-40],[26,-74,-3]],hul:H.klid,tvar:'vylek'})+K.mic(138,76)+K.hrac({x:204,y:152,s:-1,tym:'a',hul:H.klid,tvar:'ok'})}},
+      {q:'A player passes to a teammate with a foot. The ball stays low along the floor.',o:F,a:0,v:'Passing with the foot below knee level is allowed. You just cannot score with the foot.',p:'507.4',
+       s:function(){return K.hala()+K.hrac({x:64,y:152,tym:'a',nohy:'kop',lean:-3,hul:H.vzad,tvar:'ok'})+K.drah('M98,146 H160')+K.mic(96,146)+K.hrac({x:192,y:152,s:-1,tym:'a',nohy:'krok',hul:H.klid,tvar:'krik'})}},
+      {q:'A new player jumps onto the rink and plays straight away. The teammate being replaced is still in play.',o:F,a:2,v:'The new player may enter the rink only after the one leaving has crossed the board. If it affects play, it is an incorrect substitution.',p:'605.15',
+       s:function(){return K.hala(100)+'<text class="k-mtxt" x="8" y="164">RINK</text><text class="k-mtxt" x="211" y="164" text-anchor="middle">BENCH</text>'+K.lavice(184,238,150)+K.mantinelBok(124,150)+K.hrac({x:214,y:150,s:-1,tym:'b',nohy:'sed',tvar:'vylek',ruce:[[-2,-28],[8,-26]]})+K.hrac({x:50,y:152,tym:'b',nohy:'krok',hul:H.vede,tvar:'ok'})+K.mic(87,149)+K.hrac({x:104,y:152,s:-1,tym:'b',nohy:'krok',hul:H.klid,tvar:'vylek'})}}
+    ];
+    var POCET=6,sada,idx,vysl;
+    function tecky(){var t='';for(var i=0;i<POCET;i++)t+='<i class="'+(i<vysl.length?(vysl[i]?'ok':'ko'):i===idx?'ted':'')+'"></i>';return t}
+    function situace(){
+      var s=sada[idx];
+      el.innerHTML='<div class="hra-obr"><svg class="panel" viewBox="0 0 240 170" role="img" aria-label="Illustrated situation: '+s.q+'">'+s.s()+'</svg><span class="razitko" aria-hidden="true"></span></div>'+
+        '<div class="hra-panel"><div class="hra-postup">'+tecky()+'<span>Situation '+(idx+1)+' of '+POCET+'</span></div><h3>'+s.q+'</h3>'+
+        '<div class="moznosti'+(s.o.length===3?' tri':'')+'" role="group" aria-label="Your call">'+s.o.map(function(o,i){return '<button type="button" data-i="'+i+'">'+o+'</button>'}).join('')+'</div>'+
+        '<div class="hra-vysl" aria-live="polite"></div></div>';
+    }
+    function konec(){
+      var b=vysl.filter(Boolean).length,
+          t=b===POCET?['The whistle is yours','Not a single mistake. At the next match you can explain to the people around you what is going on.']:
+            b>=POCET-2?['A promising referee','You read most situations correctly. A few more matches and nothing will surprise you.']:
+            b>=2?['An attentive spectator','You have the basics. Go through the chapter What’s not allowed and try again.']:
+                 ['A fan for now','No problem, that is what this page is for. Start with the chapter What’s not allowed and come back.'];
+      el.innerHTML='<div class="hra-konec"><div class="hra-postup">'+tecky()+'</div><b>'+b+' / '+POCET+'</b><h3>'+t[0]+'</h3><p>'+t[1]+'</p>'+
+        '<div class="hero-akce"><button type="button" class="btn hlavni" data-akce="znovu">Play again</button><a class="btn" href="#kviz">Referee quiz</a></div></div>';
+    }
+    function nova(){sada=michat(SIT).slice(0,POCET);idx=0;vysl=[];situace()}
+    el.addEventListener('click',function(e){
+      var b=e.target.closest('button');if(!b)return;
+      if(b.getAttribute('data-akce')==='znovu'){nova();return}
+      if(b.getAttribute('data-akce')==='dalsi'){idx++;if(idx<POCET)situace();else konec();
+        var h=$('h3',el);if(h){h.setAttribute('tabindex','-1');h.focus({preventScroll:true})}return}
+      if(b.hasAttribute('data-i')&&!b.disabled){
+        var s=sada[idx],i=+b.getAttribute('data-i'),ok=i===s.a,r=$('.razitko',el);
+        vysl.push(ok);
+        $$('.moznosti button',el).forEach(function(x,j){x.disabled=true;if(j===s.a)x.classList.add('spravne');else if(x===b)x.classList.add('spatne')});
+        r.textContent=ok?'Correct!':'Missed!';r.className='razitko on'+(ok?'':' spatne');
+        $('.hra-postup',el).innerHTML=tecky()+'<span>Situation '+(idx+1)+' of '+POCET+'</span>';
+        $('.hra-vysl',el).innerHTML='<p><span class="chip '+(CH[s.o[s.a]]||'')+'">'+s.o[s.a]+'</span> '+s.v+(s.p?' <span class="pr">'+s.p+'</span>':'')+'</p>'+
+          '<button type="button" class="btn hlavni" data-akce="dalsi">'+(idx+1<POCET?'Next situation':'Show result')+'</button>';
+      }
+    });
+    nova();
+  })();
+
+  /* ---------- Postupné objevování při posunu ---------- */
+  (function(){
+    if(KLID||!('IntersectionObserver' in window))return;
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px',threshold:.04});
+    $$('.kap-hlava,.karta,.komiks,.stup,.sig,.klic,.hrani,.piskat,.mladez,.fact,.slovnik>div').forEach(function(el){
+      var i=0,p=el;while((p=p.previousElementSibling))i++;
+      el.classList.add('rv');el.style.transitionDelay=(i%4)*70+'ms';io.observe(el);
+    });
+  })();
+})();
+</script>
+
+</body>
+</html>

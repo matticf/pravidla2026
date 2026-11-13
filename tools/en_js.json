@@ -1,0 +1,402 @@
+[
+ [
+  "content:\"Co to znamená?\"",
+  "content:\"What does it mean?\""
+ ],
+ [
+  "'Přepnout na světlý vzhled':'Přepnout na tmavý vzhled'",
+  "'Switch to light mode':'Switch to dark mode'"
+ ],
+ [
+  "'Světlý vzhled':'Tmavý vzhled'",
+  "'Light mode':'Dark mode'"
+ ],
+ [
+  "'do konce zápasu'",
+  "'rest of the match'"
+ ],
+ [
+  "n:'Vhazování',t:'Obě předloktí vodorovně před tělem, dlaně dolů.'",
+  "n:'Face-off',t:'Both forearms held horizontally in front of the body, palms down.'"
+ ],
+ [
+  "n:'Rozehrání / volný úder',t:'Paže vodorovně ve směru hry, dlaň dolů. Ukazuje, který tým hraje.'",
+  "n:'Hit-in / Free-hit',t:'Arm held horizontally in the direction of play, palm down. It shows which team plays the ball.'"
+ ],
+ [
+  "n:'Výhoda',t:'Paže ve směru hry, dlaň nahoru. Faul byl, ale hraje se dál.'",
+  "n:'Advantage',t:'Arm in the direction of play, palm up. There was an offence, but play goes on.'"
+ ],
+ [
+  "n:'Trestné střílení',t:'Paže nad hlavou zkřížené v zápěstí, pěsti sevřené.'",
+  "n:'Penalty shot',t:'Arms above the head, crossed at the wrists, fists clenched.'"
+ ],
+ [
+  "n:'Odložené vyloučení',t:'Paže svisle nahoru, dlaň dopředu. Trest přijde, hra zatím běží.'",
+  "n:'Delayed penalty',t:'Arm held vertically, palm forward. A penalty is coming, but play continues for now.'"
+ ],
+ [
+  "n:'Vyloučení na 2 minuty',t:'Paže svisle, dva prsty = menší trest. Pět prstů znamená 2 + 2, pěst osobní trest.'",
+  "n:'Bench penalty',t:'Arm held vertically, two fingers = minor penalty. Five fingers mean 2 + 2, a fist a personal penalty.'"
+ ],
+ [
+  "n:'Červená karta',t:'Paže svisle s červenou kartou. Hráč jde do konce utkání do šatny.'",
+  "n:'Red card',t:'Arm held vertically with the red card. The player goes to the dressing room for the rest of the match.'"
+ ],
+ [
+  "n:'Gól',t:'Rozhodčí ukáže paží na branku. Gól se pak potvrdí vhazováním.'",
+  "n:'Goal',t:'The referee points an arm towards the goal. The goal is then confirmed with a face-off.'"
+ ],
+ [
+  "n:'Hraje se dál / gól neplatí',t:'Obě paže vodorovně do stran, dlaně dolů.'",
+  "n:'Continue play / No goal',t:'Both arms held horizontally out to the sides, palms down.'"
+ ],
+ [
+  "n:'Přestupky florbalkou',t:'Jedna paže vodorovně ve směru hry, druhá do ní jednou udeří. Sekání, blokování i zvedání florbalky mají od roku 2026 jeden signál.'",
+  "n:'Offences with the stick',t:'One arm held horizontally in the direction of play, the other strikes it once. Since 2026, hitting, blocking and lifting the stick share one sign.'"
+ ],
+ [
+  "n:'Malé brankoviště',t:'Paže nad hlavou, konečky prstů se dotýkají a tvoří trojúhelník.'",
+  "n:'Entering the goalkeeper area',t:'Arms above the head, fingertips touching to form a triangle.'"
+ ],
+ [
+  "n:'Nesportovní chování',t:'Ruce v bok.'",
+  "n:'Misconduct',t:'Hands on hips.'"
+ ],
+ [
+  "aria-label=\"Signál '",
+  "aria-label=\"Sign: '"
+ ],
+ [
+  "<span class=\"kod\">Signál '",
+  "<span class=\"kod\">Sign '"
+ ],
+ [
+  "Otázka '+(i+1)+' z '",
+  "Question '+(i+1)+' of '"
+ ],
+ [
+  "Nové otázky</button>",
+  "New questions</button>"
+ ],
+ [
+  "'Správně.':'Tentokrát ne.'",
+  "'Correct.':'Not this time.'"
+ ],
+ [
+  "Pravidlo '+esc(x.r)",
+  "Rule '+esc(x.r)"
+ ],
+ [
+  "'Výsledek: '+body+' z '",
+  "'Score: '+body+' of '"
+ ],
+ [
+  "'. Výborně, pravidla znáte!':'. Zkuste další sadu otázek.'",
+  "'. Well done, you know the rules!':'. Try another set of questions.'"
+ ],
+ [
+  ">úroveň pasu<",
+  ">waist level<"
+ ],
+ [
+  "'TRESTNÁ LAVICE'",
+  "'PENALTY BENCH'"
+ ],
+ [
+  ">TRESTNÁ LAVICE<",
+  ">PENALTY BENCH<"
+ ],
+ [
+  ">HŘIŠTĚ<",
+  ">RINK<"
+ ],
+ [
+  ">STŘÍDAČKA<",
+  ">BENCH<"
+ ],
+ [
+  "'FÍÍÍ!'",
+  "'TWEEET!'"
+ ],
+ [
+  "'FÍÍ!'",
+  "'TWEET!'"
+ ],
+ [
+  "'Střídám!'",
+  "'Change!'"
+ ],
+ [
+  "'Jdu!'",
+  "'Going in!'"
+ ],
+ [
+  "'správně'",
+  "'correct'"
+ ],
+ [
+  "'Sem!'",
+  "'Here!'"
+ ],
+ [
+  ">půlka<",
+  ">centre line<"
+ ],
+ [
+  "'do 3 sekund'",
+  "'within 3 seconds'"
+ ],
+ [
+  "'Pořád 5 minut?'",
+  "'Still 5 min?'"
+ ],
+ [
+  "'Čistý čas!'",
+  "'Clock stops!'"
+ ],
+ [
+  "'nikdo blízko'",
+  "'nobody near'"
+ ],
+ [
+  "'rameno na rameno'",
+  "'shoulder to shoulder'"
+ ],
+ [
+  "'ŤUK!'",
+  "'CLACK!'"
+ ],
+ [
+  "'Výhoda, hraj!'",
+  "'Advantage!'"
+ ],
+ [
+  "'GÓÓÓL!'",
+  "'GOOOAL!'"
+ ],
+ [
+  "'GÓÓL!'",
+  "'GOOAL!'"
+ ],
+ [
+  "'Jdu za brankáře!'",
+  "'On for the goalie!'"
+ ],
+ [
+  "'TREST'",
+  "'PENALTY'"
+ ],
+ [
+  "'Jdu zpátky!'",
+  "'I’m back!'"
+ ],
+ [
+  "'trest skončil'",
+  "'penalty over'"
+ ],
+ [
+  "'Góól!'",
+  "'Goal!'"
+ ],
+ [
+  "'gól neplatí'",
+  "'no goal'"
+ ],
+ [
+  "'BUM!'",
+  "'THUD!'"
+ ],
+ [
+  "['připraveno','hraje se','přerušeno, hodiny stojí','konec třetiny']",
+  "['ready','in play','stopped, the clock is paused','end of period']"
+ ],
+ [
+  "'o '+mss(r)+' víc než na tabuli':'zatím stejně'",
+  "mss(r)+' more than the scoreboard':'the same so far'"
+ ],
+ [
+  "['Rozehrát zápas','Zapískat','Pokračovat ve hře','Hrát znovu']",
+  "['Start the match','Blow the whistle','Resume play','Play again']"
+ ],
+ [
+  "'Pod úrovní kolen se míček smí hrát florbalkou i nohou.'",
+  "'Below knee level the ball may be played with the stick or the foot.'"
+ ],
+ [
+  "'Hrát míček florbalkou nebo nohou nad úrovní kolen.'",
+  "'Playing the ball with the stick or foot above knee level.'"
+ ],
+ [
+  "'Zahrát míček florbalkou nebo nohou nad úrovní pasu.'",
+  "'Playing the ball with the stick or foot above waist level.'"
+ ],
+ [
+  ">pas</text>",
+  ">waist</text>"
+ ],
+ [
+  ">kolena</text>",
+  ">knees</text>"
+ ],
+ [
+  "Vše <i>",
+  "All <i>"
+ ],
+ [
+  "{'2':['Menší trest'],'22':['1. dvouminutovka','2. dvouminutovka'],'210':['Dvě minuty za spoluhráče','Osobní trest']}",
+  "{'2':['Minor penalty'],'22':['First 2 minutes','Second 2 minutes'],'210':['2 minutes by a teammate','Personal penalty']}"
+ ],
+ [
+  ":'Trest';",
+  ":'Penalty';"
+ ],
+ [
+  ">B</text>",
+  ">G</text>"
+ ],
+ [
+  "'<b>Gól!</b> Menší trest tím končí a hráč se hned vrací na hřiště. <span class=\"pr\">603.6</span>':'Dvě minuty uplynuly. Hráč se vrací a hraje se zase 5 na 5.'",
+  "'<b>Goal!</b> That ends the minor penalty and the player returns to the rink straight away. <span class=\"pr\">603.6</span>':'The two minutes are up. The player returns and it is 5 on 5 again.'"
+ ],
+ [
+  "'<b>Gól!</b> Zrušil ale jen první dvouminutovku. Druhá teprve začíná a červení hrají dál ve čtyřech. <span class=\"pr\">603.7</span>':'První dvouminutovka uplynula, hned začíná druhá.'",
+  "'<b>Goal!</b> But it cancels only the first 2 minutes. The second 2 minutes are just starting and red keep playing with four. <span class=\"pr\">603.7</span>':'The first 2 minutes are up and the second start at once.'"
+ ],
+ [
+  "'<b>Gól!</b> Tím končí i druhá dvouminutovka a hráč se vrací.':'Větší trest uplynul. Hráč se vrací a hraje se zase 5 na 5.'",
+  "'<b>Goal!</b> That ends the second 2 minutes too and the player returns.':'The major penalty is over. The player returns and it is 5 on 5 again.'"
+ ],
+ [
+  "(gol?'<b>Gól!</b> Dvouminutový trest končí,':'Dvě minuty uplynuly,')+' spoluhráč se vrací a hraje se 5 na 5. Provinilci teď začíná běžet 10 minut osobního trestu. <span class=\"pr\">608.1</span>'",
+  "(gol?'<b>Goal!</b> The 2-minute penalty ends,':'The two minutes are up,')+' the teammate returns and it is 5 on 5. The offender’s 10-minute personal penalty starts running now. <span class=\"pr\">608.1</span>'"
+ ],
+ [
+  "'Osobní trest uplynul. Hráč se smí vrátit až při nejbližším přerušení hry.'",
+  "'The personal penalty is over. The player may return only at the next interruption of play.'"
+ ],
+ [
+  "'Vyberte trest pro červené. Čas je zrychlený, dvě minuty uběhnou za deset sekund.'",
+  "'Choose a penalty for the red team. Time is sped up: two minutes pass in ten seconds.'"
+ ],
+ [
+  "'Červený hráč jde na 2 minuty na trestnou lavici. Modří hrají přesilovku 5 na 4. Zkuste jim dát gól.'",
+  "'A red player goes to the penalty bench for 2 minutes. Blue are on a 5 on 4 power play. Try scoring for them.'"
+ ],
+ [
+  "'Větší trest: dvě dvouminutovky po sobě. Červení hrají ve čtyřech až 4 minuty. Co udělá gól modrých?'",
+  "'A major penalty: two 2-minute penalties in a row. Red play with four for up to 4 minutes. What will a blue goal do?'"
+ ],
+ [
+  "'Provinilec má osobní trest. Dvě minuty za něj odsedí spoluhráč, kterého vybere kapitán, a na hřiště jde náhradník. Tým hraje ve čtyřech jen 2 minuty.'",
+  "'The offender has a personal penalty. A teammate chosen by the captain serves the 2 minutes, and a substitute enters the rink. The team plays with four for 2 minutes only.'"
+ ],
+ [
+  "['','ještě ne','Míček je před čárou. Hraje se dál.'],['','ještě ne','Míček se čáry jen dotýká. Gól to není, dokud ji nepřejde celý.'],['ok','gól','Míček je celým objemem za brankovou čárou.']",
+  "['','not yet','The ball is in front of the line. Play on.'],['','not yet','The ball is only touching the line. It is not a goal until the whole ball has crossed it.'],['ok','goal','The whole ball is over the goal line.']"
+ ],
+ [
+  "'Ukázat všechny popisky':'Zkusit hádat signály'",
+  "'Show all descriptions':'Try guessing the signs'"
+ ],
+ [
+  "F=['Hraje se dál','Volný úder','2 minuty','Trestné střílení'],CH={'Hraje se dál':'ok','2 minuty':'trest','Trestné střílení':'ss'}",
+  "F=['Play on','Free-hit','2 minutes','Penalty shot'],CH={'Play on':'ok','2 minutes':'trest','Penalty shot':'ss'}"
+ ],
+ [
+  "q:'Dva hráči běží za míčkem a přetlačují se ramenem na rameno.',o:F,a:0,v:'Souboj ramenem na rameno o míček je dovolený.'",
+  "q:'Two players chase the ball, pushing shoulder to shoulder.',o:F,a:0,v:'A shoulder-to-shoulder challenge for the ball is allowed.'"
+ ],
+ [
+  "q:'Modrý hráč strčí soupeře oběma rukama do zad.',o:F,a:1,v:'Povolený je jen souboj ramenem na rameno. Strčit soupeře jinak je faul a míček dostane soupeř.'",
+  "q:'The blue player pushes an opponent in the back with both hands.',o:F,a:1,v:'Only a shoulder-to-shoulder challenge is allowed. Pushing in any other way is an offence and the opponents get the ball.'"
+ ],
+ [
+  "q:'Modrý hráč natlačí soupeře na mantinel.',o:F,a:2,v:'Natlačit soupeře na mantinel stojí 2 minuty na trestné lavici.'",
+  "q:'The blue player pushes an opponent against the board.',o:F,a:2,v:'Pushing an opponent against the board costs 2 minutes on the penalty bench.'"
+ ],
+ [
+  "q:'Útočník v zápalu boje šlápne do malého brankoviště.',o:F,a:1,v:'Hráč s florbalkou do malého brankoviště nesmí vstoupit ani nohou. Míček dostane bránící tým.'",
+  "q:'In the heat of the moment an attacker steps into the goalkeeper area.',o:F,a:1,v:'A field player must not step into the goalkeeper area, not even with one foot. The defending team gets the ball.'"
+ ],
+ [
+  "q:'Hráč zahraje míček florbalkou vysoko nad úrovní pasu.',o:F,a:2,v:'Zahrát míček florbalkou nad úrovní pasu stojí 2 minuty.'",
+  "q:'A player plays the ball with the stick high above waist level.',o:F,a:2,v:'Playing the ball with the stick above waist level costs 2 minutes.'"
+ ],
+ [
+  "q:'Hráč se před střelou napřáhne vysoko nad hlavu. Nikdo u něj nestojí.',o:F,a:0,v:'Vysoký nápřah nevadí, když poblíž nikdo není. Kdyby za ním stál soupeř, byl by to volný úder.'",
+  "q:'Before shooting, a player swings the stick high above the head. Nobody is standing nearby.',o:F,a:0,v:'A high back swing is fine when nobody is nearby. With an opponent right behind, it would be a free-hit.'"
+ ],
+ [
+  "q:'Útočník úmyslně kopne míček do branky.',o:['Gól platí','Gól neplatí, vhazování','Gól neplatí a 2 minuty'],a:1,v:'Úmyslně kopnutý míček se jako gól nepočítá. Nejde ale o faul, a tak se pokračuje vhazováním.'",
+  "q:'An attacker intentionally kicks the ball into the goal.',o:['Goal counts','No goal, face-off','No goal and 2 minutes'],a:1,v:'An intentionally kicked ball does not count as a goal. It is not an offence, though, so play resumes with a face-off.'"
+ ],
+ [
+  "q:'Hráč s florbalkou si letící míček srazí rukou.',o:F,a:2,v:'Hráč s florbalkou nesmí míček zastavit ani zahrát rukou. Jsou to 2 minuty.'",
+  "q:'A field player knocks down a flying ball with a hand.',o:F,a:2,v:'A field player must not stop or play the ball with a hand. That is 2 minutes.'"
+ ],
+ [
+  "q:'Hráč přihraje spoluhráči nohou. Míček letí nízko při zemi.',o:F,a:0,v:'Přihrát nohou pod úrovní kolen se smí. Jen gól se nohou dát nedá.'",
+  "q:'A player passes to a teammate with a foot. The ball stays low along the floor.',o:F,a:0,v:'Passing with the foot below knee level is allowed. You just cannot score with the foot.'"
+ ],
+ [
+  "q:'Nový hráč skočí na hřiště a hned hraje. Střídaný spoluhráč je ale pořád ve hře.',o:F,a:2,v:'Nový hráč smí na hřiště, až když ten odcházející přeleze mantinel. Když to ovlivní hru, je to špatné střídání.'",
+  "q:'A new player jumps onto the rink and plays straight away. The teammate being replaced is still in play.',o:F,a:2,v:'The new player may enter the rink only after the one leaving has crossed the board. If it affects play, it is an incorrect substitution.'"
+ ],
+ [
+  "aria-label=\"Kreslená situace: '",
+  "aria-label=\"Illustrated situation: '"
+ ],
+ [
+  "aria-label=\"Vaše rozhodnutí\"",
+  "aria-label=\"Your call\""
+ ],
+ [
+  "<span>Situace '+(idx+1)+' z '",
+  "<span>Situation '+(idx+1)+' of '"
+ ],
+ [
+  "['Píšťalka je vaše','Bez jediné chyby. Na příštím zápase můžete sousedům na tribuně vysvětlovat, co se děje.']",
+  "['The whistle is yours','Not a single mistake. At the next match you can explain to the people around you what is going on.']"
+ ],
+ [
+  "['Nadějný rozhodčí','Většinu situací čtete správně. Ještě pár zápasů a nepřekvapí vás nic.']",
+  "['A promising referee','You read most situations correctly. A few more matches and nothing will surprise you.']"
+ ],
+ [
+  "['Pozorný divák','Základ máte. Projděte si kapitolu Co se nesmí a zkuste to znovu.']",
+  "['An attentive spectator','You have the basics. Go through the chapter What’s not allowed and try again.']"
+ ],
+ [
+  "['Zatím fanoušek','Nevadí, od toho tu ta stránka je. Začněte kapitolou Co se nesmí a vraťte se.']",
+  "['A fan for now','No problem, that is what this page is for. Start with the chapter What’s not allowed and come back.']"
+ ],
+ [
+  "data-akce=\"znovu\">Hrát znovu</button><a class=\"btn\" href=\"#kviz\">Kvíz pro rozhodčí</a>",
+  "data-akce=\"znovu\">Play again</button><a class=\"btn\" href=\"#kviz\">Referee quiz</a>"
+ ],
+ [
+  "ok?'Správně!':'Vedle!'",
+  "ok?'Correct!':'Missed!'"
+ ],
+ [
+  "'Další situace':'Zobrazit výsledek'",
+  "'Next situation':'Show result'"
+ ],
+ [
+  "'2 + 2 minuty'",
+  "'2 + 2 minutes'"
+ ],
+ [
+  "'2 minuty'",
+  "'2 minutes'"
+ ],
+ [
+  "'volný úder'",
+  "'free-hit'"
+ ],
+ [
+  "'v pořádku'",
+  "'fine'"
+ ]
+]

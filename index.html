@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Grafický přehled pravidel florbalu (edice 2026) pro diváky a laiky.">
 <title>Florbal srozumitelně</title>
+<link rel="alternate" hreflang="en" href="en/index.html">
 <style>
 /* Výchozí světlý vzhled: bílé pozadí, modrý text, červené zvýraznění. Tmavý (ČF modrá) jen přepínačem.
    Layout: dlouhý výklad po kapitolách, lepkavá navigace, modré nadpisy na bílém papíře, červená jen pro akcent a mřížku (vizuální styl Českého florbalu) */
@@ -67,6 +68,8 @@ button{font-family:inherit;color:inherit}
 .nav-scroll{flex:1 1 auto;min-width:0;overflow-x:auto;scrollbar-width:none}
 .vzhled{flex:none;display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--linka);background:var(--podklad);color:var(--text);border-radius:999px;padding:5px 12px 5px 8px;font-size:14px;font-weight:600;cursor:pointer}
 .vzhled:hover{border-color:var(--cf-cervena)}
+.nav a.jazyk{flex:none;display:inline-flex;align-items:center;border:1.5px solid var(--linka);border-radius:999px;padding:5px 12px;font-size:14px;line-height:19px;font-weight:700;letter-spacing:.04em;color:var(--text);text-decoration:none}
+.nav a.jazyk:hover{border-color:var(--cf-cervena);color:var(--text-akcent)}
 .vzhled svg{width:18px;height:18px}
 .vzhled .ik-mesic{display:none}
 :root[data-theme="dark"] .vzhled .ik-slunce{display:none}
@@ -577,6 +580,7 @@ section.kap{counter-increment:kap}
       <li><a href="#kviz">Kvíz</a></li>
     </ul>
     </div>
+    <a class="jazyk" href="en/index.html" hreflang="en" lang="en" aria-label="English version">EN</a>
     <button type="button" class="vzhled" id="vzhled" aria-pressed="false" aria-label="Přepnout na tmavý vzhled">
       <svg class="ik-slunce" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="var(--cf-cervena)"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="var(--cf-cervena)" stroke-width="2" stroke-linecap="round"/></svg>
       <svg class="ik-mesic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="var(--cf-cervena)"/></svg>
