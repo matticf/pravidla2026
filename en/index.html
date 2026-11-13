@@ -378,6 +378,43 @@ section.kap{counter-increment:kap}
 .posuvnik::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--cf-cervena);border:3px solid var(--podklad);box-shadow:0 0 0 2px var(--cf-cervena)}
 .posuvnik-pop{display:flex;justify-content:space-between;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-tlumeny)}
 
+/* hra tělem: DISCO-F a stupně závažnosti */
+.telo{margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--linka);display:grid;gap:var(--s4)}
+.telo-uvod{display:grid;gap:var(--s2);max-width:720px}
+.telo-uvod p{font-size:17px;line-height:26px}
+.telo h3{scroll-margin-top:72px}
+.disco{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3)}
+.disco li{border:1px solid var(--linka);border-radius:var(--radius-blok);padding:var(--s3) var(--s4) var(--s4);display:grid;grid-template-columns:52px minmax(0,1fr);grid-template-rows:auto 1fr;gap:2px var(--s3);align-items:start;min-width:0}
+.disco .pism{grid-row:1/3;font-size:64px;line-height:62px;font-weight:700;color:var(--text-akcent)}
+.disco b{font-size:19px;line-height:25px;padding-top:6px}
+.disco p{font-size:15px;line-height:22px;grid-column:2}
+.telo-pozn{font-size:16px;line-height:24px;max-width:860px;padding:var(--s3) var(--s4);border-left:6px solid var(--cf-cervena);background:var(--podlaha)}
+.stupne{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
+.stupne li{border:1px solid var(--linka);border-radius:var(--radius-blok);padding:var(--s3) var(--s3) var(--s4);display:grid;gap:6px;align-content:start;min-width:0}
+.stupne h4{font-size:21px;line-height:26px}
+.stupne .en{font-size:14px;line-height:18px;color:var(--text-tlumeny)}
+.stupne p{font-size:15px;line-height:22px}
+.stupne .pr-pop{font-size:12px;line-height:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-akcent);margin-top:6px}
+.sila{display:flex;gap:3px;height:10px;margin-bottom:6px}
+.sila i{flex:1;background:var(--linka);opacity:.22}
+.sila i.on{background:var(--cf-cervena);opacity:1}
+.pravidla-iff{border-top:1px solid var(--linka);border-bottom:1px solid var(--linka)}
+.pravidla-iff summary{cursor:pointer;padding:14px 0;font-weight:700;font-size:16px}
+.pravidla-iff summary:hover{color:var(--text-akcent)}
+.pravidla-iff>div{display:grid;gap:var(--s3);padding-bottom:var(--s4);max-width:860px}
+.pravidla-iff th{text-align:left;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:0 8px 8px 0}
+.pravidla-iff th:last-child{text-align:right}
+.pravidla-iff .vyska-tab tr:first-child td{border-top:0}
+.pravidla-iff thead tr{border-bottom:1px solid var(--linka)}
+.pravidla-iff p{font-size:15px;line-height:22px}
+.kdy a{white-space:nowrap}
+.vety-h{margin:var(--s5) 0 var(--s2)}
+.hra-uvod{font-size:16px;line-height:24px}
+.k-cislo{font:700 11px var(--geo);fill:var(--postava)}
+.k-cislo.sv{fill:var(--podklad)}
+.k-blok{fill:var(--postava)}
+.k-otaznik{font:700 34px var(--geo);fill:var(--cf-cervena);stroke:var(--podklad);stroke-width:5;paint-order:stroke}
+
 /* mládež: menší hřiště */
 .mladez{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:var(--s3) var(--s5);align-items:center;margin-top:var(--s5);border:1px solid var(--linka);border-radius:var(--radius-blok);padding:var(--s4)}
 .mladez>div{display:grid;gap:var(--s2);min-width:0}
@@ -515,11 +552,13 @@ section.kap{counter-increment:kap}
 }
 @media (max-width:900px){
   .hero-grid,.cisty,.sim,.gol-hra,.piskat,.vyska,.mladez{grid-template-columns:minmax(0,1fr)}
+  .disco,.stupne{grid-template-columns:repeat(2,minmax(0,1fr))}
   .hero-grid h1{font-size:clamp(44px,8vw,80px)}
   .hero-scena{max-width:560px}
   .vyska-hra{max-width:460px}
 }
 @media (max-width:600px){
+  .disco,.stupne{grid-template-columns:minmax(0,1fr)}
   .cas-inner{min-width:0}
   .casova div{padding:0 6px;font-size:12px;line-height:15px}
   .casova .hra b{font-size:14px;line-height:18px}
@@ -570,12 +609,12 @@ section.kap{counter-increment:kap}
       <li><a href="#hriste">Rink</a></li>
       <li><a href="#hraci">Players</a></li>
       <li><a href="#cas">Time</a></li>
-      <li><a href="#zakazano">What’s not allowed</a></li>
+      <li><a href="#zakazano">Common offences</a></li>
       <li><a href="#preruseni">After the whistle</a></li>
       <li><a href="#tresty">Penalties</a></li>
       <li><a href="#goly">Goals</a></li>
       <li><a href="#signaly">Signs</a></li>
-      <li><a href="#rozhodci">You referee</a></li>
+      <li><a href="#rozhodci">You make the call</a></li>
       <li><a href="#slovnik">Glossary</a></li>
       <li><a href="#kviz">Quiz</a></li>
     </ul>
@@ -830,8 +869,8 @@ section.kap{counter-increment:kap}
 <section class="kap" id="zakazano">
   <div class="wrap">
     <div class="kap-hlava">
-      <div class="popisek">The most common offences</div>
-      <h2>What’s not allowed</h2>
+      <div class="popisek">What’s not allowed</div>
+      <h2>Common offences</h2>
       <p>Floorball is a non-contact game. No pushing, no hitting the opponent’s stick and no high play. A lighter offence means a free-hit for the opponents, a more serious one a bench penalty.</p>
       <div class="princip"><span class="popisek">Principle</span><p>You fight for the ball with the stick, not the body. The stick stays low, and neither the opponent nor the opponent’s stick may be pushed, hit or held.</p></div>
     </div>
@@ -906,6 +945,54 @@ section.kap{counter-increment:kap}
       </ol>
       <p class="posun drobny">Swipe sideways for more panels →</p>
     </figure>
+
+    <div class="telo" id="hra-telem">
+      <div class="telo-uvod">
+        <div class="popisek">Contact up close</div>
+        <h3>Physical play: what to look for</h3>
+        <p>Two players go for the ball near the board. They make contact and one falls. What do you know so far? You know there was contact and a fall. To decide whether there was an offence, you need to see how the contact happened.</p>
+        <p>Shoulder-to-shoulder contact can be fair when players are going for the ball. How they make contact matters: running side by side is different from pushing someone in the back. Even contact from the side can be an offence if the player uses excessive force.</p>
+      </div>
+      <div class="telo-uvod">
+        <h3>DISCO-F: six things to look for</h3>
+        <p>DISCO-F is a way to break down a situation when you watch it or discuss it with someone else. The six factors help you ask better questions. They are a referee education tool, not six separate rules or a way to add up points for a penalty.</p>
+      </div>
+      <ul class="disco">
+        <li><span class="pism" aria-hidden="true">D</span><b>Direction</b><p>Where did each player come from? Did the contact come from the front, the side or behind? Could the other player see it coming?</p></li>
+        <li><span class="pism" aria-hidden="true">I</span><b>Intention</b><p>What did the player seem to be trying to do? Were they going for the ball? Look at what they did and say when their intention is unclear.</p></li>
+        <li><span class="pism" aria-hidden="true">S</span><b>Speed</b><p>How fast were the players moving just before contact? Was one moving much faster than the other?</p></li>
+        <li><span class="pism" aria-hidden="true">C</span><b>Contact</b><p>What actually touched what? For example, shoulder to shoulder, a forearm against the back, or a stick against a foot.</p></li>
+        <li><span class="pism" aria-hidden="true">O</span><b>Outcome</b><p>What happened next? Did the player lose the ball, lose their balance or fall into the board?</p></li>
+        <li><span class="pism" aria-hidden="true">F</span><b>Force</b><p>How hard was the contact? Was it a light bump, a push or a heavy hit?</p></li>
+      </ul>
+      <p class="telo-pozn"><b>Keep speed, force and outcome separate.</b> Two players can run fast and barely touch. A player can fall after light contact. A dangerous hit can also leave no visible injury. If your view was blocked, say what you could and couldn’t see.</p>
+      <div class="telo-uvod">
+        <h3 id="stupne">From careless to brutal</h3>
+        <p>These words describe increasingly serious actions. In each example, look at the action and the risk it created. The examples show what can distinguish the categories; a real call depends on the full situation.</p>
+      </div>
+      <ol class="stupne">
+        <li><span class="sila" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><h4>Careless</h4><p><b>The player fails to take enough care around an opponent.</b></p><span class="pr-pop">Example</span><p>A player steps across an opponent’s path to reach the ball. They don’t watch where they step and trip the opponent.</p></li>
+        <li><span class="sila" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i></span><h4>Reckless</h4><p><b>The player acts without regard for what could happen to the opponent.</b></p><span class="pr-pop">Example</span><p>A player comes from behind and shoves an opponent into the board even though the ball is out of reach.</p></li>
+        <li><span class="sila" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><h4>Violent</h4><p><b>The player uses excessive force and puts the opponent in serious danger.</b></p><span class="pr-pop">Example</span><p>A player charges into an opponent at speed and drives them hard into the board, putting their head and neck at risk.</p></li>
+        <li><span class="sila" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><h4>Brutal</h4><p><b>The act is especially vicious or cruel.</b></p><span class="pr-pop">Example</span><p>During a stoppage, a player throws their stick at an opponent.</p></li>
+      </ol>
+      <details class="pravidla-iff">
+        <summary>See the IFF rule references</summary>
+        <div>
+          <table class="vyska-tab">
+            <thead><tr><th>Offence in the IFF Rules of the Game 2026</th><th>Penalty</th><th>Rule</th></tr></thead>
+            <tbody>
+              <tr><td><b>Careless physical play</b></td><td>Minor bench penalty (2 minutes)</td><td><span class="pr">605.6</span></td></tr>
+              <tr><td><b>Reckless physical play</b></td><td>Major bench penalty (two consecutive 2-minute penalties)</td><td><span class="pr">607.4</span></td></tr>
+              <tr><td><b>Violent play</b></td><td>Match penalty, with a major bench penalty</td><td><span class="pr">614.5, 613.1</span></td></tr>
+              <tr><td><b>Brutal offence, including an attempt</b></td><td>Match penalty, with a major bench penalty</td><td><span class="pr">614.6, 613.1</span></td></tr>
+            </tbody>
+          </table>
+          <p>Violent play and a brutal offence both lead to a match penalty under these rules. A match penalty also means suspension for the following match in the same competition <span class="pr">613.2</span>. For reckless stick use, the rulebook has a separate term: <b>reckless play with the stick</b>  <span class="pr">607.1</span>.</p>
+          <p class="drobny">Sources: <a href="https://www.floorball.sport/wp-content/uploads/2026/02/IFF-Rules-of-the-Game-2026.pdf" target="_blank" rel="noopener">IFF Rules of the Game 2026</a>, valid from 1 July 2026. See the Glossary and rules 507.6, 603–607 and 613–614. <a href="https://www.swissunihockey.ch/files/4216/9468/0288/IFF_Physical_Play_-_keyfactors_short.pdf" target="_blank" rel="noopener">IFF Physical Play: Key Factors (DISCO-F)</a>, referee education material hosted by swiss unihockey.</p>
+        </div>
+      </details>
+    </div>
 
     <div class="smi">
       <div>
@@ -1019,12 +1106,12 @@ section.kap{counter-increment:kap}
       <div class="stup">
         <div><span class="chip trest">minor bench penalty</span><h3 style="margin-top:8px">2 minutes</h3></div>
         <div><div class="osa" data-min="2"></div></div>
-        <p class="kdy">Careless play, hand ball, incorrect substitution, protests. When the opponents score on the power play, the penalty ends. <span class="pr">603.6</span></p>
+        <p class="kdy">Careless play, hand ball, incorrect substitution, protests. When the opponents score on the power play, the penalty ends. <span class="pr">603.6</span> <a href="#stupne">Physical play: from careless to brutal</a></p>
       </div>
       <div class="stup">
         <div><span class="chip vt">major bench penalty</span><h3 style="margin-top:8px">2 + 2 minutes</h3></div>
         <div><div class="osa" data-min="2,2"></div></div>
-        <p class="kdy">Reckless play, hooking. An opponents’ goal cancels only one of the two 2-minute penalties. <span class="pr">603.7</span></p>
+        <p class="kdy">Reckless play, hooking. An opponents’ goal cancels only one of the two 2-minute penalties. <span class="pr">603.7</span> <a href="#stupne">Physical play: from careless to brutal</a></p>
       </div>
       <div class="stup">
         <div><span class="chip os">personal penalty</span><h3 style="margin-top:8px">2 + 10 minutes</h3></div>
@@ -1034,7 +1121,7 @@ section.kap{counter-increment:kap}
       <div class="stup">
         <div><span class="chip ts">red card</span><h3 style="margin-top:8px">Rest of the match</h3></div>
         <div><div class="osa" data-min="2,2" data-konec="1"></div></div>
-        <p class="kdy">Gross misconduct, violence, fighting, a second major bench penalty. The player leaves for the dressing room and the team serves 2 + 2 min. A suspension for the next match usually follows. A red card can be given even after the final siren while players are still on the rink.</p>
+        <p class="kdy">Gross misconduct, violence, fighting, a second major bench penalty. The player leaves for the dressing room and the team serves 2 + 2 min. A suspension for the next match usually follows. A red card can be given even after the final siren while players are still on the rink. <a href="#stupne">Physical play: from careless to brutal</a></p>
       </div>
     </div>
     <div class="leg-osa">
@@ -1201,7 +1288,7 @@ section.kap{counter-increment:kap}
   <div class="wrap">
     <div class="kap-hlava">
       <div class="popisek">Have a go</div>
-      <h2>Now you referee</h2>
+      <h2>You make the call</h2>
       <p>Six situations from the rink. Look at the picture and decide like a referee. What is your call?</p>
     </div>
     <div class="piskat" id="hra"></div>
@@ -1231,6 +1318,15 @@ section.kap{counter-increment:kap}
       <div><dt>Advantage</dt><dd>The referee lets play continue because stopping it would hurt the fouled team.</dd></div>
       <div><dt>Effective time</dt><dd>The clock runs only while the game is actually being played.</dd></div>
       <div><dt>Match record</dt><dd>The official document with the team lists, goals and penalties.</dd></div>
+    </dl>
+    <h3 class="vety-h">Words you can use in a match</h3>
+    <dl class="slovnik">
+      <div><dt>Both players went for the ball.</dt><dd>Both players tried to get to the ball. If all you saw was their movement, say: “Both players moved towards the ball.”</dd></div>
+      <div><dt>They challenged for the ball.</dt><dd>Another way to say they competed for the ball. You may hear this in commentary.</dd></div>
+      <div><dt>They made contact near the board.</dt><dd>There was contact. The sentence does not say who caused it or whether it was an offence.</dd></div>
+      <div><dt>Blue 7 lost balance and fell.</dt><dd>This describes what happened to Blue 7 after the contact.</dd></div>
+      <div><dt>I couldn’t see the point of contact.</dt><dd>You saw the incident but couldn’t tell exactly where or how they touched.</dd></div>
+      <div><dt>What was the referees’ call?</dt><dd>You are asking what the referees decided.</dd></div>
     </dl>
   </div>
 </section>
@@ -1403,7 +1499,7 @@ section.kap{counter-increment:kap}
 
   function hrac(o){
     var s=o.s||1,k=o.k||1,l=o.lean||0,nohy=o.nohy||'stoj',u=POSUN[nohy]||0,n=NOHY[nohy],g=!!o.gol;
-    var dres=o.tym==='b'?'var(--tym-b)':o.tym==='r'?'url(#km-pruhy)':'var(--tym-a)';
+    var dres=o.dres||(o.tym==='b'?'var(--tym-b)':o.tym==='r'?'url(#km-pruhy)':'var(--tym-a)');
     var tren=o.tym==='a'?'var(--podklad)':'var(--postava)';
     var sh=[l,-55+u],hx=r(l*1.15),hy=-68+u;
     var ruce=o.ruce?o.ruce.slice():null,H='';
@@ -1807,12 +1903,22 @@ section.kap{counter-increment:kap}
       {q:'A new player jumps onto the rink and plays straight away. The teammate being replaced is still in play.',o:F,a:2,v:'The new player may enter the rink only after the one leaving has crossed the board. If it affects play, it is an incorrect substitution.',p:'605.15',
        s:function(){return K.hala(100)+'<text class="k-mtxt" x="8" y="164">RINK</text><text class="k-mtxt" x="211" y="164" text-anchor="middle">BENCH</text>'+K.lavice(184,238,150)+K.mantinelBok(124,150)+K.hrac({x:214,y:150,s:-1,tym:'b',nohy:'sed',tvar:'vylek',ruce:[[-2,-28],[8,-26]]})+K.hrac({x:50,y:152,tym:'b',nohy:'krok',hul:H.vede,tvar:'ok'})+K.mic(87,149)+K.hrac({x:104,y:152,s:-1,tym:'b',nohy:'krok',hul:H.klid,tvar:'vylek'})}}
     ];
+    /* Závěrečná situace každého kola: co lze z daného místa říct s jistotou */
+    function cislo(t,sv,zrc){return '<text class="k-cislo'+(sv?' sv':'')+'" x="0" y="-37" text-anchor="middle"'+(zrc?' transform="scale(-1 1)"':'')+'>'+t+'</text>'}
+    var ZAVER={u:'White 12 and Blue 7 went for the ball near the board. They made contact. Blue 7 lost balance and fell. The referees stopped play. From your position, you couldn’t see the point of contact.',
+      q:'What can you say for sure?',o:['White 12 pushed Blue 7.','White 12 tripped Blue 7.','The players made contact, and Blue 7 fell.'],a:2,
+      v:'You saw the contact and the fall. You need a clearer view to say what made contact and whether there was a push or a trip. You can ask someone with a different view: <b>“What did you see just before Blue 7 fell?”</b>',
+      s:function(){return K.hala()+K.mantinelBok(214,150)+K.mic(40,150)+
+        '<g transform="translate(146 144) rotate(-90)">'+K.hrac({x:0,y:0,tym:'a',tvar:'vylek',ruce:[[16,-46],[-15,-42]],navic:cislo('7',true)})+'</g>'+
+        K.hrac({x:190,y:152,s:-1,tym:'b',dres:'var(--podklad)',nohy:'krok',ruce:[[-13,-36,-3],[13,-36,3]],tvar:'vylek',navic:cislo('12',false,true)})+
+        '<circle class="k-blok" cx="150" cy="150" r="24"/><path class="k-blok" d="M100,182 q50,-58 100,0Z"/>'+
+        '<text class="k-otaznik" x="150" y="112" text-anchor="middle">?</text>'}};
     var POCET=6,sada,idx,vysl;
     function tecky(){var t='';for(var i=0;i<POCET;i++)t+='<i class="'+(i<vysl.length?(vysl[i]?'ok':'ko'):i===idx?'ted':'')+'"></i>';return t}
     function situace(){
       var s=sada[idx];
-      el.innerHTML='<div class="hra-obr"><svg class="panel" viewBox="0 0 240 170" role="img" aria-label="Illustrated situation: '+s.q+'">'+s.s()+'</svg><span class="razitko" aria-hidden="true"></span></div>'+
-        '<div class="hra-panel"><div class="hra-postup">'+tecky()+'<span>Situation '+(idx+1)+' of '+POCET+'</span></div><h3>'+s.q+'</h3>'+
+      el.innerHTML='<div class="hra-obr"><svg class="panel" viewBox="0 0 240 170" role="img" aria-label="Illustrated situation: '+(s.u||s.q)+'">'+s.s()+'</svg><span class="razitko" aria-hidden="true"></span></div>'+
+        '<div class="hra-panel"><div class="hra-postup">'+tecky()+'<span>Situation '+(idx+1)+' of '+POCET+'</span></div>'+(s.u?'<p class="hra-uvod">'+s.u+'</p>':'')+'<h3>'+s.q+'</h3>'+
         '<div class="moznosti'+(s.o.length===3?' tri':'')+'" role="group" aria-label="Your call">'+s.o.map(function(o,i){return '<button type="button" data-i="'+i+'">'+o+'</button>'}).join('')+'</div>'+
         '<div class="hra-vysl" aria-live="polite"></div></div>';
     }
@@ -1820,12 +1926,12 @@ section.kap{counter-increment:kap}
       var b=vysl.filter(Boolean).length,
           t=b===POCET?['The whistle is yours','Not a single mistake. At the next match you can explain to the people around you what is going on.']:
             b>=POCET-2?['A promising referee','You read most situations correctly. A few more matches and nothing will surprise you.']:
-            b>=2?['An attentive spectator','You have the basics. Go through the chapter What’s not allowed and try again.']:
-                 ['A fan for now','No problem, that is what this page is for. Start with the chapter What’s not allowed and come back.'];
+            b>=2?['An attentive spectator','You have the basics. Go through the chapter Common offences and try again.']:
+                 ['A fan for now','No problem, that is what this page is for. Start with the chapter Common offences and come back.'];
       el.innerHTML='<div class="hra-konec"><div class="hra-postup">'+tecky()+'</div><b>'+b+' / '+POCET+'</b><h3>'+t[0]+'</h3><p>'+t[1]+'</p>'+
         '<div class="hero-akce"><button type="button" class="btn hlavni" data-akce="znovu">Play again</button><a class="btn" href="#kviz">Referee quiz</a></div></div>';
     }
-    function nova(){sada=michat(SIT).slice(0,POCET);idx=0;vysl=[];situace()}
+    function nova(){sada=michat(SIT).slice(0,POCET-1).concat([ZAVER]);idx=0;vysl=[];situace()}
     el.addEventListener('click',function(e){
       var b=e.target.closest('button');if(!b)return;
       if(b.getAttribute('data-akce')==='znovu'){nova();return}
@@ -1837,7 +1943,7 @@ section.kap{counter-increment:kap}
         $$('.moznosti button',el).forEach(function(x,j){x.disabled=true;if(j===s.a)x.classList.add('spravne');else if(x===b)x.classList.add('spatne')});
         r.textContent=ok?'Correct!':'Missed!';r.className='razitko on'+(ok?'':' spatne');
         $('.hra-postup',el).innerHTML=tecky()+'<span>Situation '+(idx+1)+' of '+POCET+'</span>';
-        $('.hra-vysl',el).innerHTML='<p><span class="chip '+(CH[s.o[s.a]]||'')+'">'+s.o[s.a]+'</span> '+s.v+(s.p?' <span class="pr">'+s.p+'</span>':'')+'</p>'+
+        $('.hra-vysl',el).innerHTML='<p>'+(s.u?'':'<span class="chip '+(CH[s.o[s.a]]||'')+'">'+s.o[s.a]+'</span> ')+s.v+(s.p?' <span class="pr">'+s.p+'</span>':'')+'</p>'+
           '<button type="button" class="btn hlavni" data-akce="dalsi">'+(idx+1<POCET?'Next situation':'Show result')+'</button>';
       }
     });

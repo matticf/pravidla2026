@@ -344,6 +344,18 @@
   "q:'A new player jumps onto the rink and plays straight away. The teammate being replaced is still in play.',o:F,a:2,v:'The new player may enter the rink only after the one leaving has crossed the board. If it affects play, it is an incorrect substitution.'"
  ],
  [
+  "u:'Bílá dvanáctka a modrá sedmička běží u mantinelu k míčku a dostanou se do kontaktu. Modrá sedmička ztratí rovnováhu a spadne. Rozhodčí přeruší hru. Ze svého místa jste neviděli, kde přesně se hráči dotkli.'",
+  "u:'White 12 and Blue 7 went for the ball near the board. They made contact. Blue 7 lost balance and fell. The referees stopped play. From your position, you couldn’t see the point of contact.'"
+ ],
+ [
+  "q:'Co můžete říct s jistotou?',o:['Bílá dvanáctka strčila do modré sedmičky.','Bílá dvanáctka podrazila modrou sedmičku.','Hráči se dostali do kontaktu a modrá sedmička spadla.']",
+  "q:'What can you say for sure?',o:['White 12 pushed Blue 7.','White 12 tripped Blue 7.','The players made contact, and Blue 7 fell.']"
+ ],
+ [
+  "v:'Kontakt a pád jste viděli. Jestli šlo o strčení nebo podražení, z tohoto pohledu nepoznáte. Někoho s lepším výhledem se můžete zeptat: <b>„Co jste viděl těsně předtím, než modrá sedmička spadla?“</b>'",
+  "v:'You saw the contact and the fall. You need a clearer view to say what made contact and whether there was a push or a trip. You can ask someone with a different view: <b>“What did you see just before Blue 7 fell?”</b>'"
+ ],
+ [
   "aria-label=\"Kreslená situace: '",
   "aria-label=\"Illustrated situation: '"
  ],
@@ -365,11 +377,11 @@
  ],
  [
   "['Pozorný divák','Základ máte. Projděte si kapitolu Co se nesmí a zkuste to znovu.']",
-  "['An attentive spectator','You have the basics. Go through the chapter What’s not allowed and try again.']"
+  "['An attentive spectator','You have the basics. Go through the chapter Common offences and try again.']"
  ],
  [
   "['Zatím fanoušek','Nevadí, od toho tu ta stránka je. Začněte kapitolou Co se nesmí a vraťte se.']",
-  "['A fan for now','No problem, that is what this page is for. Start with the chapter What’s not allowed and come back.']"
+  "['A fan for now','No problem, that is what this page is for. Start with the chapter Common offences and come back.']"
  ],
  [
   "data-akce=\"znovu\">Hrát znovu</button><a class=\"btn\" href=\"#kviz\">Kvíz pro rozhodčí</a>",
