@@ -8,6 +8,10 @@ Překlady jsou ve složce tools/:
   en_js.json     dvojice [česky, anglicky] pro texty ve skriptech a stylech (v daném pořadí)
   en_kviz.json   anglický zásobník otázek kvízu (stejné pořadí a čísla jako český)
 
+Obsah jen pro jednu verzi se v české stránce značí takto:
+  <span data-jen="cs">…</span>   prvek se v anglické stránce vynechá
+  <!--EN:<div>…</div>-->         hotový anglický kus HTML navíc, vloží se bez překladu
+
 Skript vypíše texty, ke kterým překlad chybí. Po úpravě české stránky stačí
 doplnit překlady a spustit ho znovu.
 """
@@ -50,6 +54,16 @@ if CZ_ODKAZ not in telo:
     problemy.append('V české stránce chybí odkaz na anglickou verzi (přepínač jazyka).')
 telo = telo.replace(CZ_ODKAZ, ZNACKA)
 
+# --- obsah jen pro jednu jazykovou verzi ---
+# <span data-jen="cs">…</span> se v anglické stránce vynechá,
+# <!--EN:…--> je hotový anglický kus HTML, který se do anglické stránky vloží bez překladu.
+telo = re.sub(r'<(\w+)[^>]*\bdata-jen="cs"[^>]*>.*?</\1>', '', telo, flags=re.S)
+jen_en = []
+def _schovej(m):
+    jen_en.append(m.group(1))
+    return f'<!--EN#{len(jen_en) - 1}-->'
+telo = re.sub(r'<!--EN:(.*?)-->', _schovej, telo, flags=re.S)
+
 # --- HTML tělo: textové uzly a popisné atributy ---
 telo = re.sub(r'>([^<>]+)<', lambda m: '>' + preloz(m.group(1)) + '<', telo)
 telo = re.sub(r'(aria-label|placeholder|title)="([^"]+)"', lambda m: m.group(1) + '="' + preloz(m.group(2)) + '"', telo)
@@ -62,6 +76,7 @@ hlava = hlava.replace('url("fonts/', 'url("../fonts/')
 hlava = hlava.replace('<link rel="alternate" hreflang="en" href="en/index.html">', '<link rel="alternate" hreflang="cs" href="../index.html">')
 
 telo = telo.replace(ZNACKA, EN_ODKAZ)
+telo = re.sub(r'<!--EN#(\d+)-->', lambda m: jen_en[int(m.group(1))], telo)
 
 # --- kvíz ---
 m = re.search(r'var ZASOBNIK=(\[.*?\]);\n', skripty, re.S)

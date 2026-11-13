@@ -378,6 +378,43 @@ section.kap{counter-increment:kap}
 .posuvnik::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--cf-cervena);border:3px solid var(--podklad);box-shadow:0 0 0 2px var(--cf-cervena)}
 .posuvnik-pop{display:flex;justify-content:space-between;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-tlumeny)}
 
+/* hra tělem: DISCO-F a stupně závažnosti */
+.telo{margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--linka);display:grid;gap:var(--s4)}
+.telo-uvod{display:grid;gap:var(--s2);max-width:720px}
+.telo-uvod p{font-size:17px;line-height:26px}
+.telo h3{scroll-margin-top:72px}
+.disco{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3)}
+.disco li{border:1px solid var(--linka);border-radius:var(--radius-blok);padding:var(--s3) var(--s4) var(--s4);display:grid;grid-template-columns:52px minmax(0,1fr);grid-template-rows:auto 1fr;gap:2px var(--s3);align-items:start;min-width:0}
+.disco .pism{grid-row:1/3;font-size:64px;line-height:62px;font-weight:700;color:var(--text-akcent)}
+.disco b{font-size:19px;line-height:25px;padding-top:6px}
+.disco p{font-size:15px;line-height:22px;grid-column:2}
+.telo-pozn{font-size:16px;line-height:24px;max-width:860px;padding:var(--s3) var(--s4);border-left:6px solid var(--cf-cervena);background:var(--podlaha)}
+.stupne{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
+.stupne li{border:1px solid var(--linka);border-radius:var(--radius-blok);padding:var(--s3) var(--s3) var(--s4);display:grid;gap:6px;align-content:start;min-width:0}
+.stupne h4{font-size:21px;line-height:26px}
+.stupne .en{font-size:14px;line-height:18px;color:var(--text-tlumeny)}
+.stupne p{font-size:15px;line-height:22px}
+.stupne .pr-pop{font-size:12px;line-height:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-akcent);margin-top:6px}
+.sila{display:flex;gap:3px;height:10px;margin-bottom:6px}
+.sila i{flex:1;background:var(--linka);opacity:.22}
+.sila i.on{background:var(--cf-cervena);opacity:1}
+.pravidla-iff{border-top:1px solid var(--linka);border-bottom:1px solid var(--linka)}
+.pravidla-iff summary{cursor:pointer;padding:14px 0;font-weight:700;font-size:16px}
+.pravidla-iff summary:hover{color:var(--text-akcent)}
+.pravidla-iff>div{display:grid;gap:var(--s3);padding-bottom:var(--s4);max-width:860px}
+.pravidla-iff th{text-align:left;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:0 8px 8px 0}
+.pravidla-iff th:last-child{text-align:right}
+.pravidla-iff .vyska-tab tr:first-child td{border-top:0}
+.pravidla-iff thead tr{border-bottom:1px solid var(--linka)}
+.pravidla-iff p{font-size:15px;line-height:22px}
+.kdy a{white-space:nowrap}
+.vety-h{margin:var(--s5) 0 var(--s2)}
+.hra-uvod{font-size:16px;line-height:24px}
+.k-cislo{font:700 11px var(--geo);fill:var(--postava)}
+.k-cislo.sv{fill:var(--podklad)}
+.k-blok{fill:var(--postava)}
+.k-otaznik{font:700 34px var(--geo);fill:var(--cf-cervena);stroke:var(--podklad);stroke-width:5;paint-order:stroke}
+
 /* mládež: menší hřiště */
 .mladez{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:var(--s3) var(--s5);align-items:center;margin-top:var(--s5);border:1px solid var(--linka);border-radius:var(--radius-blok);padding:var(--s4)}
 .mladez>div{display:grid;gap:var(--s2);min-width:0}
@@ -515,11 +552,13 @@ section.kap{counter-increment:kap}
 }
 @media (max-width:900px){
   .hero-grid,.cisty,.sim,.gol-hra,.piskat,.vyska,.mladez{grid-template-columns:minmax(0,1fr)}
+  .disco,.stupne{grid-template-columns:repeat(2,minmax(0,1fr))}
   .hero-grid h1{font-size:clamp(44px,8vw,80px)}
   .hero-scena{max-width:560px}
   .vyska-hra{max-width:460px}
 }
 @media (max-width:600px){
+  .disco,.stupne{grid-template-columns:minmax(0,1fr)}
   .cas-inner{min-width:0}
   .casova div{padding:0 6px;font-size:12px;line-height:15px}
   .casova .hra b{font-size:14px;line-height:18px}
@@ -907,6 +946,54 @@ section.kap{counter-increment:kap}
       <p class="posun drobny">Další políčka najdete posunutím do strany →</p>
     </figure>
 
+    <div class="telo" id="hra-telem">
+      <div class="telo-uvod">
+        <div class="popisek">Souboje zblízka</div>
+        <h3>Hra tělem: na co se dívat</h3>
+        <p>Dva hráči běží u mantinelu k míčku. Dotknou se a jeden z nich spadne. Znamená to faul? Samotný pád ještě neříká, jestli někdo porušil pravidla. Pro posouzení je důležité, jak ke kontaktu došlo.</p>
+        <p>Kontakt rameno na rameno může být při souboji o míček v pořádku. Záleží ale na provedení. Když dva hráči běží vedle sebe a dotknou se rameny, je to jiná situace než strčení do zad. I kontakt z boku může být přestupkem, pokud hráč použije nepřiměřenou sílu.</p>
+      </div>
+      <div class="telo-uvod">
+        <h3>DISCO-F: šest otázek k jednomu kontaktu</h3>
+        <p>DISCO-F je pomůcka z výuky rozhodčích. Šest písmen vám připomene, čeho si při sledování souboje všímat. O tom, jestli a jak zákrok potrestat, rozhodují rozhodčí podle pravidel a okolností.</p>
+      </div>
+      <ul class="disco">
+        <li><span class="pism" aria-hidden="true">D</span><b>Direction<span data-jen="cs"> · směr</span></b><p>Jakým směrem se hráči pohybovali? Přišel kontakt zepředu, z boku, nebo zezadu? Mohl ho druhý hráč čekat?</p></li>
+        <li><span class="pism" aria-hidden="true">I</span><b>Intention<span data-jen="cs"> · záměr</span></b><p>Co se hráč zřejmě snažil udělat? Pokusil se hrát míček? Pokud to z daného úhlu není poznat, nechte záměr otevřený.</p></li>
+        <li><span class="pism" aria-hidden="true">S</span><b>Speed<span data-jen="cs"> · rychlost</span></b><p>Jak rychle se oba pohybovali těsně před kontaktem? Byl jeden výrazně rychlejší než druhý?</p></li>
+        <li><span class="pism" aria-hidden="true">C</span><b>Contact<span data-jen="cs"> · kontakt</span></b><p>Co se čeho dotklo? Dotkli se hráči rameny? Zasáhl hráč předloktím záda soupeře? Dotkla se hůl soupeřovy nohy?</p></li>
+        <li><span class="pism" aria-hidden="true">O</span><b>Outcome<span data-jen="cs"> · následek</span></b><p>Co se stalo potom? Přišel hráč o míček, ztratil rovnováhu, nebo narazil do mantinelu?</p></li>
+        <li><span class="pism" aria-hidden="true">F</span><b>Force<span data-jen="cs"> · síla</span></b><p>Jak silný byl kontakt? Šlo o lehký dotek, strčení, nebo prudký náraz?</p></li>
+      </ul>
+      <p class="telo-pozn"><b>Rychlost, sílu a následek posuzujte zvlášť.</b> Dva hráči mohou běžet rychle a přitom se sotva dotknout. Hráč může spadnout i po lehkém kontaktu. A nebezpečný zákrok může skončit bez viditelného zranění.</p>
+      <div class="telo-uvod">
+        <h3 id="stupne">Od neopatrného zákroku po brutální</h3>
+        <p>Příklady ukazují, v čem se jednotlivé stupně závažnosti liší. U skutečného zákroku záleží na tom, co hráč udělal a jakému riziku vystavil soupeře.</p>
+      </div>
+      <ol class="stupne">
+        <li><span class="sila" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><h4>Neopatrný</h4><span class="en" lang="en" data-jen="cs">careless</span><p><b>Hráč si nedá dost pozor na soupeře.</b></p><span class="pr-pop">Příklad</span><p>Hráč se snaží dosáhnout na míček, neopatrně vstoupí soupeři do dráhy a podrazí ho.</p></li>
+        <li><span class="sila" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i></span><h4>Bezohledný</h4><span class="en" lang="en" data-jen="cs">reckless</span><p><b>Hráč nedbá na to, co se soupeři může stát.</b></p><span class="pr-pop">Příklad</span><p>Hráč zezadu strčí soupeře do mantinelu, i když na míček nemůže dosáhnout.</p></li>
+        <li><span class="sila" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><h4>Násilný</h4><span class="en" lang="en" data-jen="cs">violent</span><p><b>Hráč použije nadměrnou sílu a vážně ohrozí soupeře.</b></p><span class="pr-pop">Příklad</span><p>Rozběhnutý hráč vrazí do soupeře a prudce ho natlačí na mantinel. Soupeři při nárazu hrozí vážné zranění hlavy nebo krku.</p></li>
+        <li><span class="sila" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><h4>Brutální</h4><span class="en" lang="en" data-jen="cs">brutal</span><p><b>Jde o zvlášť surový nebo krutý čin.</b></p><span class="pr-pop">Příklad</span><p>Po přerušení hry hráč hodí florbalku po soupeři.</p></li>
+      </ol>
+      <details class="pravidla-iff">
+        <summary>Zobrazit odkazy na pravidla IFF</summary>
+        <div>
+          <table class="vyska-tab">
+            <thead><tr><th>Přestupek</th><th>Trest</th><th>Pravidlo</th></tr></thead>
+            <tbody>
+              <tr><td><b>Neopatrná hra tělem</b></td><td>Menší trest (2 minuty)</td><td><span class="pr">605.6</span></td></tr>
+              <tr><td><b>Bezohledná hra tělem</b></td><td>Větší trest (2 + 2 minuty, po sobě)</td><td><span class="pr">607.4</span></td></tr>
+              <tr><td><b>Násilná hra</b></td><td>Trest do konce utkání a větší trest</td><td><span class="pr">614.5, 613.1</span></td></tr>
+              <tr><td><b>Brutální přestupek nebo pokus o něj</b></td><td>Trest do konce utkání a větší trest</td><td><span class="pr">614.6, 613.1</span></td></tr>
+            </tbody>
+          </table>
+          <p>Násilná hra a brutální přestupek tedy podle těchto pravidel vedou ke stejnému druhu trestu. Hráč s trestem do konce utkání nesmí nastoupit ani do následujícího utkání v téže soutěži <span class="pr">613.2</span>. Pro <b>bezohlednou hru holí</b> platí samostatný bod <span class="pr">607.1</span>.</p>
+          <p class="drobny">Zdroje: <a href="https://www.floorball.sport/wp-content/uploads/2026/02/IFF-Rules-of-the-Game-2026.pdf" target="_blank" rel="noopener">IFF – Pravidla hry 2026 (anglicky)</a>, platná od 1. července 2026, slovníček a pravidla 507.6, 603–607 a 613–614. <a href="https://www.swissunihockey.ch/files/4216/9468/0288/IFF_Physical_Play_-_keyfactors_short.pdf" target="_blank" rel="noopener">IFF – Hra tělem: klíčové faktory DISCO-F (anglicky)</a>, výukový materiál pro rozhodčí.</p>
+        </div>
+      </details>
+    </div>
+
     <div class="smi">
       <div>
         <div class="popisek">A co je naopak dovoleno</div>
@@ -1019,12 +1106,12 @@ section.kap{counter-increment:kap}
       <div class="stup">
         <div><span class="chip trest">menší trest</span><h3 style="margin-top:8px">2 minuty</h3></div>
         <div><div class="osa" data-min="2"></div></div>
-        <p class="kdy">Neopatrná hra, hra rukou, špatné střídání, protesty. Když soupeř v přesilovce dá gól, trest končí. <span class="pr">603.6</span></p>
+        <p class="kdy">Neopatrná hra, hra rukou, špatné střídání, protesty. Když soupeř v přesilovce dá gól, trest končí. <span class="pr">603.6</span> <a href="#stupne">Hra tělem: od neopatrného po brutální</a></p>
       </div>
       <div class="stup">
         <div><span class="chip vt">větší trest</span><h3 style="margin-top:8px">2 + 2 minuty</h3></div>
         <div><div class="osa" data-min="2,2"></div></div>
-        <p class="kdy">Bezohledná hra, hákování. Gól soupeře zruší jen jednu z dvouminutovek. <span class="pr">603.7</span></p>
+        <p class="kdy">Bezohledná hra, hákování. Gól soupeře zruší jen jednu z dvouminutovek. <span class="pr">603.7</span> <a href="#stupne">Hra tělem: od neopatrného po brutální</a></p>
       </div>
       <div class="stup">
         <div><span class="chip os">osobní trest</span><h3 style="margin-top:8px">2 + 10 minut</h3></div>
@@ -1034,7 +1121,7 @@ section.kap{counter-increment:kap}
       <div class="stup">
         <div><span class="chip ts">červená karta</span><h3 style="margin-top:8px">Do konce utkání</h3></div>
         <div><div class="osa" data-min="2,2" data-konec="1"></div></div>
-        <p class="kdy">Hrubé nesportovní chování, násilí, rvačka, druhý větší trest. Hráč odchází do šatny a tým odslouží 2 + 2 min. Většinou ho čeká i stop na další zápas. Červenou lze dostat i po závěrečné siréně, dokud jsou hráči na hřišti.</p>
+        <p class="kdy">Hrubé nesportovní chování, násilí, rvačka, druhý větší trest. Hráč odchází do šatny a tým odslouží 2 + 2 min. Většinou ho čeká i stop na další zápas. Červenou lze dostat i po závěrečné siréně, dokud jsou hráči na hřišti. <a href="#stupne">Hra tělem: od neopatrného po brutální</a></p>
       </div>
     </div>
     <div class="leg-osa">
@@ -1232,6 +1319,15 @@ section.kap{counter-increment:kap}
       <div><dt>Čistý čas</dt><dd>Hodiny běží, jen když se opravdu hraje.</dd></div>
       <div><dt>Zápis o utkání</dt><dd>Oficiální dokument se soupiskami, góly a tresty.</dd></div>
     </dl>
+    <h3 class="vety-h">Slovníček k rozboru</h3>
+    <dl class="slovnik">
+      <div><dt>Oba hráči šli do souboje o míček.</dt><dd>Oba se snažili získat nebo zahrát míček. Pokud jste viděli jen pohyb, stačí „Oba hráči běželi k míčku.“</dd></div>
+      <!--EN:<div><dt>They challenged for the ball.</dt><dd>Another way to say they competed for the ball. You may hear this in commentary.</dd></div>-->
+      <div><dt>Hráči se u mantinelu dostali do kontaktu.</dt><dd>Popisujete kontakt, aniž určujete, kdo ho způsobil nebo zda šlo o přestupek.</dd></div>
+      <div><dt>Modrá sedmička ztratila rovnováhu a spadla.</dt><dd>Popisujete následek. Tím ještě neurčujete příčinu pádu.</dd></div>
+      <div><dt>Neviděl jsem místo kontaktu.</dt><dd>Situaci jste viděli, ale nedokážete říct, co přesně se čeho dotklo.</dd></div>
+      <div><dt>Jak rozhodčí situaci posoudili?</dt><dd>Ptáte se na rozhodnutí, které na hřišti skutečně padlo.</dd></div>
+    </dl>
   </div>
 </section>
 
@@ -1403,7 +1499,7 @@ section.kap{counter-increment:kap}
 
   function hrac(o){
     var s=o.s||1,k=o.k||1,l=o.lean||0,nohy=o.nohy||'stoj',u=POSUN[nohy]||0,n=NOHY[nohy],g=!!o.gol;
-    var dres=o.tym==='b'?'var(--tym-b)':o.tym==='r'?'url(#km-pruhy)':'var(--tym-a)';
+    var dres=o.dres||(o.tym==='b'?'var(--tym-b)':o.tym==='r'?'url(#km-pruhy)':'var(--tym-a)');
     var tren=o.tym==='a'?'var(--podklad)':'var(--postava)';
     var sh=[l,-55+u],hx=r(l*1.15),hy=-68+u;
     var ruce=o.ruce?o.ruce.slice():null,H='';
@@ -1807,12 +1903,22 @@ section.kap{counter-increment:kap}
       {q:'Nový hráč skočí na hřiště a hned hraje. Střídaný spoluhráč je ale pořád ve hře.',o:F,a:2,v:'Nový hráč smí na hřiště, až když ten odcházející přeleze mantinel. Když to ovlivní hru, je to špatné střídání.',p:'605.15',
        s:function(){return K.hala(100)+'<text class="k-mtxt" x="8" y="164">HŘIŠTĚ</text><text class="k-mtxt" x="211" y="164" text-anchor="middle">STŘÍDAČKA</text>'+K.lavice(184,238,150)+K.mantinelBok(124,150)+K.hrac({x:214,y:150,s:-1,tym:'b',nohy:'sed',tvar:'vylek',ruce:[[-2,-28],[8,-26]]})+K.hrac({x:50,y:152,tym:'b',nohy:'krok',hul:H.vede,tvar:'ok'})+K.mic(87,149)+K.hrac({x:104,y:152,s:-1,tym:'b',nohy:'krok',hul:H.klid,tvar:'vylek'})}}
     ];
+    /* Závěrečná situace každého kola: co lze z daného místa říct s jistotou */
+    function cislo(t,sv,zrc){return '<text class="k-cislo'+(sv?' sv':'')+'" x="0" y="-37" text-anchor="middle"'+(zrc?' transform="scale(-1 1)"':'')+'>'+t+'</text>'}
+    var ZAVER={u:'Bílá dvanáctka a modrá sedmička běží u mantinelu k míčku a dostanou se do kontaktu. Modrá sedmička ztratí rovnováhu a spadne. Rozhodčí přeruší hru. Ze svého místa jste neviděli, kde přesně se hráči dotkli.',
+      q:'Co můžete říct s jistotou?',o:['Bílá dvanáctka strčila do modré sedmičky.','Bílá dvanáctka podrazila modrou sedmičku.','Hráči se dostali do kontaktu a modrá sedmička spadla.'],a:2,
+      v:'Kontakt a pád jste viděli. Jestli šlo o strčení nebo podražení, z tohoto pohledu nepoznáte. Někoho s lepším výhledem se můžete zeptat: <b>„Co jste viděl těsně předtím, než modrá sedmička spadla?“</b>',
+      s:function(){return K.hala()+K.mantinelBok(214,150)+K.mic(40,150)+
+        '<g transform="translate(146 144) rotate(-90)">'+K.hrac({x:0,y:0,tym:'a',tvar:'vylek',ruce:[[16,-46],[-15,-42]],navic:cislo('7',true)})+'</g>'+
+        K.hrac({x:190,y:152,s:-1,tym:'b',dres:'var(--podklad)',nohy:'krok',ruce:[[-13,-36,-3],[13,-36,3]],tvar:'vylek',navic:cislo('12',false,true)})+
+        '<circle class="k-blok" cx="150" cy="150" r="24"/><path class="k-blok" d="M100,182 q50,-58 100,0Z"/>'+
+        '<text class="k-otaznik" x="150" y="112" text-anchor="middle">?</text>'}};
     var POCET=6,sada,idx,vysl;
     function tecky(){var t='';for(var i=0;i<POCET;i++)t+='<i class="'+(i<vysl.length?(vysl[i]?'ok':'ko'):i===idx?'ted':'')+'"></i>';return t}
     function situace(){
       var s=sada[idx];
-      el.innerHTML='<div class="hra-obr"><svg class="panel" viewBox="0 0 240 170" role="img" aria-label="Kreslená situace: '+s.q+'">'+s.s()+'</svg><span class="razitko" aria-hidden="true"></span></div>'+
-        '<div class="hra-panel"><div class="hra-postup">'+tecky()+'<span>Situace '+(idx+1)+' z '+POCET+'</span></div><h3>'+s.q+'</h3>'+
+      el.innerHTML='<div class="hra-obr"><svg class="panel" viewBox="0 0 240 170" role="img" aria-label="Kreslená situace: '+(s.u||s.q)+'">'+s.s()+'</svg><span class="razitko" aria-hidden="true"></span></div>'+
+        '<div class="hra-panel"><div class="hra-postup">'+tecky()+'<span>Situace '+(idx+1)+' z '+POCET+'</span></div>'+(s.u?'<p class="hra-uvod">'+s.u+'</p>':'')+'<h3>'+s.q+'</h3>'+
         '<div class="moznosti'+(s.o.length===3?' tri':'')+'" role="group" aria-label="Vaše rozhodnutí">'+s.o.map(function(o,i){return '<button type="button" data-i="'+i+'">'+o+'</button>'}).join('')+'</div>'+
         '<div class="hra-vysl" aria-live="polite"></div></div>';
     }
@@ -1825,7 +1931,7 @@ section.kap{counter-increment:kap}
       el.innerHTML='<div class="hra-konec"><div class="hra-postup">'+tecky()+'</div><b>'+b+' / '+POCET+'</b><h3>'+t[0]+'</h3><p>'+t[1]+'</p>'+
         '<div class="hero-akce"><button type="button" class="btn hlavni" data-akce="znovu">Hrát znovu</button><a class="btn" href="#kviz">Kvíz pro rozhodčí</a></div></div>';
     }
-    function nova(){sada=michat(SIT).slice(0,POCET);idx=0;vysl=[];situace()}
+    function nova(){sada=michat(SIT).slice(0,POCET-1).concat([ZAVER]);idx=0;vysl=[];situace()}
     el.addEventListener('click',function(e){
       var b=e.target.closest('button');if(!b)return;
       if(b.getAttribute('data-akce')==='znovu'){nova();return}
@@ -1837,7 +1943,7 @@ section.kap{counter-increment:kap}
         $$('.moznosti button',el).forEach(function(x,j){x.disabled=true;if(j===s.a)x.classList.add('spravne');else if(x===b)x.classList.add('spatne')});
         r.textContent=ok?'Správně!':'Vedle!';r.className='razitko on'+(ok?'':' spatne');
         $('.hra-postup',el).innerHTML=tecky()+'<span>Situace '+(idx+1)+' z '+POCET+'</span>';
-        $('.hra-vysl',el).innerHTML='<p><span class="chip '+(CH[s.o[s.a]]||'')+'">'+s.o[s.a]+'</span> '+s.v+(s.p?' <span class="pr">'+s.p+'</span>':'')+'</p>'+
+        $('.hra-vysl',el).innerHTML='<p>'+(s.u?'':'<span class="chip '+(CH[s.o[s.a]]||'')+'">'+s.o[s.a]+'</span> ')+s.v+(s.p?' <span class="pr">'+s.p+'</span>':'')+'</p>'+
           '<button type="button" class="btn hlavni" data-akce="dalsi">'+(idx+1<POCET?'Další situace':'Zobrazit výsledek')+'</button>';
       }
     });
